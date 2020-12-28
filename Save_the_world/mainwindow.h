@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include "personaje.h"
+#include <QKeyEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,5 +21,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QGraphicsScene *scene;
+    personaje *jugador;
+
+
+    void keyPressEvent(QKeyEvent * evento);
+
+
 };
 #endif // MAINWINDOW_H
