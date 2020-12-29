@@ -6,11 +6,13 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QKeyEvent>
+#include <QList>
 #include <sstream>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <string.h>
+#include <QDebug>
 
 #include "cuerpo.h"
 #include "cuerpograf.h"
@@ -37,6 +39,7 @@ public slots:
     void Movimiento_Enemigo();
 private slots:
     void on_pushButton_clicked();
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -48,6 +51,7 @@ private:
     int v_limit;
     void borderCollision(Cuerpo *b);
     void keyPressEvent(QKeyEvent *event);
+    void Eliminar_vida();
     QList<Cuerpograf*>bars;
     Vida *vidas;
     QList<Pisos*> Muros;

@@ -20,3 +20,13 @@ int Vida::getVida()
 {
     return vida;
 }
+
+int Vida::getPx() const
+{
+    return px;
+}
+
+int Vida::getPy() const
+{
+    return py;
+}

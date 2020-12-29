@@ -8,7 +8,12 @@ public:
     Vida(QGraphicsItem * parent = 0);
     void decrease();
     int getVida();
+    int getPx() const;
+    int getPy() const;
+
 private:
+    int px;
+    int py;
     int vida;
 };
 

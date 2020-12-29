@@ -18,7 +18,10 @@ public:
     void setescala (float s);
     void actualizar (float v_limit);
     Enemigos *getEsf();
+    void setImagen(int value);
+
 private:
+    int imagen;
     Enemigos *esf;
     float escala;
 };

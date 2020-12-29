@@ -45,3 +45,8 @@ Enemigos *Enemigosgraf::getEsf()
 {
     return esf;
 }
+
+void Enemigosgraf::setImagen(int value)
+{
+    imagen = value;
+}
