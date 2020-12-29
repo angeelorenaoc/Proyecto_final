@@ -33,6 +33,8 @@ public:
     float getVy() const;
     void set_vel(float vx_,float vy_, float px_,float py_);
     float getE() const;
+    void setPx(float value);
+    void setPy(float value);
 };
 
 #endif // ENEMIGOS_H

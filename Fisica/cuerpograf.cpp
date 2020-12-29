@@ -19,8 +19,6 @@ Cuerpograf::~Cuerpograf()
     delete esf;
 }
 
-
-
 QRectF Cuerpograf::boundingRect() const
 {
     return QRectF(-1*escala*esf->getR(),-1*escala*esf->getR(),2*escala*esf->getR(), 2*escala*esf->getR());

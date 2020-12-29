@@ -1,5 +1,15 @@
 #include "enemigos.h"
 
+void Enemigos::setPx(float value)
+{
+    px = value;
+}
+
+void Enemigos::setPy(float value)
+{
+    py = value;
+}
+
 Enemigos::Enemigos(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_)
 {
     px =posx_;

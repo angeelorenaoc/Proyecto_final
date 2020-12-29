@@ -37,5 +37,5 @@ void Pisos::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     //painter->setBrush(Qt::darkGreen);
     //painter->drawRect(boundingRect());
-    painter->fillRect(boundingRect(),Qt::darkGray);
+    painter->fillRect(boundingRect(),Qt::black);
 }

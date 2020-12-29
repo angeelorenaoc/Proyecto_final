@@ -6,12 +6,20 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QKeyEvent>
+#include <sstream>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <string.h>
 
 #include "cuerpo.h"
 #include "cuerpograf.h"
 #include "vida.h"
 #include "pisos.h"
+#include "enemigos.h"
+#include "enemigosgraf.h"
 
+using namespace std;
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,5 +51,6 @@ private:
     QList<Cuerpograf*>bars;
     Vida *vidas;
     QList<Pisos*> Muros;
+    QList <Enemigosgraf *> Enemigo;
 };
 #endif // MAINWINDOW_H
