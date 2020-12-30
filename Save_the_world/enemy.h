@@ -1,28 +1,28 @@
-#ifndef PERSONAJE_H
-#define PERSONAJE_H
+#ifndef ENEMY_H
+#define ENEMY_H
 
 #include <QGraphicsItem>
 #include <QPainter>
-#include "personaje_physics.h"
+#include "enemy_physics.h"
 #include <QGraphicsScene>
 #include <stdlib.h>
 #include <time.h>
 
-class personaje: public QObject, public QGraphicsItem
+class enemy: public QObject, public QGraphicsItem
 {
-    personaje_physics * esf;
+    enemy_physics * esf;
     float escala;
 
     Q_OBJECT
 public:
-    personaje();
-    ~personaje();
+    enemy();
+    ~enemy();
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     void setEscala(float s);
     void actualizar(float v_lim);
-    personaje_physics *getEsf();
+    enemy_physics *getEsf();
 };
 
-#endif // PERSONAJE_H
+#endif // ENEMY_H

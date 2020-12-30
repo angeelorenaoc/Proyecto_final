@@ -6,6 +6,8 @@
 #include <QGraphicsView>
 #include "personaje.h"
 #include "personaje_physics.h"
+#include "enemy.h"
+#include "enemy_physics.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
@@ -24,6 +26,7 @@ public:
 
 public slots:
     void actualizar();
+    void move_enemy();
 
 private slots:
     void on_pushButton_clicked();
@@ -32,14 +35,15 @@ private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
     QTimer *timer;
-    personaje *jugador;
+    QTimer *enemy_timer;
 
     float dt;
     int h_limit;
     int v_limit;
     void borderCollision(personaje_physics *b);
     void keyPressEvent(QKeyEvent * evento);
-    QList<personaje *> bars;
+    QList<personaje *> jugadores;
+    QList<enemy *> enemigos;
 
 
 };

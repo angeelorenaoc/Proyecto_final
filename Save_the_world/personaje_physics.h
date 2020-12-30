@@ -1,6 +1,8 @@
 #ifndef PERSONAJE_PHYSICS_H
 #define PERSONAJE_PHYSICS_H
 
+#include <math.h>
+#include <cmath>
 
 class personaje_physics
 {

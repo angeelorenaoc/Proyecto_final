@@ -23,13 +23,15 @@ MainWindow::MainWindow(QWidget *parent)
 
 
     timer = new QTimer(this);
+    enemy_timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(actualizar()));
+    connect(enemy_timer,SIGNAL(timeout()),this,SLOT(move_enemy()));
 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    personaje_physics *b = bars.at(0)->getEsf();
+    personaje_physics *b = jugadores.at(0)->getEsf();
     if(event->key()== Qt::Key_A){
         b->set_vel(-25,b->getVY(),b->getPX(),b->getPY());
     }
@@ -53,11 +55,40 @@ MainWindow::~MainWindow()
 
 void MainWindow::actualizar()
 {
-    for(int i = 0; i<bars.size(); i++){
-        bars.at(i)->actualizar(v_limit);
-        borderCollision(bars.at(i)->getEsf());
+    for(int i = 0; i<jugadores.size(); i++){
+        jugadores.at(i)->actualizar(v_limit);
+        borderCollision(jugadores.at(i)->getEsf());
     }
 }
+
+void MainWindow::move_enemy()
+{
+    for (int i = 0; i < jugadores.size(); i++){
+        for (int j = 0; j < enemigos.size() ; j++ ) {
+            enemy_physics *e = enemigos.at(j)->getEsf();
+            personaje_physics *c = jugadores.at(i)->getEsf();
+            if (e->getPX() < c->getPX()){
+                e->set_vel(15,e->getVY(),e->getPX(),e->getPY());
+                enemigos.at(j)->actualizar(v_limit);
+            }
+            if (e->getPX() > c->getPX()){
+                e->set_vel(-15,e->getVY(),e->getPX(),e->getPY());
+                enemigos.at(j)->actualizar(v_limit);
+            }
+            if (e->getPY() < c->getPY()){
+              e->set_vel(e->getVX(),15,e->getPX(),e->getPY());
+              enemigos.at(j)->actualizar(v_limit);
+            }
+            if (e->getPY() > c->getPY()){
+              e->set_vel(e->getVX(),-15,e->getPX(),e->getPY());
+              enemigos.at(j)->actualizar(v_limit);
+            }
+
+        }
+    }
+}
+
+
 
 void MainWindow::borderCollision(personaje_physics *b)
 {
@@ -80,7 +111,13 @@ void MainWindow::borderCollision(personaje_physics *b)
 void MainWindow::on_pushButton_clicked()
 {
     timer->start(20);
-    bars.push_back(new personaje);
-    bars.back()->actualizar(v_limit);
-    scene->addItem(bars.back());
+    enemy_timer->start(50);
+    jugadores.push_back(new personaje);
+    jugadores.back()->actualizar(v_limit);
+    scene->addItem(jugadores.back());
+
+    enemigos.push_back(new enemy);
+    enemigos.back()->actualizar(v_limit);
+    scene->addItem(enemigos.back());
+
 }

@@ -1,8 +1,5 @@
 #include "personaje_physics.h"
 
-#include <math.h>
-#include <cmath>
-
 personaje_physics::personaje_physics(float posX_, float posY_, float velX_, float velY_, float masa_, float radio_, float K_, float e_)
 {
     PX = posX_; //pos en x
