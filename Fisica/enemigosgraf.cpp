@@ -10,7 +10,7 @@ Enemigosgraf::Enemigosgraf():escala(1)
     velx = 0;
     vely = 0;
     K = 0.08;
-    e = 0.2;
+    e = 0.1;
     esf = new Enemigos(posx,posy,velx,vely,masa,r,K,e);
 }
 

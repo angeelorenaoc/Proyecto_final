@@ -278,7 +278,29 @@ void MainWindow::Eliminar_vida()
                 vidas->decrease();
             }
         }
+    }
+}
 
+void MainWindow::Colision_paredes_e()
+{
+    for (int i = 0; i<Enemigo.size();i++){
+        for (int j = 0; j < Muros.size();j++){
+            if (Enemigo.at(i)->collidesWithItem(Muros.at(j))){
+                Enemigos *c= Enemigo.at(i)->getEsf();
+                if (c->getPx() > (Muros.at(i)->getPox()*-1)){
+                    c->set_vel(0,0,c->getPx()+c->getR(),c->getPy());
+                   }
+                else if (c->getPx() < (Muros.at(i)->getPox()*-1)){
+                    c->set_vel(0,0,c->getPx()-c->getR(),c->getPy());
+                    }
+                if (c->getPy() > (Muros.at(i)->getPoy()*-1)){
+                    c->set_vel(0,0,c->getPx(),c->getPy()-c->getR());
+                    }
+                else if (c->getPy() < (Muros.at(i)->getPoy()*-1)){
+                    c->set_vel(0,0,c->getPx(),c->getPy()+c->getR());
+                    }
+            }
+        }
     }
 
 }
@@ -287,14 +309,14 @@ void MainWindow::actualizar()
     for (int i = 0;i < bars.size() ;i++) {
         bars.at(i)->actualizar(v_limit);
         borderCollision(bars.at(i)->getEsf());
-        Eliminar_vida();
+//        Eliminar_vida();
         if (i == 0){
-//            vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
+            vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
-        if (vidas->getVida() == 0){
-            scene->removeItem(bars.at(i));
-            bars.removeAt(i);
-        }
+//        if (vidas->getVida() == 0){
+//            scene->removeItem(bars.at(i));
+//            bars.removeAt(i);
+//        }
     }
 }
 
@@ -316,6 +338,7 @@ void MainWindow::Movimiento_Enemigo()
               e->set_vel(e->getVx(),40,e->getPx(),e->getPy());
               Enemigo.at(j)->actualizar(v_limit);
             }
+            Colision_paredes_e();
 
         }
     }
@@ -350,8 +373,8 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    timer->start(3);
-    timere->start(10);
+    timer->start(1);
+    timere->start(5);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
         if (i==0){

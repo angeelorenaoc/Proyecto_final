@@ -52,6 +52,7 @@ private:
     void borderCollision(Cuerpo *b);
     void keyPressEvent(QKeyEvent *event);
     void Eliminar_vida();
+    void Colision_paredes_e();
     QList<Cuerpograf*>bars;
     Vida *vidas;
     QList<Pisos*> Muros;
