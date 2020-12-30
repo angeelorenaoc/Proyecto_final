@@ -11,11 +11,13 @@ CONFIG += c++11
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    personaje.cpp
+    personaje.cpp \
+    personaje_physics.cpp
 
 HEADERS += \
     mainwindow.h \
-    personaje.h
+    personaje.h \
+    personaje_physics.h
 
 FORMS += \
     mainwindow.ui
