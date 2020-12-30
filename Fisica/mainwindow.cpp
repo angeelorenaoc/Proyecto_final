@@ -289,7 +289,7 @@ void MainWindow::actualizar()
         borderCollision(bars.at(i)->getEsf());
         Eliminar_vida();
         if (i == 0){
-            vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
+//            vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
         if (vidas->getVida() == 0){
             scene->removeItem(bars.at(i));
