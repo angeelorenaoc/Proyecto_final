@@ -6,6 +6,7 @@
 #include <QGraphicsView>
 #include "personaje.h"
 #include "enemy.h"
+#include "bala_comun.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
@@ -39,6 +40,7 @@ private:
     int h_limit;
     int v_limit;
     int N_enemigos=0;
+    int sentido_bala=1;
 
     void keyPressEvent(QKeyEvent * evento);
     QList<personaje *> jugadores;

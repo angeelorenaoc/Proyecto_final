@@ -20,6 +20,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Laboratorio_Oak.jpg")));
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -27,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     timer_move = new QTimer(this);
     connect(timer_move,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    timer_move->stop();
 
 }
 
@@ -34,15 +36,24 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 {
     if(event->key()== Qt::Key_A){
         jugadores.at(0)->left();
+        sentido_bala=1;
     }
-    else if(event->key() == Qt::Key_D){
+    if(event->key() == Qt::Key_D){
         jugadores.at(0)->right();
+        sentido_bala=2;
     }
-    else if(event->key() == Qt::Key_W){
+    if(event->key() == Qt::Key_W){
         jugadores.at(0)->up();
+        sentido_bala=3;
     }
-    else if(event->key() == Qt::Key_S){
+    if(event->key() == Qt::Key_S){
         jugadores.at(0)->down();
+        sentido_bala=4;
+    }
+    if(event->key() == Qt::Key_Space){
+        Bala_comun *bullet = new Bala_comun(sentido_bala);
+        bullet->setPos(jugadores.at(0)->getPosx(),jugadores.at(0)->getPosy());
+        scene->addItem(bullet);
     }
 }
 
@@ -88,8 +99,6 @@ void MainWindow::move_enemy()
     }
 }
 
-
-
 void MainWindow::on_pushButton_clicked()
 {
     jugadores.push_back(new personaje);
@@ -98,6 +107,5 @@ void MainWindow::on_pushButton_clicked()
     scene->addItem(jugadores.back());
 
     enemy_timer->start(2000);
-    timer_move->start(75);
-
+    timer_move->start(50);
 }

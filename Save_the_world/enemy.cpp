@@ -2,6 +2,7 @@
 
 #include <QDebug>
 
+
 enemy::enemy()
 {
     int random_number=rand()%2;
@@ -81,6 +82,7 @@ void enemy::setPosy(int value)
 {
     posy = value;
 }
+
 
 
 

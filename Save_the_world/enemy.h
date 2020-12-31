@@ -30,6 +30,7 @@ public:
     int getR() const;
 
     int getVelocidad() const;
+
 };
 
 #endif // ENEMY_H
