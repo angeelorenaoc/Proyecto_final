@@ -59,7 +59,7 @@ void MainWindow::spawn()
     scene->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos==5){
+    if(N_enemigos>=5){
         enemy_timer->stop();
     }
 }
@@ -73,20 +73,16 @@ void MainWindow::move_enemy()
             enemy *e = enemigos.at(j);
 
             if(e->getPosx() > c->getPosx()){
-                e->setPosx(e->getPosx()-e->getVelocidad());
-                e->setPos(e->getPosx(),e->getPosy());
+                e->left();
             }
-            if(e->getPosx() < c->getPosx()){
-                e->setPosx(e->getPosx()+e->getVelocidad());
-                e->setPos(e->getPosx(),e->getPosy());
+            else if(e->getPosx() < c->getPosx()){
+                e->right();
             }
             if(e->getPosy() > c->getPosy()){
-                e->setPosy(e->getPosy()-e->getVelocidad());
-                e->setPos(e->getPosx(),e->getPosy());
+                e->up();
             }
-            if(e->getPosy() < c->getPosy()){
-                e->setPosy(e->getPosy()+e->getVelocidad());
-                e->setPos(e->getPosy(),e->getPosy());
+            else if(e->getPosy() < c->getPosy()){
+                e->down();
             }
         }
     }
@@ -102,6 +98,6 @@ void MainWindow::on_pushButton_clicked()
     scene->addItem(jugadores.back());
 
     enemy_timer->start(2000);
-    timer_move->start(200);
+    timer_move->start(75);
 
 }

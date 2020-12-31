@@ -8,11 +8,13 @@ enemy::enemy()
 
     if(random_number==0){
         random_number = rand()%560+1;
-        setPos(560,random_number);
+        setPos(0,random_number);
+        setPosx(0);setPosy(random_number);
     }
     else{
         random_number = rand()%560+1;
         setPos(800,random_number);
+        setPosx(800);setPosy(random_number);
     }
 }
 
@@ -25,6 +27,30 @@ void enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWi
 {
     painter->setBrush(Qt::green);
     painter->drawEllipse(boundingRect());
+}
+
+void enemy::up()
+{
+    posy-= velocidad;
+    setPos(posx,posy);
+}
+
+void enemy::down()
+{
+    posy+= velocidad;
+    setPos(posx,posy);
+}
+
+void enemy::left()
+{
+    posx-= velocidad;
+    setPos(posx,posy);
+}
+
+void enemy::right()
+{
+    posx+= velocidad;
+    setPos(posx,posy);
 }
 
 int enemy::getPosx() const
