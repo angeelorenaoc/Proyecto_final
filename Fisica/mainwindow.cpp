@@ -28,9 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
     vidas->setPos(0,0);
 
     Enemigo.push_back(new Enemigosgraf);
-    Enemigo.back()->setPos(50,279);
-    scene->addItem(Enemigo.back());
-    Enemigo.push_back(new Enemigosgraf);
     Enemigo.back()->setPos(1000,179);
     scene->addItem(Enemigo.back());
     Enemigo.push_back(new Enemigosgraf);
@@ -275,7 +272,10 @@ void MainWindow::Eliminar_vida()
     for (int i = 0; i < bars.size() ; i++ ) {
         for (int j = 0; j < Enemigo.size() ; j++ ) {
             if (bars.at(i)->collidesWithItem(Enemigo.at(j))){
+                Cuerpo *c = bars.at(i)->getEsf();
                 vidas->decrease();
+                c->setPx(0);
+                c->setPy(0);
             }
         }
     }
@@ -309,14 +309,14 @@ void MainWindow::actualizar()
     for (int i = 0;i < bars.size() ;i++) {
         bars.at(i)->actualizar(v_limit);
         borderCollision(bars.at(i)->getEsf());
-//        Eliminar_vida();
+        Eliminar_vida();
         if (i == 0){
             vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
-//        if (vidas->getVida() == 0){
-//            scene->removeItem(bars.at(i));
-//            bars.removeAt(i);
-//        }
+        if (vidas->getVida() == 0){
+            scene->removeItem(bars.at(i));
+            bars.removeAt(i);
+        }
     }
 }
 
@@ -327,15 +327,19 @@ void MainWindow::Movimiento_Enemigo()
             Enemigos *e = Enemigo.at(j)->getEsf();
             Cuerpo *c = bars.at(i)->getEsf();
             if (e->getPx() < c->getPx()){
-                e->set_vel(15,e->getVy(),e->getPx(),e->getPy());
+                e->set_vel(7,e->getVy(),e->getPx(),e->getPy());
                 Enemigo.at(j)->actualizar(v_limit);
             }
-            if (e->getPx() > c->getPx()){
-                e->set_vel(-15,e->getVy(),e->getPx(),e->getPy());
+            else if (e->getPx() > c->getPx()){
+                e->set_vel(-7,e->getVy(),e->getPx(),e->getPy());
                 Enemigo.at(j)->actualizar(v_limit);
             }
             if (e->getPy() < c->getPy()){
-              e->set_vel(e->getVx(),40,e->getPx(),e->getPy());
+              e->set_vel(e->getVx(),20,e->getPx(),e->getPy());
+              Enemigo.at(j)->actualizar(v_limit);
+            }
+            if (e->getPy() > c->getPy()){
+              e->set_vel(e->getVx(),-10,e->getPx(),e->getPy());
               Enemigo.at(j)->actualizar(v_limit);
             }
             Colision_paredes_e();
@@ -349,16 +353,13 @@ void MainWindow::on_pushButton_clicked()
     timere->start(10);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
-        if (i==0){
-            e->setPx(50); e->setPy(279);
-        }
-        if(i == 1){
+        if(i == 0){
             e->setPx(1000); e->setPy(179);
         }
-        if (i == 2){
+        if (i == 1){
             e->setPx(1950); e->setPy(179);
         }
-        if (i == 3){
+        if (i == 2){
             e->setPx(2760); e->setPy(139);
         }
         Enemigo.at(i)->actualizar((v_limit));
@@ -377,16 +378,13 @@ void MainWindow::on_pushButton_2_clicked()
     timere->start(5);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
-        if (i==0){
-            e->setPx(50); e->setPy(279);
-        }
-        if(i == 1){
+        if(i == 0){
             e->setPx(1000); e->setPy(179);
         }
-        if (i == 2){
+        if (i == 1){
             e->setPx(1950); e->setPy(179);
         }
-        if (i == 3){
+        if (i == 2){
             e->setPx(2760); e->setPy(139);
         }
         Enemigo.at(i)->actualizar((v_limit));

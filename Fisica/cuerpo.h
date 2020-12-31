@@ -33,6 +33,8 @@ public:
     float getE() const;
     void setAx(float value);
     void setAy(float value);
+    void setPx(float value);
+    void setPy(float value);
 };
 
 #endif // CUERPO_H

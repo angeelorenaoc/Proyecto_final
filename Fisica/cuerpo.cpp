@@ -12,6 +12,16 @@ void Cuerpo::setAy(float value)
     ay = value;
 }
 
+void Cuerpo::setPx(float value)
+{
+    px = value;
+}
+
+void Cuerpo::setPy(float value)
+{
+    py = value;
+}
+
 Cuerpo::Cuerpo(float posx_, float posy_, float velx_, float vely_, float masa_, float radio_, float k_, float e_)
 {
     px =posx_;
