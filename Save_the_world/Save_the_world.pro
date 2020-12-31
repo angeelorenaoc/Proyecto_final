@@ -10,18 +10,14 @@ CONFIG += c++11
 
 SOURCES += \
     enemy.cpp \
-    enemy_physics.cpp \
     main.cpp \
     mainwindow.cpp \
-    personaje.cpp \
-    personaje_physics.cpp
+    personaje.cpp
 
 HEADERS += \
     enemy.h \
-    enemy_physics.h \
     mainwindow.h \
-    personaje.h \
-    personaje_physics.h
+    personaje.h
 
 FORMS += \
     mainwindow.ui

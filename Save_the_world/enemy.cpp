@@ -1,48 +1,60 @@
 #include "enemy.h"
 
-enemy::enemy():escala(1)
-{
-    float posx,posy,velx,vely,mass,r,K,e;
+#include <QDebug>
 
-    posx = 400;
-    posy = 10;
-    r = 20;
-    mass = 10;
-    velx = 0;
-    vely = 0;
-    K = 0.002;
-    e = 0.2;
-    esf = new enemy_physics(posx,posy,velx,vely,mass,r,K,e);
-}
-
-enemy::~enemy()
+enemy::enemy()
 {
-    delete esf;
+    int random_number=rand()%2;
+
+    if(random_number==0){
+        random_number = rand()%560+1;
+        setPos(560,random_number);
+    }
+    else{
+        random_number = rand()%560+1;
+        setPos(800,random_number);
+    }
 }
 
 QRectF enemy::boundingRect() const
 {
-    return QRectF(-1*escala*esf->getR(),-1*escala*esf->getR(),2*escala*esf->getR(),2*escala*esf->getR());
+    return QRectF(-r,-r,2*r,2*r);
 }
 
 void enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::darkGreen);
+    painter->setBrush(Qt::green);
     painter->drawEllipse(boundingRect());
 }
 
-void enemy::setEscala(float s)
+int enemy::getPosx() const
 {
-    escala = s;
+    return posx;
 }
 
-void enemy::actualizar(float v_lim)
+int enemy::getPosy() const
 {
-    esf->Actualizar();
-    setPos(esf->getPX(),v_lim-esf->getPY());
+    return posy;
 }
 
-enemy_physics *enemy::getEsf()
+int enemy::getR() const
 {
-    return esf;
+    return r;
 }
+
+int enemy::getVelocidad() const
+{
+    return velocidad;
+}
+void enemy::setPosx(int value)
+{
+    posx = value;
+}
+
+void enemy::setPosy(int value)
+{
+    posy = value;
+}
+
+
+

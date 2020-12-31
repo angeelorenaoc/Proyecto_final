@@ -3,26 +3,29 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
-#include "personaje_physics.h"
-#include <QGraphicsScene>
-#include <stdlib.h>
-#include <time.h>
 
 class personaje: public QObject, public QGraphicsItem
 {
-    personaje_physics * esf;
-    float escala;
+    int posx ,posy;
+    int velocidad=2;
+    int r=20;
 
     Q_OBJECT
 public:
     personaje();
-    ~personaje();
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
-    void setEscala(float s);
-    void actualizar(float v_lim);
-    personaje_physics *getEsf();
+    void up();
+    void down();
+    void left();
+    void right();
+
+    void setPosx(int value);
+    void setPosy(int value);
+    int getPosx() const;
+    int getPosy() const;
+    int getR() const;
 };
 
 #endif // PERSONAJE_H

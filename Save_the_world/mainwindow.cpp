@@ -21,103 +21,87 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-
-    timer = new QTimer(this);
     enemy_timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(actualizar()));
-    connect(enemy_timer,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
+    enemy_timer->stop();
+
+    timer_move = new QTimer(this);
+    connect(timer_move,SIGNAL(timeout()),this,SLOT(move_enemy()));
 
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
-    personaje_physics *b = jugadores.at(0)->getEsf();
     if(event->key()== Qt::Key_A){
-        b->set_vel(-25,b->getVY(),b->getPX(),b->getPY());
+        jugadores.at(0)->left();
     }
-    if(event->key() == Qt::Key_D){
-        b->set_vel(25,b->getVY(),b->getPX(),b->getPY());
+    else if(event->key() == Qt::Key_D){
+        jugadores.at(0)->right();
     }
-    if(event->key() == Qt::Key_W){
-        b->set_vel(b->getVX(),25,b->getPX(),b->getPY());
+    else if(event->key() == Qt::Key_W){
+        jugadores.at(0)->up();
     }
-    if(event->key() == Qt::Key_S){
-        b->set_vel(b->getVX(),-25,b->getPX(),b->getPY());
+    else if(event->key() == Qt::Key_S){
+        jugadores.at(0)->down();
     }
 }
 
 MainWindow::~MainWindow()
 {
-    delete timer;
+    delete enemy_timer;
     delete scene;
     delete ui;
 }
 
-void MainWindow::actualizar()
+void MainWindow::spawn()
 {
-    for(int i = 0; i<jugadores.size(); i++){
-        jugadores.at(i)->actualizar(v_limit);
-        borderCollision(jugadores.at(i)->getEsf());
+    enemigos.push_back(new enemy);
+    scene->addItem(enemigos.back());
+    N_enemigos++;
+
+    if(N_enemigos==5){
+        enemy_timer->stop();
     }
 }
 
 void MainWindow::move_enemy()
 {
-    for (int i = 0; i < jugadores.size(); i++){
-        for (int j = 0; j < enemigos.size() ; j++ ) {
-            enemy_physics *e = enemigos.at(j)->getEsf();
-            personaje_physics *c = jugadores.at(i)->getEsf();
-            if (e->getPX() < c->getPX()){
-                e->set_vel(15,e->getVY(),e->getPX(),e->getPY());
-                enemigos.at(j)->actualizar(v_limit);
-            }
-            if (e->getPX() > c->getPX()){
-                e->set_vel(-15,e->getVY(),e->getPX(),e->getPY());
-                enemigos.at(j)->actualizar(v_limit);
-            }
-            if (e->getPY() < c->getPY()){
-              e->set_vel(e->getVX(),15,e->getPX(),e->getPY());
-              enemigos.at(j)->actualizar(v_limit);
-            }
-            if (e->getPY() > c->getPY()){
-              e->set_vel(e->getVX(),-15,e->getPX(),e->getPY());
-              enemigos.at(j)->actualizar(v_limit);
-            }
+    for(int i=0;i<jugadores.size();i++){
+        for(int j=0;j<enemigos.size();j++){
 
+            personaje *c = jugadores.at(i);
+            enemy *e = enemigos.at(j);
+
+            if(e->getPosx() > c->getPosx()){
+                e->setPosx(e->getPosx()-e->getVelocidad());
+                e->setPos(e->getPosx(),e->getPosy());
+            }
+            if(e->getPosx() < c->getPosx()){
+                e->setPosx(e->getPosx()+e->getVelocidad());
+                e->setPos(e->getPosx(),e->getPosy());
+            }
+            if(e->getPosy() > c->getPosy()){
+                e->setPosy(e->getPosy()-e->getVelocidad());
+                e->setPos(e->getPosx(),e->getPosy());
+            }
+            if(e->getPosy() < c->getPosy()){
+                e->setPosy(e->getPosy()+e->getVelocidad());
+                e->setPos(e->getPosy(),e->getPosy());
+            }
         }
     }
 }
 
 
 
-void MainWindow::borderCollision(personaje_physics *b)
-{
-
-    if (b->getPX()<b->getR()){
-        b->set_vel(-1*b->getE()*b->getVX(),b->getVY(),b->getR(),b->getPY());
-    }
-    if (b->getPX()>h_limit-b->getR()){
-        b->set_vel(-1*b->getE()*b->getVX(),b->getVY(),h_limit-b->getR(),b->getPY());
-    }
-    if (b->getPY()<b->getR()){
-        b->set_vel(b->getVX(),-1*b->getE()*b->getVY(),b->getPX(),b->getR());
-    }
-    if (b->getPY()>v_limit-b->getR()){
-        b->set_vel(b->getVX(),-1*b->getE()*b->getVY(),b->getPX(),v_limit-b->getR());
-    }
-
-}
-
 void MainWindow::on_pushButton_clicked()
 {
-    timer->start(20);
-    enemy_timer->start(50);
     jugadores.push_back(new personaje);
-    jugadores.back()->actualizar(v_limit);
+    jugadores.back()->setPosx(100);jugadores.back()->setPosy(100);
+    jugadores.back()->setPos(100,100);
     scene->addItem(jugadores.back());
 
-    enemigos.push_back(new enemy);
-    enemigos.back()->actualizar(v_limit);
-    scene->addItem(enemigos.back());
+    enemy_timer->start(2000);
+    timer_move->start(200);
 
 }

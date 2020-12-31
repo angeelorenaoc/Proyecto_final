@@ -1,28 +1,13 @@
 #include "personaje.h"
 
-personaje::personaje():escala(1)
+personaje::personaje()
 {
-    float posx,posy,velx,vely,mass,r,K,e;
 
-    posx = 32;
-    posy = 150;
-    r = 20;
-    mass = 100;
-    velx = 0;
-    vely = 0;
-    K = 0.002;
-    e = 0.02;
-    esf = new personaje_physics(posx,posy,velx,vely,mass,r,K,e);
-}
-
-personaje::~personaje()
-{
-    delete esf;
 }
 
 QRectF personaje::boundingRect() const
 {
-    return QRectF(-1*escala*esf->getR(),-1*escala*esf->getR(),2*escala*esf->getR(),2*escala*esf->getR());
+    return QRectF(-r,-r,2*r,2*r);
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -31,18 +16,51 @@ void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
     painter->drawEllipse(boundingRect());
 }
 
-void personaje::setEscala(float s)
+void personaje::up()
 {
-    escala = s;
+    posy-= velocidad;
+    setPos(posx,posy);
 }
 
-void personaje::actualizar(float v_lim)
+void personaje::down()
 {
-    esf->actualizar();
-    setPos(esf->getPX(),v_lim-esf->getPY());
+    posy+= velocidad;
+    setPos(posx,posy);
 }
 
-personaje_physics *personaje::getEsf()
+void personaje::left()
 {
-    return esf;
+    posx-= velocidad;
+    setPos(posx,posy);
+}
+
+void personaje::right()
+{
+    posx+= velocidad;
+    setPos(posx,posy);
+}
+
+int personaje::getPosx() const
+{
+    return posx;
+}
+
+int personaje::getPosy() const
+{
+    return posy;
+}
+
+int personaje::getR() const
+{
+    return r;
+}
+
+void personaje::setPosx(int value)
+{
+    posx = value;
+}
+
+void personaje::setPosy(int value)
+{
+    posy = value;
 }

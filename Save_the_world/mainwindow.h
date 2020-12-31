@@ -5,9 +5,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include "personaje.h"
-#include "personaje_physics.h"
 #include "enemy.h"
-#include "enemy_physics.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
@@ -25,7 +23,7 @@ public:
     ~MainWindow();
 
 public slots:
-    void actualizar();
+    void spawn();
     void move_enemy();
 
 private slots:
@@ -34,13 +32,14 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene;
-    QTimer *timer;
     QTimer *enemy_timer;
+    QTimer *timer_move;
 
     float dt;
     int h_limit;
     int v_limit;
-    void borderCollision(personaje_physics *b);
+    int N_enemigos=0;
+
     void keyPressEvent(QKeyEvent * evento);
     QList<personaje *> jugadores;
     QList<enemy *> enemigos;
