@@ -43,9 +43,10 @@ private:
     int sentido_bala=1;
 
     void keyPressEvent(QKeyEvent * evento);
+    void bullet_impact();
+
     QList<personaje *> jugadores;
     QList<enemy *> enemigos;
-
-
+    QList<Bala_comun *> disparos;
 };
 #endif // MAINWINDOW_H

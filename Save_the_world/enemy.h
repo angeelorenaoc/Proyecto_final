@@ -10,7 +10,7 @@ class enemy: public QObject, public QGraphicsItem
 {
     int posx ,posy;
     int velocidad=2;
-    int r=20;
+    int r=9;
 
     Q_OBJECT
 public:

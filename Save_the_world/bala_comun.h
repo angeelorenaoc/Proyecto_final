@@ -1,9 +1,9 @@
 #ifndef BALA_COMUN_H
 #define BALA_COMUN_H
 
-#include <QObject>
 #include <QGraphicsItem>
 #include <QTimer>
+#include "mainwindow.h"
 #include <QPainter>
 
 class Bala_comun: public QObject, public QGraphicsItem

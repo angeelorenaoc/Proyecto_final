@@ -34,26 +34,72 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
 {
+    personaje *player = jugadores.at(0);
+    personaje *player_two = jugadores.at(1);
     if(event->key()== Qt::Key_A){
-        jugadores.at(0)->left();
+        if(player->getPosx()>0+player->getR())
+            player->left();
         sentido_bala=1;
     }
     if(event->key() == Qt::Key_D){
-        jugadores.at(0)->right();
+        if(player->getPosx()<800-player->getR())
+            player->right();
         sentido_bala=2;
     }
     if(event->key() == Qt::Key_W){
-        jugadores.at(0)->up();
+        if(player->getPosy()>10+player->getR())
+            player->up();
         sentido_bala=3;
     }
     if(event->key() == Qt::Key_S){
-        jugadores.at(0)->down();
+        if(player->getPosy()<560)
+            player->down();
         sentido_bala=4;
     }
     if(event->key() == Qt::Key_Space){
-        Bala_comun *bullet = new Bala_comun(sentido_bala);
-        bullet->setPos(jugadores.at(0)->getPosx(),jugadores.at(0)->getPosy());
-        scene->addItem(bullet);
+        disparos.back() = new Bala_comun(sentido_bala);
+        disparos.back()->setPos(player->getPosx(),player->getPosy());
+        scene->addItem(disparos.back());
+    }
+
+    if(event->key()== Qt::Key_Left){
+        if(player->getPosx()>0+player->getR())
+            player_two->left();
+        sentido_bala=1;
+    }
+    if(event->key() == Qt::Key_Right){
+        if(player->getPosx()<800-player->getR())
+            player->right();
+        sentido_bala=2;
+    }
+    if(event->key() == Qt::Key_Up){
+        if(player->getPosy()>10+player->getR())
+            player->up();
+        sentido_bala=3;
+    }
+    if(event->key() == Qt::Key_Down){
+        if(player->getPosy()<560)
+            player->down();
+        sentido_bala=4;
+    }
+    if(event->key() == Qt::Key_Enter){
+        disparos.back() = new Bala_comun(sentido_bala);
+        disparos.back()->setPos(player->getPosx(),player->getPosy());
+        scene->addItem(disparos.back());
+    }
+}
+
+void MainWindow::bullet_impact()
+{
+    for (int i=0;i<enemigos.size();i++) {
+        for (int j=0;j<disparos.size();j++) {
+            if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
+                scene->removeItem(enemigos.at(i));
+                scene->removeItem(disparos.at(j));
+                delete enemigos.at(i);
+                delete disparos.at(j);
+            }
+        }
     }
 }
 
@@ -97,6 +143,7 @@ void MainWindow::move_enemy()
             }
         }
     }
+    bullet_impact();
 }
 
 void MainWindow::on_pushButton_clicked()

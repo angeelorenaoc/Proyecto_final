@@ -8,7 +8,7 @@ class personaje: public QObject, public QGraphicsItem
 {
     int posx ,posy;
     int velocidad=3;
-    int r=20;
+    int r=15;
 
     Q_OBJECT
 public:
