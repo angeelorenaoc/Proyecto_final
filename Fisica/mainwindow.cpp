@@ -23,9 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    vidas = new Vida();
-    scene->addItem(vidas);
-    vidas->setPos(0,0);
+    vidas1 = new Vida();
+    scene->addItem(vidas1);
+    vidas1->setPos(0,0);
 
     Enemigo.push_back(new Enemigosgraf);
     Enemigo.back()->setPos(1000,179);
@@ -251,6 +251,7 @@ void MainWindow::borderCollision(Cuerpo *b)
 }
 
 void MainWindow:: keyPressEvent(QKeyEvent *event){
+    if (semilla == 1){
     Cuerpo *b=bars.at(0)->getEsf();
     if (event->key()== Qt::Key_D){
         b->set_vel(15,b->getVy(),b->getPx(),b->getPy());
@@ -264,7 +265,41 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
         b->set_vel(b->getVx(),40,b->getPx(),b->getPy());
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
     }
-
+    }
+    else if (semilla == 2){
+        for (int i = 0; i < bars.size() ; i++ ){
+            if (i == 0){
+            Cuerpo *b=bars.at(0)->getEsf();
+            if (event->key()== Qt::Key_D){
+                b->set_vel(15,b->getVy(),b->getPx(),b->getPy());
+                ui->graphicsView->centerOn(b->getPx(),b->getPy());
+            }
+            if (event->key()== Qt::Key_A){
+                b->set_vel(-15,b->getVy(),b->getPx(),b->getPy());
+                ui->graphicsView->centerOn(b->getPx(),b->getPy());
+            }
+            if (event->key()== Qt::Key_W){
+                b->set_vel(b->getVx(),40,b->getPx(),b->getPy());
+                ui->graphicsView->centerOn(b->getPx(),b->getPy());
+            }
+            }
+            if (i ==1){
+                Cuerpo *c = bars.at(1)->getEsf();
+                if (event->key()== Qt::Key_L){
+                    c->set_vel(15,c->getVy(),c->getPx(),c->getPy());
+                    ui->graphicsView->centerOn(c->getPx(),c->getPy());
+                }
+                if (event->key()== Qt::Key_J){
+                    c->set_vel(-15,c->getVy(),c->getPx(),c->getPy());
+                    ui->graphicsView->centerOn(c->getPx(),c->getPy());
+                }
+                if (event->key()== Qt::Key_I){
+                    c->set_vel(c->getVx(),40,c->getPx(),c->getPy());
+                    ui->graphicsView->centerOn(c->getPx(),c->getPy());
+                }
+            }
+        }
+    }
 }
 
 void MainWindow::Eliminar_vida()
@@ -273,7 +308,7 @@ void MainWindow::Eliminar_vida()
         for (int j = 0; j < Enemigo.size() ; j++ ) {
             if (bars.at(i)->collidesWithItem(Enemigo.at(j))){
                 Cuerpo *c = bars.at(i)->getEsf();
-                vidas->decrease();
+                vidas1->decrease();
                 c->setPx(0);
                 c->setPy(0);
             }
@@ -311,9 +346,12 @@ void MainWindow::actualizar()
         borderCollision(bars.at(i)->getEsf());
         Eliminar_vida();
         if (i == 0){
-            vidas->setPos(vidas->getPx()+bars.at(i)->getEsf()->getPx(),0);
+            vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
-        if (vidas->getVida() == 0){
+        else if (i == 1){
+            vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
+        }
+        if (vidas1->getVida() == 0){
             scene->removeItem(bars.at(i));
             bars.removeAt(i);
         }
@@ -349,6 +387,7 @@ void MainWindow::Movimiento_Enemigo()
 }
 void MainWindow::on_pushButton_clicked()
 {
+    semilla = 1;
     timer->start(3);
     timere->start(10);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
@@ -374,6 +413,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    semilla = 2;
     timer->start(1);
     timere->start(5);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
@@ -389,6 +429,9 @@ void MainWindow::on_pushButton_2_clicked()
         }
         Enemigo.at(i)->actualizar((v_limit));
     }
+    vidas2 = new Vida();
+    scene->addItem(vidas2);
+    vidas1->setPos(0,20);
     bars.push_back((new Cuerpograf));
     bars.back()->setFocus();
     bars.back()->actualizar((v_limit));

@@ -49,12 +49,14 @@ private:
     float dt;
     int h_limit;
     int v_limit;
+    int semilla;
     void borderCollision(Cuerpo *b);
     void keyPressEvent(QKeyEvent *event);
     void Eliminar_vida();
     void Colision_paredes_e();
     QList<Cuerpograf*>bars;
-    Vida *vidas;
+    Vida *vidas1;
+    Vida *vidas2;
     QList<Pisos*> Muros;
     QList <Enemigosgraf *> Enemigo;
 };
