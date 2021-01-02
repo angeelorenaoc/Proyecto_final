@@ -7,9 +7,12 @@
 #include "personaje.h"
 #include "enemy.h"
 #include "bala_comun.h"
+#include "paredes.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
+#include <QList>
+#include <math.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,7 +35,7 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene;
+    QGraphicsScene *scene = new QGraphicsScene;
     QTimer *enemy_timer;
     QTimer *timer_move;
 
@@ -41,12 +44,16 @@ private:
     int v_limit;
     int N_enemigos=0;
     int sentido_bala=1;
+    float dist;
 
     void keyPressEvent(QKeyEvent * evento);
     void bullet_impact();
+    void Spawn_bullet(personaje *P);
+    bool player_collides(personaje *P);
 
     QList<personaje *> jugadores;
     QList<enemy *> enemigos;
-    QList<Bala_comun *> disparos;
+    QList<paredes *> muros;
+    Bala_comun *Disparo_frontal;
 };
 #endif // MAINWINDOW_H

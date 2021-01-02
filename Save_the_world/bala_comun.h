@@ -3,7 +3,6 @@
 
 #include <QGraphicsItem>
 #include <QTimer>
-#include "mainwindow.h"
 #include <QPainter>
 
 class Bala_comun: public QObject, public QGraphicsItem

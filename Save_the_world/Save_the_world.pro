@@ -13,12 +13,14 @@ SOURCES += \
     enemy.cpp \
     main.cpp \
     mainwindow.cpp \
+    paredes.cpp \
     personaje.cpp
 
 HEADERS += \
     bala_comun.h \
     enemy.h \
     mainwindow.h \
+    paredes.h \
     personaje.h
 
 FORMS += \
