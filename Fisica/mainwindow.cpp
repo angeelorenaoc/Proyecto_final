@@ -23,10 +23,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    vidas1 = new Vida();
-    scene->addItem(vidas1);
-    vidas1->setPos(0,0);
-
     Enemigo.push_back(new Enemigosgraf);
     Enemigo.back()->setPos(1000,179);
     scene->addItem(Enemigo.back());
@@ -202,7 +198,6 @@ MainWindow::MainWindow(QWidget *parent)
 //    }
 //    Leer.close();
 
-
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
 }
@@ -352,8 +347,8 @@ void MainWindow::actualizar()
             vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
         if (vidas1->getVida() == 0){
-            scene->removeItem(bars.at(i));
-            bars.removeAt(i);
+            scene->removeItem(bars.at(0));
+            bars.removeAt(0);
         }
     }
 }
@@ -390,6 +385,9 @@ void MainWindow::on_pushButton_clicked()
     semilla = 1;
     timer->start(3);
     timere->start(10);
+    vidas1 = new Vida();
+    scene->addItem(vidas1);
+    vidas1->setPx(0);vidas1->setPy(0);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
         if(i == 0){
@@ -404,7 +402,7 @@ void MainWindow::on_pushButton_clicked()
         Enemigo.at(i)->actualizar((v_limit));
     }
     bars.push_back((new Cuerpograf));
-    bars.back()->setFocus();
+    //bars.back()->setFocus();
     bars.back()->actualizar((v_limit));
     scene->addItem(bars.back());
     ui->graphicsView->centerOn(bars.back());
@@ -429,13 +427,18 @@ void MainWindow::on_pushButton_2_clicked()
         }
         Enemigo.at(i)->actualizar((v_limit));
     }
+    vidas1 = new Vida();
+    scene->addItem(vidas1);
+    vidas1->setPx(0);vidas1->setPy(0);
     vidas2 = new Vida();
     scene->addItem(vidas2);
-    vidas1->setPos(0,20);
+    vidas2->setPx(0);vidas2->setPy(0);
     bars.push_back((new Cuerpograf));
-    bars.back()->setFocus();
     bars.back()->actualizar((v_limit));
     scene->addItem(bars.back());
     ui->graphicsView->centerOn(bars.back());
     bars.push_back((new Cuerpograf));
+    bars.back()->actualizar((v_limit));
+    scene->addItem(bars.back());
+    ui->graphicsView->centerOn(bars.back());
 }

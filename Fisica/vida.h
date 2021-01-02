@@ -10,6 +10,8 @@ public:
     int getVida();
     int getPx() const;
     int getPy() const;
+    void setPx(int value);
+    void setPy(int value);
 
 private:
     int px;

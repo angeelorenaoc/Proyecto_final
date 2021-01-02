@@ -30,3 +30,13 @@ int Vida::getPy() const
 {
     return py;
 }
+
+void Vida::setPx(int value)
+{
+    px = value;
+}
+
+void Vida::setPy(int value)
+{
+    py = value;
+}
