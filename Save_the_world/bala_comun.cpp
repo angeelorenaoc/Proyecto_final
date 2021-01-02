@@ -31,39 +31,28 @@ int Bala_comun::getSentido() const
 
 void Bala_comun::move()
 {                            
-    if(sentido == 1){
+    if(sentido == 1)
         setPos(x()-20,y());
-        if(pos().x() < 0){
-            scene()->removeItem(this);
-            delete this;
-        }
-    }
-    if(sentido == 2){
+
+    if(sentido == 2)
         setPos(x()+20,y());
-        if(pos().x() > 962){
-            scene()->removeItem(this);
-            delete this;
-        }
-    }
-    if(sentido == 3){
+
+    if(sentido == 3)
         setPos(x(),y()-20);
-        if(pos().y() < 0){
-            scene()->removeItem(this);
-            delete this;
-        }
-    }
-    if(sentido == 4){
+
+    if(sentido == 4)
         setPos(x(),y()+20);
-        if(pos().y() > 642){
-            scene()->removeItem(this);
-            delete this;
-        }
-    }
+
     QList<QGraphicsItem *> colliding_items = collidingItems();
     for(int i=0; i< colliding_items.size();i++){
         if(typeid(*(colliding_items[i]))==typeid (enemy)){
+            scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
             delete colliding_items[i];
+            delete this;
+        }
+        if(typeid(*(colliding_items[i]))==typeid (paredes)){
+            scene()->removeItem(this);
             delete this;
         }
     }

@@ -47,9 +47,9 @@ private:
     float dist;
 
     void keyPressEvent(QKeyEvent * evento);
-    void bullet_impact();
     void Spawn_bullet(personaje *P);
     bool player_collides(personaje *P);
+    bool enemy_collides(enemy *E);
 
     QList<personaje *> jugadores;
     QList<enemy *> enemigos;

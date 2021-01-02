@@ -59,7 +59,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         personaje *player = jugadores.at(0);
 
         if(event->key()== Qt::Key_A){
-            if(!player_collides(player))
                 player->left();
             if(player_collides(player))
                 player->right();
@@ -68,7 +67,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=1;
         }
         if(event->key() == Qt::Key_D){
-            if(!player_collides(player))
                 player->right();
             if(player_collides(player))
                 player->left();
@@ -77,7 +75,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=2;
         }
         if(event->key() == Qt::Key_W){
-            if(!player_collides(player))
                 player->up();
             if(player_collides(player))
                 player->down();
@@ -86,7 +83,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=3;
         }
         if(event->key() == Qt::Key_S){
-            if(!player_collides(player))
                 player->down();
             if(player_collides(player))
                 player->up();
@@ -103,16 +99,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
         personaje *player = jugadores.at(0);
         if(event->key()== Qt::Key_A){
-            if(!player_collides(player))
                 player->left();
-            else
+            if(player_collides(player))
                 player->right();
 
             ui->graphicsView->centerOn(player->x(),player->y());
             sentido_bala=1;
         }
         if(event->key() == Qt::Key_D){
-            if(!player_collides(player))
                 player->right();
             if(player_collides(player))
                 player->left();
@@ -121,7 +115,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=2;
         }
         if(event->key() == Qt::Key_W){
-            if(!player_collides(player))
                 player->up();
             if(player_collides(player))
                 player->down();
@@ -130,7 +123,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=3;
         }
         if(event->key() == Qt::Key_S){
-            if(!player_collides(player))
                 player->down();
             if(player_collides(player))
                 player->up();
@@ -144,7 +136,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         personaje *player_two = jugadores.at(1);
 
         if(event->key()== Qt::Key_J){
-            if(!player_collides(player_two))
                 player_two->left();
             if(player_collides(player_two))
                 player_two->right();
@@ -152,7 +143,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=1;
         }
         if(event->key() == Qt::Key_L){
-            if(!player_collides(player_two))
                 player_two->right();
             if(player_collides(player_two))
                 player_two->left();
@@ -160,7 +150,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=2;
         }
         if(event->key() == Qt::Key_I){
-            if(!player_collides(player_two))
                 player_two->up();
             if(player_collides(player_two))
                 player_two->down();
@@ -168,7 +157,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=3;
         }
         if(event->key() == Qt::Key_K){
-            if(!player_collides(player_two))
                 player_two->down();
             if(player_collides(player_two))
                 player_two->up();
@@ -181,21 +169,6 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
-//void MainWindow::bullet_impact()
-//{
-//    for (int i=0;i<enemigos.size();i++) {
-//        for (int j=0;j<disparos.size();j++) {
-//            if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
-//                scene->removeItem(enemigos.at(i));
-//                scene->removeItem(disparos.at(j));
-//                delete enemigos.at(i);
-//                qDebug()<<"Fino por ahora";
-//                delete disparos.at(j);
-//            }
-//        }
-//    }
-//}
-
 void MainWindow::Spawn_bullet(personaje *P)
 {
     Disparo_frontal = new Bala_comun(sentido_bala);
@@ -207,6 +180,16 @@ bool MainWindow::player_collides(personaje *P)
 {
     for(int i=0;i<muros.size();i++){
         if(P->collidesWithItem(muros.at(i))){
+            return true;
+        }
+    }
+    return false;
+}
+
+bool MainWindow::enemy_collides(enemy *E)
+{
+    for(int i=0;i<muros.size();i++){
+        if(E->collidesWithItem(muros.at(i))){
             return true;
         }
     }
@@ -242,15 +225,23 @@ void MainWindow::move_enemy()
 
             if(e->getPosx() > c->getPosx()){
                 e->left();
+                if(enemy_collides(e))
+                    e->right();
             }
             else if(e->getPosx() < c->getPosx()){
                 e->right();
+                if(enemy_collides(e))
+                    e->left();
             }
             if(e->getPosy() > c->getPosy()){
                 e->up();
+                if(enemy_collides(e))
+                    e->down();
             }
             else if(e->getPosy() < c->getPosy()){
                 e->down();
+                if(enemy_collides(e))
+                    e->up();
             }
         }
     }
