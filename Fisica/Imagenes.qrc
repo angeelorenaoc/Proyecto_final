@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/new/fondo">
         <file>nochefin.jpg</file>
+        <file>Enemigorecortada_nivel3.png</file>
+        <file>Personajefemeninorecortada_3.png</file>
+        <file>Personajehombrerecortada_3.png</file>
     </qresource>
 </RCC>
