@@ -13,8 +13,4 @@ QRectF paredes::boundingRect() const
     return QRectF(posx,posy,w,h);
 }
 
-void paredes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-
-    painter->drawRect(boundingRect());
-}
+void paredes::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget){}

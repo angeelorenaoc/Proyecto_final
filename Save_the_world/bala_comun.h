@@ -10,6 +10,7 @@ class Bala_comun: public QObject, public QGraphicsItem
     int r = 5;
     int posx, posy;
     int sentido;
+    bool collides = false;
 
     Q_OBJECT
 public:

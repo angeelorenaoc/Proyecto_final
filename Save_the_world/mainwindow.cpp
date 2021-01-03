@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(ui->graphicsView->width()+100,ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scene->setBackgroundBrush(QBrush(QImage(":/new/prefix1/Laboratorio_Oak.jpg")));
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/Laboratorio_Oak.jpg")));
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -29,11 +29,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(timer_move,SIGNAL(timeout()),this,SLOT(move_enemy()));
     timer_move->stop();
 
+    bullet_timer = new QTimer(this);
+    connect(bullet_timer,SIGNAL(timeout()),this,SLOT(bullet_impact()));
+    bullet_timer->stop();
+
     //MUROS
-    muros.push_back(new paredes(129,129,0,0));scene->addItem(muros.back());
+    muros.push_back(new paredes(67,31,0,67));scene->addItem(muros.back());
     muros.push_back(new paredes(96,96,67,289));scene->addItem(muros.back());
     muros.push_back(new paredes(962,81,0,0));scene->addItem(muros.back());
-    muros.push_back(new paredes(64,0,66,97));scene->addItem(muros.back());
     muros.push_back(new paredes(190,194,388,0));scene->addItem(muros.back());
     muros.push_back(new paredes(320,51,642,142));scene->addItem(muros.back());
     muros.push_back(new paredes(96,96,802,288));scene->addItem(muros.back());
@@ -46,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent)
     muros.push_back(new paredes(34,84,0,341));scene->addItem(muros.back());
     muros.push_back(new paredes(258,64,0,417));scene->addItem(muros.back());
     muros.push_back(new paredes(194,79,0,434));scene->addItem(muros.back());
-    muros.push_back(new paredes(114,100,0,542));scene->addItem(muros.back());
+    muros.push_back(new paredes(112,97,0,544));scene->addItem(muros.back());
     muros.push_back(new paredes(0,642,0,0));scene->addItem(muros.back());
     muros.push_back(new paredes(0,642,962,0));scene->addItem(muros.back());
     muros.push_back(new paredes(962,0,0,642));scene->addItem(muros.back());
@@ -91,7 +94,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=4;
         }
         if(event->key() == Qt::Key_Space){
-            Spawn_bullet(player);
+            disparos.push_back(new Bala_comun(sentido_bala));
+            disparos.back()->setPos(player->getPosx(),player->getPosy());
+            scene->addItem(disparos.back());
         }
     }
 
@@ -131,7 +136,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             sentido_bala=4;
         }
         if(event->key() == Qt::Key_Space){
-            Spawn_bullet(player);
+            disparos.push_back(new Bala_comun(sentido_bala));
+            disparos.back()->setPos(player->getPosx(),player->getPosy());
+            scene->addItem(disparos.back());
         }
         personaje *player_two = jugadores.at(1);
 
@@ -140,40 +147,35 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             if(player_collides(player_two))
                 player_two->right();
 
-            sentido_bala=1;
+            sentido_bala_two=1;
         }
         if(event->key() == Qt::Key_L){
                 player_two->right();
             if(player_collides(player_two))
                 player_two->left();
 
-            sentido_bala=2;
+            sentido_bala_two=2;
         }
         if(event->key() == Qt::Key_I){
                 player_two->up();
             if(player_collides(player_two))
                 player_two->down();
 
-            sentido_bala=3;
+            sentido_bala_two=3;
         }
         if(event->key() == Qt::Key_K){
                 player_two->down();
             if(player_collides(player_two))
                 player_two->up();
 
-            sentido_bala=4;
+            sentido_bala_two=4;
         }
         if(event->key() == Qt::Key_P){
-            Spawn_bullet(player_two);
+            disparos.push_back(new Bala_comun(sentido_bala_two));
+            disparos.back()->setPos(player_two->getPosx(),player_two->getPosy());
+            scene->addItem(disparos.back());
         }
     }
-}
-
-void MainWindow::Spawn_bullet(personaje *P)
-{
-    Disparo_frontal = new Bala_comun(sentido_bala);
-    Disparo_frontal->setPos(P->getPosx(),P->getPosy());
-    scene->addItem(Disparo_frontal);
 }
 
 bool MainWindow::player_collides(personaje *P)
@@ -214,6 +216,28 @@ void MainWindow::spawn()
     }
 }
 
+void MainWindow::bullet_impact()
+{
+    for (int i=0;i<enemigos.size();i++) {
+        for (int j=0;j<disparos.size();j++) {
+            if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
+                scene->removeItem(enemigos.at(i));
+                scene->removeItem(disparos.at(j));
+                enemigos.removeAt(i);
+                disparos.removeAt(j);
+            }
+        }
+    }
+    for (int i=0;i<muros.size();i++) {
+        for (int j=0;j<disparos.size();j++) {
+            if(disparos.at(j)->collidesWithItem(muros.at(i))){
+                scene->removeItem(disparos.at(j));
+                disparos.removeAt(j);
+            }
+        }
+    }
+}
+
 void MainWindow::move_enemy()
 {
     for(int i=0;i<jugadores.size();i++){
@@ -245,17 +269,36 @@ void MainWindow::move_enemy()
             }
         }
     }
-    //bullet_impact();
 }
 
 void MainWindow::on_pushButton_clicked()
 {
-    jugadores.push_back(new personaje);
-    jugadores.back()->setPosx(490);jugadores.back()->setPosy(400);
-    jugadores.back()->setPos(490,400);
-    scene->addItem(jugadores.back());
+    if(ui->radioButton->isChecked() && N_jugadores<1){
+        jugadores.push_back(new personaje);
+        jugadores.back()->setPosx(490);jugadores.back()->setPosy(400);
+        jugadores.back()->setPos(490,400);
+        scene->addItem(jugadores.back());
+        N_jugadores++;
+    }
+
+    else if(ui->radioButton_2->isChecked() && N_jugadores<2){
+        jugadores.push_back(new personaje);
+        jugadores.back()->setPosx(470);jugadores.back()->setPosy(400);
+        jugadores.back()->setPos(470,400);
+        scene->addItem(jugadores.back());
+        N_jugadores++;
+
+        if(N_jugadores<2){
+            jugadores.push_back(new personaje);
+            jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
+            jugadores.back()->setPos(510,400);
+            scene->addItem(jugadores.back());
+            N_jugadores++;
+        }
+    }
 
     enemy_timer->start(2000);
     timer_move->start(50);
+    bullet_timer->start(50);
     ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 }

@@ -29,6 +29,7 @@ public:
 public slots:
     void spawn();
     void move_enemy();
+    void bullet_impact();
 
 private slots:
     void on_pushButton_clicked();
@@ -38,22 +39,24 @@ private:
     QGraphicsScene *scene = new QGraphicsScene;
     QTimer *enemy_timer;
     QTimer *timer_move;
+    QTimer *bullet_timer;
 
     float dt;
     int h_limit;
     int v_limit;
     int N_enemigos=0;
-    int sentido_bala=1;
-    float dist;
+    int N_jugadores=0;
+    int sentido_bala=2;
+    int sentido_bala_two=1;
+    float dist;    
 
     void keyPressEvent(QKeyEvent * evento);
-    void Spawn_bullet(personaje *P);
     bool player_collides(personaje *P);
     bool enemy_collides(enemy *E);
 
     QList<personaje *> jugadores;
     QList<enemy *> enemigos;
     QList<paredes *> muros;
-    Bala_comun *Disparo_frontal;
+    QList<Bala_comun *> disparos;
 };
 #endif // MAINWINDOW_H
