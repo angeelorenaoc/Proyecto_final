@@ -7,11 +7,13 @@
 #include <time.h>
 #include <QObject>
 #include "enemigos.h"
+#include <QTimer>
+#include <QPixmap>
 
 class Enemigosgraf: public QObject, public QGraphicsItem
 {
 public:
-    Enemigosgraf();
+    explicit Enemigosgraf(QObject *parent = nullptr);
     ~Enemigosgraf();
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
@@ -19,11 +21,24 @@ public:
     void actualizar (float v_limit);
     Enemigos *getEsf();
     void setImagen(int value);
-
+    QTimer *timerm;      //Variable para lograr que el pacman se vea comiendo
+    QPixmap *pixmap;
+    void setFilas(float value);
+    void setColumnas(float value);
+    void setAncho(float value);
+    void setAlto(float value);
 private:
-    int imagen;
+    float filas,columnas;
+    float ancho;
+    float alto;
     Enemigos *esf;
     float escala;
+
+signals:
+
+public slots:
+    //Actualiza las imagenes.
+    void Actualizacion();
 };
 
 #endif // ENEMIGOSGRAF_H
