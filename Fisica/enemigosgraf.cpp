@@ -3,7 +3,7 @@
 Enemigosgraf::Enemigosgraf(QObject *parent) : QObject(parent),escala(1)
 {
     timerm = new QTimer();
-    filas = 0;
+    filas = 65;
     columnas = 0;
     pixmap = new QPixmap(":/new/fondo/Enemigorecortada_nivel3.png");
 
@@ -39,7 +39,7 @@ void Enemigosgraf::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
 {
 //    painter->setBrush(Qt::green);
 //    painter->drawEllipse(boundingRect());
-    painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,0,ancho,alto);
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 
 void Enemigosgraf::setescala(float s)
@@ -69,15 +69,6 @@ void Enemigosgraf::setColumnas(float value)
     columnas = value;
 }
 
-void Enemigosgraf::setAncho(float value)
-{
-    ancho = value;
-}
-
-void Enemigosgraf::setAlto(float value)
-{
-    alto = value;
-}
 
 void Enemigosgraf::Actualizacion()
 {

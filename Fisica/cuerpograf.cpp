@@ -1,7 +1,15 @@
 #include "cuerpograf.h"
 
-Cuerpograf::Cuerpograf():escala(1) //Para escalar la imagen
+Cuerpograf::Cuerpograf(QObject *parent) : QObject(parent), escala(1) //Para escalar la imagen
 {
+    timermo = new QTimer();
+    filas = 65;
+    columnas = 0;
+    pixmap = new QPixmap(":/new/fondo/Enemigorecortada_nivel3.png");
+
+    ancho = 63;
+    alto  = 65;
+
     float posx,posy,velx,vely,masa,r,K,e;
     posx = 32;
     posy = 30;
@@ -12,6 +20,9 @@ Cuerpograf::Cuerpograf():escala(1) //Para escalar la imagen
     K = 0.08;
     e = 0.2;
     esf = new Cuerpo(posx,posy,velx,vely,masa,r,K,e);
+
+    timermo->start(100);
+    connect(timermo,&QTimer::timeout,this,&Cuerpograf::Actualizacion);
 }
 
 Cuerpograf::~Cuerpograf()
@@ -21,13 +32,15 @@ Cuerpograf::~Cuerpograf()
 
 QRectF Cuerpograf::boundingRect() const
 {
-    return QRectF(-1*escala*esf->getR(),-1*escala*esf->getR(),2*escala*esf->getR(), 2*escala*esf->getR());
+//    return QRectF(-1*escala*esf->getR(),-1*escala*esf->getR(),2*escala*esf->getR(), 2*escala*esf->getR());
+    return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
 
 void Cuerpograf::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::blue);
+//    painter->drawEllipse(boundingRect());
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 
 void Cuerpograf::setescala(float s)
@@ -44,4 +57,24 @@ void Cuerpograf::actualizar(float v_limit)
 Cuerpo *Cuerpograf::getEsf()
 {
     return esf;
+}
+
+void Cuerpograf::setColumnas(float value)
+{
+    columnas = value;
+}
+
+void Cuerpograf::setFilas(float value)
+{
+    filas = value;
+}
+
+void Cuerpograf::Actualizacion()
+{
+    columnas += 63;
+    if(columnas >= 567)
+    {
+        columnas =0;
+    }
+    this->update(-ancho/2,-alto/2,ancho,alto);
 }

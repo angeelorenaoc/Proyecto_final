@@ -361,22 +361,22 @@ void MainWindow::Movimiento_Enemigo()
             Cuerpo *c = bars.at(i)->getEsf();
             if (e->getPx() < c->getPx()){
                 e->set_vel(7,e->getVy(),e->getPx(),e->getPy());
-                Enemigo.at(j)->setFilas(130);
+                Enemigo.at(j)->setFilas(190);
                 Enemigo.at(j)->actualizar(v_limit);
             }
             else if (e->getPx() > c->getPx()){
                 e->set_vel(-7,e->getVy(),e->getPx(),e->getPy());
-                Enemigo.at(j)->setFilas(190);
+                Enemigo.at(j)->setFilas(65);
                 Enemigo.at(j)->actualizar(v_limit);
             }
             if (e->getPy() < c->getPy()){
               e->set_vel(e->getVx(),20,e->getPx(),e->getPy());
-              Enemigo.at(j)->setFilas(130);
+              //Enemigo.at(j)->setFilas(130);
               Enemigo.at(j)->actualizar(v_limit);
             }
             if (e->getPy() > c->getPy()){
               e->set_vel(e->getVx(),-10,e->getPx(),e->getPy());
-              Enemigo.at(j)->setFilas(190);
+              //Enemigo.at(j)->setFilas(190);
               Enemigo.at(j)->actualizar(v_limit);
             }
             Colision_paredes_e();

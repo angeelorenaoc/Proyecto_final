@@ -20,13 +20,10 @@ public:
     void setescala (float s);
     void actualizar (float v_limit);
     Enemigos *getEsf();
-    void setImagen(int value);
     QTimer *timerm;      //Variable para lograr que el pacman se vea comiendo
     QPixmap *pixmap;
     void setFilas(float value);
     void setColumnas(float value);
-    void setAncho(float value);
-    void setAlto(float value);
 private:
     float filas,columnas;
     float ancho;
