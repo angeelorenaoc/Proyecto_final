@@ -250,10 +250,12 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
     Cuerpo *b=bars.at(0)->getEsf();
     if (event->key()== Qt::Key_D){
         b->set_vel(15,b->getVy(),b->getPx(),b->getPy());
+        bars.at(0)->setFilas(190);
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
     }
     if (event->key()== Qt::Key_A){
         b->set_vel(-15,b->getVy(),b->getPx(),b->getPy());
+        bars.at(0)->setFilas(65);
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
     }
     if (event->key()== Qt::Key_W){

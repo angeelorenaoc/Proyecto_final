@@ -5,9 +5,9 @@ Cuerpograf::Cuerpograf(QObject *parent) : QObject(parent), escala(1) //Para esca
     timermo = new QTimer();
     filas = 65;
     columnas = 0;
-    pixmap = new QPixmap(":/new/fondo/Enemigorecortada_nivel3.png");
+    pixmap = new QPixmap(":/new/fondo/Personajehombrerecortada_3.png");
 
-    ancho = 63;
+    ancho = 64;
     alto  = 65;
 
     float posx,posy,velx,vely,masa,r,K,e;
@@ -71,8 +71,8 @@ void Cuerpograf::setFilas(float value)
 
 void Cuerpograf::Actualizacion()
 {
-    columnas += 63;
-    if(columnas >= 567)
+    columnas += 64;
+    if(columnas >= 576)
     {
         columnas =0;
     }
