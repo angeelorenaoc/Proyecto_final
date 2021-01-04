@@ -157,6 +157,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             disparos.back()->setPos(player->getPosx(),player->getPosy());
             scene->addItem(disparos.back());
         }
+        if(event->key() == Qt::Key_E){
+            if(Cooldown)
+                spawn_shield(player);
+        }
         personaje *player_two = jugadores.at(1);
 
         if(event->key()== Qt::Key_J){
@@ -191,6 +195,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             disparos.push_back(new Bala_comun(sentido_bala_two));
             disparos.back()->setPos(player_two->getPosx(),player_two->getPosy());
             scene->addItem(disparos.back());
+        }
+        if(event->key() == Qt::Key_O){
+            if(Cooldown)
+                spawn_shield(player_two);
         }
     }
 }
@@ -271,7 +279,6 @@ void MainWindow::perseguir()
             enemy *e = enemigos.at(i);
             personaje *p = jugadores.at(j);
             float new_dist = pow((pow(e->getPosx()-p->getPosx(),2)+pow(e->getPosy()-p->getPosy(),2)),0.5);
-            qDebug()<<dist<<" "<<new_dist<<" "<<i<<" "<<j;
             if(dist>new_dist){
                 dist=new_dist;
                 player=j;
