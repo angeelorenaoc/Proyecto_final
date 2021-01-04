@@ -22,7 +22,12 @@ void Cuerpo::setPy(float value)
     py = value;
 }
 
-Cuerpo::Cuerpo(float posx_, float posy_, float velx_, float vely_, float masa_, float radio_, float k_, float e_)
+float Cuerpo::getRr() const
+{
+    return rr;
+}
+
+Cuerpo::Cuerpo(float posx_, float posy_, float velx_, float vely_, float masa_, float radio_, float k_, float e_, float rr_)
 {
     px =posx_;
     py = posy_;
@@ -30,6 +35,7 @@ Cuerpo::Cuerpo(float posx_, float posy_, float velx_, float vely_, float masa_, 
     vx=velx_;
     vy=vely_;
     r =radio_;
+    rr = rr_;
     ax = 0;
     ay= 0;
     g = 9.8;

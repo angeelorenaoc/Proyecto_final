@@ -50,7 +50,7 @@ private:
     int h_limit;
     int v_limit;
     int semilla;
-    void borderCollision(Cuerpo *b);
+    void borderCollision();
     void keyPressEvent(QKeyEvent *event);
     void Eliminar_vida();
     void Colision_paredes_e();

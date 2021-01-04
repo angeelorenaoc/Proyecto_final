@@ -19,8 +19,9 @@ private:
     float e; //Coeficiente de restitución
     float v; //vector velocidad
     float dt;
+    float rr;
 public:
-    Cuerpo(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_);
+    Cuerpo(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_);
     ~Cuerpo();
     void Actualizar();
     float getPx() const;
@@ -35,6 +36,7 @@ public:
     void setAy(float value);
     void setPx(float value);
     void setPy(float value);
+    float getRr() const;
 };
 
 #endif // CUERPO_H
