@@ -26,7 +26,7 @@ QRectF enemy::boundingRect() const
 
 void enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::green);
+    painter->setBrush(Qt::darkGreen);
     painter->drawEllipse(boundingRect());
 }
 

@@ -33,6 +33,19 @@ MainWindow::MainWindow(QWidget *parent)
     connect(bullet_timer,SIGNAL(timeout()),this,SLOT(bullet_impact()));
     bullet_timer->stop();
 
+    shield = new QTimer(this);
+    connect(bullet_timer,SIGNAL(timeout()),this,SLOT(actualizar_escudos()));
+    shield->stop();
+    dt=300;
+
+    tiempo_de_habilidad = new QTimer(this);
+    connect(tiempo_de_habilidad,SIGNAL(timeout()),this,SLOT(delete_escudos()));
+    tiempo_de_habilidad->stop();
+
+    Cooldown_timer = new QTimer(this);
+    connect(Cooldown_timer,SIGNAL(timeout()),this,SLOT(estado_de_habilidad()));
+    Cooldown_timer->stop();
+
     //MUROS
     muros.push_back(new paredes(67,31,0,67));scene->addItem(muros.back());
     muros.push_back(new paredes(96,96,67,289));scene->addItem(muros.back());
@@ -97,6 +110,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             disparos.push_back(new Bala_comun(sentido_bala));
             disparos.back()->setPos(player->getPosx(),player->getPosy());
             scene->addItem(disparos.back());
+        }
+        if(event->key() == Qt::Key_E){
+            if(Cooldown)
+                spawn_shield(player);
         }
     }
 
@@ -198,6 +215,47 @@ bool MainWindow::enemy_collides(enemy *E)
     return false;
 }
 
+void MainWindow::spawn_shield(personaje *P)
+{
+    delete_escudos();
+
+    escudos.push_back(new escudo_graph(P->getPosx(),P->getPosy(),0,0));
+    escudos.back()->getEsf()->setMasa(1000);
+
+    escudos.push_back(new escudo_graph(P->getPosx()+40,P->getPosy(),0,-0.009));
+    scene->addItem(escudos.back());
+
+    escudos.push_back(new escudo_graph(P->getPosx()-40,P->getPosy(),0,0.009));
+    scene->addItem(escudos.back());
+
+    escudos.push_back(new escudo_graph(P->getPosx(),P->getPosy()+40,0.009,0));
+    scene->addItem(escudos.back());
+
+    escudos.push_back(new escudo_graph(P->getPosx(),P->getPosy()-40,-0.009,0));
+    scene->addItem(escudos.back());
+
+    tiempo_de_habilidad->start(5000);
+}
+
+void MainWindow::delete_escudos()
+{
+    for (int i=0;i<escudos.size();i++) {
+        scene->removeItem(escudos.at(i));
+        tiempo_de_habilidad->stop();
+    }
+    escudos.clear();
+    estado_de_habilidad();
+    Cooldown_timer->start(5000);
+}
+
+void MainWindow::estado_de_habilidad()
+{
+    if(Cooldown)
+        Cooldown=false;
+    else
+        Cooldown=true;
+}
+
 MainWindow::~MainWindow()
 {
     delete enemy_timer;
@@ -233,6 +291,36 @@ void MainWindow::bullet_impact()
             if(disparos.at(j)->collidesWithItem(muros.at(i))){
                 scene->removeItem(disparos.at(j));
                 disparos.removeAt(j);
+            }
+        }
+    }
+}
+
+void MainWindow::actualizar_escudos()
+{
+    for(int i=0; i<escudos.size();i++){
+        for(int j=0; j<escudos.size();j++){
+            if(i!=j){
+                escudos.at(i)->getEsf()->acelerar(escudos.at(j)->getEsf()->getPX(),escudos.at(j)->getEsf()->getPY(),escudos.at(j)->getEsf()->getMasa());
+                escudos.at(i)->actualizar(dt);
+            }
+        }
+    }
+    for (int i=0;i<enemigos.size();i++) {
+        for (int j=0;j<escudos.size();j++) {
+            if(enemigos.at(i)->collidesWithItem(escudos.at(j))){
+                scene->removeItem(enemigos.at(i));
+                scene->removeItem(escudos.at(j));
+                enemigos.removeAt(i);
+                escudos.removeAt(j);
+            }
+        }
+    }
+    for (int i=0;i<muros.size();i++) {
+        for (int j=0;j<escudos.size();j++) {
+            if(escudos.at(j)->collidesWithItem(muros.at(i))){
+                scene->removeItem(escudos.at(j));
+                escudos.removeAt(j);
             }
         }
     }
@@ -300,5 +388,6 @@ void MainWindow::on_pushButton_clicked()
     enemy_timer->start(2000);
     timer_move->start(50);
     bullet_timer->start(50);
+    shield->start(50);
     ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 }

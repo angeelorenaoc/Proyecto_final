@@ -11,6 +11,8 @@ CONFIG += c++11
 SOURCES += \
     bala_comun.cpp \
     enemy.cpp \
+    escudo.cpp \
+    escudo_graph.cpp \
     main.cpp \
     mainwindow.cpp \
     paredes.cpp \
@@ -19,6 +21,8 @@ SOURCES += \
 HEADERS += \
     bala_comun.h \
     enemy.h \
+    escudo.h \
+    escudo_graph.h \
     mainwindow.h \
     paredes.h \
     personaje.h

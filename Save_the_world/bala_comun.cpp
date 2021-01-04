@@ -1,7 +1,4 @@
 #include "bala_comun.h"
-#include "mainwindow.h"
-
-extern MainWindow *game;
 
 Bala_comun::Bala_comun(int sentido_)
 {
