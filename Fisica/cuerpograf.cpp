@@ -3,12 +3,12 @@
 Cuerpograf::Cuerpograf(QObject *parent) : QObject(parent), escala(1) //Para escalar la imagen
 {
     timermo = new QTimer();
-    filas = 100;
+    filas = 0;
     columnas = 0;
-    pixmap = new QPixmap(":/new/fondo/Personajehombreaumentada_3.png");
+    pixmap = new QPixmap(":/new/fondo/Sprite_personaje.png");
 
-    ancho = 101;
-    alto  = 100;
+    ancho = 40;
+    alto  = 76;
 
     float posx,posy,velx,vely,masa,r,K,e,rr;
     posx = 32;
@@ -82,8 +82,8 @@ float Cuerpograf::getAncho() const
 
 void Cuerpograf::Actualizacion()
 {
-    columnas += 101;
-    if(columnas >= 909)
+    columnas += 40;
+    if(columnas >= 360)
     {
         columnas =0;
     }

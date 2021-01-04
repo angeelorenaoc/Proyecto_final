@@ -9,6 +9,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    boton_final.cpp \
     cuerpo.cpp \
     cuerpograf.cpp \
     enemigos.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     vida.cpp
 
 HEADERS += \
+    boton_final.h \
     cuerpo.h \
     cuerpograf.h \
     enemigos.h \

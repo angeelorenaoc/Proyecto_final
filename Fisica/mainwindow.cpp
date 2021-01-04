@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent)
     Enemigo.back()->setPos(2760,139);
     scene->addItem(Enemigo.back());
 
+
     Muros.push_back(new Pisos(150,30,0,-300));
     scene->addItem(Muros.back());
     Muros.push_back(new Pisos(30,70,-150,-260));
@@ -232,8 +233,6 @@ void MainWindow::borderCollision()
             if (bars.at(j)->collidesWithItem(Muros.at(i))){
                 Cuerpo *c= bars.at(j)->getEsf();
                 if (c->getPx() > (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()-c->getR(),c->getPy());
-                    bars.at(j)->actualizar(v_limit);
                     c->set_vel(0,0,c->getPx()+c->getRr(),c->getPy());
                    }
                 else if (c->getPx() < (Muros.at(i)->getPox()*-1)){
@@ -255,17 +254,22 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
     Cuerpo *b=bars.at(0)->getEsf();
     if (event->key()== Qt::Key_D){
         b->set_vel(15,b->getVy(),b->getPx(),b->getPy());
-        bars.at(0)->setFilas(300);
+        bars.at(0)->setFilas(76);
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
     }
     if (event->key()== Qt::Key_A){
         b->set_vel(-15,b->getVy(),b->getPx(),b->getPy());
-        bars.at(0)->setFilas(100);
+        bars.at(0)->setFilas(0);
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
     }
     if (event->key()== Qt::Key_W){
         b->set_vel(b->getVx(),40,b->getPx(),b->getPy());
         ui->graphicsView->centerOn(b->getPx(),b->getPy());
+    }
+    if (b->getPx() > 5600 && b->getPx() < 5900){
+        if (event->key() == Qt::Key_Space){
+            b->setPy(0);
+        }
     }
     }
     else if (semilla == 2){
@@ -274,34 +278,44 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
             Cuerpo *b=bars.at(0)->getEsf();
             if (event->key()== Qt::Key_D){
                 b->set_vel(15,b->getVy(),b->getPx(),b->getPy());
-                bars.at(0)->setFilas(300);
+                bars.at(0)->setFilas(76);
                 ui->graphicsView->centerOn(b->getPx(),b->getPy());
             }
             if (event->key()== Qt::Key_A){
                 b->set_vel(-15,b->getVy(),b->getPx(),b->getPy());
-                bars.at(0)->setFilas(100);
+                bars.at(0)->setFilas(0);
                 ui->graphicsView->centerOn(b->getPx(),b->getPy());
             }
             if (event->key()== Qt::Key_W){
                 b->set_vel(b->getVx(),40,b->getPx(),b->getPy());
                 ui->graphicsView->centerOn(b->getPx(),b->getPy());
             }
+            if (b->getPx() > 5600 && b->getPx() < 5900){
+                if (event->key() == Qt::Key_Space){
+                    b->setPy(0);
+                }
+            }
             }
             if (i ==1){
                 Cuerpo *c = bars.at(1)->getEsf();
                 if (event->key()== Qt::Key_L){
                     c->set_vel(15,c->getVy(),c->getPx(),c->getPy());
-                    bars.at(0)->setFilas(300);
+                    bars.at(1)->setFilas(0);
                     ui->graphicsView->centerOn(c->getPx(),c->getPy());
                 }
                 if (event->key()== Qt::Key_J){
                     c->set_vel(-15,c->getVy(),c->getPx(),c->getPy());
-                    bars.at(0)->setFilas(100);
+                    bars.at(1)->setFilas(76);
                     ui->graphicsView->centerOn(c->getPx(),c->getPy());
                 }
                 if (event->key()== Qt::Key_I){
                     c->set_vel(c->getVx(),40,c->getPx(),c->getPy());
                     ui->graphicsView->centerOn(c->getPx(),c->getPy());
+                }
+                if (c->getPx() > 5600 && c->getPx() < 5900){
+                    if (event->key() == Qt::Key_Space){
+                        c->setPy(0);
+                    }
                 }
             }
         }
