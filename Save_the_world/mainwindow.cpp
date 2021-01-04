@@ -217,7 +217,8 @@ bool MainWindow::enemy_collides(enemy *E)
 
 void MainWindow::spawn_shield(personaje *P)
 {
-    delete_escudos();
+    Cooldown = false;
+    Cooldown_timer->stop();
 
     escudos.push_back(new escudo_graph(P->getPosx(),P->getPosy(),0,0));
     escudos.back()->getEsf()->setMasa(1000);
@@ -244,15 +245,12 @@ void MainWindow::delete_escudos()
         tiempo_de_habilidad->stop();
     }
     escudos.clear();
-    estado_de_habilidad();
     Cooldown_timer->start(5000);
 }
 
 void MainWindow::estado_de_habilidad()
 {
-    if(Cooldown)
-        Cooldown=false;
-    else
+    if(!Cooldown)
         Cooldown=true;
 }
 
