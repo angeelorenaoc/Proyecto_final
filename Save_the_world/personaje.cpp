@@ -40,12 +40,12 @@ void personaje::right()
     setPos(posx,posy);
 }
 
-int personaje::getPosx() const
+float personaje::getPosx() const
 {
     return posx;
 }
 
-int personaje::getPosy() const
+float personaje::getPosy() const
 {
     return posy;
 }
@@ -55,12 +55,12 @@ int personaje::getR() const
     return r;
 }
 
-void personaje::setPosx(int value)
+void personaje::setPosx(float value)
 {
     posx = value;
 }
 
-void personaje::setPosy(int value)
+void personaje::setPosy(float value)
 {
     posy = value;
 }

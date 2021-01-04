@@ -26,7 +26,7 @@ MainWindow::MainWindow(QWidget *parent)
     enemy_timer->stop();
 
     timer_move = new QTimer(this);
-    connect(timer_move,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    connect(timer_move,SIGNAL(timeout()),this,SLOT(perseguir()));
     timer_move->stop();
 
     bullet_timer = new QTimer(this);
@@ -195,6 +195,30 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
     }
 }
 
+void MainWindow::move_enemy(personaje *c, enemy *e)
+{
+    if(e->getPosx() > c->getPosx()){
+        e->left();
+        if(enemy_collides(e))
+            e->right();
+    }
+    else if(e->getPosx() < c->getPosx()){
+        e->right();
+        if(enemy_collides(e))
+            e->left();
+    }
+    if(e->getPosy() > c->getPosy()){
+        e->up();
+        if(enemy_collides(e))
+            e->down();
+    }
+    else if(e->getPosy() < c->getPosy()){
+        e->down();
+        if(enemy_collides(e))
+            e->up();
+    }
+}
+
 bool MainWindow::player_collides(personaje *P)
 {
     for(int i=0;i<muros.size();i++){
@@ -238,6 +262,26 @@ void MainWindow::spawn_shield(personaje *P)
     tiempo_de_habilidad->start(5000);
 }
 
+void MainWindow::perseguir()
+{
+    float dist = 999;
+    int player=0;
+    for(int i=0;i<enemigos.size();i++){
+        for(int j=0;j<jugadores.size();j++){            
+            enemy *e = enemigos.at(i);
+            personaje *p = jugadores.at(j);
+            float new_dist = pow((pow(e->getPosx()-p->getPosx(),2)+pow(e->getPosy()-p->getPosy(),2)),0.5);
+            qDebug()<<dist<<" "<<new_dist<<" "<<i<<" "<<j;
+            if(dist>new_dist){
+                dist=new_dist;
+                player=j;
+            }
+        }
+        dist=999;
+        move_enemy(jugadores.at(player),enemigos.at(i));
+    }
+}
+
 void MainWindow::delete_escudos()
 {
     for (int i=0;i<escudos.size();i++) {
@@ -257,6 +301,12 @@ void MainWindow::estado_de_habilidad()
 MainWindow::~MainWindow()
 {
     delete enemy_timer;
+    delete timer_move;
+    delete bullet_timer;
+    delete shield;
+    delete Cooldown_timer;
+    delete tiempo_de_habilidad;
+    delete enemy_timer;
     delete scene;
     delete ui;
 }
@@ -267,7 +317,7 @@ void MainWindow::spawn()
     scene->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos>=5){
+    if(N_enemigos>=20){
         enemy_timer->stop();
     }
 }
@@ -324,39 +374,6 @@ void MainWindow::actualizar_escudos()
     }
 }
 
-void MainWindow::move_enemy()
-{
-    for(int i=0;i<jugadores.size();i++){
-        for(int j=0;j<enemigos.size();j++){
-            //dist = pow((pow((_px2-Px),2)+pow((_py2-Py),2)) ,1/2);
-
-            personaje *c = jugadores.at(i);
-            enemy *e = enemigos.at(j);
-
-            if(e->getPosx() > c->getPosx()){
-                e->left();
-                if(enemy_collides(e))
-                    e->right();
-            }
-            else if(e->getPosx() < c->getPosx()){
-                e->right();
-                if(enemy_collides(e))
-                    e->left();
-            }
-            if(e->getPosy() > c->getPosy()){
-                e->up();
-                if(enemy_collides(e))
-                    e->down();
-            }
-            else if(e->getPosy() < c->getPosy()){
-                e->down();
-                if(enemy_collides(e))
-                    e->up();
-            }
-        }
-    }
-}
-
 void MainWindow::on_pushButton_clicked()
 {
     if(ui->radioButton->isChecked() && N_jugadores<1){
@@ -383,8 +400,8 @@ void MainWindow::on_pushButton_clicked()
         }
     }
 
-    enemy_timer->start(2000);
-    timer_move->start(50);
+    enemy_timer->start(1000);
+    timer_move->start(20);
     bullet_timer->start(50);
     shield->start(50);
     ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());

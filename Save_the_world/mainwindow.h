@@ -30,11 +30,11 @@ public:
     ~MainWindow();
 
 public slots:
-    void spawn();
-    void move_enemy();
-    void bullet_impact();
-    void actualizar_escudos();
+    void spawn();    
+    void perseguir();
+    void bullet_impact();    
     void delete_escudos();
+    void actualizar_escudos();
     void estado_de_habilidad();
 
 private slots:
@@ -43,31 +43,31 @@ private slots:
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene = new QGraphicsScene;
-    QTimer *enemy_timer;
-    QTimer *timer_move;
-    QTimer *bullet_timer;
     QTimer *shield;
+    QTimer *timer_move;
+    QTimer *enemy_timer;
+    QTimer *bullet_timer;
     QTimer *Cooldown_timer;
     QTimer *tiempo_de_habilidad;
 
-    bool Cooldown = true;
     float dt;
     int h_limit;
     int v_limit;
     int N_enemigos=0;
     int N_jugadores=0;
     int sentido_bala=2;
+    bool Cooldown = true;
     int sentido_bala_two=1;
-    float dist;    
 
-    void keyPressEvent(QKeyEvent * evento);
-    bool player_collides(personaje *P);
     bool enemy_collides(enemy *E);
     void spawn_shield(personaje *P);
+    bool player_collides(personaje *P);
+    void keyPressEvent(QKeyEvent * evento);
+    void move_enemy(personaje *c, enemy *e);
 
-    QList<personaje *> jugadores;
-    QList<enemy *> enemigos;
     QList<paredes *> muros;
+    QList<enemy *> enemigos;
+    QList<personaje *> jugadores;
     QList<Bala_comun *> disparos;
     QList<escudo_graph *> escudos;
 };

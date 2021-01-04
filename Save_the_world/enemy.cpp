@@ -5,17 +5,27 @@
 
 enemy::enemy()
 {
-    int random_number=rand()%2;
+    int random_number=rand()%4;
 
     if(random_number==0){
-        random_number = rand()%560+1;
-        setPos(0,random_number);
-        setPosx(0);setPosy(random_number);
+        random_number = rand()%180+135;
+        setPos(18,random_number);
+        setPosx(18);setPosy(random_number);
+    }
+    else if(random_number==1){
+        random_number = rand()%619+185;
+        setPos(random_number,620);
+        setPosx(random_number);setPosy(620);
+    }
+    else if(random_number==3){
+        random_number = rand()%619+185;
+        setPos(random_number,620);
+        setPosx(random_number);setPosy(620);
     }
     else{
-        random_number = rand()%560+1;
-        setPos(800,random_number);
-        setPosx(800);setPosy(random_number);
+        random_number = rand()%81+207;
+        setPos(930,random_number);
+        setPosx(930);setPosy(random_number);
     }
 }
 
@@ -54,12 +64,12 @@ void enemy::right()
     setPos(posx,posy);
 }
 
-int enemy::getPosx() const
+float enemy::getPosx() const
 {
     return posx;
 }
 
-int enemy::getPosy() const
+float enemy::getPosy() const
 {
     return posy;
 }
@@ -73,12 +83,12 @@ int enemy::getVelocidad() const
 {
     return velocidad;
 }
-void enemy::setPosx(int value)
+void enemy::setPosx(float value)
 {
     posx = value;
 }
 
-void enemy::setPosy(int value)
+void enemy::setPosy(float value)
 {
     posy = value;
 }

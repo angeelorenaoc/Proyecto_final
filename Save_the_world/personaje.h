@@ -6,7 +6,7 @@
 
 class personaje: public QObject, public QGraphicsItem
 {
-    int posx ,posy;
+    float posx ,posy;
     int velocidad=3;
     int r=15;
 
@@ -21,10 +21,10 @@ public:
     void left();
     void right();
 
-    void setPosx(int value);
-    void setPosy(int value);
-    int getPosx() const;
-    int getPosy() const;
+    void setPosx(float value);
+    void setPosy(float value);
+    float getPosx() const;
+    float getPosy() const;
     int getR() const;
 };
 
