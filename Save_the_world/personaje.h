@@ -3,12 +3,17 @@
 
 #include <QGraphicsItem>
 #include <QPainter>
+#include <QTimer>
 
 class personaje: public QObject, public QGraphicsItem
 {
     float posx ,posy;
     int velocidad=3;
-    int r=15;
+    int r=20;
+
+    int columnas,filas;
+    QTimer *timer;
+    QPixmap *pixmap;
 
     Q_OBJECT
 public:
@@ -26,6 +31,9 @@ public:
     float getPosx() const;
     float getPosy() const;
     int getR() const;
+
+public slots:
+    void Actualizar_sprite();
 };
 
 #endif // PERSONAJE_H

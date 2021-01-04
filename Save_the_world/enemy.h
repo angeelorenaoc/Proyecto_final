@@ -10,7 +10,11 @@ class enemy: public QObject, public QGraphicsItem
 {
     float posx ,posy;
     int velocidad=2;
-    int r=9;
+    int r=20;
+
+    int columnas;
+    QTimer *timer;
+    QPixmap *pixmap;
 
     Q_OBJECT
 public:
@@ -21,7 +25,7 @@ public:
     void up();
     void down();
     void left();
-    void right();
+    void right();       
 
     void setPosx(float value);
     void setPosy(float value);
@@ -30,6 +34,9 @@ public:
     int getR() const;
 
     int getVelocidad() const;
+
+public slots:
+    void Actualizar_sprite();
 
 };
 

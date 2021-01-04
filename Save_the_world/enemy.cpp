@@ -2,42 +2,48 @@
 
 #include <QDebug>
 
-
 enemy::enemy()
 {
-    int random_number=rand()%4;
+    int random_number=rand()%3;
 
     if(random_number==0){
-        random_number = rand()%180+135;
-        setPos(18,random_number);
-        setPosx(18);setPosy(random_number);
+        random_number = rand()%170+135;
+        setPos(21,random_number);
+        setPosx(21);setPosy(random_number);
     }
     else if(random_number==1){
         random_number = rand()%619+185;
-        setPos(random_number,620);
-        setPosx(random_number);setPosy(620);
-    }
-    else if(random_number==3){
-        random_number = rand()%619+185;
-        setPos(random_number,620);
-        setPosx(random_number);setPosy(620);
+        setPos(random_number,600);
+        setPosx(random_number);setPosy(600);
     }
     else{
-        random_number = rand()%81+207;
-        setPos(930,random_number);
-        setPosx(930);setPosy(random_number);
+        random_number = rand()%70+207;
+        setPos(920,random_number);
+        setPosx(920);setPosy(random_number);
     }
+    columnas=0;
+
+    pixmap = new QPixmap(":/Imagenes/Covid.png");
+    setScale(0.45);
+
+    timer = new QTimer();
+    connect(timer, &QTimer::timeout, this, &enemy::Actualizar_sprite);
+    timer->start(150);
 }
 
 QRectF enemy::boundingRect() const
 {
-    return QRectF(-r,-r,2*r,2*r);
+    return QRectF(-r,-r,5*r,5*r);
 }
 
 void enemy::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::darkGreen);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::darkGreen);
+//    painter->drawEllipse(boundingRect());
+
+    QPixmap ghost;
+    ghost.load(":/Imagenes/Covid.png");
+    painter->drawPixmap(-r,-r,*pixmap,columnas,0,r*5,r*5);
 }
 
 void enemy::up()
@@ -82,6 +88,15 @@ int enemy::getR() const
 int enemy::getVelocidad() const
 {
     return velocidad;
+}
+
+void enemy::Actualizar_sprite()
+{
+    columnas += 100;
+    if(columnas >= 200){
+        columnas = 0;
+    }
+    this->update(-r,-r,r*5,r*5);
 }
 void enemy::setPosx(float value)
 {
