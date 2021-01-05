@@ -11,9 +11,9 @@ class personaje: public QObject, public QGraphicsItem
     int velocidad=3;
     int r=20;
 
-    int columnas,filas;
-    QTimer *timer;
-    QPixmap *pixmap;
+//    int columnas,filas;
+//    QTimer *timer;
+//    QPixmap *pixmap;
 
     Q_OBJECT
 public:
@@ -32,8 +32,8 @@ public:
     float getPosy() const;
     int getR() const;
 
-public slots:
-    void Actualizar_sprite();
+//public slots:
+//    void Actualizar_sprite();
 };
 
 #endif // PERSONAJE_H

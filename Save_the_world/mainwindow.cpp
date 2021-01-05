@@ -115,6 +115,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             if(Cooldown)
                 spawn_shield(player);
         }
+        anuncio_J1->setPx_V(player->getPosx()-20); anuncio_J1->setPy_V(player->getPosy()+20);
+        anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
     }
 
     else if(jugadores.size()==2){
@@ -161,6 +163,10 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             if(Cooldown)
                 spawn_shield(player);
         }
+
+        anuncio_J1->setPx_V(player->getPosx()-20); anuncio_J1->setPy_V(player->getPosy()+20);
+        anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
+
         personaje *player_two = jugadores.at(1);
 
         if(event->key()== Qt::Key_J){
@@ -200,10 +206,14 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             if(Cooldown)
                 spawn_shield(player_two);
         }
+
+        anuncio_J2->setPx_V(player_two->getPosx()-20); anuncio_J2->setPy_V(player_two->getPosy()+20);
+        anuncio_J2->setPos(anuncio_J2->getPx_V(),anuncio_J2->getPy_V());
+
     }
 }
 
-void MainWindow::move_enemy(personaje *c, enemy *e)
+void MainWindow::move_enemy(personaje *c, enemy *e, int j)
 {
     if(e->getPosx() > c->getPosx()){
         e->left();
@@ -224,6 +234,58 @@ void MainWindow::move_enemy(personaje *c, enemy *e)
         e->down();
         if(enemy_collides(e))
             e->up();
+    }
+    if(e->collidesWithItem(c)){
+        if(j==0){
+            if(anuncio_J1->getVida()<=1){
+                scene->removeItem(c);
+                jugadores.removeAt(j);
+                scene->removeItem(anuncio_J1);
+            }
+            else{
+                anuncio_J1->decrease_vida();
+                c->setPosx(495); c->setPosy(400);
+                c->setPos(495,400);
+            }
+        }
+        else{
+            if(anuncio_J2->getVida()<=1){
+                scene->removeItem(c);
+                jugadores.removeAt(j);
+                scene->removeItem(anuncio_J2);
+            }
+            else{
+                anuncio_J2->decrease_vida();
+                c->setPosx(495); c->setPosy(400);
+                c->setPos(495,400);
+            }
+        }
+        if(jugadores.size()<=0){
+            for(int i=0;i<muros.size();i++){
+                scene->removeItem(muros.at(i));
+            }
+            for(int i=0;i<escudos.size();i++){
+                scene->removeItem(escudos.at(i));
+            }
+            for(int i=0;i<enemigos.size();i++){
+                scene->removeItem(enemigos.at(i));
+            }
+            for(int i=0;i<disparos.size();i++){
+                scene->removeItem(disparos.at(i));
+            }
+            muros.clear();
+            escudos.clear();
+            enemigos.clear();
+            disparos.clear();
+
+            shield->stop();
+            timer_move->stop();
+            enemy_timer->stop();
+            bullet_timer->stop();
+            Cooldown_timer->stop();
+            tiempo_de_habilidad->stop();
+            qDebug()<<"YOU LOSE";
+        }
     }
 }
 
@@ -285,7 +347,7 @@ void MainWindow::perseguir()
             }
         }
         dist=999;
-        move_enemy(jugadores.at(player),enemigos.at(i));
+        move_enemy(jugadores.at(player),enemigos.at(i),player);
     }
 }
 
@@ -307,13 +369,6 @@ void MainWindow::estado_de_habilidad()
 
 MainWindow::~MainWindow()
 {
-    delete enemy_timer;
-    delete timer_move;
-    delete bullet_timer;
-    delete shield;
-    delete Cooldown_timer;
-    delete tiempo_de_habilidad;
-    delete enemy_timer;
     delete scene;
     delete ui;
 }
@@ -338,6 +393,8 @@ void MainWindow::bullet_impact()
                 scene->removeItem(disparos.at(j));
                 enemigos.removeAt(i);
                 disparos.removeAt(j);
+                i=0; j=0;
+//                anuncio_J1->increase_score();
             }
         }
     }
@@ -389,6 +446,13 @@ void MainWindow::on_pushButton_clicked()
         jugadores.back()->setPos(490,400);
         scene->addItem(jugadores.back());
         N_jugadores++;
+        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+
+        anuncio_J1 = new anuncios;
+        anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
+
+        anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
+        scene->addItem(anuncio_J1);
     }
 
     else if(ui->radioButton_2->isChecked() && N_jugadores<2){
@@ -397,6 +461,10 @@ void MainWindow::on_pushButton_clicked()
         jugadores.back()->setPos(470,400);
         scene->addItem(jugadores.back());
         N_jugadores++;
+        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+        anuncio_J1 = new anuncios;
+        anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
+        scene->addItem(anuncio_J1);
 
         if(N_jugadores<2){
             jugadores.push_back(new personaje);
@@ -404,6 +472,9 @@ void MainWindow::on_pushButton_clicked()
             jugadores.back()->setPos(510,400);
             scene->addItem(jugadores.back());
             N_jugadores++;
+            anuncio_J2 = new anuncios;
+            anuncio_J2->setPx_V(490); anuncio_J2->setPy_V(420);
+            scene->addItem(anuncio_J2);
         }
     }
 
@@ -411,5 +482,4 @@ void MainWindow::on_pushButton_clicked()
     timer_move->start(20);
     bullet_timer->start(50);
     shield->start(50);
-    ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 }
