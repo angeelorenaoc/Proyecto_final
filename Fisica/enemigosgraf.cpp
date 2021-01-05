@@ -3,12 +3,12 @@
 Enemigosgraf::Enemigosgraf(QObject *parent) : QObject(parent),escala(1)
 {
     timerm = new QTimer();
-    filas = 65;
+    filas = 0;
     columnas = 0;
-    pixmap = new QPixmap(":/new/fondo/Enemigorecortada_nivel3.png");
+    pixmap = new QPixmap(":/new/fondo/Sprite_enemigo.png");
 
-    ancho = 63;
-    alto  = 65;
+    ancho = 40;
+    alto  = 76;
 
     float posx,posy,velx,vely,masa,r,K,e;
     posx = 32;
@@ -72,8 +72,8 @@ void Enemigosgraf::setColumnas(float value)
 
 void Enemigosgraf::Actualizacion()
 {
-    columnas += 63;
-    if(columnas >= 567)
+    columnas += 40;
+    if(columnas >= 360)
     {
         columnas =0;
     }

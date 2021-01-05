@@ -50,6 +50,7 @@ private:
     int h_limit;
     int v_limit;
     int semilla;
+    int personaje = 2;
     void borderCollision();
     void keyPressEvent(QKeyEvent *event);
     void Eliminar_vida();
