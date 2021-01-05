@@ -20,6 +20,7 @@
 #include "pisos.h"
 #include "enemigos.h"
 #include "enemigosgraf.h"
+#include "boton_final.h"
 
 using namespace std;
 
@@ -60,5 +61,6 @@ private:
     Vida *vidas2;
     QList<Pisos*> Muros;
     QList <Enemigosgraf *> Enemigo;
+    Boton_final *Boton;
 };
 #endif // MAINWINDOW_H

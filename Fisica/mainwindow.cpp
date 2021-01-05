@@ -24,15 +24,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     Enemigo.push_back(new Enemigosgraf);
-    Enemigo.back()->setPos(1000,179);
+    Enemigo.back()->setPos(1000,160);
     scene->addItem(Enemigo.back());
     Enemigo.push_back(new Enemigosgraf);
-    Enemigo.back()->setPos(1950,179);
+    Enemigo.back()->setPos(1950,160);
     scene->addItem(Enemigo.back());
     Enemigo.push_back(new Enemigosgraf);
-    Enemigo.back()->setPos(2760,139);
+    Enemigo.back()->setPos(2760,120);
     scene->addItem(Enemigo.back());
 
+    Boton = new Boton_final();
+    Boton->setPos(5850,530);
+    scene->addItem(Boton);
 
     Muros.push_back(new Pisos(150,30,0,-300));
     scene->addItem(Muros.back());
@@ -301,12 +304,12 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
                 Cuerpo *c = bars.at(1)->getEsf();
                 if (event->key()== Qt::Key_L){
                     c->set_vel(15,c->getVy(),c->getPx(),c->getPy());
-                    bars.at(1)->setFilas(0);
+                    bars.at(1)->setFilas(76);
                     ui->graphicsView->centerOn(c->getPx(),c->getPy());
                 }
                 if (event->key()== Qt::Key_J){
                     c->set_vel(-15,c->getVy(),c->getPx(),c->getPy());
-                    bars.at(1)->setFilas(76);
+                    bars.at(1)->setFilas(0);
                     ui->graphicsView->centerOn(c->getPx(),c->getPy());
                 }
                 if (event->key()== Qt::Key_I){
@@ -352,7 +355,7 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
                     }
                     if (event->key()== Qt::Key_J){
                         c->set_vel(-15,c->getVy(),c->getPx(),c->getPy());
-                        bars.at(1)->setFilas(0);
+                        bars.at(0)->setFilas(0);
                         ui->graphicsView->centerOn(c->getPx(),c->getPy());
                     }
                     if (event->key()== Qt::Key_I){
@@ -440,7 +443,7 @@ void MainWindow::Movimiento_Enemigo()
             Cuerpo *c = bars.at(i)->getEsf();
             if (e->getPx() < c->getPx()){
                 e->set_vel(7,e->getVy(),e->getPx(),e->getPy());
-                Enemigo.at(j)->setFilas(76);
+                Enemigo.at(j)->setFilas(80);
                 Enemigo.at(j)->actualizar(v_limit);
             }
             else if (e->getPx() > c->getPx()){
@@ -472,13 +475,13 @@ void MainWindow::on_pushButton_clicked()
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
         if(i == 0){
-            e->setPx(1000); e->setPy(179);
+            e->setPx(1000); e->setPy(160);
         }
         if (i == 1){
-            e->setPx(1950); e->setPy(179);
+            e->setPx(1950); e->setPy(160);
         }
         if (i == 2){
-            e->setPx(2760); e->setPy(139);
+            e->setPx(2760); e->setPy(120);
         }
         Enemigo.at(i)->actualizar((v_limit));
     }
@@ -498,13 +501,13 @@ void MainWindow::on_pushButton_2_clicked()
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
         if(i == 0){
-            e->setPx(1000); e->setPy(179);
+            e->setPx(1000); e->setPy(160);
         }
         if (i == 1){
-            e->setPx(1950); e->setPy(179);
+            e->setPx(1950); e->setPy(160);
         }
         if (i == 2){
-            e->setPx(2760); e->setPy(139);
+            e->setPx(2760); e->setPy(120);
         }
         Enemigo.at(i)->actualizar((v_limit));
     }

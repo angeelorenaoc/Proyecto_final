@@ -5,10 +5,10 @@ Enemigosgraf::Enemigosgraf(QObject *parent) : QObject(parent),escala(1)
     timerm = new QTimer();
     filas = 0;
     columnas = 0;
-    pixmap = new QPixmap(":/new/fondo/Sprite_enemigo.png");
+    pixmap = new QPixmap(":/new/fondo/Enemigo_3.png");
 
-    ancho = 40;
-    alto  = 76;
+    ancho = 45;
+    alto  = 80;
 
     float posx,posy,velx,vely,masa,r,K,e,rr;
     posx = 32;
@@ -73,8 +73,8 @@ void Enemigosgraf::setColumnas(float value)
 
 void Enemigosgraf::Actualizacion()
 {
-    columnas += 40;
-    if(columnas >= 360)
+    columnas += 45;
+    if(columnas >= 405)
     {
         columnas =0;
     }
