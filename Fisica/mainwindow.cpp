@@ -347,12 +347,12 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
                     Cuerpo *c = bars.at(0)->getEsf();
                     if (event->key()== Qt::Key_L){
                         c->set_vel(15,c->getVy(),c->getPx(),c->getPy());
-                        bars.at(0)->setFilas(0);
+                        bars.at(0)->setFilas(76);
                         ui->graphicsView->centerOn(c->getPx(),c->getPy());
                     }
                     if (event->key()== Qt::Key_J){
                         c->set_vel(-15,c->getVy(),c->getPx(),c->getPy());
-                        bars.at(1)->setFilas(76);
+                        bars.at(1)->setFilas(0);
                         ui->graphicsView->centerOn(c->getPx(),c->getPy());
                     }
                     if (event->key()== Qt::Key_I){
@@ -377,8 +377,8 @@ void MainWindow::Eliminar_vida()
             if (bars.at(i)->collidesWithItem(Enemigo.at(j))){
                 Cuerpo *c = bars.at(i)->getEsf();
                 vidas1->decrease();
-                c->setPx(0);
-                c->setPy(0);
+                //c->setPx(0);
+                c->setPy(v_limit);
             }
         }
     }
@@ -391,10 +391,10 @@ void MainWindow::Colision_paredes_e()
             if (Enemigo.at(i)->collidesWithItem(Muros.at(j))){
                 Enemigos *c= Enemigo.at(i)->getEsf();
                 if (c->getPx() > (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()+c->getR(),c->getPy());
+                    c->set_vel(0,0,c->getPx()+c->getRr(),c->getPy());
                    }
                 else if (c->getPx() < (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()-c->getR(),c->getPy());
+                    c->set_vel(0,0,c->getPx()-c->getRr(),c->getPy());
                     }
                 if (c->getPy() > (Muros.at(i)->getPoy()*-1)){
                     c->set_vel(0,0,c->getPx(),c->getPy()-c->getR());
@@ -450,12 +450,10 @@ void MainWindow::Movimiento_Enemigo()
             }
             if (e->getPy() < c->getPy()){
               e->set_vel(e->getVx(),20,e->getPx(),e->getPy());
-              //Enemigo.at(j)->setFilas(130);
               Enemigo.at(j)->actualizar(v_limit);
             }
             if (e->getPy() > c->getPy()){
               e->set_vel(e->getVx(),-10,e->getPx(),e->getPy());
-              //Enemigo.at(j)->setFilas(190);
               Enemigo.at(j)->actualizar(v_limit);
             }
             Colision_paredes_e();

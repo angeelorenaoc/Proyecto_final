@@ -10,16 +10,17 @@ Enemigosgraf::Enemigosgraf(QObject *parent) : QObject(parent),escala(1)
     ancho = 40;
     alto  = 76;
 
-    float posx,posy,velx,vely,masa,r,K,e;
+    float posx,posy,velx,vely,masa,r,K,e,rr;
     posx = 32;
     posy = 30;
-    r = 20;
+    r = 40;
     masa = 50;
     velx = 0;
     vely = 0;
     K = 0.08;
     e = 0.09;
-    esf = new Enemigos(posx,posy,velx,vely,masa,r,K,e);
+    rr = 10;
+    esf = new Enemigos(posx,posy,velx,vely,masa,r,K,e,rr);
     timerm->start(100);
     connect(timerm,&QTimer::timeout,this,&Enemigosgraf::Actualizacion);
 }

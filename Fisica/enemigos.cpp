@@ -10,7 +10,12 @@ void Enemigos::setPy(float value)
     py = value;
 }
 
-Enemigos::Enemigos(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_)
+float Enemigos::getRr() const
+{
+    return rr;
+}
+
+Enemigos::Enemigos(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_)
 {
     px =posx_;
     py = posy_;
@@ -25,6 +30,7 @@ Enemigos::Enemigos(float posx_, float posy_, float velx_, float vely_,float masa
     K= k_;
     v = 0;
     dt = 0.1;
+    rr = rr_;
 }
 
 Enemigos::~Enemigos()

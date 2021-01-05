@@ -21,8 +21,9 @@ class Enemigos: public QObject
     float e; //Coeficiente de restitución
     float v; //vector velocidad
     float dt;
+    float rr;
 public:
-    Enemigos(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_);
+    Enemigos(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_);
     ~Enemigos();
     void Actualizar();
     float getPx() const;
@@ -35,6 +36,7 @@ public:
     float getE() const;
     void setPx(float value);
     void setPy(float value);
+    float getRr() const;
 };
 
 #endif // ENEMIGOS_H
