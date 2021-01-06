@@ -210,8 +210,6 @@ MainWindow::~MainWindow()
 {
     delete timer;
     delete timere;
-    delete vidas1;
-    delete vidas2;
     delete scene;
     delete ui;
 }
@@ -317,13 +315,13 @@ void MainWindow:: keyPressEvent(QKeyEvent *event){
                 if(vidas2->getVida()>0){
                     if(event->key()== Qt::Key_J){
                         player_two->set_vel(-15,player_two->getVy(),player_two->getPx(),player_two->getPy());
-                        if (personaje == 2){bars.at(1)->setFilas(0);}
+                        if (vidas1->getVida() > 0){bars.at(1)->setFilas(0);}
                         else {bars.at(0)->setFilas(0);
                              ui->graphicsView->centerOn(player_two->getPx(),player_two->getPy());}
                     }
                     if(event->key() == Qt::Key_L){
                         player_two->set_vel(15,player_two->getVy(),player_two->getPx(),player_two->getPy());
-                        if (personaje == 2){bars.at(1)->setFilas(76);}
+                        if (vidas1->getVida() > 0){bars.at(1)->setFilas(76);}
 
                         else {bars.at(0)->setFilas(76);
                              ui->graphicsView->centerOn(player_two->getPx(),player_two->getPy());}
@@ -342,9 +340,8 @@ void MainWindow::Eliminar_vida()
         for (int j = 0; j < Enemigo.size() ; j++ ) {
             if (bars.at(i)->collidesWithItem(Enemigo.at(j))){
                 Cuerpo *c = bars.at(i)->getEsf();
-                if (personaje == 2 || personaje == 1){
-                vidas1->decrease();}
-                else if (personaje == 0 || i == 1){vidas2->decrease();}
+                if (vidas1->getVida() > 0 && i == 0){vidas1->decrease();}
+                else if (vidas2->getVida() > 0){vidas2->decrease();}
                 //c->setPx(0);
                 c->setPy(v_limit);
             }
@@ -382,9 +379,9 @@ void MainWindow::actualizar()
         borderCollision();
         Eliminar_vida();
         if (i == 0){
-            if (personaje == 2 || personaje ==1){
+            if (vidas1->getVida() > 0){
             vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);}
-            else if (personaje == 0){
+            else{
                 vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
             }
         }
@@ -395,15 +392,19 @@ void MainWindow::actualizar()
             scene->removeItem(bars.at(0));
             bars.removeAt(0);
             scene->removeItem(vidas1);
-            delete vidas1;
+           // delete vidas1;
             personaje = 0;
         }
         if (vidas2->getVida() == 0){
+            if (vidas1->getVida() > 0){
             scene->removeItem(bars.at(1));
-            bars.removeAt(1);
+            bars.removeAt(1);}
+            else{
+                scene->removeItem(bars.at(0));
+                bars.removeAt(0);}
             personaje = 1;
             scene->removeItem(vidas2);
-            delete vidas2;
+            //delete vidas2;
         }
     }
 }
@@ -436,6 +437,7 @@ void MainWindow::Movimiento_Enemigo()
 }
 void MainWindow::on_pushButton_clicked()
 {
+    personaje = 2;
     semilla = 1;
     timer->start(3);
     timere->start(10);
@@ -465,6 +467,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    personaje = 2;
     semilla = 2;
     timer->start(3);
     timere->start(10);
