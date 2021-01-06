@@ -13,12 +13,14 @@ SOURCES += \
     bala_graph.cpp \
     main.cpp \
     mainwindow.cpp \
+    personaje.cpp \
     vida.cpp
 
 HEADERS += \
     bala.h \
     bala_graph.h \
     mainwindow.h \
+    personaje.h \
     vida.h
 
 FORMS += \
