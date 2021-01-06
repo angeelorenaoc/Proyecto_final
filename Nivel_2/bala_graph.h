@@ -3,6 +3,7 @@
 
 #include "bala.h"
 #include <QGraphicsItem>
+#include <QGraphicsScene>
 #include <QPainter>
 #include <QObject>
 #include <QTimer>

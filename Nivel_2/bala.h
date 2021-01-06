@@ -26,5 +26,6 @@ public:
     void ActualizarPosicion();
     void CalcularVelocidad();
 
+    int getR() const;
 };
 #endif // BALA_H

@@ -1,5 +1,10 @@
 #include "bala.h"
 
+int Bala::getR() const
+{
+    return r;
+}
+
 Bala::Bala(double x, double y, double v, double a)
 {
     posx=x;

@@ -6,6 +6,7 @@ Bala_graph::Bala_graph(double x, double y, double v, double a)
 
     timer = new QTimer;
     connect(timer, SIGNAL(timeout()), this, SLOT(Actualizar()));
+    timer->start(20);
 }
 
 QRectF Bala_graph::boundingRect() const
