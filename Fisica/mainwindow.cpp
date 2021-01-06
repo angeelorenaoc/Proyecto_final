@@ -342,7 +342,9 @@ void MainWindow::Eliminar_vida()
         for (int j = 0; j < Enemigo.size() ; j++ ) {
             if (bars.at(i)->collidesWithItem(Enemigo.at(j))){
                 Cuerpo *c = bars.at(i)->getEsf();
-                vidas1->decrease();
+                if (personaje == 2 || personaje == 1){
+                vidas1->decrease();}
+                else if (personaje == 0 || i == 1){vidas2->decrease();}
                 //c->setPx(0);
                 c->setPy(v_limit);
             }
@@ -386,14 +388,14 @@ void MainWindow::actualizar()
                 vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
             }
         }
-        else if (i == 1 ){
+        else if (i == 1){
             vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
         if (vidas1->getVida() == 0){
             scene->removeItem(bars.at(0));
             bars.removeAt(0);
             scene->removeItem(vidas1);
-            //delete vidas1;
+            delete vidas1;
             personaje = 0;
         }
         if (vidas2->getVida() == 0){
