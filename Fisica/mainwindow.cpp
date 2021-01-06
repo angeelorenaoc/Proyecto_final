@@ -23,6 +23,9 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+    vidas1 = new Vida();
+    vidas2 = new Vida();
+
     Enemigo.push_back(new Enemigosgraf);
     Enemigo.back()->setPos(1000,160);
     scene->addItem(Enemigo.back());
@@ -389,20 +392,17 @@ void MainWindow::actualizar()
             vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
         }
         if (vidas1->getVida() == 0){
+            //scene->removeItem(vidas1);
             scene->removeItem(bars.at(0));
-            bars.removeAt(0);
-            scene->removeItem(vidas1);
-           // delete vidas1;
-            personaje = 0;
+            bars.pop_front();
+            //delete vidas1;
         }
         if (vidas2->getVida() == 0){
             if (vidas1->getVida() > 0){
             scene->removeItem(bars.at(1));
-            bars.removeAt(1);}
-            else{
-                scene->removeItem(bars.at(0));
-                bars.removeAt(0);}
-            personaje = 1;
+            bars.pop_back();}
+            else{scene->removeItem(bars.at(0));
+                bars.pop_back();}
             scene->removeItem(vidas2);
             //delete vidas2;
         }
@@ -437,11 +437,10 @@ void MainWindow::Movimiento_Enemigo()
 }
 void MainWindow::on_pushButton_clicked()
 {
-    personaje = 2;
     semilla = 1;
     timer->start(3);
     timere->start(10);
-    vidas1 = new Vida();
+    //vidas1 = new Vida();
     scene->addItem(vidas1);
     vidas1->setPx(0);vidas1->setPy(0);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
@@ -467,7 +466,6 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    personaje = 2;
     semilla = 2;
     timer->start(3);
     timere->start(10);
@@ -484,10 +482,10 @@ void MainWindow::on_pushButton_2_clicked()
         }
         Enemigo.at(i)->actualizar((v_limit));
     }
-    vidas1 = new Vida();
+    //vidas1 = new Vida();
     scene->addItem(vidas1);
     vidas1->setPx(0);vidas1->setPy(0);
-    vidas2 = new Vida();
+    //vidas2 = new Vida();
     scene->addItem(vidas2);
     vidas2->setPx(0);vidas2->setPy(0);
     bars.push_back((new Cuerpograf));
