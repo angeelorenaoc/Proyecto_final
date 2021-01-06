@@ -9,11 +9,17 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    bala.cpp \
+    bala_graph.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    vida.cpp
 
 HEADERS += \
-    mainwindow.h
+    bala.h \
+    bala_graph.h \
+    mainwindow.h \
+    vida.h
 
 FORMS += \
     mainwindow.ui
