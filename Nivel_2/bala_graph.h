@@ -18,7 +18,7 @@ public:
 
     Bala *getBala() const;
 
-    void move();
+//    void move();
 
 private:
     int posx, posy;
@@ -27,6 +27,8 @@ private:
     int ancho,alto;
     Bala *bala;
     QTimer *timer;
+
+//signals:
 
 //public slots:
 //    void move();

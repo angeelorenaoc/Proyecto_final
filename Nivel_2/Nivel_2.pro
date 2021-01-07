@@ -12,6 +12,8 @@ SOURCES += \
     bala.cpp \
     bala_graph.cpp \
     enemigo_normal.cpp \
+    enemigos_saltarines.cpp \
+    enemigos_sgraph.cpp \
     main.cpp \
     mainwindow.cpp \
     personaje.cpp \
@@ -21,6 +23,8 @@ HEADERS += \
     bala.h \
     bala_graph.h \
     enemigo_normal.h \
+    enemigos_saltarines.h \
+    enemigos_sgraph.h \
     mainwindow.h \
     personaje.h \
     vida.h

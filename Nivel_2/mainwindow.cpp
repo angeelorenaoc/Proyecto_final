@@ -31,6 +31,14 @@ MainWindow::MainWindow(QWidget *parent)
     connect(mover_enemigos,SIGNAL(timeout()),this,SLOT(move_enemy()));
     mover_enemigos->start(50);
 
+    crear_enemigos_s = new QTimer;
+    connect(crear_enemigos_s,SIGNAL(timeout()),this,SLOT(spawn_jump()));
+    crear_enemigos_s->start(5000);
+
+    mover_enemigos_s = new QTimer;
+    connect(mover_enemigos_s,SIGNAL(timeout()),this,SLOT(move_enemy_jump()));
+    crear_enemigos_s->start(50);
+
     jugadores.push_back(new Personaje(20,200));scene->addItem(jugadores.back());
 
 }
@@ -68,7 +76,7 @@ void MainWindow::spawn()
     scene->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos>=5){
+    if(N_enemigos>=10){
         crear_enemigos->stop();
     }
 }
@@ -80,6 +88,30 @@ void MainWindow::move_enemy()
         if(enemigos.at(i)->getPX()<=0){
             scene->removeItem(enemigos.at(i));
             enemigos.removeAt(i);
+        }
+    }
+}
+
+void MainWindow::spawn_jump()
+{
+    enemigos_s.push_back(new Enemigos_sGraph);
+    scene->addItem(enemigos_s.back());
+    N_enemigos++;
+
+    if(N_enemigos>=10){
+        crear_enemigos->stop();
+    }
+}
+
+void MainWindow::move_enemy_jump()
+{
+    for(int i=0;i<enemigos_s.size();i++){
+        if(enemigos_s.at(i)->getEnemy()->getPy()>=400){
+            enemigos_s.at(i)->up();
+        }
+        if(enemigos_s.at(i)->getEnemy()->getPx()<=0){
+            scene->removeItem(enemigos_s.at(i));
+            enemigos_s.removeAt(i);
         }
     }
 }

@@ -9,7 +9,9 @@
 #include "bala_graph.h"
 #include "personaje.h"
 #include "vida.h"
-#include <enemigo_normal.h>
+#include "enemigo_normal.h"
+#include "enemigos_saltarines.h"
+#include "enemigos_sgraph.h"
 #include <QKeyEvent>
 #include <QList>
 #include <QDebug>
@@ -33,6 +35,8 @@ public:
 public slots:
     void spawn();
     void move_enemy();
+    void spawn_jump();
+    void move_enemy_jump();
 
 private:
     Ui::MainWindow *ui;
@@ -46,11 +50,15 @@ private:
     QTimer *crear_enemigos;
     QTimer *mover_enemigos;
 
+    QTimer *crear_enemigos_s;
+    QTimer *mover_enemigos_s;
+
     void keyPressEvent(QKeyEvent * event);
 
     QList<Personaje *> jugadores;
     QList<Bala_graph *> balas;
     QList<Enemigo_normal *> enemigos;
+    QList<Enemigos_sGraph *> enemigos_s;
 
 };
 #endif // MAINWINDOW_H
