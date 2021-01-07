@@ -8,7 +8,7 @@ class Personaje: public QGraphicsItem
 {
     int PX, PY;
     int columnas;
-    int ancho, alto;
+    int ancho=30, alto=30;
 
     int angulo;
     int vel_inicial;

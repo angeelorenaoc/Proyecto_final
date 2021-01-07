@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    h_limit = 962;
-    v_limit = 642;
+    h_limit = 800;
+    v_limit = 600;
 
     scene->setSceneRect(0,0,h_limit,v_limit);
     ui->graphicsView->setScene(scene);
@@ -19,7 +19,16 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
+//    timer = new QTimer;
+//    connect(timer,SIGNAL(timeout()),this,SLOT(balas.back()->move()));
+//    timer->start(50);
+
+    crear_enemigos = new QTimer;
+    connect(crear_enemigos,SIGNAL(timeout()),this,SLOT(spawn()));
+    crear_enemigos->start(2000);
+
     jugadores.push_back(new Personaje(20,200));scene->addItem(jugadores.back());
+
 }
 
 void MainWindow::keyPressEvent(QKeyEvent *event)
@@ -37,8 +46,26 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         jugadores.back()->right();
     }
     if(event->key() == Qt::Key_Space){
-        balas.push_back(new Bala(jugadores.back()->getPX(),jugadores.back()->getPY(),jugadores.back()->getVel_inicial(),jugadores.back()->getAngulo()));
-        scene->addItem(balas.back());
+//        balas.push_back(new Bala_graph(jugadores.back()->getPX(),jugadores.back()->getPY(),jugadores.back()->getVel_inicial(),jugadores.back()->getAngulo()));
+//        scene->addItem(balas.back());
+    }
+}
+
+//void MainWindow::move()
+//{
+//    for(int i=0;i<balas.size();i++){
+//        balas.at(i)->move();
+//    }
+//}
+
+void MainWindow::spawn()
+{
+    enemigos.push_back(new Enemigo_normal);
+    scene->addItem(enemigos.back());
+    N_enemigos++;
+
+    if(N_enemigos>=5){
+        crear_enemigos->stop();
     }
 }
 
@@ -46,4 +73,3 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-

@@ -11,6 +11,7 @@ CONFIG += c++11
 SOURCES += \
     bala.cpp \
     bala_graph.cpp \
+    enemigo_normal.cpp \
     main.cpp \
     mainwindow.cpp \
     personaje.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
 HEADERS += \
     bala.h \
     bala_graph.h \
+    enemigo_normal.h \
     mainwindow.h \
     personaje.h \
     vida.h
