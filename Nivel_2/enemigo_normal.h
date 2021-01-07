@@ -8,7 +8,7 @@
 class Enemigo_normal: public QObject, public QGraphicsItem
 {
     int PX,PY;
-    int Vel;
+    int Vel=3;
     int r=10;
 
 public:

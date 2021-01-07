@@ -32,6 +32,7 @@ public:
 
 public slots:
     void spawn();
+    void move_enemy();
 
 private:
     Ui::MainWindow *ui;
@@ -43,6 +44,7 @@ private:
 
 //    QTimer *timer;
     QTimer *crear_enemigos;
+    QTimer *mover_enemigos;
 
     void keyPressEvent(QKeyEvent * event);
 

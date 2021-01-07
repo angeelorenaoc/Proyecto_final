@@ -18,6 +18,12 @@ void Enemigo_normal::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawEllipse(boundingRect());
 }
 
+void Enemigo_normal::move()
+{
+    PX-=Vel;
+    setPos(PX,PY);
+}
+
 int Enemigo_normal::getPX() const
 {
     return PX;

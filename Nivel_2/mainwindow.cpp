@@ -27,6 +27,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(crear_enemigos,SIGNAL(timeout()),this,SLOT(spawn()));
     crear_enemigos->start(2000);
 
+    mover_enemigos = new QTimer;
+    connect(mover_enemigos,SIGNAL(timeout()),this,SLOT(move_enemy()));
+    mover_enemigos->start(50);
+
     jugadores.push_back(new Personaje(20,200));scene->addItem(jugadores.back());
 
 }
@@ -66,6 +70,17 @@ void MainWindow::spawn()
 
     if(N_enemigos>=5){
         crear_enemigos->stop();
+    }
+}
+
+void MainWindow::move_enemy()
+{
+    for(int i=0;i<enemigos.size();i++){
+        enemigos.at(i)->move();
+        if(enemigos.at(i)->getPX()<=0){
+            scene->removeItem(enemigos.at(i));
+            enemigos.removeAt(i);
+        }
     }
 }
 
