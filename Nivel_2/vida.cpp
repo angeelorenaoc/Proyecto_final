@@ -1,0 +1,41 @@
+#include "vida.h"
+
+Vida::Vida(QGraphicsItem *parent)
+{
+    vida = 3;
+    setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
+    setDefaultTextColor(Qt::darkBlue);
+    setFont(QFont("Tekton Pro",10));
+    setPos(Px,Py);
+}
+
+void Vida::decrease_vida()
+{
+    vida--;
+    setPlainText(QString("Vida: ")+QString::number(vida));
+}
+
+int Vida::getPx() const
+{
+    return Px;
+}
+
+void Vida::setPx(int value)
+{
+    Px = value;
+}
+
+int Vida::getPy() const
+{
+    return Py;
+}
+
+void Vida::setPy(int value)
+{
+    Py = value;
+}
+
+int Vida::getVida() const
+{
+    return vida;
+}
