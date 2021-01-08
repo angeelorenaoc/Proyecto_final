@@ -102,7 +102,6 @@ void MainWindow::spawn_jump()
         crear_enemigos->stop();
     }
 }
-
 //void MainWindow::move_enemy_jump()
 //{
 //    for(int i=0;i<enemigos_s.size();i++){
@@ -118,6 +117,5 @@ void MainWindow::spawn_jump()
 
 MainWindow::~MainWindow()
 {
-
     delete ui;
 }
