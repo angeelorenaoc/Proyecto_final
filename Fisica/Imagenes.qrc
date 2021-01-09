@@ -1,9 +1,0 @@
-<RCC>
-    <qresource prefix="/new/fondo">
-        <file>nochefin.jpg</file>
-        <file>Sprite_personaje.png</file>
-        <file>Enemigo_3.png</file>
-        <file>Personaje_mujer.png</file>
-        <file>Boton.png</file>
-    </qresource>
-</RCC>
