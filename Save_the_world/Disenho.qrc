@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/Imagenes">
+        <file>Laboratorio_Oak.jpg</file>
+        <file>Covid.png</file>
+        <file>Personaje_Medico_sprite.png</file>
+    </qresource>
+</RCC>
