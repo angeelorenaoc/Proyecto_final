@@ -17,6 +17,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     personaje.cpp \
+    puntaje.cpp \
     vida.cpp
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     enemigos_sgraph.h \
     mainwindow.h \
     personaje.h \
+    puntaje.h \
     vida.h
 
 FORMS += \
