@@ -2,6 +2,11 @@
 
 #include <QDebug>
 
+void enemy::setVelocidad(int value)
+{
+    velocidad = value;
+}
+
 enemy::enemy()
 {
     int random_number=rand()%3;
