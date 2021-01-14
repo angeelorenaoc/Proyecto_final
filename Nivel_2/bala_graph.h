@@ -1,37 +1,37 @@
 #ifndef BALA_GRAPH_H
 #define BALA_GRAPH_H
-
-#include <QObject>
-#include <QGraphicsItem>
-#include <QTimer>
 #include <QPainter>
+#include <QGraphicsItem>
+#include <QGraphicsScene>
+#include <stdlib.h>
+#include <time.h>
+#include <QObject>
 #include "bala.h"
+#include <QTimer>
+#include <QPixmap>
+#include <QDebug>
 
 class Bala_graph: public QObject, public QGraphicsItem
 {
-//    Q_OBJECT
 public:
-    Bala_graph(int px_, int py_, int v_, int a_);
+    Bala_graph(float px, float py,float ang,float v);
     ~Bala_graph();
     QRectF boundingRect() const;
-    void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
-
+    void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
+    void actualizar(float v_limit);
     Bala *getBala() const;
-
-//    void move();
+    int getId() const;
+    void setId(int value);
 
 private:
-    int posx, posy;
-    int angulo;
-    int vel;
-    int ancho,alto;
     Bala *bala;
-    QTimer *timer;
+    int id;
+
+};
 
 //signals:
 
 //public slots:
 //    void move();
-};
 
 #endif // BALA_GRAPH_H

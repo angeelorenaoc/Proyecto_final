@@ -93,7 +93,3 @@ void Enemigos_saltarines::set_vel(float vx_, float vy_, float px_, float py_)
     px = px_;
     py= py_;
 }
-
-
-
-

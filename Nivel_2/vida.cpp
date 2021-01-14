@@ -2,16 +2,16 @@
 
 Vida::Vida(QGraphicsItem *parent)
 {
-    vida = 3;
+    vida = 10;
     setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
     setDefaultTextColor(Qt::darkBlue);
     setFont(QFont("Tekton Pro",10));
     setPos(Px,Py);
 }
 
-void Vida::decrease_vida()
+void Vida::decrease_vida(int p)
 {
-    vida--;
+    vida = vida - p;
     setPlainText(QString("Vida: ")+QString::number(vida));
 }
 

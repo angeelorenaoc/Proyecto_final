@@ -1,6 +1,5 @@
 #ifndef ENEMIGO_NORMAL_H
 #define ENEMIGO_NORMAL_H
-
 #include <QObject>
 #include <QGraphicsItem>
 #include <QPainter>
@@ -24,5 +23,4 @@ public:
     void setPX(int value);
     void setPY(int value);
 };
-
 #endif // ENEMIGO_NORMAL_H

@@ -11,7 +11,7 @@ class Vida: public QGraphicsTextItem
 public:
     Vida(QGraphicsItem * parent=0);
 
-    void decrease_vida();
+    void decrease_vida(int p);
 
     int getVida() const;
 

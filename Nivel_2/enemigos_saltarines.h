@@ -1,5 +1,5 @@
-#ifndef Enemigos_SALTARINES_H
-#define Enemigos_SALTARINES_H
+#ifndef ENEMIGOS_SALTARINES_H
+#define ENEMIGOS_SALTARINES_H
 
 #include <QObject>
 #include <math.h>
@@ -41,4 +41,4 @@ public:
 
 };
 
-#endif // Enemigos_SALTARINES_H
+#endif // ENEMIGOS_SALTARINES_H

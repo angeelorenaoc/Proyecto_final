@@ -1,6 +1,5 @@
 #ifndef PERSONAJE_H
 #define PERSONAJE_H
-
 #include <QGraphicsItem>
 #include <QPainter>
 
@@ -30,5 +29,4 @@ public:
     int getAngulo() const;
     int getVel_inicial() const;
 };
-
 #endif // PERSONAJE_H
