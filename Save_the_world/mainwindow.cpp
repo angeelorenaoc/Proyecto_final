@@ -106,8 +106,9 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             }
             if(event->key() == Qt::Key_Space){
                 disparos.push_back(new Bala_comun(sentido_bala));
+                disparos.back()->setId(1);
                 disparos.back()->setPos(player->getPosx(),player->getPosy());
-                scene->addItem(disparos.back());
+                scene->addItem(disparos.back());                
             }
             if(event->key() == Qt::Key_E){
                 if(Cooldown)
@@ -160,6 +161,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 if(event->key() == Qt::Key_Space){
                     disparos.push_back(new Bala_comun(sentido_bala));
                     disparos.back()->setPos(player->getPosx(),player->getPosy());
+                    disparos.back()->setId(1);
                     scene->addItem(disparos.back());
                 }
                 if(event->key() == Qt::Key_E){
@@ -210,6 +212,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 }
                 if(event->key() == Qt::Key_P){
                     disparos.push_back(new Bala_comun(sentido_bala_two));
+                    disparos.back()->setId(2);
                     disparos.back()->setPos(player_two->getPosx(),player_two->getPosy());
                     scene->addItem(disparos.back());
                 }
@@ -477,6 +480,13 @@ void MainWindow::bullet_impact()
             if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
                 scene->removeItem(enemigos.at(i));
                 scene->removeItem(disparos.at(j));
+                int id = disparos.at(j)->getId();
+                if(id==1){
+                    puntaje_J1->increase();
+                }
+                else{
+                    puntaje_J2->increase();
+                }
                 enemigos.removeAt(i);
                 disparos.removeAt(j);
                 break;
@@ -508,6 +518,8 @@ void MainWindow::actualizar_escudos()
             if(enemigos.at(i)->collidesWithItem(escudos.at(j))){
                 scene->removeItem(enemigos.at(i));
                 scene->removeItem(escudos.at(j));
+                puntaje_J1->increse_low();
+                puntaje_J2->increse_low();
                 enemigos.removeAt(i);
                 escudos.removeAt(j);
             }
@@ -535,6 +547,9 @@ void MainWindow::on_pushButton_clicked()
 
         anuncio_J1 = new anuncios;
         anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
+        puntaje_J1 = new puntaje(0,0);
+        puntaje_J1->setPos(420,83);
+        scene->addItem(puntaje_J1);
 
         anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
         scene->addItem(anuncio_J1);
@@ -550,6 +565,9 @@ void MainWindow::on_pushButton_clicked()
         anuncio_J1 = new anuncios;
         anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
         scene->addItem(anuncio_J1);
+        puntaje_J1 = new puntaje(0,0);
+        puntaje_J1->setPos(420,52);
+        scene->addItem(puntaje_J1);
 
         if(N_jugadores<2){
             jugadores.push_back(new personaje);
@@ -560,6 +578,9 @@ void MainWindow::on_pushButton_clicked()
             anuncio_J2 = new anuncios;
             anuncio_J2->setPx_V(490); anuncio_J2->setPy_V(420);
             scene->addItem(anuncio_J2);
+            puntaje_J2 = new puntaje(0,1);
+            puntaje_J2->setPos(420,83);
+            scene->addItem(puntaje_J2);
         }
     }
 

@@ -11,6 +11,7 @@ class Bala_comun: public QObject, public QGraphicsItem
     int posx, posy;
     int sentido;
     bool collides = false;
+    int id;
 
     Q_OBJECT
 public:
@@ -19,6 +20,9 @@ public:
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
     int getSentido() const;
+
+    int getId() const;
+    void setId(int value);
 
 public slots:
     void move();

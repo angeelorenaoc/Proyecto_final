@@ -17,7 +17,8 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     paredes.cpp \
-    personaje.cpp
+    personaje.cpp \
+    puntaje.cpp
 
 HEADERS += \
     anuncios.h \
@@ -27,7 +28,8 @@ HEADERS += \
     escudo_graph.h \
     mainwindow.h \
     paredes.h \
-    personaje.h
+    personaje.h \
+    puntaje.h
 
 FORMS += \
     mainwindow.ui

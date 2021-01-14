@@ -14,6 +14,7 @@ public:
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
     void actualizar(float dt);
     escudo* getEsf();
+
 private:
     escudo *esc;
 

@@ -12,6 +12,7 @@
 #include "escudo.h"
 #include "escudo_graph.h"
 #include "anuncios.h"
+#include "puntaje.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
@@ -71,6 +72,8 @@ private:
 
     anuncios *anuncio_J1;
     anuncios *anuncio_J2;
+    puntaje *puntaje_J1;
+    puntaje *puntaje_J2;
     QList<paredes *> muros;
     QList<enemy *> enemigos;
     QList<personaje *> jugadores;

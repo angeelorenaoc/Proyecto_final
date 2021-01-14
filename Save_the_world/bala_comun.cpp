@@ -1,5 +1,15 @@
 #include "bala_comun.h"
 
+int Bala_comun::getId() const
+{
+    return id;
+}
+
+void Bala_comun::setId(int value)
+{
+    id = value;
+}
+
 Bala_comun::Bala_comun(int sentido_)
 {
     sentido = sentido_;
