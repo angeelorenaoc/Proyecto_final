@@ -1,10 +1,11 @@
 #include "bala.h"
+#define pi 3.1416
 
 Bala::Bala(float posx_, float posy_,float masa_, float radio_, float k_, float e_,float a_,float v_)
 {
     px =posx_;
     py = posy_;
-    angulo = a_;
+    angulo = (a_*pi)/180;
     v = v_;
     masa = masa_;
     vx=0;

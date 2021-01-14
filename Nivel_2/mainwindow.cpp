@@ -74,6 +74,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
             balas.push_back(new Bala_graph(jugadores.at(0)->getPX(),v_limit-jugadores.at(0)->getPY(),jugadores.at(0)->getAngulo(),jugadores.at(0)->getVel_inicial()));
             balas.back()->setId(1);
             scene->addItem(balas.back());
+
         }
         if(event->key() == Qt::Key_I){
             jugadores.back()->up();
@@ -137,8 +138,10 @@ void MainWindow::move_enemy()
                     jugadores.removeAt(1);
                     scene->removeItem(puntaje2);
                 }
-                scene->removeItem(jugadores.at(0));
-                jugadores.removeAt(0);
+                if(jugadores.size()==1){
+                    scene->removeItem(jugadores.at(0));
+                    jugadores.removeAt(0);
+                }
             }
         }
     }
