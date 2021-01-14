@@ -13,7 +13,7 @@ class anuncios: public QGraphicsTextItem
     int Px_V, Py_V;
 public:
     anuncios(QGraphicsItem * parent=0);
-    void increase_score();
+    //void increase_score();
     void decrease_vida();
 
     int getScore() const;

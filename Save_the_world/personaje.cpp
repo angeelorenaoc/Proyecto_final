@@ -2,7 +2,7 @@
 
 personaje::personaje()
 {
-//    int columnas,filas;
+    //    int columnas,filas;
 //    QTimer *timer;
 //    QPixmap *pixmap;
 

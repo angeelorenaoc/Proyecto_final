@@ -37,7 +37,7 @@ public slots:
     void delete_escudos();
     void actualizar_escudos();
     void estado_de_habilidad();
-    void Zona_segura();
+    void inmunidad();
 
 private slots:
     void on_pushButton_clicked();
@@ -51,7 +51,7 @@ private:
     QTimer *bullet_timer;
     QTimer *Cooldown_timer;
     QTimer *tiempo_de_habilidad;
-    QTimer *zona;
+    QTimer *tiempo_inmunidad;
 
     float dt;
     int h_limit;
@@ -60,6 +60,7 @@ private:
     int N_jugadores=0;
     int sentido_bala=2;
     bool Cooldown = true;
+    bool inmune = false;
     int sentido_bala_two=1;
 
     bool enemy_collides(enemy *E);
@@ -67,7 +68,6 @@ private:
     bool player_collides(personaje *P);
     void keyPressEvent(QKeyEvent * evento);
     void move_enemy(personaje *c, enemy *e,int i,int j);
-    bool enemy_zone(enemy *E);
 
     anuncios *anuncio_J1;
     anuncios *anuncio_J2;
@@ -76,6 +76,5 @@ private:
     QList<personaje *> jugadores;
     QList<Bala_comun *> disparos;
     QList<escudo_graph *> escudos;
-    QList<paredes *> zona_segura;
 };
 #endif // MAINWINDOW_H

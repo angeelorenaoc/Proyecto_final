@@ -40,8 +40,8 @@ MainWindow::MainWindow(QWidget *parent)
     Cooldown_timer = new QTimer(this);
     connect(Cooldown_timer,SIGNAL(timeout()),this,SLOT(estado_de_habilidad()));
 
-    zona = new QTimer(this);
-    connect(zona,SIGNAL(timeout()),this,SLOT(Zona_segura()));
+    tiempo_inmunidad = new QTimer();
+    connect(tiempo_inmunidad,SIGNAL(timeout()),this,SLOT(inmunidad()));
 
     //MUROS
     muros.push_back(new paredes(67,31,0,67));scene->addItem(muros.back());
@@ -172,10 +172,12 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
             personaje *player_two;
             if(anuncio_J1->getVida()>0){
-                player_two = jugadores.at(1);
+                if(anuncio_J2->getVida()>0)
+                    player_two = jugadores.at(1);
             }
             else{
                 player_two = jugadores.at(0);
+                ui->graphicsView->centerOn(player_two->x(),player_two->y());
             }
             if(anuncio_J2->getVida()>0){
                 if(event->key()== Qt::Key_J){
@@ -218,6 +220,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
 
                 anuncio_J2->setPx_V(player_two->getPosx()-20); anuncio_J2->setPy_V(player_two->getPosy()+20);
                 anuncio_J2->setPos(anuncio_J2->getPx_V(),anuncio_J2->getPy_V());
+
             }
         }
     }
@@ -227,38 +230,23 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
 {
     if(e->getPosx() > c->getPosx()){
         e->left();
+
         if(enemy_collides(e)){
-            e->setVelocidad(2);
-            e->right();}
-        if(enemy_zone(e)){
-            e->setVelocidad(10);
             e->right();}
     }
     else if(e->getPosx() < c->getPosx()){
         e->right();
         if(enemy_collides(e)){
-            e->setVelocidad(2);
-            e->left();}
-        if(enemy_zone(e)){
-            e->setVelocidad(10);
             e->left();}
     }
     if(e->getPosy() > c->getPosy()){
         e->up();
         if(enemy_collides(e)){
-            e->setVelocidad(2);
-            e->down();}
-        if(enemy_zone(e)){
-            e->setVelocidad(10);
             e->down();}
     }
     else if(e->getPosy() < c->getPosy()){
         e->down();
         if(enemy_collides(e)){
-            e->setVelocidad(2);
-            e->up();}
-        if(enemy_zone(e)){
-            e->setVelocidad(10);
             e->up();}
     }
     if(e->collidesWithItem(c)){
@@ -271,17 +259,17 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
                     scene->removeItem(anuncio_J1);
                     scene->removeItem(e);
                     enemigos.removeAt(i);
-
                 }
                 else{
-                    anuncio_J1->decrease_vida();
-                    c->setPosx(495); c->setPosy(400);
-                    c->setPos(495,400);
-                    zona_segura.push_back(new paredes(90,60,445,370));
-                    scene->addItem(zona_segura.back());
-                    zona->start(3000);
-                    scene->removeItem(e);
-                    enemigos.removeAt(i);
+                    if(!inmune){
+                        anuncio_J1->decrease_vida();
+                        c->setPosx(495); c->setPosy(400);
+                        c->setPos(495,400);
+                        inmune = true;
+                        tiempo_inmunidad->start(2000);
+                        scene->removeItem(e);
+                        enemigos.removeAt(i);
+                    }
                 }
             }
             else{
@@ -295,14 +283,15 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
                         enemigos.removeAt(i);
                     }
                     else{
-                        anuncio_J1->decrease_vida();
-                        c->setPosx(495); c->setPosy(400);
-                        c->setPos(495,400);
-                        zona_segura.push_back(new paredes(90,60,445,370));
-                        scene->addItem(zona_segura.back());
-                        zona->start(3000);
-                        scene->removeItem(e);
-                        enemigos.removeAt(i);
+                        if(!inmune){
+                            anuncio_J1->decrease_vida();
+                            c->setPosx(495); c->setPosy(400);
+                            c->setPos(495,400);
+                            inmune = true;
+                            tiempo_inmunidad->start(2000);
+                            scene->removeItem(e);
+                            enemigos.removeAt(i);
+                        }
                     }
                 }
                 else if(anuncio_J2->getVida()>0){
@@ -315,75 +304,67 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
                         enemigos.removeAt(i);
                     }
                     else{
-                        anuncio_J2->decrease_vida();
-                        c->setPosx(495); c->setPosy(400);
-                        c->setPos(495,400);
-                        zona_segura.push_back(new paredes(90,60,445,370));
-                        scene->addItem(zona_segura.back());
-                        zona->start(3000);
-                        scene->removeItem(e);
-                        enemigos.removeAt(i);
+                        if(!inmune){
+                            anuncio_J2->decrease_vida();
+                            c->setPosx(495); c->setPosy(400);
+                            c->setPos(495,400);
+                            inmune = true;
+                            tiempo_inmunidad->start(2000);
+                            scene->removeItem(e);
+                            enemigos.removeAt(i);
+                        }
                     }
                 }
             }
         }
         else{
-            if(anuncio_J2->getVida()<1){
-                anuncio_J1->decrease_vida();
-                scene->removeItem(c);
-                jugadores.removeAt(j);
-                scene->removeItem(anuncio_J2);
-                scene->removeItem(e);
+            if(anuncio_J2->getVida()<=1){
+                anuncio_J2->decrease_vida();
+                scene->removeItem(c);                
+                jugadores.removeAt(j);               
+                scene->removeItem(anuncio_J2);               
+                scene->removeItem(e);                
                 enemigos.removeAt(i);
             }
             else{
-                anuncio_J2->decrease_vida();
-                c->setPosx(495); c->setPosy(400);
-                c->setPos(495,400);
-                zona_segura.push_back(new paredes(90,60,445,370));
-                scene->addItem(zona_segura.back());
-                zona->start(3000);
-                scene->removeItem(e);
-                enemigos.removeAt(i);
+                if(!inmune){
+                    anuncio_J2->decrease_vida();
+                    c->setPosx(495); c->setPosy(400);
+                    c->setPos(495,400);
+                    inmune = true;
+                    tiempo_inmunidad->start(2000);
+                    scene->removeItem(e);
+                    enemigos.removeAt(i);
+                }
             }
         }
     }
-        if(jugadores.size()<=0){
-            for(int i=0;i<muros.size();i++){
-                scene->removeItem(muros.at(i));
-            }
-            for(int i=0;i<escudos.size();i++){
-                scene->removeItem(escudos.at(i));
-            }
-            for(int i=0;i<enemigos.size();i++){
-                scene->removeItem(enemigos.at(i));
-            }
-            for(int i=0;i<disparos.size();i++){
-                scene->removeItem(disparos.at(i));
-            }
-            muros.clear();
-            escudos.clear();
-            enemigos.clear();
-            disparos.clear();
-
-            shield->stop();
-            timer_move->stop();
-            enemy_timer->stop();
-            bullet_timer->stop();
-            Cooldown_timer->stop();
-            tiempo_de_habilidad->stop();
-            qDebug()<<"YOU LOSE";
+    if(jugadores.size()<=0){
+        for(int i=0;i<muros.size();i++){
+            scene->removeItem(muros.at(i));
         }
-}
-
-bool MainWindow::enemy_zone(enemy *E)
-{
-    for(int i = 0; i < zona_segura.size();i++){
-        if (E->collidesWithItem(zona_segura.at(i))){
-            return true;
+        for(int i=0;i<escudos.size();i++){
+            scene->removeItem(escudos.at(i));
         }
+        for(int i=0;i<enemigos.size();i++){
+            scene->removeItem(enemigos.at(i));
+        }
+        for(int i=0;i<disparos.size();i++){
+            scene->removeItem(disparos.at(i));
+        }
+        muros.clear();
+        escudos.clear();
+        enemigos.clear();
+        disparos.clear();
+
+        shield->stop();
+        timer_move->stop();
+        enemy_timer->stop();
+        bullet_timer->stop();
+        Cooldown_timer->stop();
+        tiempo_de_habilidad->stop();
+        qDebug()<<"YOU LOSE";
     }
-    return false;
 }
 
 bool MainWindow::player_collides(personaje *P)
@@ -466,13 +447,10 @@ void MainWindow::estado_de_habilidad()
         Cooldown=true;
 }
 
-void MainWindow::Zona_segura()
+void MainWindow::inmunidad()
 {
-    for (int i = 0;i < zona_segura.size() ; i++ ) {
-        scene->removeItem(zona_segura.at(i));
-        zona_segura.removeAt(i);
-    }
-    zona->stop();
+    inmune = false;
+    tiempo_inmunidad->stop();
 }
 
 MainWindow::~MainWindow()
@@ -494,15 +472,14 @@ void MainWindow::spawn()
 
 void MainWindow::bullet_impact()
 {
-    for (int i=0;i<enemigos.size();i++) {
-        for (int j=0;j<disparos.size();j++) {
+    for (int j=0;j<disparos.size();j++) {
+        for (int i=0;i<enemigos.size();i++) {
             if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
                 scene->removeItem(enemigos.at(i));
                 scene->removeItem(disparos.at(j));
                 enemigos.removeAt(i);
                 disparos.removeAt(j);
-                i=0; j=0;
-//                anuncio_J1->increase_score();
+                break;
             }
         }
     }
