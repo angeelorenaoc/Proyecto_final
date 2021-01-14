@@ -1,5 +1,6 @@
 #ifndef Puntaje_H
 #define Puntaje_H
+
 #include <QGraphicsTextItem>
 
 class Puntaje: public QGraphicsTextItem
@@ -15,4 +16,5 @@ private:
     int score;
     int color;
 };
+
 #endif // Puntaje_H
