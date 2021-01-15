@@ -3,5 +3,7 @@
         <file>Sprite_canon.png</file>
         <file>Bosque.jpg</file>
         <file>Lenador_saltando.png</file>
+        <file>Lenador_Sprite.png</file>
+        <file>Perro_sprite.png</file>
     </qresource>
 </RCC>
