@@ -19,7 +19,7 @@ Enemigosgraf::Enemigosgraf(QObject *parent) : QObject(parent),escala(1)
     vely = 0;
     K = 0.08;
     e = 0.09;
-    rr = 10;
+    rr = 1;
     esf = new Enemigos(posx,posy,velx,vely,masa,r,K,e,rr);
     timerm->start(100);
     connect(timerm,&QTimer::timeout,this,&Enemigosgraf::Actualizacion);
@@ -68,6 +68,11 @@ void Enemigosgraf::setFilas(float value)
 void Enemigosgraf::setColumnas(float value)
 {
     columnas = value;
+}
+
+float Enemigosgraf::getAncho() const
+{
+    return ancho;
 }
 
 

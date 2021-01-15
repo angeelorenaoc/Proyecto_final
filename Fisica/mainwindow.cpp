@@ -239,22 +239,20 @@ void MainWindow::borderCollision()
         for (int j = 0; j < bars.size();j++){
             if (bars.at(j)->collidesWithItem(Muros.at(i))){
                 Cuerpo *c= bars.at(j)->getEsf();
-                if (c->getPx() > (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()+(bars.at(j)->getAncho()/2),c->getPy());
+                Pisos *m = Muros.at(i);
+
+                if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()<-m->getPox()){
+                    c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()-(bars.at(j)->getAncho()/2),c->getPy());
                 }
-                else if (c->getPx() < (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()-(bars.at(j)->getAncho()/2),c->getPy());
+                else if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()>-m->getPox()+m->getW()){
+                    c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()+(bars.at(j)->getAncho()/2),c->getPy());
                 }
-                if (c->getPy() > (Muros.at(i)->getPoy()*-1)){
-                    c->set_vel(0,0,c->getPx(),c->getPy()-(bars.at(j)->getAlto()/2));
+                if(c->getPy()>v_limit+m->getPoy() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                    c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()+c->getRr());
                 }
-                else if (c->getPy() < (Muros.at(i)->getPoy()*-1)){
-                    c->set_vel(0,0,c->getPx(),c->getPy()+(bars.at(j)->getAlto()/2));
+                else if(c->getPy()<v_limit+m->getPoy()+m->getH() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                    c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()-c->getRr());
                 }
-//                if(c->getPy()>-1*Muros.at(i)->getPoy() && c->getPy()<-1*Muros.at(i)->getPoy()+Muros.at(i)->getW() && c->getPx()==-1*Muros.at(i)->getPox()-(bars.at(j)->getAncho()/2)){
-//                    qDebug()<<"Bingo :v";
-//                    c->set_vel(0,0,c->getPx()+(bars.at(j)->getAncho()/2),c->getPy());
-//                }
             }
         }
     }
@@ -363,19 +361,22 @@ void MainWindow::Colision_paredes_e()
     for (int i = 0; i<Enemigo.size();i++){
         for (int j = 0; j < Muros.size();j++){
             if (Enemigo.at(i)->collidesWithItem(Muros.at(j))){
+
                 Enemigos *c= Enemigo.at(i)->getEsf();
-                if (c->getPx() > (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()+c->getRr(),c->getPy());
-                   }
-                else if (c->getPx() < (Muros.at(i)->getPox()*-1)){
-                    c->set_vel(0,0,c->getPx()-c->getRr(),c->getPy());
-                    }
-                if (c->getPy() > (Muros.at(i)->getPoy()*-1)){
-                    c->set_vel(0,0,c->getPx(),c->getPy()-c->getR());
-                    }
-                else if (c->getPy() < (Muros.at(i)->getPoy()*-1)){
-                    c->set_vel(0,0,c->getPx(),c->getPy()+c->getR());
-                    }
+                Pisos *m = Muros.at(j);
+
+                if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()<-m->getPox()){
+                    c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()-(Enemigo.at(i)->getAncho()/2),c->getPy());
+                }
+                else if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()>-m->getPox()+m->getW()){
+                    c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()+(Enemigo.at(i)->getAncho()/2),c->getPy());
+                }
+                if(c->getPy()>v_limit+m->getPoy() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                    c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()+c->getRr());
+                }
+                else if(c->getPy()<v_limit+m->getPoy()+m->getH() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                    c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()-c->getRr());
+                }
             }
         }
     }

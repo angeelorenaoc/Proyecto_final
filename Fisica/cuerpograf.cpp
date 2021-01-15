@@ -19,7 +19,7 @@ Cuerpograf::Cuerpograf(QObject *parent) : QObject(parent), escala(1) //Para esca
     vely = 0;
     K = 0.08;
     e = 0.5;
-    rr = 10;
+    rr = 1;
     esf = new Cuerpo(posx,posy,velx,vely,masa,r,K,e,rr);
 
     timermo->start(100);

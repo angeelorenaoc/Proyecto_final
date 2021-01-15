@@ -24,6 +24,8 @@ public:
     QPixmap *pixmap;
     void setFilas(float value);
     void setColumnas(float value);
+    float getAncho() const;
+
 private:
     float filas,columnas;
     float ancho;
