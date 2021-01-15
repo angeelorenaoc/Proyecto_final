@@ -4,8 +4,8 @@ Vida::Vida(QGraphicsItem *parent)
 {
     vida = 10;
     setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
-    setDefaultTextColor(Qt::darkBlue);
-    setFont(QFont("Tekton Pro",10));
+    setDefaultTextColor(Qt::white);
+    setFont(QFont("Tekton Pro",16));
     setPos(Px,Py);
 }
 

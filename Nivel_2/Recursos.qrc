@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/Imagenes">
+        <file>Sprite_canon.png</file>
+        <file>Bosque.jpg</file>
+    </qresource>
+</RCC>

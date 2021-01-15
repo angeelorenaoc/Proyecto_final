@@ -17,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/Bosque.jpg")));
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -47,14 +48,17 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
         if(event->key() == Qt::Key_A){
             jugadores.back()->left();
+            velocidad_1->increase(-5);
         }
         if(event->key() == Qt::Key_D){
             jugadores.back()->right();
+            velocidad_1->increase(5);
         }
         if(event->key() == Qt::Key_Space){
             balas.push_back(new Bala_graph(jugadores.back()->getPX(),v_limit-jugadores.back()->getPY(),jugadores.back()->getAngulo(),jugadores.back()->getVel_inicial()));
             balas.back()->setId(1);
-            scene->addItem(balas.back());
+            jugadores.back()->disparo();
+            scene->addItem(balas.back());            
         }
     }
     else if (jugadores.size()==2){
@@ -66,13 +70,16 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
         if(event->key() == Qt::Key_A){
             jugadores.at(0)->left();
+            velocidad_1->increase(-5);
         }
         if(event->key() == Qt::Key_D){
             jugadores.at(0)->right();
+            velocidad_1->increase(5);
         }
         if(event->key() == Qt::Key_Space){
             balas.push_back(new Bala_graph(jugadores.at(0)->getPX(),v_limit-jugadores.at(0)->getPY(),jugadores.at(0)->getAngulo(),jugadores.at(0)->getVel_inicial()));
             balas.back()->setId(1);
+            jugadores.at(0)->disparo();
             scene->addItem(balas.back());
 
         }
@@ -84,13 +91,16 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         }
         if(event->key() == Qt::Key_J){
             jugadores.back()->left();
+            velocidad_2->increase(-5);
         }
         if(event->key() == Qt::Key_L){
             jugadores.back()->right();
+            velocidad_2->increase(5);
         }
         if(event->key() == Qt::Key_P){
             balas.push_back(new Bala_graph(jugadores.at(1)->getPX(),v_limit-jugadores.at(1)->getPY(),jugadores.at(1)->getAngulo(),jugadores.at(1)->getVel_inicial()));
             balas.back()->setId(2);
+            jugadores.at(1)->disparo();
             scene->addItem(balas.back());
         }
     }
@@ -102,9 +112,6 @@ void MainWindow::move()
         balas.at(i)->actualizar(v_limit);
         if (Colisiones_Enemigos(i)){
             scene->removeItem(balas.at(i));
-            if (balas.at(i)->getId() == 1){
-            puntaje1->increase();}
-            else{puntaje2->increase();}
             balas.removeAt(i);
         }
         else{borderCollisionbala(i);}
@@ -141,6 +148,8 @@ void MainWindow::move_enemy()
                 if(jugadores.size()==1){
                     scene->removeItem(jugadores.at(0));
                     jugadores.removeAt(0);
+                    scene->removeItem(velocidad_1);
+                    scene->removeItem(velocidad_2);
                 }
             }
         }
@@ -210,6 +219,10 @@ bool MainWindow::Colisiones_Enemigos(int i)
 {
     for(int j = 0; j < enemigos.size(); j++){
         if (balas.at(i)->collidesWithItem(enemigos.at(j))){
+            if (balas.at(i)->getId() == 1)
+                puntaje1->increase(1);
+            else
+                puntaje2->increase(1);
             scene->removeItem(enemigos.at(j));
             enemigos.removeAt(j);
             return true;
@@ -217,6 +230,10 @@ bool MainWindow::Colisiones_Enemigos(int i)
     }
     for(int j = 0; j < enemigos_s.size(); j++){
         if (balas.at(i)->collidesWithItem(enemigos_s.at(j))){
+            if (balas.at(i)->getId() == 1)
+                puntaje1->increase(3);
+            else
+                puntaje2->increase(3);
             scene->removeItem(enemigos_s.at(j));
             enemigos_s.removeAt(j);
             return true;
@@ -230,16 +247,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
-    jugadores.push_back(new Personaje(20,580));scene->addItem(jugadores.back());
+    jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(730,10);
+    vida->setPos(710,10);
     scene->addItem(vida);
-    puntaje1 = new Puntaje(0,1);
-    puntaje1->setPos(10,10);
+    puntaje1 = new Puntaje(0,1,0);
+    puntaje1->setPos(670,540);
     scene->addItem(puntaje1);
+    velocidad_1 = new Puntaje(0,1,1);
+    velocidad_1->setPos(0,575);
+    scene->addItem(velocidad_1);
     timer->start(20);
     crear_enemigos->start(2000);
     mover_enemigos->start(50);
@@ -249,17 +268,23 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    jugadores.push_back(new Personaje(20,580));scene->addItem(jugadores.back());
+    jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(730,10);
+    vida->setPos(710,10);
     scene->addItem(vida);
-    puntaje1 = new Puntaje(0,1);
-    puntaje1->setPos(10,10);
+    puntaje1 = new Puntaje(0,1,0);
+    puntaje1->setPos(670,540);
     scene->addItem(puntaje1);
-    jugadores.push_back(new Personaje(20,540));scene->addItem(jugadores.back());
-    puntaje2 = new Puntaje(0,2);
-    puntaje2->setPos(10,40);
+    velocidad_1 = new Puntaje(0,1,1);
+    velocidad_1->setPos(0,575);
+    scene->addItem(velocidad_1);
+    jugadores.push_back(new Personaje(nullptr,40,470,1));scene->addItem(jugadores.back());
+    puntaje2 = new Puntaje(0,2,0);
+    puntaje2->setPos(670,470);
     scene->addItem(puntaje2);
+    velocidad_2 = new Puntaje(0,2,1);
+    velocidad_2->setPos(0,500);
+    scene->addItem(velocidad_2);
     timer->start(20);
     crear_enemigos->start(2000);
     mover_enemigos->start(50);

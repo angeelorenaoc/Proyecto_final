@@ -71,6 +71,8 @@ private:
     Vida *vida;
     Puntaje *puntaje1;
     Puntaje *puntaje2;
+    Puntaje *velocidad_1;
+    Puntaje *velocidad_2;
 
 };
 #endif // MAINWINDOW_H

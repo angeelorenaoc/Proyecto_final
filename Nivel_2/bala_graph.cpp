@@ -46,7 +46,7 @@ QRectF Bala_graph::boundingRect() const
 
 void Bala_graph::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::cyan);
+    painter->setBrush(Qt::darkGray);
     painter->drawEllipse(boundingRect());
 }
 

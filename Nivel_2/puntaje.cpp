@@ -1,23 +1,37 @@
 #include "puntaje.h"
 #include <QFont>
 
-Puntaje::Puntaje(QGraphicsItem *parent, int colorp ): QGraphicsTextItem(parent)
+Puntaje::Puntaje(QGraphicsItem *parent, int colorp, int id_ ): QGraphicsTextItem(parent)
 {
+    id=id_;
     score = 0;
     color = colorp;
-    setPlainText(QString("Puntaje: ")+ QString::number(score));
+    if (id == 0) {
+        setPlainText(QString("Puntaje: ")+ QString::number(score));
+        setFont(QFont("times",16));
+    }
+    else {
+        setPlainText(QString("Velocidad: ")+ QString::number(score));
+        setFont(QFont("times",10));
+    }
 
-    if (color == 1){setDefaultTextColor(Qt::cyan);}
+    if (color == 1) {setDefaultTextColor(Qt::darkMagenta);}
 
-    else{setDefaultTextColor(Qt::red);}
+    else {setDefaultTextColor(Qt::red);}
 
-    setFont(QFont("times",16));
 }
 
-void Puntaje::increase()
+void Puntaje::increase(int s)
 {
-    score++;
-    setPlainText(QString("Puntaje: ")+ QString::number(score));
+    score+=s;
+    if (id == 0) {
+        setPlainText(QString("Puntaje: ")+ QString::number(score));
+        setFont(QFont("times",16));
+    }
+    else {
+        setPlainText(QString("Velocidad: ")+ QString::number(score));
+        setFont(QFont("times",10));
+    }
 }
 
 int Puntaje::getPuntaje()
