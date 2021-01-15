@@ -2,5 +2,6 @@
     <qresource prefix="/Imagenes">
         <file>Sprite_canon.png</file>
         <file>Bosque.jpg</file>
+        <file>Lenador_saltando.png</file>
     </qresource>
 </RCC>

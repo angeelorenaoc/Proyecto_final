@@ -7,7 +7,6 @@
 #include <time.h>
 #include <QObject>
 #include "enemigos_saltarines.h"
-#include <QTimer>
 #include <QPixmap>
 #include <QDebug>
 
@@ -21,9 +20,14 @@ public:
     Enemigos_saltarines *getEnemy() const;
     void up();
     void actualizar(float v_limit);
+    QPixmap *pixmap;
 
 private:
     Enemigos_saltarines *enemy;
+    int ancho=43,alto=62, columnas;
+
+public slots:
+    void sprite();
 
 };
 

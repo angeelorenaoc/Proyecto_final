@@ -132,7 +132,7 @@ void MainWindow::spawn()
 void MainWindow::move_enemy()
 {
     for(int i=0;i<enemigos.size();i++){
-        enemigos.at(i)->move();
+        enemigos.at(i)->move();        
         if(enemigos.at(i)->getPX()<=0){
             scene->removeItem(enemigos.at(i));
             enemigos.removeAt(i);
@@ -171,6 +171,7 @@ void MainWindow::move_enemy_jump()
 {
     for(int i=0;i<enemigos_s.size();i++){
         enemigos_s.at(i)->actualizar(v_limit);
+        enemigos_s.at(i)->sprite();
         borderCollision(i);
     }
 }
