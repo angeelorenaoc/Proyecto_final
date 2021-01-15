@@ -26,6 +26,8 @@ public:
 private:
     Bala *bala;
     int id;
+    QPixmap *pixmap;
+    int r_sprite=64;
 
 };
 
