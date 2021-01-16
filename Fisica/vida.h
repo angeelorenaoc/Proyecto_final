@@ -5,8 +5,9 @@
 class Vida: public QGraphicsTextItem
 {
 public:
-    Vida(QGraphicsItem * parent = 0);
+    Vida(QGraphicsItem * parent = 0,int id=0);
     void decrease();
+    void increse();
     int getVida();
     int getPx() const;
     int getPy() const;

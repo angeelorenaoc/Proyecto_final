@@ -16,6 +16,7 @@ SOURCES += \
     enemigosgraf.cpp \
     main.cpp \
     mainwindow.cpp \
+    monedas.cpp \
     pisos.cpp \
     vida.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     enemigos.h \
     enemigosgraf.h \
     mainwindow.h \
+    monedas.h \
     pisos.h \
     vida.h
 

@@ -26,6 +26,9 @@ MainWindow::MainWindow(QWidget *parent)
     vidas1 = new Vida();
     vidas2 = new Vida();
 
+    puntaje1 = new Vida(0,1);
+    puntaje2 = new Vida(0,1);
+
     Enemigo.push_back(new Enemigosgraf);
     Enemigo.back()->setPos(1000,160);
     scene->addItem(Enemigo.back());
@@ -40,6 +43,7 @@ MainWindow::MainWindow(QWidget *parent)
     Boton->setPos(5850,530);
     scene->addItem(Boton);
 
+for(int i=0;i<1;i++){
     Muros.push_back(new Pisos(150,30,0,-300));
     scene->addItem(Muros.back());
     Muros.push_back(new Pisos(30,70,-150,-260));
@@ -172,38 +176,15 @@ MainWindow::MainWindow(QWidget *parent)
     scene->addItem(Muros.back());
     Muros.push_back(new Pisos(200,20,-5300,-200));
     scene->addItem(Muros.back());
+}
 
-    //Muros
-//    int w,h,cx,cy;
-//    ifstream Leer;
-//    Leer.open("Coordenadasmuros.txt");
-//    char linea[20];
-//    Leer.getline(linea,sizeof (linea));
-//    while (!Leer.eof()){
-//        for (int i=0; i<4 ;i++){
-//            char *p;
-//            if (i==0){
-//                p =strtok(linea, ",");
-//                w=atoi(p);
-//            }
-//            if (i==1){
-//                p =strtok(NULL, ",");
-//                h=atoi(p);
-//            }
-//            if (i==2){
-//                p =strtok(NULL, ",");
-//                cx=atoi(p);
-//            }
-//            if (i==3){
-//                p =strtok(NULL, ",");
-//                cy=atoi(p);
-//            }
-//        }
-//        Muros.push_back(new Pisos(w,h,cx,cy));
-//        scene->addItem(Muros.back());
-//        Leer.getline(linea,sizeof (linea));
-//    }
-//    Leer.close();
+    Bonus.push_back(new monedas(92,275)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(1710,226)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(2420,310)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(3295,91)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(4191,372)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(4825,298)); scene->addItem(Bonus.back());
+    Bonus.push_back(new monedas(5401,43)); scene->addItem(Bonus.back());
 
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
@@ -241,16 +222,16 @@ void MainWindow::borderCollision()
                 Cuerpo *c= bars.at(j)->getEsf();
                 Pisos *m = Muros.at(i);
 
-                if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()<-m->getPox()){
+                if(c->getPy()<=v_limit+m->getPoy() && c->getPy()>=v_limit+m->getPoy()-m->getH() && c->getPx()<=-m->getPox()){
                     c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()-(bars.at(j)->getAncho()/2),c->getPy());
                 }
-                else if(c->getPy()<v_limit+m->getPoy() && c->getPy()>v_limit+m->getPoy()-m->getH() && c->getPx()>-m->getPox()+m->getW()){
+                else if(c->getPy()<=v_limit+m->getPoy() && c->getPy()>=v_limit+m->getPoy()-m->getH() && c->getPx()>=-m->getPox()+m->getW()){
                     c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()+(bars.at(j)->getAncho()/2),c->getPy());
                 }
-                if(c->getPy()>v_limit+m->getPoy() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                if(c->getPy()>=v_limit+m->getPoy() && c->getPx()>=-m->getPox() && c->getPx()<=-m->getPox()+m->getW()){
                     c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()+c->getRr());
                 }
-                else if(c->getPy()<v_limit+m->getPoy()+m->getH() && c->getPx()>-m->getPox() && c->getPx()<-m->getPox()+m->getW()){
+                else if(c->getPy()<=v_limit+m->getPoy()+m->getH() && c->getPx()>=-m->getPox() && c->getPx()<=-m->getPox()+m->getW()){
                     c->set_vel(c->getVx(),-1*c->getE()*c->getVy(),c->getPx(),c->getPy()-c->getRr());
                 }
             }
@@ -356,6 +337,27 @@ void MainWindow::Eliminar_vida()
     }
 }
 
+void MainWindow::Puntos(int i)
+{
+    for (int j=0;j<Bonus.size();j++) {
+        if(bars.at(i)->collidesWithItem(Bonus.at(j))){
+            if (i == 0){
+                if (vidas1->getVida() > 0){
+                    puntaje1->increse();
+                }
+                else{
+                    puntaje2->increse();
+                }
+            }
+            else if (i == 1){
+                puntaje2->increse();
+            }
+            scene->removeItem(Bonus.at(j));
+            Bonus.removeAt(j);
+        }
+    }
+}
+
 void MainWindow::Colision_paredes_e()
 {
     for (int i = 0; i<Enemigo.size();i++){
@@ -389,19 +391,25 @@ void MainWindow::actualizar()
         bars.at(i)->actualizar(v_limit);
         borderCollision();
         Eliminar_vida();
+        Puntos(i);
         if (i == 0){
             if (vidas1->getVida() > 0){
-            vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);}
+                vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);
+                puntaje1->setPos(puntaje1->getPx()+bars.at(i)->getEsf()->getPx(),18);
+            }
             else{
                 vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
+                puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx(),18);
             }
         }
         else if (i == 1){
             vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
+            puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx(),18);
         }
         if (vidas1->getVida() == 0){
             scene->removeItem(vidas1);
             vidas1->decrease();
+            scene->removeItem(puntaje1);
             scene->removeItem(bars.at(0));
             //timere->stop();
             bars.pop_front();
@@ -409,6 +417,7 @@ void MainWindow::actualizar()
         }
         if (vidas2->getVida() == 0){
             scene->removeItem(vidas2);
+            scene->removeItem(puntaje2);
             if (vidas1->getVida() > 0){
                 vidas2->decrease();
                 scene->removeItem(bars.at(1));
@@ -473,7 +482,9 @@ void MainWindow::on_pushButton_clicked()
     timere->start(10);
     //vidas1 = new Vida();
     scene->addItem(vidas1);
+    scene->addItem(puntaje1);
     vidas1->setPx(0);vidas1->setPy(0);
+    puntaje1->setPx(0);vidas1->setPy(18);
     for (int i = 0; i < Enemigo.size() ; i++ ) {
         Enemigos *e = Enemigo.at(i)->getEsf();
         if(i == 0){
@@ -515,10 +526,14 @@ void MainWindow::on_pushButton_2_clicked()
     }
     //vidas1 = new Vida();
     scene->addItem(vidas1);
+    scene->addItem(puntaje1);
     vidas1->setPx(0);vidas1->setPy(0);
+    puntaje1->setPx(0);vidas1->setPy(18);
     //vidas2 = new Vida();
     scene->addItem(vidas2);
+    scene->addItem(puntaje2);
     vidas2->setPx(0);vidas2->setPy(0);
+    puntaje2->setPx(0);vidas1->setPy(18);
     bars.push_back((new Cuerpograf));
     bars.back()->actualizar((v_limit));
     scene->addItem(bars.back());
