@@ -139,18 +139,26 @@ void MainWindow::move_enemy()
             vida->decrease_vida(1);
             if (vida->getVida() <= 0){
                 scene->removeItem(vida);
-                scene->removeItem(puntaje1);
                 if (jugadores.size()== 2){
                     scene->removeItem(jugadores.at(1));
                     jugadores.removeAt(1);
                     scene->removeItem(puntaje2);
+                    scene->removeItem(velocidad_2);
                 }
                 if(jugadores.size()==1){
                     scene->removeItem(jugadores.at(0));
                     jugadores.removeAt(0);
+                    scene->removeItem(puntaje1);
                     scene->removeItem(velocidad_1);
-                    scene->removeItem(velocidad_2);
                 }
+                for(int i=0;i<enemigos.size();i++){scene->removeItem(enemigos.at(i));} enemigos.clear();
+                for(int i=0;i<enemigos_s.size();i++){scene->removeItem(enemigos_s.at(i));} enemigos_s.clear();
+                for(int i=0;i<balas.size();i++){scene->removeItem(balas.at(i));} balas.clear();
+                timer->stop();
+                crear_enemigos->stop();
+                mover_enemigos->stop();
+                crear_enemigos_s->stop();
+                mover_enemigos_s->stop();
             }
         }
     }
@@ -252,7 +260,7 @@ void MainWindow::on_pushButton_clicked()
 {
     jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(710,10);
+    vida->setPos(710,20);
     scene->addItem(vida);
     puntaje1 = new Puntaje(0,1,0);
     puntaje1->setPos(670,540);
@@ -271,7 +279,7 @@ void MainWindow::on_pushButton_2_clicked()
 {
     jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(710,10);
+    vida->setPos(710,20);
     scene->addItem(vida);
     puntaje1 = new Puntaje(0,1,0);
     puntaje1->setPos(670,540);
