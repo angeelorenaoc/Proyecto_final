@@ -1,11 +1,13 @@
 #include "cuerpograf.h"
 
-Cuerpograf::Cuerpograf(QObject *parent) : QObject(parent), escala(1) //Para escalar la imagen
+Cuerpograf::Cuerpograf(QObject *parent, int id) : QObject(parent), escala(1) //Para escalar la imagen
 {
     timermo = new QTimer();
     filas = 0;
     columnas = 0;
-    pixmap = new QPixmap(":/new/fondo/Sprite_personaje.png");
+    if (id == 0){
+    pixmap = new QPixmap(":/new/fondo/Sprite_personaje.png");}
+    else{pixmap = new QPixmap(":/new/fondo/Personaje_mujer.png");}
 
     ancho = 40;
     alto  = 76;

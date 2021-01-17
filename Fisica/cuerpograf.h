@@ -14,7 +14,7 @@
 class Cuerpograf: public QObject, public QGraphicsItem
 {
 public:
-    explicit Cuerpograf(QObject *parent = nullptr);
+    explicit Cuerpograf(QObject *parent = nullptr, int id = 0);
     ~Cuerpograf();
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);

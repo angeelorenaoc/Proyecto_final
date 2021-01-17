@@ -538,7 +538,7 @@ void MainWindow::on_pushButton_2_clicked()
     bars.back()->actualizar((v_limit));
     scene->addItem(bars.back());
     ui->graphicsView->centerOn(bars.back());
-    bars.push_back((new Cuerpograf));
+    bars.push_back((new Cuerpograf(0,1)));
     bars.back()->actualizar((v_limit));
     scene->addItem(bars.back());
     ui->graphicsView->centerOn(bars.back());
