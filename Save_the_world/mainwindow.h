@@ -12,7 +12,6 @@
 #include "escudo.h"
 #include "escudo_graph.h"
 #include "anuncios.h"
-#include "puntaje.h"
 #include <QKeyEvent>
 #include <QTimer>
 #include <QDebug>
@@ -70,10 +69,10 @@ private:
     void keyPressEvent(QKeyEvent * evento);
     void move_enemy(personaje *c, enemy *e,int i,int j);
 
-    anuncios *anuncio_J1;
-    anuncios *anuncio_J2;
-    puntaje *puntaje_J1;
-    puntaje *puntaje_J2;
+    anuncios *vida_J1;
+    anuncios *vida_J2;
+    anuncios *puntaje_J1;
+    anuncios *puntaje_J2;
     QList<paredes *> muros;
     QList<enemy *> enemigos;
     QList<personaje *> jugadores;

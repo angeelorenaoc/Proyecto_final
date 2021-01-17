@@ -3,15 +3,18 @@
 
 #include <QGraphicsItem>
 #include <QTimer>
+#include <QPixmap>
 #include <QPainter>
 
 class Bala_comun: public QObject, public QGraphicsItem
 {
-    int r = 5;
     int posx, posy;
     int sentido;
     bool collides = false;
     int id;
+
+    int ancho, alto;
+    QPixmap *pixmap;
 
     Q_OBJECT
 public:

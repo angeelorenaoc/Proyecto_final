@@ -1,39 +1,65 @@
 #include "anuncios.h"
 
-anuncios::anuncios(QGraphicsItem *parent)
+anuncios::anuncios(QGraphicsItem *parent, int colorp, int id_,int tamanio)
 {
-    vida = 3;
-    setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
-    setDefaultTextColor(Qt::darkBlue);
-    setFont(QFont("Tekton Pro",10));
-    setPos(Px_V,Py_V);
+    color = colorp;
+    id = id_;
+
+    if(id==0){
+        anuncio = 3;
+        setPlainText(QString("Vida: ")+ QString::number(anuncio));
+    }
+    else{
+        anuncio = 0;
+        setPlainText(QString("Puntaje: ")+ QString::number(anuncio));
+    }
+    if(color == 0)
+        setDefaultTextColor(Qt::blue);
+    else
+        setDefaultTextColor(Qt::magenta);
+
+    setFont(QFont("Tekton Pro",tamanio));
+    setPos(Px,Py);
 }
 
-void anuncios::decrease_vida()
+void anuncios::decrease_vida(int i)
 {
-    vida--;
-    setPlainText(QString("Vida: ")+QString::number(vida));
-}
-int anuncios::getVida() const
-{
-    return vida;
-}
-int anuncios::getPx_V() const
-{
-    return Px_V;
+    anuncio-=i;
+    setPlainText(QString("Vida: ")+QString::number(anuncio));
 }
 
-int anuncios::getPy_V() const
+void anuncios::increse_score(int i)
 {
-    return Py_V;
+    anuncio+=i;
+    setPlainText(QString("Puntaje: ")+QString::number(anuncio));
 }
 
-void anuncios::setPx_V(int value)
+int anuncios::getAnuncio() const
 {
-    Px_V = value;
+    return anuncio;
 }
 
-void anuncios::setPy_V(int value)
+void anuncios::setAnuncio(int value)
 {
-    Py_V = value;
+    anuncio = value;
+}
+
+int anuncios::getPx() const
+{
+    return Px;
+}
+
+int anuncios::getPy() const
+{
+    return Py;
+}
+
+void anuncios::setPx(int value)
+{
+    Px = value;
+}
+
+void anuncios::setPy(int value)
+{
+    Py = value;
 }

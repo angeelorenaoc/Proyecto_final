@@ -5,21 +5,35 @@
 #include <QFont>
 
 class anuncios: public QGraphicsTextItem
-{
-    int vida;
-    int Px_V, Py_V;
+{    
+//    puntaje(QGraphicsItem * parent = 0, int colorp = 0);
+//    void increase();
+//    void increse_low();
+//    int getpuntaje();
+//    void setScore(int value);
+//    void setColor(int value);
+
+//private:
+//    int score;
+//    int color;
+
+    int anuncio;
+    int Px, Py;
+    int color, id;
+
 public:
-    anuncios(QGraphicsItem * parent=0);
-    void decrease_vida();
+    anuncios(QGraphicsItem * parent=0, int colorp=0, int id_=0,int tamanio=15);
+    void decrease_vida(int i);
+    void increse_score(int i);
 
-    int getScore() const;
-    int getVida() const;
+    int getPx() const;
+    int getPy() const;
 
-    int getPy_V() const;
-    int getPx_V() const;
+    void setPx(int value);
+    void setPy(int value);
 
-    void setPx_V(int value);
-    void setPy_V(int value);
+    int getAnuncio() const;
+    void setAnuncio(int value);
 };
 
 #endif // ANUNCIOS_H

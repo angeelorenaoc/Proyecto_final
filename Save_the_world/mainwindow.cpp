@@ -114,8 +114,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                 if(Cooldown)
                     spawn_shield(player);
             }
-            anuncio_J1->setPx_V(player->getPosx()-20); anuncio_J1->setPy_V(player->getPosy()+20);
-            anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
+            vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
+            vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
         }
     }
 
@@ -123,7 +123,7 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
         if(jugadores.size()>0){
 
             personaje *player;
-            if(anuncio_J1->getVida()>0){
+            if(vida_J1->getAnuncio()>0){
                 player = jugadores.at(0);
 
                 if(event->key()== Qt::Key_A){
@@ -168,20 +168,20 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                     if(Cooldown)
                         spawn_shield(player);
                 }
-                anuncio_J1->setPx_V(player->getPosx()-20); anuncio_J1->setPy_V(player->getPosy()+20);
-                anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
+                vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
+                vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
             }
 
             personaje *player_two;
-            if(anuncio_J1->getVida()>0){
-                if(anuncio_J2->getVida()>0)
+            if(vida_J1->getAnuncio()>0){
+                if(vida_J2->getAnuncio()>0)
                     player_two = jugadores.at(1);
             }
             else{
                 player_two = jugadores.at(0);
                 ui->graphicsView->centerOn(player_two->x(),player_two->y());
             }
-            if(anuncio_J2->getVida()>0){
+            if(vida_J2->getAnuncio()>0){
                 if(event->key()== Qt::Key_J){
                     player_two->left();
                     if(player_collides(player_two))
@@ -221,8 +221,8 @@ void MainWindow::keyPressEvent(QKeyEvent *event)
                         spawn_shield(player_two);
                 }
 
-                anuncio_J2->setPx_V(player_two->getPosx()-20); anuncio_J2->setPy_V(player_two->getPosy()+20);
-                anuncio_J2->setPos(anuncio_J2->getPx_V(),anuncio_J2->getPy_V());
+                vida_J2->setPx(player_two->getPosx()-20); vida_J2->setPy(player_two->getPosy()+20);
+                vida_J2->setPos(vida_J2->getPx(),vida_J2->getPy());
 
             }
         }
@@ -255,17 +255,17 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
     if(e->collidesWithItem(c)){
         if(j==0){
             if(N_jugadores==1){
-                if(anuncio_J1->getVida()<=1){
-                    anuncio_J1->decrease_vida();
+                if(vida_J1->getAnuncio()<=1){
+                    vida_J1->decrease_vida(1);
                     scene->removeItem(c);
                     jugadores.removeAt(j);
-                    scene->removeItem(anuncio_J1);
+                    scene->removeItem(vida_J1);
                     scene->removeItem(e);
                     enemigos.removeAt(i);
                 }
                 else{
                     if(!inmune){
-                        anuncio_J1->decrease_vida();
+                        vida_J1->decrease_vida(1);
                         c->setPosx(495); c->setPosy(400);
                         c->setPos(495,400);
                         inmune = true;
@@ -276,18 +276,18 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
                 }
             }
             else{
-                if(anuncio_J1->getVida()>0){
-                    if(anuncio_J1->getVida()<=1){
-                        anuncio_J1->decrease_vida();
+                if(vida_J1->getAnuncio()>0){
+                    if(vida_J1->getAnuncio()<=1){
+                        vida_J1->decrease_vida(1);
                         scene->removeItem(c);
                         jugadores.removeAt(j);
-                        scene->removeItem(anuncio_J1);
+                        scene->removeItem(vida_J1);
                         scene->removeItem(e);
                         enemigos.removeAt(i);
                     }
                     else{
                         if(!inmune){
-                            anuncio_J1->decrease_vida();
+                            vida_J1->decrease_vida(1);
                             c->setPosx(495); c->setPosy(400);
                             c->setPos(495,400);
                             inmune = true;
@@ -297,18 +297,18 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
                         }
                     }
                 }
-                else if(anuncio_J2->getVida()>0){
-                    if(anuncio_J2->getVida()<=1){
-                        anuncio_J2->decrease_vida();
+                else if(vida_J2->getAnuncio()>0){
+                    if(vida_J2->getAnuncio()<=1){
+                        vida_J2->decrease_vida(1);
                         scene->removeItem(c);
                         jugadores.removeAt(j);
-                        scene->removeItem(anuncio_J2);
+                        scene->removeItem(vida_J2);
                         scene->removeItem(e);
                         enemigos.removeAt(i);
                     }
                     else{
                         if(!inmune){
-                            anuncio_J2->decrease_vida();
+                            vida_J2->decrease_vida(1);
                             c->setPosx(495); c->setPosy(400);
                             c->setPos(495,400);
                             inmune = true;
@@ -321,17 +321,17 @@ void MainWindow::move_enemy(personaje *c, enemy *e,int i, int j)
             }
         }
         else{
-            if(anuncio_J2->getVida()<=1){
-                anuncio_J2->decrease_vida();
+            if(vida_J2->getAnuncio()<=1){
+                vida_J2->decrease_vida(1);
                 scene->removeItem(c);                
                 jugadores.removeAt(j);               
-                scene->removeItem(anuncio_J2);               
+                scene->removeItem(vida_J2);
                 scene->removeItem(e);                
                 enemigos.removeAt(i);
             }
             else{
                 if(!inmune){
-                    anuncio_J2->decrease_vida();
+                    vida_J2->decrease_vida(1);
                     c->setPosx(495); c->setPosy(400);
                     c->setPos(495,400);
                     inmune = true;
@@ -482,10 +482,10 @@ void MainWindow::bullet_impact()
                 scene->removeItem(disparos.at(j));
                 int id = disparos.at(j)->getId();
                 if(id==1){
-                    puntaje_J1->increase();
+                    puntaje_J1->increse_score(5);
                 }
                 else{
-                    puntaje_J2->increase();
+                    puntaje_J2->increse_score(5);
                 }
                 enemigos.removeAt(i);
                 disparos.removeAt(j);
@@ -518,9 +518,9 @@ void MainWindow::actualizar_escudos()
             if(enemigos.at(i)->collidesWithItem(escudos.at(j))){
                 scene->removeItem(enemigos.at(i));
                 scene->removeItem(escudos.at(j));
-                puntaje_J1->increse_low();
+                puntaje_J1->increse_score(1);
                 if(jugadores.size()==2){
-                    puntaje_J2->increse_low();
+                    puntaje_J2->increse_score(1);
                 }
                 enemigos.removeAt(i);
                 escudos.removeAt(j);
@@ -547,16 +547,16 @@ void MainWindow::on_pushButton_clicked()
         N_jugadores++;
         ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 
-        anuncio_J1 = new anuncios;
-        anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
-        puntaje_J1 = new puntaje(0,0);
+        vida_J1 = new anuncios(0,0,0,10);
+        vida_J1->setPx(470); vida_J1->setPy(420);
+        puntaje_J1 = new anuncios(0,0,1,15);
         puntaje_J1->setPos(420,83);
         scene->addItem(puntaje_J1);
 
-        anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
-        scene->addItem(anuncio_J1);
+        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+        scene->addItem(vida_J1);
 
-        timer_move->start(2);
+        timer_move->start(15);
         enemy_timer->start(1000);
 
     }
@@ -568,10 +568,10 @@ void MainWindow::on_pushButton_clicked()
         scene->addItem(jugadores.back());
         N_jugadores++;
         ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
-        anuncio_J1 = new anuncios;
-        anuncio_J1->setPx_V(470); anuncio_J1->setPy_V(420);
-        scene->addItem(anuncio_J1);
-        puntaje_J1 = new puntaje(0,0);
+        vida_J1 = new anuncios(0,0,0,10);
+        vida_J1->setPx(470); vida_J1->setPy(420);
+        scene->addItem(vida_J1);
+        puntaje_J1 = new anuncios(0,0,1,15);
         puntaje_J1->setPos(420,52);
         scene->addItem(puntaje_J1);
 
@@ -581,14 +581,14 @@ void MainWindow::on_pushButton_clicked()
             jugadores.back()->setPos(510,400);
             scene->addItem(jugadores.back());
             N_jugadores++;
-            anuncio_J2 = new anuncios;
-            anuncio_J2->setPx_V(490); anuncio_J2->setPy_V(420);
-            scene->addItem(anuncio_J2);
-            puntaje_J2 = new puntaje(0,1);
+            vida_J2 = new anuncios(0,1,0,10);
+            vida_J2->setPx(490); vida_J2->setPy(420);
+            scene->addItem(vida_J2);
+            puntaje_J2 = new anuncios(0,1,1,15);
             puntaje_J2->setPos(420,83);
             scene->addItem(puntaje_J2);
 
-            timer_move->start(10);
+            timer_move->start(15);
             enemy_timer->start(800);
         }
     }
