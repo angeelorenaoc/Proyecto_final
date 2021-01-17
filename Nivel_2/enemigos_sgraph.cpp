@@ -62,5 +62,5 @@ Enemigos_saltarines *Enemigos_sGraph::getEnemy() const
 
 void Enemigos_sGraph::up()
 {
-    enemy->set_vel(-30,90,enemy->getPx(),enemy->getPy());
+    enemy->set_vel(-20,100,enemy->getPx(),enemy->getPy());
 }

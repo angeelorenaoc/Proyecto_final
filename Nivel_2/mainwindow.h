@@ -50,7 +50,8 @@ private:
     int h_limit;
     int v_limit;
     int N_enemigos=0;
-    int n_enemigos_s = 0;
+//    int n_enemigos_s = 0;
+    int Total_enemigos;
 
     QTimer *timer;
     QTimer *crear_enemigos;

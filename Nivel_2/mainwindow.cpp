@@ -124,7 +124,7 @@ void MainWindow::spawn()
     scene->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos>=10){
+    if(N_enemigos>=Total_enemigos){
         crear_enemigos->stop();
     }
 }
@@ -168,9 +168,9 @@ void MainWindow::spawn_jump()
 {
     enemigos_s.push_back(new Enemigos_sGraph);
     scene->addItem(enemigos_s.back());
-    n_enemigos_s++;
+    N_enemigos++;
 
-    if(n_enemigos_s>=3){
+    if(N_enemigos>=Total_enemigos){
         crear_enemigos_s->stop();
     }
 }
@@ -258,9 +258,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+    Total_enemigos = 30;
     jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(710,20);
+    vida->setPos(710,40);
     scene->addItem(vida);
     puntaje1 = new Puntaje(0,1,0);
     puntaje1->setPos(670,540);
@@ -270,16 +271,17 @@ void MainWindow::on_pushButton_clicked()
     scene->addItem(velocidad_1);
     timer->start(20);
     crear_enemigos->start(2000);
-    mover_enemigos->start(50);
+    mover_enemigos->start(20);
     crear_enemigos_s->start(5000);
-    mover_enemigos_s->start(50);
+    mover_enemigos_s->start(15);
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    Total_enemigos = 60;
     jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
     vida = new Vida();
-    vida->setPos(710,20);
+    vida->setPos(710,40);
     scene->addItem(vida);
     puntaje1 = new Puntaje(0,1,0);
     puntaje1->setPos(670,540);
@@ -295,9 +297,9 @@ void MainWindow::on_pushButton_2_clicked()
     velocidad_2->setPos(0,500);
     scene->addItem(velocidad_2);
     timer->start(20);
-    crear_enemigos->start(2000);
-    mover_enemigos->start(50);
-    crear_enemigos_s->start(5000);
-    mover_enemigos_s->start(50);
+    crear_enemigos->start(1500);
+    mover_enemigos->start(25);
+    crear_enemigos_s->start(3000);
+    mover_enemigos_s->start(20);
 
 }
