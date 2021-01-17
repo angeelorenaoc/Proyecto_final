@@ -1,81 +1,80 @@
 #include "personaje.h"
 
-personaje::personaje()
+personaje::personaje(int id_)
 {
-    //    int columnas,filas;
-//    QTimer *timer;
-//    QPixmap *pixmap;
+    id=id_;
+    columnas=0;
+    filas=0;
+    ancho = 60;
+    alto = 95;
 
-//    columnas=0;
-//    filas=0;
+    if(id==0)
+        pixmap = new QPixmap(":/Imagenes/Sprite_medico_1.png");
+    else
+        pixmap = new QPixmap(":/Imagenes/Sprite_medico2.png");
 
-//    pixmap = new QPixmap(":/Imagenes/Personaje_Medico_sprite.png");
-//    setScale(0.45);
+    setScale(0.6);
 
-//    timer = new QTimer();
-//    connect(timer, &QTimer::timeout, this, &personaje::Actualizar_sprite);
-//    timer->start(150);
+    timer = new QTimer();
+    connect(timer, &QTimer::timeout, this, &personaje::Actualizar_sprite);
+    timer->start(150);
 
 }
 
 QRectF personaje::boundingRect() const
 {
-    return QRectF(-r,-r,2*r,2*r);
+    return QRectF(-ancho/2,-alto/2,ancho,alto);
 }
 
 void personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(boundingRect());
+//    painter->setBrush(Qt::blue);
+//    painter->drawEllipse(boundingRect());
 
-//    QPixmap doctor;
-//    doctor.load(":/Imagenes/Personaje_Medico_sprite.png");
-//    painter->drawPixmap(-r,-r,*pixmap,columnas,filas,r*5,r*5);
+    QPixmap doctor;
+    if(id==0)
+        doctor.load(":/Imagenes/Sprite_medico_1.png");
+    else
+        doctor.load(":/Imagenes/Sprite_medico2.png");
+
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 
-//void personaje::Actualizar_sprite()
-//{
-//    columnas += 100;
-//    if(filas<=300){
-//        if(columnas >= 800){
-//            columnas = 0;
-//        }
-//    }
-//    else if(filas <= 700 && filas>=500){
-//        if(columnas >= 900){
-//            columnas = 0;
-//        }
-//    }
-//    else if(filas <= 1200 && filas>=800){
-//        if(columnas >= 600){
-//            columnas = 0;
-//        }
-//    }
+void personaje::Actualizar_sprite()
+{
+    columnas += 60;
+    if(columnas >= 540){
+        columnas = 0;
+    }
 
-//    this->update(-r,-r,r*5,r*5);
-//}
+    this->update(-ancho/2,-alto/2,ancho,alto);
+}
 
 void personaje::up()
 {
     posy-= velocidad;
+    filas=95;
     setPos(posx,posy);
 }
 
 void personaje::down()
 {
     posy+= velocidad;
+    filas=0;
     setPos(posx,posy);
 }
 
 void personaje::left()
 {
     posx-= velocidad;
+    filas=285;
     setPos(posx,posy);
 }
 
 void personaje::right()
 {
     posx+= velocidad;
+    filas=190;
     setPos(posx,posy);
 }
 

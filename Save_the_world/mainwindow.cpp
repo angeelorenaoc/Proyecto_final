@@ -468,7 +468,7 @@ void MainWindow::spawn()
     scene->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos>=20){
+    if(N_enemigos>=30){
         enemy_timer->stop();
     }
 }
@@ -519,7 +519,9 @@ void MainWindow::actualizar_escudos()
                 scene->removeItem(enemigos.at(i));
                 scene->removeItem(escudos.at(j));
                 puntaje_J1->increse_low();
-                puntaje_J2->increse_low();
+                if(jugadores.size()==2){
+                    puntaje_J2->increse_low();
+                }
                 enemigos.removeAt(i);
                 escudos.removeAt(j);
             }
@@ -538,7 +540,7 @@ void MainWindow::actualizar_escudos()
 void MainWindow::on_pushButton_clicked()
 {
     if(ui->radioButton->isChecked() && N_jugadores<1){
-        jugadores.push_back(new personaje);
+        jugadores.push_back(new personaje(0));
         jugadores.back()->setPosx(490);jugadores.back()->setPosy(400);
         jugadores.back()->setPos(490,400);
         scene->addItem(jugadores.back());
@@ -553,10 +555,14 @@ void MainWindow::on_pushButton_clicked()
 
         anuncio_J1->setPos(anuncio_J1->getPx_V(),anuncio_J1->getPy_V());
         scene->addItem(anuncio_J1);
+
+        timer_move->start(2);
+        enemy_timer->start(1000);
+
     }
 
     else if(ui->radioButton_2->isChecked() && N_jugadores<2){
-        jugadores.push_back(new personaje);
+        jugadores.push_back(new personaje(0));
         jugadores.back()->setPosx(470);jugadores.back()->setPosy(400);
         jugadores.back()->setPos(470,400);
         scene->addItem(jugadores.back());
@@ -570,7 +576,7 @@ void MainWindow::on_pushButton_clicked()
         scene->addItem(puntaje_J1);
 
         if(N_jugadores<2){
-            jugadores.push_back(new personaje);
+            jugadores.push_back(new personaje(1));
             jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
             jugadores.back()->setPos(510,400);
             scene->addItem(jugadores.back());
@@ -581,11 +587,13 @@ void MainWindow::on_pushButton_clicked()
             puntaje_J2 = new puntaje(0,1);
             puntaje_J2->setPos(420,83);
             scene->addItem(puntaje_J2);
+
+            timer_move->start(10);
+            enemy_timer->start(800);
         }
     }
 
-    enemy_timer->start(1000);
-    timer_move->start(20);
+
     bullet_timer->start(50);
     shield->start(50);
 }
