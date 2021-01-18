@@ -2,6 +2,8 @@
     <qresource prefix="/Imagenes">
         <file>Laboratorio_Oak.jpg</file>
         <file>Covid.png</file>
-        <file>Personaje_Medico_sprite.png</file>
+        <file>Sprite_medico_1.png</file>
+        <file>Sprite_medico2.png</file>
+        <file>Disparo.png</file>
     </qresource>
 </RCC>

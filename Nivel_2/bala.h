@@ -1,31 +1,44 @@
 #ifndef BALA_H
 #define BALA_H
 
+#include <QObject>
 #include <math.h>
+#include <cmath>
+#include <QDebug>
 
-class Bala
+class Bala: public QObject
 {
-    double posx;
-    double posy;
-    double vel;
-    double ang;
-    double vel_x;
-    double vel_y;
-    const double tiempo=0.01;
-    const double g=9.8;
-    const int r=10;
-
-
+    Q_OBJECT
+    float px;
+    float py;
+    float masa;
+    float r;
+    float vx;
+    float vy;
+    float angulo;
+    float ax;
+    float ay;
+    float g;
+    float K; //Resistencia del aire
+    float e; //Coeficiente de restitución
+    float v; //vector velocidad
+    float dt;
 public:
-    Bala();
-    Bala(double x, double y,double v, double a);
-    double getPosy() const;
-    void setPosy(double value);
-    double getPosx() const;
-    void setPosx(double value);
+    Bala(float posx_, float posy_,float masa_, float radio_, float k_, float e_,float a_,float v_);
+    ~Bala();
     void ActualizarPosicion();
     void CalcularVelocidad();
+    float getPx() const;
+    float getPy() const;
+    float getMasa() const;
+    float getR() const;
+    float getVx() const;
+    float getVy() const;
+    void set_vel(float vx_,float vy_, float px_,float py_);
+    float getE() const;
+    void setPx(float value);
+    void setPy(float value);
 
-    int getR() const;
 };
+
 #endif // BALA_H

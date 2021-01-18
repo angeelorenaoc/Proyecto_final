@@ -1,78 +1,65 @@
 #include "anuncios.h"
 
-anuncios::anuncios(QGraphicsItem *parent)
+anuncios::anuncios(QGraphicsItem *parent, int colorp, int id_,int tamanio)
 {
-//    score=0;
-//    setPlainText(QString("Score: ")+ QString::number(score));//COnvertir entero a string
-//    setDefaultTextColor(Qt::darkBlue);
-//    setFont(QFont("Tekton Pro",25));
-//    setPos(Px_S,Py_S);
+    color = colorp;
+    id = id_;
 
-    vida = 3;
-    setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
-    setDefaultTextColor(Qt::darkBlue);
-    setFont(QFont("Tekton Pro",10));
-    setPos(Px_V,Py_V);
+    if(id==0){
+        anuncio = 3;
+        setPlainText(QString("Vida: ")+ QString::number(anuncio));
+    }
+    else{
+        anuncio = 0;
+        setPlainText(QString("Puntaje: ")+ QString::number(anuncio));
+    }
+    if(color == 0)
+        setDefaultTextColor(Qt::blue);
+    else
+        setDefaultTextColor(Qt::magenta);
+
+    setFont(QFont("Tekton Pro",tamanio));
+    setPos(Px,Py);
 }
 
-//void anuncios::increase_score()
-//{
-//    score++;
-//    setPlainText(QString("Score: ")+ QString::number(score));
-//}
-
-void anuncios::decrease_vida()
+void anuncios::decrease_vida(int i)
 {
-    vida--;
-    setPlainText(QString("Vida: ")+QString::number(vida));
+    anuncio-=i;
+    setPlainText(QString("Vida: ")+QString::number(anuncio));
 }
 
-//int anuncios::getScore() const
-//{
-//    return score;
-//}
-
-int anuncios::getVida() const
+void anuncios::increse_score(int i)
 {
-    return vida;
+    anuncio+=i;
+    setPlainText(QString("Puntaje: ")+QString::number(anuncio));
 }
 
-//int anuncios::getPx_S() const
-//{
-//    return Px_S;
-//}
-
-//int anuncios::getPy_S() const
-//{
-//    return Py_S;
-//}
-
-int anuncios::getPx_V() const
+int anuncios::getAnuncio() const
 {
-    return Px_V;
+    return anuncio;
 }
 
-int anuncios::getPy_V() const
+void anuncios::setAnuncio(int value)
 {
-    return Py_V;
+    anuncio = value;
 }
 
-//void anuncios::setPy_S(int value)
-//{
-//    Py_S = value;
-//}
-
-//void anuncios::setPx_S(int value)
-//{
-//    Px_S = value;
-//}
-
-void anuncios::setPx_V(int value)
+int anuncios::getPx() const
 {
-    Px_V = value;
+    return Px;
 }
 
-void anuncios::setPy_V(int value)
+int anuncios::getPy() const
 {
-    Py_V = value;
+    return Py;
+}
+
+void anuncios::setPx(int value)
+{
+    Px = value;
+}
+
+void anuncios::setPy(int value)
+{
+    Py = value;
 }

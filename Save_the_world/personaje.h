@@ -2,6 +2,7 @@
 #define PERSONAJE_H
 
 #include <QGraphicsItem>
+#include <QPixmap>
 #include <QPainter>
 #include <QTimer>
 
@@ -11,13 +12,16 @@ class personaje: public QObject, public QGraphicsItem
     int velocidad=3;
     int r=20;
 
-//    int columnas,filas;
-//    QTimer *timer;
-//    QPixmap *pixmap;
+    int id;
+
+    int ancho,alto;
+    int columnas,filas;
+    QTimer *timer;
+    QPixmap *pixmap;
 
     Q_OBJECT
 public:
-    personaje();
+    personaje(int id_);
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
@@ -32,8 +36,8 @@ public:
     float getPosy() const;
     int getR() const;
 
-//public slots:
-//    void Actualizar_sprite();
+public slots:
+    void Actualizar_sprite();
 };
 
 #endif // PERSONAJE_H

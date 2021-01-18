@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1000</width>
+    <height>650</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,11 +17,37 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>771</width>
-      <height>531</height>
+      <x>20</x>
+      <y>0</y>
+      <width>800</width>
+      <height>800</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>50</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>1 jugador</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>870</x>
+      <y>80</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Multijugador</string>
     </property>
    </widget>
   </widget>
@@ -30,8 +56,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>20</height>
+     <width>1000</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>

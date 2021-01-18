@@ -17,10 +17,7 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     personaje.cpp \
-<<<<<<< HEAD
     puntaje.cpp \
-=======
->>>>>>> 522d6ef6ce13ae778b3c4033ea9ffc986048a540
     vida.cpp
 
 HEADERS += \
@@ -31,10 +28,7 @@ HEADERS += \
     enemigos_sgraph.h \
     mainwindow.h \
     personaje.h \
-<<<<<<< HEAD
     puntaje.h \
-=======
->>>>>>> 522d6ef6ce13ae778b3c4033ea9ffc986048a540
     vida.h
 
 FORMS += \
@@ -44,3 +38,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    Recursos.qrc

@@ -1,11 +1,22 @@
-#ifndef PUNTAJE_H
-#define PUNTAJE_H
+#ifndef Puntaje_H
+#define Puntaje_H
 
+#include <QGraphicsTextItem>
 
-class Puntaje
+class Puntaje: public QGraphicsTextItem
 {
 public:
-    Puntaje();
+    Puntaje(QGraphicsItem * parent = 0, int colorp = 0,int id=0);
+    void increase(int s);
+    void up_vel();
+    int getPuntaje();
+    void setScore(int value);
+    void setColor(int value);
+
+private:
+    int score;
+    int color;
+    int id;
 };
 
-#endif // PUNTAJE_H
+#endif // Puntaje_H

@@ -31,12 +31,13 @@ public:
     ~MainWindow();
 
 public slots:
-    void spawn();    
+    void spawn();
     void perseguir();
-    void bullet_impact();    
+    void bullet_impact();
     void delete_escudos();
     void actualizar_escudos();
     void estado_de_habilidad();
+    void inmunidad();
 
 private slots:
     void on_pushButton_clicked();
@@ -50,6 +51,7 @@ private:
     QTimer *bullet_timer;
     QTimer *Cooldown_timer;
     QTimer *tiempo_de_habilidad;
+    QTimer *tiempo_inmunidad;
 
     float dt;
     int h_limit;
@@ -58,16 +60,19 @@ private:
     int N_jugadores=0;
     int sentido_bala=2;
     bool Cooldown = true;
+    bool inmune = false;
     int sentido_bala_two=1;
 
     bool enemy_collides(enemy *E);
     void spawn_shield(personaje *P);
     bool player_collides(personaje *P);
     void keyPressEvent(QKeyEvent * evento);
-    void move_enemy(personaje *c, enemy *e,int j);
+    void move_enemy(personaje *c, enemy *e,int i,int j);
 
-    anuncios *anuncio_J1;
-    anuncios *anuncio_J2;
+    anuncios *vida_J1;
+    anuncios *vida_J2;
+    anuncios *puntaje_J1;
+    anuncios *puntaje_J2;
     QList<paredes *> muros;
     QList<enemy *> enemigos;
     QList<personaje *> jugadores;

@@ -25,7 +25,7 @@ public:
     void up();
     void down();
     void left();
-    void right();       
+    void right();
 
     void setPosx(float value);
     void setPosy(float value);
@@ -34,6 +34,7 @@ public:
     int getR() const;
 
     int getVelocidad() const;
+    void setVelocidad(int value);
 
 public slots:
     void Actualizar_sprite();

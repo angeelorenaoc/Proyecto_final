@@ -12,6 +12,7 @@
 #include "enemigo_normal.h"
 #include "enemigos_saltarines.h"
 #include "enemigos_sgraph.h"
+#include "puntaje.h"
 #include <QKeyEvent>
 #include <QList>
 #include <QDebug>
@@ -29,25 +30,30 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-//private slots:
-//    void move();
 
 public slots:
     void spawn();
     void move_enemy();
     void spawn_jump();
-//    void move_enemy_jump();
+    void move_enemy_jump();
+    void move();
+
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
 
 private:
     Ui::MainWindow *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
 
     int h_limit;
-    int v_limit;   
+    int v_limit;
     int N_enemigos=0;
-    int n_enemigos_s = 0;
+//    int n_enemigos_s = 0;
+    int Total_enemigos;
 
-//    QTimer *timer;
+    QTimer *timer;
     QTimer *crear_enemigos;
     QTimer *mover_enemigos;
 
@@ -55,11 +61,19 @@ private:
     QTimer *mover_enemigos_s;
 
     void keyPressEvent(QKeyEvent * event);
+    void borderCollision(int i);
+    void borderCollisionbala(int i);
+    bool Colisiones_Enemigos(int i);
 
     QList<Personaje *> jugadores;
     QList<Bala_graph *> balas;
     QList<Enemigo_normal *> enemigos;
     QList<Enemigos_sGraph *> enemigos_s;
+    Vida *vida;
+    Puntaje *puntaje1;
+    Puntaje *puntaje2;
+    Puntaje *velocidad_1;
+    Puntaje *velocidad_2;
 
 };
 #endif // MAINWINDOW_H

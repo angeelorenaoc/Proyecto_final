@@ -1,50 +1,94 @@
 #include "bala.h"
+#define pi 3.1416
 
-int Bala::getR() const
+Bala::Bala(float posx_, float posy_,float masa_, float radio_, float k_, float e_,float a_,float v_)
 {
-    return r;
+    px =posx_;
+    py = posy_;
+    angulo = (a_*pi)/180;
+    v = v_;
+    masa = masa_;
+    vx=0;
+    vy=0;
+    r =radio_;
+    ax = 0;
+    ay= 0;
+    g = 9.8;
+    e= e_;
+    K= k_;
+    dt = 0.1;
 }
 
-Bala::Bala(double x, double y, double v, double a)
+void Bala::setPx(float value)
 {
-    posx=x;
-    posy=y;
-    vel=v;
-    ang=a;
+    px = value;
+}
+
+void Bala::setPy(float value)
+{
+    py = value;
+}
+
+
+Bala::~Bala()
+{
+
 }
 
 void Bala::ActualizarPosicion()
 {
     CalcularVelocidad();
-    posx=posx+vel_x*tiempo;
-    posy=posy+vel_y*tiempo-(0.5*g*tiempo+tiempo);
+    px=px+vx*dt;
+    py=py+vy*dt-(0.5*g*dt+dt);
 }
 
 void Bala::CalcularVelocidad()
 {
-    vel_x=vel*cos(ang);
-    vel_y=vel*sin(ang)-g*tiempo;
-    ang=atan2(vel_y,vel_x);
-    vel=sqrt(pow(vel_y,2)+pow(vel_x,2));
+    vx=v*cos(angulo);
+    vy=v*sin(angulo)-g*dt;
+    angulo=atan2(vy,vx);
+    v=sqrt(pow(vy,2)+pow(vx,2));
 }
 
-void Bala::setPosx(double value)
+float Bala::getE() const
 {
-    posx = value;
+    return e;
 }
 
-void Bala::setPosy(double value)
+float Bala::getPx() const
 {
-    posy = value;
+    return px;
 }
 
-double Bala::getPosx() const
+float Bala::getPy() const
 {
-    return posx;
+    return py;
 }
 
-double Bala::getPosy() const
+float Bala::getMasa() const
 {
-    return posy;
+    return masa;
 }
 
+float Bala::getR() const
+{
+    return r;
+}
+
+float Bala::getVx() const
+{
+    return vx;
+}
+
+float Bala::getVy() const
+{
+    return vy;
+}
+
+void Bala::set_vel(float vx_, float vy_, float px_, float py_)
+{
+    vx = vx_;
+    vy = vy_;
+    px = px_;
+    py= py_;
+}
