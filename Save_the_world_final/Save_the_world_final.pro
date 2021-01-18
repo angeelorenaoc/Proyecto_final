@@ -9,14 +9,29 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    anuncio.cpp \
+    enemigo_fisica.cpp \
+    enemigo_graf.cpp \
+    enemigo_normal.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    muro.cpp \
+    nivel_1.cpp \
+    personaje.cpp
 
 HEADERS += \
-    mainwindow.h
+    anuncio.h \
+    enemigo_fisica.h \
+    enemigo_graf.h \
+    enemigo_normal.h \
+    mainwindow.h \
+    muro.h \
+    nivel_1.h \
+    personaje.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    nivel_1.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
