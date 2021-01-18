@@ -11,6 +11,8 @@ class personaje: public QObject, public QGraphicsItem
     float posx ,posy;
     int velocidad=3;
     int r=20;
+    int angulo;
+    int vel_inicial;
 
     int id;
 
@@ -35,6 +37,9 @@ public:
     float getPosx() const;
     float getPosy() const;
     int getR() const;
+
+    int getAngulo() const;
+    int getVel_inicial() const;
 
 public slots:
     void Actualizar_sprite();

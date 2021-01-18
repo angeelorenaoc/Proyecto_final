@@ -3,10 +3,6 @@
 Vida::Vida(QGraphicsItem *parent)
 {
     vida = 10;
-//    setPlainText(QString("Vida: ")+ QString::number(vida));//COnvertir entero a string
-//    setDefaultTextColor(Qt::white);
-//    setFont(QFont("Tekton Pro",16));
-
     pixmap = new QPixmap(":/Imagenes/sprite_Vida.png");
     setScale(0.85);
     columnas = 0;
@@ -28,7 +24,6 @@ void Vida::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 void Vida::decrease_vida(int p)
 {
     vida = vida - p;
-//    setPlainText(QString("Vida: ")+QString::number(vida));
     if(columnas<=1431 && p==2){
         columnas+=159*p;
     }

@@ -1,5 +1,15 @@
 #include "personaje.h"
 
+int personaje::getAngulo() const
+{
+    return angulo;
+}
+
+int personaje::getVel_inicial() const
+{
+    return vel_inicial;
+}
+
 personaje::personaje(int id_)
 {
     id=id_;

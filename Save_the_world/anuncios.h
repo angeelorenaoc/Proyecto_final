@@ -6,17 +6,6 @@
 
 class anuncios: public QGraphicsTextItem
 {    
-//    puntaje(QGraphicsItem * parent = 0, int colorp = 0);
-//    void increase();
-//    void increse_low();
-//    int getpuntaje();
-//    void setScore(int value);
-//    void setColor(int value);
-
-//private:
-//    int score;
-//    int color;
-
     int anuncio;
     int Px, Py;
     int color, id;
