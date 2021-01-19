@@ -18,7 +18,7 @@ Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int niv
     }
     else {
         anuncio = 10;
-        pixmap = new QPixmap(":/Imagenes/sprite_Vida.png");
+        pixmap = new QPixmap(":/new/Imagenes/sprite_Vida.png");
         setScale(0.85);
         columnas = 0;
         setPos(Px,Py);
@@ -47,8 +47,6 @@ void Anuncio::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, Q
 {
     if (nivel == 2 && id == 0){
         /*El sprite de la vida solo se invoca en el nivel 2*/
-        QPixmap can;
-        can.load(":/Imagenes/sprite_Vida.png");
         painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,0,ancho,alto);}
 }
 

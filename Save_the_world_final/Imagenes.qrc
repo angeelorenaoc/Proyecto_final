@@ -1,0 +1,21 @@
+<RCC>
+    <qresource prefix="/new/Imagenes">
+        <file>Bosque.jpg</file>
+        <file>Laboratorio_Oak.jpg</file>
+        <file>nochefin.jpg</file>
+        <file>bala_canon.png</file>
+        <file>Boton.png</file>
+        <file>Covid.png</file>
+        <file>Disparo.png</file>
+        <file>Enemigo_3.png</file>
+        <file>Lenador_saltando.png</file>
+        <file>Perro_sprite.png</file>
+        <file>Personaje_mujer.png</file>
+        <file>Sprite_canon.png</file>
+        <file>Sprite_medico_1.png</file>
+        <file>Sprite_medico2.png</file>
+        <file>Sprite_moneda.png</file>
+        <file>Sprite_personaje.png</file>
+        <file>sprite_Vida.png</file>
+    </qresource>
+</RCC>

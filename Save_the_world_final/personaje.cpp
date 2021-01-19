@@ -1,6 +1,6 @@
 #include "personaje.h"
 
-Personaje::Personaje(QObject *parent,int id_, int nivel_): QObject(parent)
+Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): QObject(parent)
 {
     id=id_;
     nivel = nivel_;
@@ -12,19 +12,33 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_): QObject(parent)
     if (nivel == 1){
         ancho = 60;
         alto = 95;
-
         if(id==0)
-            pixmap = new QPixmap(":/Imagenes/Sprite_medico_1.png");
+            pixmap = new QPixmap(":/new/Imagenes/Sprite_medico_1.png");
         else
-            pixmap = new QPixmap(":/Imagenes/Sprite_medico2.png");
+            pixmap = new QPixmap(":/new/Imagenes/Sprite_medico2.png");
 
         setScale(0.6);
         timer->start(150);
     }
     else {
+        ancho=100;
+        alto=100;
+        angulo=45;
+        vel_inicial=0;
 
+        timer = new QTimer();
+        if(id == 0)
+            filas = 0;
+        else
+            filas = 100;
+        columnas = 1200;
+        pixmap = new QPixmap(":/new/Imagenes/Sprite_canon.png");
+        setScale(0.8);
+        setRotation(45);
     }
-
+    posx = posx_;
+    posy = posy_;
+    setPos(posx,posy);
 
 }
 
@@ -35,15 +49,6 @@ QRectF Personaje::boundingRect() const
 
 void Personaje::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-//    painter->setBrush(Qt::blue);
-//    painter->drawEllipse(boundingRect());
-
-    QPixmap doctor;
-    if(id==0)
-        doctor.load(":/Imagenes/Sprite_medico_1.png");
-    else
-        doctor.load(":/Imagenes/Sprite_medico2.png");
-
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 

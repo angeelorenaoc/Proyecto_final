@@ -1,14 +1,12 @@
-#ifndef ENEMIGO_FISICA_H
-#define ENEMIGO_FISICA_H
+#ifndef PERSONAJE3_H
+#define PERSONAJE3_H
 
-#include <QObject>
 #include <math.h>
 #include <cmath>
-/*Fisica para los enemigo saltarines del nivel 2 y el enemigo del nivel 3*/
 
-class Enemigo_fisica: public QObject
+class Personaje3
 {
-    Q_OBJECT
+private:
     float px;
     float py;
     float masa;
@@ -25,20 +23,22 @@ class Enemigo_fisica: public QObject
     float dt;
     float rr;
 public:
-    Enemigo_fisica(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_);
-    ~Enemigo_fisica();
+    Personaje3(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_);
+    ~Personaje3();
     void Actualizar();
-    void set_vel(float vx_,float vy_, float px_,float py_);
     float getPx() const;
-    void setPx(float value);
     float getPy() const;
-    void setPy(float value);
     float getMasa() const;
     float getR() const;
     float getVx() const;
     float getVy() const;
+    void set_vel(float vx_,float vy_, float px_,float py_);
     float getE() const;
+    void setAx(float value);
+    void setAy(float value);
+    void setPx(float value);
+    void setPy(float value);
     float getRr() const;
 };
 
-#endif // ENEMIGO_FISICA_H
+#endif // PERSONAJE3_H

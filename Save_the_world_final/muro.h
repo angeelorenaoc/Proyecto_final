@@ -4,7 +4,7 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
-class Muro: public QGraphicsItem
+class Muro: public QGraphicsItem, public QObject
 {
 
     int w,h;
@@ -12,7 +12,7 @@ class Muro: public QGraphicsItem
     int  id;
 
 public:
-    Muro(int w_, int h_, int x, int y, int id_);
+    Muro(int w_, int h_, int x, int y, int id_,QObject *parent = nullptr);
     QRectF boundingRect() const;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget = nullptr);
     int getW() const;

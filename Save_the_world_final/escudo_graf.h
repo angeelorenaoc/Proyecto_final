@@ -1,10 +1,11 @@
-#ifndef ESCUDO_GRAPH_H
-#define ESCUDO_GRAPH_H
+#ifndef ESCUDO_GRAF_H
+#define ESCUDO_GRAF_H
+
 
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
-#include "escudo.h"
+#include "escudos_fisica.h"
 
 class escudo_graph: public QGraphicsItem
 {
@@ -13,11 +14,12 @@ public:
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
     void actualizar(float dt);
-    escudo* getEsf();
+    Escudos_fisica * getEsf();
 
 
 private:
-    escudo *esc;
+    Escudos_fisica *esc;
 
 };
-#endif // ESCUDO_GRAPH_H
+
+#endif // ESCUDO_GRAF_H

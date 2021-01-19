@@ -1,5 +1,4 @@
 #include "enemigos_saltarines.h"
-#include <qDebug>
 
 Enemigos_saltarines::Enemigos_saltarines(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_)
 {

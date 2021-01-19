@@ -1,41 +1,39 @@
-#ifndef ENEMIGO_GRAF_H
-#define ENEMIGO_GRAF_H
-
+#ifndef PERSONAJE3GRAF_H
+#define PERSONAJE3GRAF_H
 #include <QPainter>
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <stdlib.h>
-#include <time.h>
 #include <QObject>
+#include <time.h>
 #include <QTimer>
 #include <QPixmap>
 
-#include "enemigo_fisica.h"
+#include <personaje3.h>
 
-class Enemigo_graf: public QObject, public QGraphicsItem
+class Personaje3graf: public QObject, public QGraphicsItem
 {
 public:
-    explicit Enemigo_graf(QObject *parent = nullptr, int nivel_= 1);
-    ~Enemigo_graf();
+    explicit Personaje3graf(QObject *parent = nullptr, int id = 0);
+    ~Personaje3graf();
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
     void setescala (float s);
     void actualizar (float v_limit);
-    Enemigo_fisica *getEnemy();
-    QTimer *timerm;      //Variable para lograr que el pacman se vea comiendo
+    Personaje3 *getEsf();
+    QTimer *timermo;      //Variable para lograr que el pacman se vea comiendo
     QPixmap *pixmap;
-    void setFilas(float value);
     void setColumnas(float value);
+    void setFilas(float value);
+    float getAlto() const;
     float getAncho() const;
-    void up();
 
 private:
     float filas,columnas;
     float ancho;
     float alto;
-    Enemigo_fisica *enemy;
+    Personaje3 *esf;
     float escala;
-    int nivel;
 
 signals:
 
@@ -44,4 +42,4 @@ public slots:
     void Actualizacion();
 };
 
-#endif // ENEMIGO_GRAF_H
+#endif // PERSONAJE3GRAF_H

@@ -22,7 +22,7 @@ class Personaje: public QObject, public QGraphicsItem
 
     Q_OBJECT
 public:
-    Personaje(QObject *parent = nullptr,int id_=0, int nivel_=0);
+    Personaje(QObject *parent = nullptr,int id_=0, int nivel_=0, int posx_=0, int posy_=0);
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
