@@ -7,10 +7,10 @@
 #include <QGraphicsScene>
 #include "escudos_fisica.h"
 
-class escudo_graph: public QGraphicsItem
+class escudo_graf: public QGraphicsItem
 {
 public:
-    escudo_graph(float x, float y, float vx, float vy);
+    escudo_graf(float x, float y, float vx, float vy);
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
     void actualizar(float dt);

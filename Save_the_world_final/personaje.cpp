@@ -1,5 +1,25 @@
 #include "personaje.h"
 
+int Personaje::getAngulo() const
+{
+    return angulo;
+}
+
+void Personaje::setAngulo(int value)
+{
+    angulo = value;
+}
+
+int Personaje::getVel_inicial() const
+{
+    return vel_inicial;
+}
+
+void Personaje::setVel_inicial(int value)
+{
+    vel_inicial = value;
+}
+
 Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): QObject(parent)
 {
     id=id_;

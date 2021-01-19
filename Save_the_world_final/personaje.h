@@ -44,6 +44,11 @@ public:
     int getFilas() const;
     void setFilas(int value);
 
+    int getAngulo() const;
+
+    int getVel_inicial() const;
+    void setVel_inicial(int value);
+
 public slots:
     void Actualizar_sprite();
 };
