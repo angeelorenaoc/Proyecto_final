@@ -18,10 +18,13 @@ SOURCES += \
     enemigo_normal.cpp \
     escudo_graf.cpp \
     escudos_fisica.cpp \
+    informacion.cpp \
     main.cpp \
     mainwindow.cpp \
     monedas.cpp \
     muro.cpp \
+    nivel2.cpp \
+    nivel3.cpp \
     nivel_1.cpp \
     personaje.cpp \
     personaje3.cpp \
@@ -37,9 +40,12 @@ HEADERS += \
     enemigo_normal.h \
     escudo_graf.h \
     escudos_fisica.h \
+    informacion.h \
     mainwindow.h \
     monedas.h \
     muro.h \
+    nivel2.h \
+    nivel3.h \
     nivel_1.h \
     personaje.h \
     personaje3.h \
@@ -47,6 +53,8 @@ HEADERS += \
 
 FORMS += \
     mainwindow.ui \
+    nivel2.ui \
+    nivel3.ui \
     nivel_1.ui
 
 # Default rules for deployment.
