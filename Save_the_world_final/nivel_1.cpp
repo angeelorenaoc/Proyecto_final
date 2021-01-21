@@ -11,15 +11,15 @@ Nivel_1::Nivel_1(QWidget *parent) :
     h_limit = 962;
     v_limit = 642;
 
-    scene->setSceneRect(0,0,h_limit,v_limit);
-    ui->graphicsView->setScene(scene);
+    scene_1->setSceneRect(0,0,h_limit,v_limit);
+    ui->graphicsView->setScene(scene_1);
     ui->centralwidget->adjustSize();
-    scene->addRect(scene->sceneRect());
-    ui->graphicsView->resize(scene->width(),scene->height());
-    this->resize(ui->graphicsView->width()+100,ui->graphicsView->height());
+    scene_1->addRect(scene_1->sceneRect());
+    ui->graphicsView->resize(scene_1->width(),scene_1->height());
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/Laboratorio_Oak.jpg")));
+    scene_1->setBackgroundBrush(QBrush(QImage(":/Imagenes/Laboratorio_Oak.jpg")));
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -44,31 +44,32 @@ Nivel_1::Nivel_1(QWidget *parent) :
     connect(tiempo_inmunidad,SIGNAL(timeout()),this,SLOT(inmunidad()));
 
     //MUROS
-    muros.push_back(new Muro(67,31,0,67,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(96,96,67,289,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(962,81,0,0,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(190,194,388,0,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(320,51,642,142,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(96,96,802,288,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(32,110,930,309,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(64,33,674,387,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(288,64,674,417,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(256,59,706,470,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(112,97,850,545,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(96,64,194,128,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(34,84,0,341,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(258,64,0,417,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(194,79,0,434,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(112,97,0,544,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(0,642,0,0,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(0,642,962,0,1));scene->addItem(muros.back());
-    muros.push_back(new Muro(962,0,0,642,1));scene->addItem(muros.back());
+    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
 
-    if(datos_partida.getModo()==1){
+    qDebug()<<datos_partida_1.getClave()<<datos_partida_1.getPuntaje()<<datos_partida_1.getSemilla()<<datos_partida_1.getModo();
+    if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));
 //        jugadores.back()->setPosx(490);jugadores.back()->setPosy(400);
 //        jugadores.back()->setPos(490,400);
-        scene->addItem(jugadores.back());
+        scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 
@@ -76,10 +77,10 @@ Nivel_1::Nivel_1(QWidget *parent) :
         vida_J1->setPx(470); vida_J1->setPy(420);
         puntaje_J1 = new Anuncio(0,0,1,15,1);
         puntaje_J1->setPos(420,83);
-        scene->addItem(puntaje_J1);
+        scene_1->addItem(puntaje_J1);
 
         vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
-        scene->addItem(vida_J1);
+        scene_1->addItem(vida_J1);
 
         timer_move->start(15);
         enemy_timer->start(1000);
@@ -88,28 +89,28 @@ Nivel_1::Nivel_1(QWidget *parent) :
         jugadores.push_back(new Personaje(0,0,1,470,400));
 //        jugadores.back()->setPosx(470);jugadores.back()->setPosy(400);
 //        jugadores.back()->setPos(470,400);
-        scene->addItem(jugadores.back());
+        scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
         vida_J1 = new Anuncio(0,0,0,10);
         vida_J1->setPx(470); vida_J1->setPy(420);
-        scene->addItem(vida_J1);
+        scene_1->addItem(vida_J1);
         puntaje_J1 = new Anuncio(0,0,1,15);
         puntaje_J1->setPos(420,52);
-        scene->addItem(puntaje_J1);
+        scene_1->addItem(puntaje_J1);
 
         if(N_jugadores<2){
             jugadores.push_back(new Personaje(0,1,1,510,400));
 //            jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
 //            jugadores.back()->setPos(510,400);
-            scene->addItem(jugadores.back());
+            scene_1->addItem(jugadores.back());
             N_jugadores++;
             vida_J2 = new Anuncio(0,1,0,10);
             vida_J2->setPx(490); vida_J2->setPy(420);
-            scene->addItem(vida_J2);
+            scene_1->addItem(vida_J2);
             puntaje_J2 = new Anuncio(0,1,1,15);
             puntaje_J2->setPos(420,83);
-            scene->addItem(puntaje_J2);
+            scene_1->addItem(puntaje_J2);
 
             timer_move->start(15);
             enemy_timer->start(800);
@@ -174,7 +175,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 disparos.push_back(new Bala_normal(sentido_bala));
                 disparos.back()->setId(1);
                 disparos.back()->setPos(player->getPosx(),player->getPosy());
-                scene->addItem(disparos.back());
+                scene_1->addItem(disparos.back());
             }
             if(event->key() == Qt::Key_E){
                 if(Cooldown)
@@ -228,7 +229,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     disparos.push_back(new Bala_normal(sentido_bala));
                     disparos.back()->setPos(player->getPosx(),player->getPosy());
                     disparos.back()->setId(1);
-                    scene->addItem(disparos.back());
+                    scene_1->addItem(disparos.back());
                 }
                 if(event->key() == Qt::Key_E){
                     if(Cooldown)
@@ -280,7 +281,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     disparos.push_back(new Bala_normal(sentido_bala_two));
                     disparos.back()->setId(2);
                     disparos.back()->setPos(player_two->getPosx(),player_two->getPosy());
-                    scene->addItem(disparos.back());
+                    scene_1->addItem(disparos.back());
                 }
                 if(event->key() == Qt::Key_O){
                     if(Cooldown)
@@ -310,8 +311,8 @@ void Nivel_1::bullet_impact()
     for (int j=0;j<disparos.size();j++) {
         for (int i=0;i<enemigos.size();i++) {
             if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
-                scene->removeItem(enemigos.at(i));
-                scene->removeItem(disparos.at(j));
+                scene_1->removeItem(enemigos.at(i));
+                scene_1->removeItem(disparos.at(j));
                 int id = disparos.at(j)->getId();
                 if(id==1){
                     puntaje_J1->increse_score(5);
@@ -328,7 +329,7 @@ void Nivel_1::bullet_impact()
     for (int i=0;i<muros.size();i++) {
         for (int j=0;j<disparos.size();j++) {
             if(disparos.at(j)->collidesWithItem(muros.at(i))){
-                scene->removeItem(disparos.at(j));
+                scene_1->removeItem(disparos.at(j));
                 disparos.removeAt(j);
             }
         }
@@ -338,7 +339,7 @@ void Nivel_1::bullet_impact()
 void Nivel_1::spawn()
 {
     enemigos.push_back(new Enemigo_normal(1));
-    scene->addItem(enemigos.back());
+    scene_1->addItem(enemigos.back());
     N_enemigos++;
 
     if(N_enemigos>=30){
@@ -395,10 +396,10 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
             if(N_jugadores==1){
                 if(vida_J1->getAnuncio()<=1){
                     vida_J1->decrease_vida(1);
-                    scene->removeItem(c);
+                    scene_1->removeItem(c);
                     jugadores.removeAt(j);
-                    scene->removeItem(vida_J1);
-                    scene->removeItem(e);
+                    scene_1->removeItem(vida_J1);
+                    scene_1->removeItem(e);
                     enemigos.removeAt(i);
                 }
                 else{
@@ -408,7 +409,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                         c->setPos(495,400);
                         inmune = true;
                         tiempo_inmunidad->start(2000);
-                        scene->removeItem(e);
+                        scene_1->removeItem(e);
                         enemigos.removeAt(i);
                     }
                 }
@@ -417,10 +418,10 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                 if(vida_J1->getAnuncio()>0){
                     if(vida_J1->getAnuncio()<=1){
                         vida_J1->decrease_vida(1);
-                        scene->removeItem(c);
+                        scene_1->removeItem(c);
                         jugadores.removeAt(j);
-                        scene->removeItem(vida_J1);
-                        scene->removeItem(e);
+                        scene_1->removeItem(vida_J1);
+                        scene_1->removeItem(e);
                         enemigos.removeAt(i);
                     }
                     else{
@@ -430,7 +431,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                             c->setPos(495,400);
                             inmune = true;
                             tiempo_inmunidad->start(2000);
-                            scene->removeItem(e);
+                            scene_1->removeItem(e);
                             enemigos.removeAt(i);
                         }
                     }
@@ -438,10 +439,10 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                 else if(vida_J2->getAnuncio()>0){
                     if(vida_J2->getAnuncio()<=1){
                         vida_J2->decrease_vida(1);
-                        scene->removeItem(c);
+                        scene_1->removeItem(c);
                         jugadores.removeAt(j);
-                        scene->removeItem(vida_J2);
-                        scene->removeItem(e);
+                        scene_1->removeItem(vida_J2);
+                        scene_1->removeItem(e);
                         enemigos.removeAt(i);
                     }
                     else{
@@ -451,7 +452,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                             c->setPos(495,400);
                             inmune = true;
                             tiempo_inmunidad->start(2000);
-                            scene->removeItem(e);
+                            scene_1->removeItem(e);
                             enemigos.removeAt(i);
                         }
                     }
@@ -461,10 +462,10 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         else{
             if(vida_J2->getAnuncio()<=1){
                 vida_J2->decrease_vida(1);
-                scene->removeItem(c);
+                scene_1->removeItem(c);
                 jugadores.removeAt(j);
-                scene->removeItem(vida_J2);
-                scene->removeItem(e);
+                scene_1->removeItem(vida_J2);
+                scene_1->removeItem(e);
                 enemigos.removeAt(i);
             }
             else{
@@ -474,7 +475,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
                     c->setPos(495,400);
                     inmune = true;
                     tiempo_inmunidad->start(2000);
-                    scene->removeItem(e);
+                    scene_1->removeItem(e);
                     enemigos.removeAt(i);
                 }
             }
@@ -482,16 +483,16 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
     }
     if(jugadores.size()<=0){
         for(int i=0;i<muros.size();i++){
-            scene->removeItem(muros.at(i));
+            scene_1->removeItem(muros.at(i));
         }
         for(int i=0;i<escudos.size();i++){
-            scene->removeItem(escudos.at(i));
+            scene_1->removeItem(escudos.at(i));
         }
         for(int i=0;i<enemigos.size();i++){
-            scene->removeItem(enemigos.at(i));
+            scene_1->removeItem(enemigos.at(i));
         }
         for(int i=0;i<disparos.size();i++){
-            scene->removeItem(disparos.at(i));
+            scene_1->removeItem(disparos.at(i));
         }
         muros.clear();
         escudos.clear();
@@ -527,16 +528,16 @@ void Nivel_1::spawn_shield(Personaje *P)
     escudos.back()->getEsf()->setMasa(1000);
 
     escudos.push_back(new escudo_graf(P->getPosx()+40,P->getPosy(),0,-0.009));
-    scene->addItem(escudos.back());
+    scene_1->addItem(escudos.back());
 
     escudos.push_back(new escudo_graf(P->getPosx()-40,P->getPosy(),0,0.009));
-    scene->addItem(escudos.back());
+    scene_1->addItem(escudos.back());
 
     escudos.push_back(new escudo_graf(P->getPosx(),P->getPosy()+40,0.009,0));
-    scene->addItem(escudos.back());
+    scene_1->addItem(escudos.back());
 
     escudos.push_back(new escudo_graf(P->getPosx(),P->getPosy()-40,-0.009,0));
-    scene->addItem(escudos.back());
+    scene_1->addItem(escudos.back());
 
     tiempo_de_habilidad->start(5000);
 }
@@ -554,8 +555,8 @@ void Nivel_1::actualizar_escudos()
     for (int i=0;i<enemigos.size();i++) {
         for (int j=0;j<escudos.size();j++) {
             if(enemigos.at(i)->collidesWithItem(escudos.at(j))){
-                scene->removeItem(enemigos.at(i));
-                scene->removeItem(escudos.at(j));
+                scene_1->removeItem(enemigos.at(i));
+                scene_1->removeItem(escudos.at(j));
                 puntaje_J1->increse_score(1);
                 if(jugadores.size()==2){
                     puntaje_J2->increse_score(1);
@@ -568,7 +569,7 @@ void Nivel_1::actualizar_escudos()
     for (int i=0;i<muros.size();i++) {
         for (int j=0;j<escudos.size();j++) {
             if(escudos.at(j)->collidesWithItem(muros.at(i))){
-                scene->removeItem(escudos.at(j));
+                scene_1->removeItem(escudos.at(j));
                 escudos.removeAt(j);
             }
         }
@@ -578,7 +579,7 @@ void Nivel_1::actualizar_escudos()
 void Nivel_1::delete_escudos()
 {
     for (int i=0;i<escudos.size();i++) {
-        scene->removeItem(escudos.at(i));
+        scene_1->removeItem(escudos.at(i));
         tiempo_de_habilidad->stop();
     }
     escudos.clear();
@@ -597,12 +598,13 @@ void Nivel_1::inmunidad()
     tiempo_inmunidad->stop();
 }
 
-Informacion Nivel_1::getDatos_partida() const
+Informacion Nivel_1::getDatos_partida_1() const
 {
-    return datos_partida;
+    return datos_partida_1;
 }
 
-void Nivel_1::setDatos_partida(const Informacion &value)
+void Nivel_1::setDatos_partida_1(const Informacion &value)
 {
-    datos_partida = value;
+    datos_partida_1 = value;
 }
+

@@ -28,12 +28,14 @@ class Nivel_1 : public QMainWindow
 {
     Q_OBJECT
 
+    Informacion datos_partida_1;
+
 public:
     explicit Nivel_1(QWidget *parent = nullptr);
     ~Nivel_1();
 
-    Informacion getDatos_partida() const;
-    void setDatos_partida(const Informacion &value);
+    Informacion getDatos_partida_1() const;
+    void setDatos_partida_1(const Informacion &value);
 
 public slots:
     void spawn();
@@ -46,7 +48,7 @@ public slots:
 
 private:
     Ui::Nivel_1 *ui;
-    QGraphicsScene *scene = new QGraphicsScene;
+    QGraphicsScene *scene_1 = new QGraphicsScene;
     QTimer *shield;
     QTimer *timer_move;
     QTimer *enemy_timer;
@@ -54,8 +56,6 @@ private:
     QTimer *Cooldown_timer;
     QTimer *tiempo_de_habilidad;
     QTimer *tiempo_inmunidad;
-
-    Informacion datos_partida;
 
     float dt;
     int h_limit;
