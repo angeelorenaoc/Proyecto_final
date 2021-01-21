@@ -16,7 +16,7 @@ Enemigo_normal::Enemigo_normal(int nivel_)
         columnas = 0;
         ancho = 95;
         alto = 50;
-        pixmap = new QPixmap(":/Imagenes/Perro_sprite.png");
+        pixmap = new QPixmap(":/new/Imagenes/Perro_sprite.png");
         setScale(0.8);
 
         timer= new QTimer;
@@ -45,7 +45,7 @@ Enemigo_normal::Enemigo_normal(int nivel_)
         ancho = 100;
         alto = 100;
 
-        pixmap = new QPixmap(":/Imagenes/Covid.png");
+        pixmap = new QPixmap(":/new/Imagenes/Covid.png");
         setScale(0.45);
 
         timer = new QTimer();

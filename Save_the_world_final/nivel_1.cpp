@@ -19,7 +19,8 @@ Nivel_1::Nivel_1(QWidget *parent) :
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scene_1->setBackgroundBrush(QBrush(QImage(":/Imagenes/Laboratorio_Oak.jpg")));
+
+    ui->pushButton_3->hide();
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -44,80 +45,7 @@ Nivel_1::Nivel_1(QWidget *parent) :
     connect(tiempo_inmunidad,SIGNAL(timeout()),this,SLOT(inmunidad()));
 
     //MUROS
-    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
 
-    qDebug()<<datos_partida_1.getClave()<<datos_partida_1.getPuntaje()<<datos_partida_1.getSemilla()<<datos_partida_1.getModo();
-    if(datos_partida_1.getModo()==1){
-        jugadores.push_back(new Personaje(0,0,1,490,400));
-//        jugadores.back()->setPosx(490);jugadores.back()->setPosy(400);
-//        jugadores.back()->setPos(490,400);
-        scene_1->addItem(jugadores.back());
-        N_jugadores++;
-        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
-
-        vida_J1 = new Anuncio(0,0,0,10,1);
-        vida_J1->setPx(470); vida_J1->setPy(420);
-        puntaje_J1 = new Anuncio(0,0,1,15,1);
-        puntaje_J1->setPos(420,83);
-        scene_1->addItem(puntaje_J1);
-
-        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
-        scene_1->addItem(vida_J1);
-
-        timer_move->start(15);
-        enemy_timer->start(1000);
-    }
-    else{
-        jugadores.push_back(new Personaje(0,0,1,470,400));
-//        jugadores.back()->setPosx(470);jugadores.back()->setPosy(400);
-//        jugadores.back()->setPos(470,400);
-        scene_1->addItem(jugadores.back());
-        N_jugadores++;
-        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
-        vida_J1 = new Anuncio(0,0,0,10);
-        vida_J1->setPx(470); vida_J1->setPy(420);
-        scene_1->addItem(vida_J1);
-        puntaje_J1 = new Anuncio(0,0,1,15);
-        puntaje_J1->setPos(420,52);
-        scene_1->addItem(puntaje_J1);
-
-        if(N_jugadores<2){
-            jugadores.push_back(new Personaje(0,1,1,510,400));
-//            jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
-//            jugadores.back()->setPos(510,400);
-            scene_1->addItem(jugadores.back());
-            N_jugadores++;
-            vida_J2 = new Anuncio(0,1,0,10);
-            vida_J2->setPx(490); vida_J2->setPy(420);
-            scene_1->addItem(vida_J2);
-            puntaje_J2 = new Anuncio(0,1,1,15);
-            puntaje_J2->setPos(420,83);
-            scene_1->addItem(puntaje_J2);
-
-            timer_move->start(15);
-            enemy_timer->start(800);
-        }
-        bullet_timer->start(50);
-        shield->start(50);
-    }
 
 }
 
@@ -608,3 +536,98 @@ void Nivel_1::setDatos_partida_1(const Informacion &value)
     datos_partida_1 = value;
 }
 
+void Nivel_1::on_pushButton_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
+
+//    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
+//    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(50,50,480,322,1));muros.back()->setPos(muros.back()->getPosx(),muros.back()->getPosy());scene_1->addItem(muros.back());
+
+    if(datos_partida_1.getModo()==1){
+        jugadores.push_back(new Personaje(0,0,1,490,400));
+        scene_1->addItem(jugadores.back());
+        N_jugadores++;
+        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+
+        vida_J1 = new Anuncio(0,0,0,10,1);
+        vida_J1->setPx(470); vida_J1->setPy(420);
+        puntaje_J1 = new Anuncio(0,0,1,15,1);
+        puntaje_J1->setPos(420,83);
+        scene_1->addItem(puntaje_J1);
+
+        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+        scene_1->addItem(vida_J1);
+
+        timer_move->start(50);
+        enemy_timer->start(1000);
+        bullet_timer->start(50);
+        shield->start(50);
+    }
+    else{
+        jugadores.push_back(new Personaje(0,0,1,470,400));
+        scene_1->addItem(jugadores.back());
+        N_jugadores++;
+        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+        vida_J1 = new Anuncio(0,0,0,10);
+        vida_J1->setPx(470); vida_J1->setPy(420);
+        scene_1->addItem(vida_J1);
+        puntaje_J1 = new Anuncio(0,0,1,15);
+        puntaje_J1->setPos(420,52);
+        scene_1->addItem(puntaje_J1);
+
+        if(N_jugadores<2){
+            jugadores.push_back(new Personaje(0,1,1,510,400));
+//            jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
+//            jugadores.back()->setPos(510,400);
+            scene_1->addItem(jugadores.back());
+            N_jugadores++;
+            vida_J2 = new Anuncio(0,1,0,10);
+            vida_J2->setPx(490); vida_J2->setPy(420);
+            scene_1->addItem(vida_J2);
+            puntaje_J2 = new Anuncio(0,1,1,15);
+            puntaje_J2->setPos(420,83);
+            scene_1->addItem(puntaje_J2);
+
+            timer_move->start(15);
+            enemy_timer->start(800);
+        }
+        bullet_timer->start(50);
+        shield->start(50);
+    }
+}
+
+void Nivel_1::on_pushButton_2_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
+    ui->pushButton_3->show();
+}
+
+void Nivel_1::on_pushButton_3_clicked()
+{
+    scene_1->clear();
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->hide();
+}

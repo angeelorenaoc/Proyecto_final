@@ -5,10 +5,6 @@ int Personaje::getAngulo() const
     return angulo;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 2f0acb9b100e1abd5542466289a3e60c21141441
 int Personaje::getVel_inicial() const
 {
     return vel_inicial;

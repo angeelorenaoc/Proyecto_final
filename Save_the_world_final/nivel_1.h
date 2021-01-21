@@ -46,6 +46,13 @@ public slots:
     void actualizar_escudos();
     void estado_de_habilidad();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::Nivel_1 *ui;
     QGraphicsScene *scene_1 = new QGraphicsScene;
