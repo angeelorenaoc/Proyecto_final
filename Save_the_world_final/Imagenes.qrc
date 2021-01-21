@@ -17,5 +17,14 @@
         <file>Sprite_moneda.png</file>
         <file>Sprite_personaje.png</file>
         <file>sprite_Vida.png</file>
+        <file>Ganar_nivel1.jpg</file>
+        <file>Ganar_nivel2.jpg</file>
+        <file>Ganar_nivel3.jpg</file>
+        <file>Instrucciones_1.jpg</file>
+        <file>Instrucciones2.jpg</file>
+        <file>Instrucciones3.jpg</file>
+        <file>Perder_nivel1.jpg</file>
+        <file>Perder_nivel2.jpg</file>
+        <file>Perder_nivel3.jpg</file>
     </qresource>
 </RCC>

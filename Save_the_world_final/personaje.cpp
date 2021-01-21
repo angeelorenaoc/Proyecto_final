@@ -5,10 +5,6 @@ int Personaje::getAngulo() const
     return angulo;
 }
 
-void Personaje::setAngulo(int value)
-{
-    angulo = value;
-}
 
 int Personaje::getVel_inicial() const
 {
