@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setStyleSheet("MainWindow {background-image:url(:/new/Imagenes/Fondo_menu.jpg)}");
+
     datos_partida.setNombre_equipo("Juacho");
     datos_partida.setClave(1234);
     datos_partida.setModo(1);
