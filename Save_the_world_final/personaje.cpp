@@ -22,8 +22,6 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
     columnas=0;
     filas=0;
 
-    timer = new QTimer();
-    connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
     if (nivel == 1){
         ancho = 60;
         alto = 95;
@@ -54,6 +52,9 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
     posx = posx_;
     posy = posy_;
     setPos(posx,posy);
+
+    timer = new QTimer();
+    connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
 
 }
 

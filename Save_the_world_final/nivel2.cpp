@@ -17,7 +17,8 @@ Nivel2::Nivel2(QWidget *parent) :
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    scene->setBackgroundBrush(QBrush(QImage(":/Imagenes/Bosque.jpg")));
+
+    ui->pushButton_3->hide();
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -33,50 +34,6 @@ Nivel2::Nivel2(QWidget *parent) :
 
     mover_enemigos_s = new QTimer;
     connect(mover_enemigos_s,SIGNAL(timeout()),this,SLOT(move_enemy_jump()));
-
-    if(datos_partida.getModo()==1){
-        Total_enemigos = 30;
-        jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
-        vida = new Anuncio(0,0,0,15,2);
-        vida->setPos(710,40);
-        scene->addItem(vida);
-        puntaje1 = new Anuncio(0,0,1,16,2);
-        puntaje1->setPos(670,540);
-        scene->addItem(puntaje1);
-        velocidad_1 = new Anuncio(0,0,2,10,2);
-        velocidad_1->setPos(0,575);
-        scene->addItem(velocidad_1);
-        timer->start(20);
-        crear_enemigos->start(2000);
-        mover_enemigos->start(20);
-        crear_enemigos_s->start(5000);
-        mover_enemigos_s->start(15);
-    }
-    else{
-        Total_enemigos = 60;
-        jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
-        vida = new Anuncio(0,0,0,15,2);
-        vida->setPos(710,40);
-        scene->addItem(vida);
-        puntaje1 = new Anuncio(0,0,1,16,2);
-        puntaje1->setPos(670,540);
-        scene->addItem(puntaje1);
-        velocidad_1 = new Anuncio(0,0,2,10,2);
-        velocidad_1->setPos(0,575);
-        scene->addItem(velocidad_1);
-        jugadores.push_back(new Personaje(nullptr,40,470,1));scene->addItem(jugadores.back());
-        puntaje2 = new Anuncio(0,1,1,16,2);
-        puntaje2->setPos(670,470);
-        scene->addItem(puntaje2);
-        velocidad_2 = new Anuncio(0,1,2,10,2);
-        velocidad_2->setPos(0,500);
-        scene->addItem(velocidad_2);
-        timer->start(20);
-        crear_enemigos->start(1500);
-        mover_enemigos->start(25);
-        crear_enemigos_s->start(3000);
-        mover_enemigos_s->start(20);
-    }
 }
 
 Nivel2::~Nivel2()
@@ -306,4 +263,70 @@ Informacion Nivel2::getDatos_partida() const
 void Nivel2::setDatos_partida(const Informacion &value)
 {
     datos_partida = value;
+}
+
+void Nivel2::on_pushButton_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
+
+    if(datos_partida.getModo()==1){
+        Total_enemigos = 30;
+        jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
+        vida = new Anuncio(0,0,0,15,2);
+        vida->setPos(710,40);
+        scene->addItem(vida);
+        puntaje1 = new Anuncio(0,0,1,16,2);
+        puntaje1->setPos(670,540);
+        scene->addItem(puntaje1);
+        velocidad_1 = new Anuncio(0,0,2,10,2);
+        velocidad_1->setPos(0,575);
+        scene->addItem(velocidad_1);
+        timer->start(20);
+        crear_enemigos->start(2000);
+        mover_enemigos->start(20);
+        crear_enemigos_s->start(5000);
+        mover_enemigos_s->start(15);
+    }
+    else{
+        Total_enemigos = 60;
+        jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
+        vida = new Anuncio(0,0,0,15,2);
+        vida->setPos(710,40);
+        scene->addItem(vida);
+        puntaje1 = new Anuncio(0,0,1,16,2);
+        puntaje1->setPos(670,540);
+        scene->addItem(puntaje1);
+        velocidad_1 = new Anuncio(0,0,2,10,2);
+        velocidad_1->setPos(0,575);
+        scene->addItem(velocidad_1);
+        jugadores.push_back(new Personaje(nullptr,40,470,1));scene->addItem(jugadores.back());
+        puntaje2 = new Anuncio(0,1,1,16,2);
+        puntaje2->setPos(670,470);
+        scene->addItem(puntaje2);
+        velocidad_2 = new Anuncio(0,1,2,10,2);
+        velocidad_2->setPos(0,500);
+        scene->addItem(velocidad_2);
+        timer->start(20);
+        crear_enemigos->start(1500);
+        mover_enemigos->start(25);
+        crear_enemigos_s->start(3000);
+        mover_enemigos_s->start(20);
+    }
+}
+
+void Nivel2::on_pushButton_2_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    ui->pushButton_3->show();
+}
+
+void Nivel2::on_pushButton_3_clicked()
+{
+    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->hide();
 }

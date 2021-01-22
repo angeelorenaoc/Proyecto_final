@@ -6,7 +6,7 @@ Muro::Muro(int w_,int h_, int pox, int poy, int id_, QObject *parent) : QObject(
     h = h_;
     posx = pox;
     posy = poy;
-
+    setPos(posx,posy);
     id = id_;//Variable que indica el numero del nivel para definir la forma de los muros
 //    alto =250; - Ancho y alto del boton final
 //    ancho=150;
@@ -14,7 +14,7 @@ Muro::Muro(int w_,int h_, int pox, int poy, int id_, QObject *parent) : QObject(
 
 QRectF Muro::boundingRect() const
 {
-    return QRectF(-posx,-posy,w,h);
+    return QRectF(0,0,w,h);
 }
 
 void Muro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
@@ -24,9 +24,6 @@ void Muro::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
         QPixmap pixmap;
         pixmap.load(":/new/Imagenes/Boton.png");
         painter->drawPixmap(boundingRect(),pixmap,pixmap.rect());
-    }
-    else{
-        painter->fillRect(boundingRect(),Qt::black);
     }
 }
 

@@ -42,6 +42,13 @@ public slots:
     void actualizar();
     void Movimiento_Enemigo();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::Nivel3 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);

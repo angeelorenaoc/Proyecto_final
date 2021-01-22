@@ -21,7 +21,6 @@ Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int niv
         pixmap = new QPixmap(":/new/Imagenes/sprite_Vida.png");
         setScale(0.85);
         columnas = 0;
-        setPos(Px,Py);
         if (id == 1){
             anuncio = 0;
             setPlainText(QString("Puntaje: ")+ QString::number(anuncio));}

@@ -61,7 +61,7 @@ QRectF Enemigo_normal::boundingRect() const
 
 void Enemigo_normal::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-    painter->drawPixmap(-r,-r,*pixmap,columnas,0,ancho,alto);
+    painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,0,ancho,alto);
 }
 
 void Enemigo_normal::up()

@@ -12,11 +12,8 @@ Nivel3::Nivel3(QWidget *parent) :
     h_limit = 6000;
     v_limit = 650;
 
-    timer = new QTimer(this);
-    timere = new QTimer(this);
-    scene->setSceneRect(0,0,h_limit,v_limit);
-    scene->setBackgroundBrush(QBrush(QImage(":/new/fondo/nochefin.jpg")));
 
+    scene->setSceneRect(0,0,h_limit,v_limit);
     ui->graphicsView->setScene(scene);
     ui->centralwidget->adjustSize();
     scene->addRect(scene->sceneRect());
@@ -24,232 +21,12 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    Enemigo.push_back(new Enemigo_graf(0,3));
-    Enemigo.back()->setPos(1000,160);
-    scene->addItem(Enemigo.back());
-    Enemigo.push_back(new Enemigo_graf(0,3));
-    Enemigo.back()->setPos(1950,160);
-    scene->addItem(Enemigo.back());
-    Enemigo.push_back(new Enemigo_graf(0,3));
-    Enemigo.back()->setPos(2760,120);
-    scene->addItem(Enemigo.back());
+    ui->pushButton_3->hide();
 
-    Boton = new Muro(150,250,5850,530,2);
-//    Boton->setPos(5850,530);
-    scene->addItem(Boton);
-
-    for(int i=0;i<1;i++){
-        Muros.push_back(new Muro(150,30,0,-300,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(30,70,-150,-260,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(80,80,-300,-580,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(80,80,-400,-480,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,300,-600,-350,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(180,20,-520,-330,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,120,-800,-530,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-760,-510,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-950,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(150,20,-920,-200,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,200,-1150,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-1400,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,100,-1600,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-1560,-530,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,300,-1750,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-1670,-300,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-1900,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(120,20,-1900,-200,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,80,-2020,-140,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,50,-2200,-600,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,100,-2240,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,150,-2280,-500,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,200,-2320,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,250,-2360,-400,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,300,-2400,-350,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,250,-2440,-400,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,200,-2480,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,150,-2520,-500,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,100,-2560,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,50,-2600,-600,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,200,-2400,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(30,200,-2700,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,100,-2730,-160,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(200,40,-2780,-220,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-3200,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(180,20,-3120,-430,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,150,-3400,-500,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(140,20,-3340,-480,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,100,-3600,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-3560,-530,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,150,-3200,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,200,-3400,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,250,-3600,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-3900,-500,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,120,-4000,-400,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-4020,-400,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,120,-4120,-300,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-4140,-300,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,120,-4240,-200,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(100,20,-4260,-200,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,450,-4360,-200,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,50,-4600,-600,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,100,-4640,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,150,-4680,-500,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,200,-4720,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,250,-4760,-400,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(40,300,-4800,-350,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-5000,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(150,20,-5000,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,200,-5150,-450,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,250,-5085,0,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,100,-5300,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(150,20,-5300,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(20,100,-5450,-550,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(200,20,-5300,-100,3));
-        scene->addItem(Muros.back());
-        Muros.push_back(new Muro(200,20,-5300,-200,3));
-        scene->addItem(Muros.back());
-    }
-
-    Bonus.push_back(new Monedas(92,275)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(1710,226)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(2420,310)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(3295,91)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(4191,372)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(4825,298)); scene->addItem(Bonus.back());
-    Bonus.push_back(new Monedas(5401,43)); scene->addItem(Bonus.back());
-
+    timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
+    timere = new QTimer;
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
-
-    if(datos_juego.getModo()==1){
-        timer->start(3);
-        timere->start(10);
-        vidas1 = new Anuncio(0,0,0,15,3);
-        puntaje1 = new Anuncio(0,0,1,15,3);
-        scene->addItem(vidas1);
-        scene->addItem(puntaje1);
-        vidas1->setPx(0);vidas1->setPy(0);
-        puntaje1->setPx(0);vidas1->setPy(18);
-        for (int i = 0; i < Enemigo.size() ; i++ ) {
-            Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
-            if(i == 0){
-                e->setPx(1000); e->setPy(160);
-            }
-            if (i == 1){
-                e->setPx(1950); e->setPy(160);
-            }
-            if (i == 2){
-                e->setPx(2760); e->setPy(120);
-            }
-            Enemigo.at(i)->actualizar((v_limit));
-        }
-        bars.push_back((new Personaje3graf));
-        bars.back()->setFocus();
-        bars.back()->actualizar((v_limit));
-        scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
-    }
-    else{
-        timer->start(3);
-        timere->start(10);
-        for (int i = 0; i < Enemigo.size() ; i++ ) {
-            Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
-            if(i == 0){
-                e->setPx(1000); e->setPy(160);
-            }
-            if (i == 1){
-                e->setPx(1950); e->setPy(160);
-            }
-            if (i == 2){
-                e->setPx(2760); e->setPy(120);
-            }
-            Enemigo.at(i)->actualizar((v_limit));
-        }
-        vidas1 = new Anuncio(0,0,0,15,3);
-        vidas2 = new Anuncio(0,1,0,15,3);
-        puntaje1 = new Anuncio(0,0,1,15,3);
-        puntaje2 = new Anuncio(0,1,1,15,3);
-        scene->addItem(vidas1);
-        scene->addItem(puntaje1);
-        vidas1->setPx(0);vidas1->setPy(0);
-        puntaje1->setPx(0);vidas1->setPy(18);
-        scene->addItem(vidas2);
-        scene->addItem(puntaje2);
-        vidas2->setPx(0);vidas2->setPy(0);
-        puntaje2->setPx(0);vidas1->setPy(18);
-        bars.push_back((new Personaje3graf));
-        bars.back()->actualizar((v_limit));
-        scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
-        bars.push_back((new Personaje3graf(0,1)));
-        bars.back()->actualizar((v_limit));
-        scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
-    }
-
 }
 
 Nivel3::~Nivel3()
@@ -539,4 +316,270 @@ Informacion Nivel3::getDatos_juego() const
 void Nivel3::setDatos_juego(const Informacion &value)
 {
     datos_juego = value;
+}
+
+void Nivel3::on_pushButton_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
+    qDebug()<<"Fondo";
+
+    Enemigo.push_back(new Enemigo_graf(0,3));
+    Enemigo.back()->setPos(1000,160);
+    scene->addItem(Enemigo.back());
+    Enemigo.push_back(new Enemigo_graf(0,3));
+    Enemigo.back()->setPos(1950,160);
+    scene->addItem(Enemigo.back());
+    Enemigo.push_back(new Enemigo_graf(0,3));
+    Enemigo.back()->setPos(2760,120);
+    scene->addItem(Enemigo.back());
+    qDebug()<<"Enemigos en escena";
+
+    Boton = new Muro(150,250,5850,530,2);
+//    Boton->setPos(5850,530);
+    scene->addItem(Boton);
+    qDebug()<<"Boton en escena";
+
+    for(int i=0;i<1;i++){
+        Muros.push_back(new Muro(150,30,0,-300,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(30,70,-150,-260,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(80,80,-300,-580,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(80,80,-400,-480,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,300,-600,-350,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(180,20,-520,-330,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,120,-800,-530,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-760,-510,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-950,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(150,20,-920,-200,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,200,-1150,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-1400,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,100,-1600,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-1560,-530,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,300,-1750,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-1670,-300,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-1900,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(120,20,-1900,-200,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,80,-2020,-140,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,50,-2200,-600,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,100,-2240,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,150,-2280,-500,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,200,-2320,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,250,-2360,-400,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,300,-2400,-350,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,250,-2440,-400,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,200,-2480,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,150,-2520,-500,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,100,-2560,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,50,-2600,-600,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,200,-2400,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(30,200,-2700,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,100,-2730,-160,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(200,40,-2780,-220,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-3200,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(180,20,-3120,-430,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,150,-3400,-500,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(140,20,-3340,-480,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,100,-3600,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-3560,-530,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,150,-3200,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,200,-3400,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,250,-3600,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-3900,-500,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,120,-4000,-400,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-4020,-400,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,120,-4120,-300,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-4140,-300,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,120,-4240,-200,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(100,20,-4260,-200,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,450,-4360,-200,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,50,-4600,-600,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,100,-4640,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,150,-4680,-500,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,200,-4720,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,250,-4760,-400,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(40,300,-4800,-350,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-5000,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(150,20,-5000,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,200,-5150,-450,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,250,-5085,0,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,100,-5300,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(150,20,-5300,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(20,100,-5450,-550,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(200,20,-5300,-100,3));
+        scene->addItem(Muros.back());
+        Muros.push_back(new Muro(200,20,-5300,-200,3));
+        scene->addItem(Muros.back());
+    }
+
+    qDebug()<<"Muros en escena";
+
+    Bonus.push_back(new Monedas(92,275)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(1710,226)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(2420,310)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(3295,91)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(4191,372)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(4825,298)); scene->addItem(Bonus.back());
+    Bonus.push_back(new Monedas(5401,43)); scene->addItem(Bonus.back());
+
+    qDebug()<<"Monedas en escena";
+
+    if(datos_juego.getModo()==1){
+        vidas1 = new Anuncio(0,0,0,15,3);
+        puntaje1 = new Anuncio(0,0,1,15,3);
+        scene->addItem(vidas1);
+        qDebug()<<"Vida en escena";
+        scene->addItem(puntaje1);
+        qDebug()<<"Puntaje en escena";
+        vidas1->setPx(0);vidas1->setPy(0);
+        puntaje1->setPx(0);vidas1->setPy(18);
+        qDebug()<<"Posicion";
+        for (int i = 0; i < Enemigo.size() ; i++ ) {
+            Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
+            qDebug()<<"Ciclo";
+            if(i == 0){
+                e->setPx(1000); e->setPy(160);
+                qDebug()<<"Enemgio 1";
+            }
+            if (i == 1){
+                e->setPx(1950); e->setPy(160);
+                qDebug()<<"Enemgio 2";
+            }
+            if (i == 2){
+                e->setPx(2760); e->setPy(120);
+                qDebug()<<"Enemgio 3";
+            }
+            Enemigo.at(i)->actualizar((v_limit));
+            qDebug()<<"Actualizar";
+        }
+        bars.push_back((new Personaje3graf(0,0)));
+        qDebug()<<"Crear personaje";
+        bars.back()->setFocus();
+        bars.back()->actualizar((v_limit));
+        qDebug()<<"Actualizar personaje";
+        scene->addItem(bars.back());
+        qDebug()<<"Personaje en escena";
+        ui->graphicsView->centerOn(bars.back());
+        qDebug()<<"Centrar personaje";
+        timer->start(3);
+        qDebug()<<"Inicio del timer";
+        timere->start(10);
+        qDebug()<<"Inicio timere";
+    }
+    else{
+        timer->start(3);
+        timere->start(10);
+        for (int i = 0; i < Enemigo.size() ; i++ ) {
+            Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
+            if(i == 0){
+                e->setPx(1000); e->setPy(160);
+            }
+            if (i == 1){
+                e->setPx(1950); e->setPy(160);
+            }
+            if (i == 2){
+                e->setPx(2760); e->setPy(120);
+            }
+            Enemigo.at(i)->actualizar((v_limit));
+        }
+        vidas1 = new Anuncio(0,0,0,15,3);
+        vidas2 = new Anuncio(0,1,0,15,3);
+        puntaje1 = new Anuncio(0,0,1,15,3);
+        puntaje2 = new Anuncio(0,1,1,15,3);
+        scene->addItem(vidas1);
+        scene->addItem(puntaje1);
+        vidas1->setPx(0);vidas1->setPy(0);
+        puntaje1->setPx(0);vidas1->setPy(18);
+        scene->addItem(vidas2);
+        scene->addItem(puntaje2);
+        vidas2->setPx(0);vidas2->setPy(0);
+        puntaje2->setPx(0);vidas1->setPy(18);
+        bars.push_back((new Personaje3graf));
+        bars.back()->actualizar((v_limit));
+        scene->addItem(bars.back());
+        ui->graphicsView->centerOn(bars.back());
+        bars.push_back((new Personaje3graf(0,1)));
+        bars.back()->actualizar((v_limit));
+        scene->addItem(bars.back());
+        ui->graphicsView->centerOn(bars.back());
+    }
+
+}
+
+void Nivel3::on_pushButton_2_clicked()
+{
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    ui->pushButton_3->show();
+}
+
+void Nivel3::on_pushButton_3_clicked()
+{
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->hide();
 }

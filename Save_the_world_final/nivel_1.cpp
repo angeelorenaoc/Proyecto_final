@@ -44,9 +44,6 @@ Nivel_1::Nivel_1(QWidget *parent) :
     tiempo_inmunidad = new QTimer();
     connect(tiempo_inmunidad,SIGNAL(timeout()),this,SLOT(inmunidad()));
 
-    //MUROS
-
-
 }
 
 Nivel_1::~Nivel_1()
@@ -111,6 +108,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
             }
             vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
             vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+            qDebug()<<vida_J1->x()<<vida_J1->y();
         }
     }
 
@@ -542,26 +540,25 @@ void Nivel_1::on_pushButton_clicked()
     ui->pushButton_2->hide();
     scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
 
-//    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
-//    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(50,50,480,322,1));muros.back()->setPos(muros.back()->getPosx(),muros.back()->getPosy());scene_1->addItem(muros.back());
+    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
 
     if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));
@@ -571,12 +568,12 @@ void Nivel_1::on_pushButton_clicked()
 
         vida_J1 = new Anuncio(0,0,0,10,1);
         vida_J1->setPx(470); vida_J1->setPy(420);
+        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+        scene_1->addItem(vida_J1);
         puntaje_J1 = new Anuncio(0,0,1,15,1);
         puntaje_J1->setPos(420,83);
         scene_1->addItem(puntaje_J1);
 
-        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
-        scene_1->addItem(vida_J1);
 
         timer_move->start(50);
         enemy_timer->start(1000);
@@ -597,8 +594,6 @@ void Nivel_1::on_pushButton_clicked()
 
         if(N_jugadores<2){
             jugadores.push_back(new Personaje(0,1,1,510,400));
-//            jugadores.back()->setPosx(510);jugadores.back()->setPosy(400);
-//            jugadores.back()->setPos(510,400);
             scene_1->addItem(jugadores.back());
             N_jugadores++;
             vida_J2 = new Anuncio(0,1,0,10);

@@ -41,6 +41,13 @@ public slots:
     void spawn_jump();
     void move_enemy_jump();
 
+private slots:
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::Nivel2 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
