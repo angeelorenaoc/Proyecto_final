@@ -17,8 +17,10 @@ Nivel2::Nivel2(QWidget *parent) :
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
     ui->pushButton_3->hide();
+    ui->graphicsView->hide();
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -269,7 +271,9 @@ void Nivel2::on_pushButton_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->graphicsView->show();
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
+
 
     if(datos_partida.getModo()==1){
         Total_enemigos = 30;

@@ -11,7 +11,12 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Ella Mission</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/new/Imagenes/Logo.png</normalon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QGraphicsView" name="graphicsView">
@@ -33,6 +38,10 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
      <string>Inicio</string>
     </property>
@@ -46,6 +55,10 @@
       <height>41</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
      <string>Instrucciones</string>
     </property>
@@ -58,6 +71,10 @@
       <width>80</width>
       <height>21</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>Cancel</string>

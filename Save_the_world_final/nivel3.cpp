@@ -20,8 +20,10 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->graphicsView->resize(1000,650);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
     ui->pushButton_3->hide();
+    ui->graphicsView->hide();
 
     vidas1 = new Anuncio(0,0,0,15,3);
     vidas2 = new Anuncio(0,1,0,15,3);
@@ -224,6 +226,7 @@ void Nivel3::borderCollision()
     }
     for (int i = 0; i < bars.size() ; i++ ) {
         if (bars.at(i)->collidesWithItem(Boton)){
+            qDebug()<<"GG izi";
             //Los jugadores ganan
         }
     }
@@ -279,7 +282,6 @@ void Nivel3::Colision_paredes_e()
 
                 Enemigo_fisica *c= Enemigo.at(i)->getEnemy();
                 Muro *m = Muros.at(j);
-                qDebug() << v_limit-m->getPosy() << c->getPy()<< v_limit-m->getPosy()-m->getH() << m->getPosx() << c->getPx();
                 if(c->getPy()<v_limit-m->getPosy() && c->getPy()>v_limit-m->getPosy()-m->getH() && c->getPx()<m->getPosx()){
                     c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()-c->getRr(),c->getPy());
                 }
@@ -327,10 +329,9 @@ void Nivel3::on_pushButton_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->graphicsView->show();
 
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
-    qDebug()<<"Fondo";
-
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(1000,160);
     scene->addItem(Enemigo.back());
@@ -340,12 +341,9 @@ void Nivel3::on_pushButton_clicked()
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(2760,120);
     scene->addItem(Enemigo.back());
-    qDebug()<<"Enemigos en escena";
 
     Boton = new Muro(150,250,5850,530,2);
-//    Boton->setPos(5850,530);
     scene->addItem(Boton);
-    qDebug()<<"Boton en escena";
 
     for(int i=0;i<1;i++){
         Muros.push_back(new Muro(150,30,0,300,3));
@@ -482,8 +480,6 @@ void Nivel3::on_pushButton_clicked()
         scene->addItem(Muros.back());
     }
 
-    qDebug()<<"Muros en escena";
-
     Bonus.push_back(new Monedas(92,275)); scene->addItem(Bonus.back());
     Bonus.push_back(new Monedas(1710,226)); scene->addItem(Bonus.back());
     Bonus.push_back(new Monedas(2420,310)); scene->addItem(Bonus.back());
@@ -491,8 +487,6 @@ void Nivel3::on_pushButton_clicked()
     Bonus.push_back(new Monedas(4191,372)); scene->addItem(Bonus.back());
     Bonus.push_back(new Monedas(4825,298)); scene->addItem(Bonus.back());
     Bonus.push_back(new Monedas(5401,43)); scene->addItem(Bonus.back());
-
-    qDebug()<<"Monedas en escena";
 
     if(datos_juego.getModo()==1){
         scene->addItem(vidas1);
@@ -513,18 +507,12 @@ void Nivel3::on_pushButton_clicked()
             Enemigo.at(i)->actualizar((v_limit));
         }
         bars.push_back((new Personaje3graf(0,0)));
-        qDebug()<<"Crear personaje";
         bars.back()->setFocus();
         bars.back()->actualizar((v_limit));
-        qDebug()<<"Actualizar personaje";
         scene->addItem(bars.back());
-        qDebug()<<"Personaje en escena";
         ui->graphicsView->centerOn(bars.back());
-        qDebug()<<"Centrar personaje";
         timer->start(3);
-        qDebug()<<"Inicio del timer";
-        timere->start(10);
-        qDebug()<<"Inicio timere";
+        timere->start(50);
     }
     else{
         timer->start(3);

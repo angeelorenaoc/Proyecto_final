@@ -10,15 +10,35 @@
     <height>600</height>
    </rect>
   </property>
+  <property name="minimumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>800</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Save The World</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/new/Imagenes/Logo.png</normalon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>260</y>
+      <y>310</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -28,6 +48,10 @@
       <family>Kristen ITC</family>
       <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>SOLITARIO</string>
@@ -37,7 +61,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>330</y>
+      <y>380</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -47,6 +71,10 @@
       <family>Kristen ITC</family>
       <pointsize>14</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>MULTIJUGADOR</string>
@@ -56,7 +84,7 @@
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>400</y>
+      <y>450</y>
       <width>211</width>
       <height>61</height>
      </rect>
@@ -67,6 +95,10 @@
       <pointsize>14</pointsize>
      </font>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
      <string>CARGAR PARTIDA</string>
     </property>
@@ -74,17 +106,20 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>210</y>
-      <width>301</width>
-      <height>41</height>
+      <x>160</x>
+      <y>220</y>
+      <width>481</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>MS Gothic</family>
-      <pointsize>20</pointsize>
+      <family>MV Boli</family>
+      <pointsize>26</pointsize>
      </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
     </property>
     <property name="text">
      <string>SELECCIONE UNA OPCIÓN</string>
@@ -97,7 +132,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

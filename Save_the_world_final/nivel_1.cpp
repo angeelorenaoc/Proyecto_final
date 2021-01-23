@@ -15,11 +15,22 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->graphicsView->setScene(scene_1);
     ui->centralwidget->adjustSize();
     scene_1->addRect(scene_1->sceneRect());
-    ui->graphicsView->resize(scene_1->width(),scene_1->height());
+    ui->graphicsView->resize(800,600);
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
+    scene_2->setSceneRect(0,0,800,800);
+    ui->graphicsView_2->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->graphicsView_2->resize(800,800);
+    ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+
+    ui->graphicsView->hide();
+    ui->graphicsView_2->hide();
     ui->pushButton_3->hide();
 
     enemy_timer = new QTimer(this);
@@ -108,7 +119,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
             }
             vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
             vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
-            qDebug()<<vida_J1->x()<<vida_J1->y();
+//            qDebug()<<vida_J1->x()<<vida_J1->y();
         }
     }
 
@@ -538,6 +549,7 @@ void Nivel_1::on_pushButton_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->graphicsView->show();
     scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
 
     muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
@@ -615,13 +627,17 @@ void Nivel_1::on_pushButton_2_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
-    scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
+    ui->graphicsView_2->show();
+    this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
     ui->pushButton_3->show();
 }
 
 void Nivel_1::on_pushButton_3_clicked()
 {
-    scene_1->clear();
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    scene_2->clear();
+    ui->graphicsView_2->hide();
     ui->pushButton->show();
     ui->pushButton_2->show();
     ui->pushButton_3->hide();

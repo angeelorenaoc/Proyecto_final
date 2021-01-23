@@ -56,6 +56,8 @@ private slots:
 private:
     Ui::Nivel_1 *ui;
     QGraphicsScene *scene_1 = new QGraphicsScene;
+    QGraphicsScene *scene_2 = new QGraphicsScene;
+
     QTimer *shield;
     QTimer *timer_move;
     QTimer *enemy_timer;
