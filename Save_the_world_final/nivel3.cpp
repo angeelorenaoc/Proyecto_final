@@ -8,10 +8,8 @@ Nivel3::Nivel3(QWidget *parent) :
     srand(time(NULL));
     ui->setupUi(this);
 
-
     h_limit = 6000;
     v_limit = 650;
-
 
     scene->setSceneRect(0,0,h_limit,v_limit);
     ui->graphicsView->setScene(scene);
@@ -20,10 +18,19 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->graphicsView->resize(1000,650);
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+    setStyleSheet("Nivel3 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+
+    scene_2->setSceneRect(0,0,700,700);
+    ui->graphicsView_2->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->graphicsView_2->resize(700,700);
+    ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     ui->pushButton_3->hide();
     ui->graphicsView->hide();
+    ui->graphicsView_2->hide();
 
     vidas1 = new Anuncio(0,0,0,15,3);
     vidas2 = new Anuncio(0,1,0,15,3);
@@ -331,6 +338,7 @@ void Nivel3::on_pushButton_clicked()
     ui->pushButton_2->hide();
     ui->graphicsView->show();
 
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height()+25);
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(1000,160);
@@ -554,6 +562,9 @@ void Nivel3::on_pushButton_2_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->graphicsView_2->show();
+    this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones3.jpg")));
     ui->pushButton_3->show();
 }
 
@@ -561,5 +572,8 @@ void Nivel3::on_pushButton_3_clicked()
 {
     ui->pushButton->show();
     ui->pushButton_2->show();
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    scene_2->clear();
+    ui->graphicsView_2->hide();
     ui->pushButton_3->hide();
 }

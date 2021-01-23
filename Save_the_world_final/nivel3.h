@@ -52,6 +52,7 @@ private slots:
 private:
     Ui::Nivel3 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
+    QGraphicsScene *scene_2 = new QGraphicsScene(this);
 
     QTimer *timer;
     QTimer *timere;

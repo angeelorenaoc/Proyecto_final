@@ -17,10 +17,19 @@ Nivel2::Nivel2(QWidget *parent) :
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+    setStyleSheet("Nivel2 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+
+    scene_2->setSceneRect(0,0,902,605);
+    ui->graphicsView_2->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->graphicsView_2->resize(902,605);
+    ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     ui->pushButton_3->hide();
     ui->graphicsView->hide();
+    ui->graphicsView_2->hide();
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -324,12 +333,18 @@ void Nivel2::on_pushButton_2_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->graphicsView_2->show();
+    this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
     ui->pushButton_3->show();
+
 }
 
 void Nivel2::on_pushButton_3_clicked()
 {
-    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    scene_2->clear();
+    ui->graphicsView_2->hide();
     ui->pushButton->show();
     ui->pushButton_2->show();
     ui->pushButton_3->hide();

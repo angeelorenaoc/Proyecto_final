@@ -51,6 +51,7 @@ private slots:
 private:
     Ui::Nivel2 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
+    QGraphicsScene *scene_2 = new QGraphicsScene;
 
     int h_limit;
     int v_limit;

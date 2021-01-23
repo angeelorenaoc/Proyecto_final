@@ -12,8 +12,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>400</width>
+    <height>700</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -89,7 +89,7 @@ background-color: rgb(22, 22, 22);</string>
 background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
-     <string>Cerrar</string>
+     <string>Volver</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_2">
@@ -102,11 +102,53 @@ background-color: rgb(22, 22, 22);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>660</y>
+      <width>111</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SIGUIENTE NIVEL</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_5">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>630</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>SALIR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_6">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>660</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>REINICIAR</string>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>pushButton</zorder>
    <zorder>pushButton_2</zorder>
    <zorder>graphicsView_2</zorder>
    <zorder>pushButton_3</zorder>
+   <zorder>pushButton_4</zorder>
+   <zorder>pushButton_5</zorder>
+   <zorder>pushButton_6</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -114,7 +156,7 @@ background-color: rgb(22, 22, 22);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

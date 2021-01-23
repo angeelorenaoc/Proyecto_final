@@ -21,17 +21,19 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
-    scene_2->setSceneRect(0,0,800,800);
+    scene_2->setSceneRect(0,0,700,700);
     ui->graphicsView_2->setScene(scene_2);
     ui->centralwidget->adjustSize();
     scene_2->addRect(scene_2->sceneRect());
-    ui->graphicsView_2->resize(800,800);
+    ui->graphicsView_2->resize(700,700);
     ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     ui->graphicsView->hide();
     ui->graphicsView_2->hide();
     ui->pushButton_3->hide();
+    ui->pushButton_4->hide();
+    ui->pushButton_6->hide();
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -443,6 +445,16 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         Cooldown_timer->stop();
         tiempo_de_habilidad->stop();
         qDebug()<<"YOU LOSE";
+        ui->graphicsView->hide();
+        scene_2->clear();
+        ui->graphicsView_2->show();
+        ui->graphicsView_2->resize(467,700);
+        this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+        ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel1.jpg")));
+        ui->pushButton_5->show();
+        ui->pushButton_6->show();
     }
 }
 
@@ -549,9 +561,11 @@ void Nivel_1::on_pushButton_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->pushButton_5->hide();
     ui->graphicsView->show();
     scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
 
+    for(int i =0; i <1; i++){
     muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
@@ -570,7 +584,7 @@ void Nivel_1::on_pushButton_clicked()
     muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());
+    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());}
 
     if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));
@@ -627,6 +641,7 @@ void Nivel_1::on_pushButton_2_clicked()
 {
     ui->pushButton->hide();
     ui->pushButton_2->hide();
+    ui->pushButton_4->hide();
     ui->graphicsView_2->show();
     this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
@@ -641,4 +656,19 @@ void Nivel_1::on_pushButton_3_clicked()
     ui->pushButton->show();
     ui->pushButton_2->show();
     ui->pushButton_3->hide();
+}
+
+void Nivel_1::on_pushButton_6_clicked()
+{
+
+}
+
+void Nivel_1::on_pushButton_4_clicked()
+{
+
+}
+
+void Nivel_1::on_pushButton_5_clicked()
+{
+
 }

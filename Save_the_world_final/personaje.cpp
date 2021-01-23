@@ -22,9 +22,6 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
     columnas=0;
     filas=0;
 
-    timer = new QTimer();
-    connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
-
     if (nivel == 1){
         ancho = 60;
         alto = 95;
@@ -34,6 +31,8 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
             pixmap = new QPixmap(":/new/Imagenes/Sprite_medico2.png");
 
         setScale(0.6);
+        timer = new QTimer();//Creacion del timer para el nivel 1
+        connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
         timer->start(150);
     }
     else {
@@ -51,6 +50,8 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
         pixmap = new QPixmap(":/new/Imagenes/Sprite_canon.png");
         setScale(0.8);
         setRotation(45);
+        timer = new QTimer();//Creacion del timer para el nivel 2
+        connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
     }
     posx = posx_;
     posy = posy_;
