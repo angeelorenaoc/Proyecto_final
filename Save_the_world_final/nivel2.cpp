@@ -19,7 +19,7 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("Nivel2 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
-    scene_2->setSceneRect(0,0,902,605);
+    scene_2->setSceneRect(0,0,902,700);
     ui->graphicsView_2->setScene(scene_2);
     ui->centralwidget->adjustSize();
     scene_2->addRect(scene_2->sceneRect());
@@ -182,14 +182,34 @@ void Nivel2::move_enemy()
                     scene->removeItem(puntaje1);
                     scene->removeItem(velocidad_1);
                 }
-                for(int i=0;i<enemigos.size();i++){scene->removeItem(enemigos.at(i));} enemigos.clear();
-                for(int i=0;i<enemigos_s.size();i++){scene->removeItem(enemigos_s.at(i));} enemigos_s.clear();
-                for(int i=0;i<balas.size();i++){scene->removeItem(balas.at(i));} balas.clear();                
+                ui->graphicsView->hide();
+                balas.clear();
+                enemigos_s.clear();
+                enemigos.clear();
+                jugadores.clear();
+
                 timer->stop();
                 crear_enemigos->stop();
                 mover_enemigos->stop();
                 crear_enemigos_s->stop();
                 mover_enemigos_s->stop();
+                win->stop();
+
+                scene_2->clear();
+                scene_2->setSceneRect(0,0,497,700);
+                ui->graphicsView_2->setScene(scene_2);
+                ui->centralwidget->adjustSize();
+                scene_2->addRect(scene_2->sceneRect());
+                ui->graphicsView_2->show();
+                ui->graphicsView_2->resize(497,700);
+                this->resize(ui->graphicsView_2->width()+105,ui->graphicsView_2->height());
+                ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel2.jpg")));
+                ui->Salir->show();
+                ui->Reiniciar->show();
+
+                scene->clear();
             }
         }
     }
@@ -218,6 +238,7 @@ void Nivel2::move_enemy_jump()
 void Nivel2::victory()
 {
     if(enemigos.size()==0 && enemigos_s.size()==0 && crear_enemigos->isActive()==false && crear_enemigos_s->isActive()==false){
+        ui->graphicsView->hide();
         balas.clear();
         enemigos_s.clear();
         enemigos.clear();
@@ -230,10 +251,15 @@ void Nivel2::victory()
         mover_enemigos_s->stop();
         win->stop();
 
-        ui->graphicsView->hide();
+        ui->Salir->show();
+        ui->Siguiente->show();
+        scene_2->setSceneRect(0,0,497,700);
+        ui->graphicsView_2->setScene(scene_2);
+        ui->centralwidget->adjustSize();
+        scene_2->addRect(scene_2->sceneRect());
         ui->graphicsView_2->show();
-        ui->graphicsView_2->resize(467,700);
-        this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+        ui->graphicsView_2->resize(497,700);
+        this->resize(ui->graphicsView_2->width()+105,ui->graphicsView_2->height());
         ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel2.jpg")));
@@ -361,6 +387,7 @@ void Nivel2::on_Iniciar_clicked()
         crear_enemigos_s->start(3000);
         mover_enemigos_s->start(20);
     }
+    win->start(10);
 }
 
 void Nivel2::on_Instrucciones_clicked()

@@ -54,20 +54,20 @@ void MainWindow::on_Volver_clicked()
 
 void MainWindow::on_Solitario_clicked()
 {
-    Nivel_1 *nivel_1 = new Nivel_1;
-    nivel_1->setDatos_partida_1(this->datos_partida);
-    nivel_1->show();
-    this->hide();
+//    Nivel_1 *nivel_1 = new Nivel_1;
+//    nivel_1->setDatos_partida_1(this->datos_partida);
+//    nivel_1->show();
+//    this->hide();
 
 //    Nivel2 *nivel_2 = new Nivel2;
 //    nivel_2->setDatos_partida(this->datos_partida);
 //    nivel_2->show();
 //    this->hide();
 
-//    Nivel3 *nivel_3 = new Nivel3;
-//    nivel_3->setDatos_juego(this->datos_partida);
-//    nivel_3->show();
-//    this->hide();
+    Nivel3 *nivel_3 = new Nivel3;
+    nivel_3->setDatos_juego(this->datos_partida);
+    nivel_3->show();
+    this->hide();
 }
 
 void MainWindow::on_Multijugador_clicked()

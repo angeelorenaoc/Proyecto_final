@@ -43,6 +43,7 @@ public:
 public slots:
     void actualizar();
     void Movimiento_Enemigo();
+    void Perder();
 
 private slots:
     void on_Inicio_clicked();
@@ -51,6 +52,12 @@ private slots:
 
     void on_Volver_clicked();
 
+    void on_Siguiente_clicked();
+
+    void on_Reiniciar_clicked();
+
+    void on_Salir_clicked();
+
 private:
     Ui::Nivel3 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
@@ -58,6 +65,7 @@ private:
 
     QTimer *timer;
     QTimer *timere;
+    QTimer *Lose;
 
     float dt;
     int h_limit;

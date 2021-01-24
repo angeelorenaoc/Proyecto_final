@@ -7,19 +7,19 @@
     <x>0</x>
     <y>0</y>
     <width>905</width>
-    <height>610</height>
+    <height>700</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>800</width>
-    <height>600</height>
+    <width>490</width>
+    <height>610</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>905</width>
-    <height>610</height>
+    <height>700</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -105,8 +105,8 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Salir">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>510</y>
+      <x>500</x>
+      <y>340</y>
       <width>80</width>
       <height>21</height>
      </rect>
@@ -122,8 +122,8 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Reiniciar">
     <property name="geometry">
      <rect>
-      <x>710</x>
-      <y>530</y>
+      <x>500</x>
+      <y>370</y>
       <width>80</width>
       <height>21</height>
      </rect>
@@ -139,8 +139,8 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Siguiente">
     <property name="geometry">
      <rect>
-      <x>689</x>
-      <y>530</y>
+      <x>500</x>
+      <y>370</y>
       <width>101</width>
       <height>21</height>
      </rect>
@@ -168,7 +168,7 @@ background-color: rgb(22, 22, 22);</string>
      <x>0</x>
      <y>0</y>
      <width>905</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

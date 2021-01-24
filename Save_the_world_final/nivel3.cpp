@@ -33,6 +33,9 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Volver->hide();
     ui->Game->hide();
     ui->Anuncios->hide();
+    ui->Reiniciar->hide();
+    ui->Salir->hide();
+    ui->Siguiente->hide();
 
     vidas1 = new Anuncio(0,0,0,15,3);
     vidas2 = new Anuncio(0,1,0,15,3);
@@ -43,6 +46,8 @@ Nivel3::Nivel3(QWidget *parent) :
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
     timere = new QTimer;
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
+    Lose = new QTimer;
+    connect(timere,SIGNAL(timeout()),this, SLOT(Perder()));
 }
 
 Nivel3::~Nivel3()
@@ -236,7 +241,29 @@ void Nivel3::borderCollision()
     for (int i = 0; i < bars.size() ; i++ ) {
         if (bars.at(i)->collidesWithItem(Boton)){
             qDebug()<<"GG izi";
-            //Los jugadores ganan
+            ui->Game->hide();
+            Bonus.clear();
+            Muros.clear();
+            bars.clear();
+            Enemigo.clear();
+
+            timer->stop();
+            timere->stop();
+
+            ui->Salir->show();
+            ui->Siguiente->show();
+            scene_2->setSceneRect(0,0,466,700);
+            ui->Anuncios->setScene(scene_2);
+            ui->centralwidget->adjustSize();
+            scene_2->addRect(scene_2->sceneRect());
+            ui->Anuncios->show();
+            ui->Anuncios->resize(466,700);
+            this->resize(ui->Anuncios->width()+90,ui->Anuncios->height());
+            ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel3.jpg")));
+
+            scene->clear();
         }
     }
 }
@@ -280,6 +307,35 @@ void Nivel3::Movimiento_Enemigo()
             }
             Colision_paredes_e();
         }
+    }
+}
+
+void Nivel3::Perder()
+{
+    if(bars.size() == 0){
+        ui->Game->hide();
+        Bonus.clear();
+        Muros.clear();
+        bars.clear();
+        Enemigo.clear();
+
+        timer->stop();
+        timere->stop();
+
+        ui->Salir->show();
+        ui->Reiniciar->show();
+        scene_2->setSceneRect(0,0,466,700);
+        ui->Anuncios->setScene(scene_2);
+        ui->centralwidget->adjustSize();
+        scene_2->addRect(scene_2->sceneRect());
+        ui->Anuncios->show();
+        ui->Anuncios->resize(466,700);
+        this->resize(ui->Anuncios->width()+90,ui->Anuncios->height());
+        ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel3.jpg")));
+
+        scene->clear();
     }
 }
 
@@ -396,149 +452,6 @@ void Nivel3::on_Inicio_clicked()
     Boton = new Muro(150,250,5850,530,2);
     scene->addItem(Boton);
 
-  for(int i=0;i<1;i++){
-//        Muros.push_back(new Muro(150,30,0,300,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(30,70,150,260,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(80,80,300,580,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(80,80,400,480,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,300,600,350,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(180,20,520,330,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,120,800,530,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,760,510,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,950,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(150,20,920,200,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,200,1150,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,1400,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,100,1600,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,1560,530,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,300,1750,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,1670,300,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,1900,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(120,20,1900,200,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,80,2020,140,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,50,2200,600,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,100,2240,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,150,2280,500,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,200,2320,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,250,2360,400,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,300,2400,350,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,250,2440,400,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,200,2480,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,150,2520,500,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,100,2560,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,50,2600,600,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,200,2400,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(30,200,2700,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,100,2730,160,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(200,40,2780,220,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,3200,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(180,20,3120,430,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,150,3400,500,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(140,20,3340,480,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,100,3600,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,3560,530,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,150,3200,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,200,3400,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,250,3600,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,3900,500,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,120,4000,400,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,4020,400,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,120,4120,300,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,4140,300,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,120,4240,200,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(100,20,4260,200,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,450,4360,200,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,50,4600,600,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,100,4640,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,150,4680,500,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,200,4720,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,250,4760,400,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(40,300,4800,350,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,5000,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(150,20,5000,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,200,5150,450,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,250,5085,0,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,100,5300,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(150,20,5300,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(20,100,5450,550,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(200,20,5300,100,3));
-//        scene->addItem(Muros.back());
-//        Muros.push_back(new Muro(200,20,5300,200,3));
-//        scene->addItem(Muros.back());
-    }
-
-//    Bonus.push_back(new Monedas(92,275)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(1710,226)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(2420,310)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(3295,91)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(4191,372)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(4825,298)); scene->addItem(Bonus.back());
-//    Bonus.push_back(new Monedas(5401,43)); scene->addItem(Bonus.back());
-
     if(datos_juego.getModo()==1){
         scene->addItem(vidas1);
         scene->addItem(puntaje1);
@@ -598,6 +511,7 @@ void Nivel3::on_Inicio_clicked()
         scene->addItem(bars.back());
         ui->Game->centerOn(bars.back());
     }
+    Lose->start(10);
 
 }
 
@@ -621,3 +535,18 @@ void Nivel3::on_Volver_clicked()
     ui->Volver->hide();
 }
 
+
+void Nivel3::on_Siguiente_clicked()
+{
+
+}
+
+void Nivel3::on_Reiniciar_clicked()
+{
+
+}
+
+void Nivel3::on_Salir_clicked()
+{
+
+}
