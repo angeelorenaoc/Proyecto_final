@@ -27,7 +27,7 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ui->pushButton_3->hide();
+    ui->Volver->hide();
     ui->graphicsView->hide();
     ui->graphicsView_2->hide();
 
@@ -276,10 +276,11 @@ void Nivel2::setDatos_partida(const Informacion &value)
     datos_partida = value;
 }
 
-void Nivel2::on_pushButton_clicked()
+
+void Nivel2::on_Iniciar_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
+    ui->Iniciar->hide();
+    ui->Instrucciones->hide();
     ui->graphicsView->show();
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
 
@@ -329,23 +330,22 @@ void Nivel2::on_pushButton_clicked()
     }
 }
 
-void Nivel2::on_pushButton_2_clicked()
+void Nivel2::on_Instrucciones_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
+    ui->Iniciar->hide();
+    ui->Instrucciones->hide();
     ui->graphicsView_2->show();
     this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
-    ui->pushButton_3->show();
-
+    ui->Volver->show();
 }
 
-void Nivel2::on_pushButton_3_clicked()
+void Nivel2::on_Volver_clicked()
 {
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     scene_2->clear();
     ui->graphicsView_2->hide();
-    ui->pushButton->show();
-    ui->pushButton_2->show();
-    ui->pushButton_3->hide();
+    ui->Iniciar->show();
+    ui->Instrucciones->show();
+    ui->Volver->hide();
 }

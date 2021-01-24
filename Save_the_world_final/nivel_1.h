@@ -10,6 +10,8 @@
 #include <QDebug>
 #include <math.h>
 #include <QList>
+#include <QFile>
+#include <QString>
 
 #include "muro.h"
 #include "anuncio.h"

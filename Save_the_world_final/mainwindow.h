@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFile>
+#include <QString>
 
 #include "nivel_1.h"
 #include "nivel2.h"
@@ -21,11 +23,15 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_Botoncontinuar_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_Volver_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_Solitario_clicked();
+
+    void on_Multijugador_clicked();
+
+    void on_CargaPartida_clicked();
 
 private:
     Ui::MainWindow *ui;

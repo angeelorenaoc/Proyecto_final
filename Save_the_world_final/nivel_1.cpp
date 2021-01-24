@@ -1,5 +1,6 @@
 #include "nivel_1.h"
 #include "ui_nivel_1.h"
+#define RUTA_MURO "Muros_N1.txt"
 
 Nivel_1::Nivel_1(QWidget *parent) :
     QMainWindow(parent),
@@ -565,8 +566,30 @@ void Nivel_1::on_pushButton_clicked()
     ui->graphicsView->show();
     scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
 
+    /*QString info;*/                       //String para leer los datos del archivo
+
+    QFile file(RUTA_MURO);           //Objeto para manejar la lectura del archivo
+    file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+
+    QList<QString> dats;
+    int n=0;
+    while (file.atEnd() == false){
+        QString line = file.readLine();
+        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+            n = line.indexOf(" ");
+            if(n!=0){
+                dats.append(line.left(n));
+            }
+            line=line.remove(0,n+1);
+        }
+        muros.push_back(new Muro(dats.at(0).toInt(),dats.at(1).toInt(),dats.at(2).toInt(),dats.at(3).toInt(),dats.at(4).toInt()));scene_1->addItem(muros.back());
+        dats.clear();
+        n = 0;
+    }
+    file.close();
+
     for(int i =0; i <1; i++){
-    muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
+   /* muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
@@ -584,7 +607,7 @@ void Nivel_1::on_pushButton_clicked()
     muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());}
+    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());*/}
 
     if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));

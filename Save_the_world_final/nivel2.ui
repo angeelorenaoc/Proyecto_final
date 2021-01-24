@@ -41,7 +41,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Iniciar">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -58,7 +58,7 @@ background-color: rgb(22, 22, 22);</string>
      <string>Iniciar</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="Instrucciones">
     <property name="geometry">
      <rect>
       <x>350</x>
@@ -75,7 +75,7 @@ background-color: rgb(22, 22, 22);</string>
      <string>Instrucciones</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="Volver">
     <property name="geometry">
      <rect>
       <x>420</x>
@@ -89,7 +89,7 @@ background-color: rgb(22, 22, 22);</string>
 background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
-     <string>Cancelar</string>
+     <string>VOLVER</string>
     </property>
    </widget>
    <widget class="QGraphicsView" name="graphicsView_2">
@@ -104,9 +104,9 @@ background-color: rgb(22, 22, 22);</string>
    </widget>
    <zorder>graphicsView_2</zorder>
    <zorder>graphicsView</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>pushButton_3</zorder>
+   <zorder>Iniciar</zorder>
+   <zorder>Instrucciones</zorder>
+   <zorder>Volver</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

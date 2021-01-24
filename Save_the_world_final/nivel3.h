@@ -13,6 +13,8 @@
 #include <QDebug>
 #include <QTimer>
 #include <QList>
+#include <QFile>
+#include <QString>
 
 #include "muro.h"
 #include "anuncio.h"

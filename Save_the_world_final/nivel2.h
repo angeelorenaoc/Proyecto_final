@@ -9,6 +9,8 @@
 #include <QDebug>
 #include <QTimer>
 #include <QList>
+#include <QFile>
+#include <QString>
 
 #include "anuncio.h"
 #include "personaje.h"
@@ -42,11 +44,11 @@ public slots:
     void move_enemy_jump();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_Iniciar_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_Instrucciones_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_Volver_clicked();
 
 private:
     Ui::Nivel2 *ui;
