@@ -37,11 +37,6 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Salir->hide();
     ui->Siguiente->hide();
 
-    vidas1 = new Anuncio(0,0,0,15,3);
-    vidas2 = new Anuncio(0,1,0,15,3);
-    puntaje1 = new Anuncio(0,0,1,15,3);
-    puntaje2 = new Anuncio(0,1,1,15,3);
-
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
     timere = new QTimer;
@@ -140,7 +135,6 @@ void Nivel3::actualizar()
 {
     for (int i = 0;i < bars.size() ;i++) {
         bars.at(i)->actualizar(v_limit);
-        borderCollision();
         Eliminar_vida();
         Puntos(i);
         if (i == 0){
@@ -176,6 +170,7 @@ void Nivel3::actualizar()
                 bars.pop_back();}
         }
     }
+    borderCollision();
 }
 
 void Nivel3::Puntos(int i)
@@ -240,7 +235,6 @@ void Nivel3::borderCollision()
     }
     for (int i = 0; i < bars.size() ; i++ ) {
         if (bars.at(i)->collidesWithItem(Boton)){
-            qDebug()<<"GG izi";
             ui->Game->hide();
             Bonus.clear();
             Muros.clear();
@@ -249,6 +243,7 @@ void Nivel3::borderCollision()
 
             timer->stop();
             timere->stop();
+            Lose->stop();
 
             ui->Salir->show();
             ui->Siguiente->show();
@@ -321,6 +316,7 @@ void Nivel3::Perder()
 
         timer->stop();
         timere->stop();
+        Lose->stop();
 
         ui->Salir->show();
         ui->Reiniciar->show();
@@ -452,6 +448,11 @@ void Nivel3::on_Inicio_clicked()
     Boton = new Muro(150,250,5850,530,2);
     scene->addItem(Boton);
 
+    vidas1 = new Anuncio(0,0,0,15,3);
+    vidas2 = new Anuncio(0,1,0,15,3);
+    puntaje1 = new Anuncio(0,0,1,15,3);
+    puntaje2 = new Anuncio(0,1,1,15,3);
+
     if(datos_juego.getModo()==1){
         scene->addItem(vidas1);
         scene->addItem(puntaje1);
@@ -535,18 +536,39 @@ void Nivel3::on_Volver_clicked()
     ui->Volver->hide();
 }
 
-
 void Nivel3::on_Siguiente_clicked()
 {
 
+    scene_2->clear();
+    ui->Siguiente->hide();
+    ui->Salir->move(226,600);
+    scene_2->setSceneRect(0,0,547,700);
+    ui->Anuncios->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->Anuncios->show();
+    ui->Anuncios->resize(547,700);
+    this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+    ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Felicitaciones.jpg")));
 }
 
 void Nivel3::on_Reiniciar_clicked()
 {
-
+    this->resize(ui->Game->width(),ui->Game->height());
+    scene_2->clear();
+    ui->Anuncios->hide();
+    ui->Reiniciar->hide();
+    ui->Salir->hide();
+    ui->Inicio->show();
+    ui->Instrucciones->show();
 }
 
 void Nivel3::on_Salir_clicked()
 {
-
+    this->hide();
+    MainWindow *Menu = new MainWindow;
+    Menu->show();
+    this->~Nivel3();
 }

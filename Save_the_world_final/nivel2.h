@@ -20,6 +20,8 @@
 #include "enemigo_normal.h"
 #include "bala_parabolica.h"
 #include "bala_parabolica_graf.h"
+#include "mainwindow.h"
+#include "nivel3.h"
 
 namespace Ui {
 class Nivel2;

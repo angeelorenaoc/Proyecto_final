@@ -335,7 +335,6 @@ void Nivel2::setDatos_partida(const Informacion &value)
     datos_partida = value;
 }
 
-
 void Nivel2::on_Iniciar_clicked()
 {
     ui->Iniciar->hide();
@@ -364,7 +363,7 @@ void Nivel2::on_Iniciar_clicked()
     }
     else{
         Total_enemigos = 60;
-        jugadores.push_back(new Personaje(nullptr,40,540,2));scene->addItem(jugadores.back());
+        jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
         vida = new Anuncio(0,0,0,15,2);
         vida->setPos(710,40);
         scene->addItem(vida);
@@ -374,7 +373,7 @@ void Nivel2::on_Iniciar_clicked()
         velocidad_1 = new Anuncio(0,0,2,10,2);
         velocidad_1->setPos(0,575);
         scene->addItem(velocidad_1);
-        jugadores.push_back(new Personaje(nullptr,40,470,1));scene->addItem(jugadores.back());
+        jugadores.push_back(new Personaje(nullptr,1,2,40,470));scene->addItem(jugadores.back());
         puntaje2 = new Anuncio(0,1,1,16,2);
         puntaje2->setPos(670,470);
         scene->addItem(puntaje2);
@@ -412,15 +411,29 @@ void Nivel2::on_Volver_clicked()
 
 void Nivel2::on_Salir_clicked()
 {
-
+    this->hide();
+    MainWindow *Menu = new MainWindow;
+    Menu->show();
+    this->~Nivel2();
 }
 
 void Nivel2::on_Siguiente_clicked()
 {
-
+    Nivel3 *nivel_3 = new Nivel3;
+    nivel_3->setDatos_juego(this->datos_partida);
+    nivel_3->show();
+    this->~Nivel2();
 }
 
 void Nivel2::on_Reiniciar_clicked()
 {
-
+    N_enemigos=0;
+    Total_enemigos=0;
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    scene_2->clear();
+    ui->graphicsView_2->hide();
+    ui->Reiniciar->hide();
+    ui->Salir->hide();
+    ui->Iniciar->show();
+    ui->Instrucciones->show();
 }

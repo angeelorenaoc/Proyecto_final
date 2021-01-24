@@ -21,6 +21,8 @@
 #include "escudo_graf.h"
 #include "escudos_fisica.h"
 #include "enemigo_normal.h"
+#include "mainwindow.h"
+#include "nivel2.h"
 
 namespace Ui {
 class Nivel_1;
@@ -80,10 +82,10 @@ private:
     int v_limit;
     int N_enemigos=0;
     int N_jugadores=0;
-    int sentido_bala=2;
+    int sentido_bala=4;
     bool inmune = false;
     bool Cooldown = true;
-    int sentido_bala_two=1;
+    int sentido_bala_two=4;
 
     void spawn_shield(Personaje *P);
     bool player_collides(Personaje *P);

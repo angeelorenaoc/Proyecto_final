@@ -11,16 +11,13 @@ MainWindow::MainWindow(QWidget *parent)
 
     datos_partida.setNombre_equipo("Juacho");
     datos_partida.setClave(1234);
-    datos_partida.setModo(1);
-    datos_partida.setPuntaje(0);
-    datos_partida.setSemilla(1);
+
 
     ui->Nombre->hide();
     ui->Clave->hide();
     ui->Botoncontinuar->hide();
     ui->Volver->hide();
     ui->Ingresar->hide();
-
 
 }
 
@@ -54,28 +51,42 @@ void MainWindow::on_Volver_clicked()
 
 void MainWindow::on_Solitario_clicked()
 {
+    datos_partida.setModo(1);
+    datos_partida.setPuntaje(0);
+    datos_partida.setSemilla(1);
+
 //    Nivel_1 *nivel_1 = new Nivel_1;
 //    nivel_1->setDatos_partida_1(this->datos_partida);
 //    nivel_1->show();
-//    this->hide();
+//    this->~MainWindow();
 
 //    Nivel2 *nivel_2 = new Nivel2;
 //    nivel_2->setDatos_partida(this->datos_partida);
 //    nivel_2->show();
-//    this->hide();
+//    this->~MainWindow();
 
     Nivel3 *nivel_3 = new Nivel3;
     nivel_3->setDatos_juego(this->datos_partida);
     nivel_3->show();
-    this->hide();
+    this->~MainWindow();
 }
 
 void MainWindow::on_Multijugador_clicked()
 {
+    datos_partida.setModo(2);
+    datos_partida.setPuntaje(0);
+    datos_partida.setSemilla(1);
 
-    //    datos_partida.setModo(2);
-    //    datos_partida.setPuntaje(0);
-    //    datos_partida.setSemilla(1);
+//    Nivel_1 *nivel_1 = new Nivel_1;
+//    nivel_1->setDatos_partida_1(this->datos_partida);
+//    nivel_1->show();
+//    this->~MainWindow();
+
+    Nivel3 *nivel_3 = new Nivel3;
+    nivel_3->setDatos_juego(this->datos_partida);
+    nivel_3->show();
+    this->~MainWindow();
+
 }
 
 void MainWindow::on_CargaPartida_clicked()

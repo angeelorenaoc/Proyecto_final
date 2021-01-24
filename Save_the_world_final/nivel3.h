@@ -24,6 +24,7 @@
 #include "enemigo_graf.h"
 #include "personaje3graf.h"
 #include "enemigo_fisica.h"
+#include "mainwindow.h"
 
 namespace Ui {
 class Nivel3;

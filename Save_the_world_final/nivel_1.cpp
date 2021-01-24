@@ -494,6 +494,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel1.jpg")));
         ui->Salir->show();
+        ui->Reiniciar->show();
         ui->Anuncios->show();
 
         scene_1->clear();
@@ -724,15 +725,32 @@ void Nivel_1::on_Volver_clicked()
 
 void Nivel_1::on_Reiniciar_clicked()
 {
-
+    N_enemigos=0;
+    N_jugadores=0;
+    sentido_bala=4;
+    sentido_bala_two=4;
+    inmune = false;
+    Cooldown = true;
+    this->resize(ui->Game->width(),ui->Game->height());
+    scene_2->clear();
+    ui->Anuncios->hide();
+    ui->Reiniciar->hide();
+    ui->Inicio->show();
+    ui->Instrucciones->show();
 }
 
 void Nivel_1::on_Siguiente_nivel_clicked()
 {
-
+    Nivel2 *nivel_2 = new Nivel2;
+    nivel_2->setDatos_partida(this->datos_partida_1);
+    nivel_2->show();
+    this->~Nivel_1();
 }
 
 void Nivel_1::on_Salir_clicked()
 {
-
+    this->hide();
+    MainWindow *Menu = new MainWindow;
+    Menu->show();
+    this->~Nivel_1();
 }
