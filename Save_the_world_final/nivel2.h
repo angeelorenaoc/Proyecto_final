@@ -42,6 +42,7 @@ public slots:
     void move_enemy();
     void spawn_jump();
     void move_enemy_jump();
+    void victory();
 
 private slots:
     void on_Iniciar_clicked();
@@ -49,6 +50,12 @@ private slots:
     void on_Instrucciones_clicked();
 
     void on_Volver_clicked();
+
+    void on_Salir_clicked();
+
+    void on_Siguiente_clicked();
+
+    void on_Reiniciar_clicked();
 
 private:
     Ui::Nivel2 *ui;
@@ -67,6 +74,7 @@ private:
     QTimer *mover_enemigos;
     QTimer *crear_enemigos_s;
     QTimer *mover_enemigos_s;
+    QTimer *win;
 
     void keyPressEvent(QKeyEvent * event);
     void borderCollision(int i);

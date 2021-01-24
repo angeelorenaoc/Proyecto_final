@@ -102,11 +102,65 @@ background-color: rgb(22, 22, 22);</string>
      </rect>
     </property>
    </widget>
+   <widget class="QPushButton" name="Salir">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>510</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>SALIR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Reiniciar">
+    <property name="geometry">
+     <rect>
+      <x>710</x>
+      <y>530</y>
+      <width>80</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>REINICIAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Siguiente">
+    <property name="geometry">
+     <rect>
+      <x>689</x>
+      <y>530</y>
+      <width>101</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>SIGUIENTE NIVEL</string>
+    </property>
+   </widget>
    <zorder>graphicsView_2</zorder>
    <zorder>graphicsView</zorder>
    <zorder>Iniciar</zorder>
    <zorder>Instrucciones</zorder>
    <zorder>Volver</zorder>
+   <zorder>Salir</zorder>
+   <zorder>Reiniciar</zorder>
+   <zorder>Siguiente</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -114,7 +168,7 @@ background-color: rgb(22, 22, 22);</string>
      <x>0</x>
      <y>0</y>
      <width>905</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

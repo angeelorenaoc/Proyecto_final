@@ -31,7 +31,7 @@
    </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QGraphicsView" name="Game">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -41,7 +41,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="Inicio">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -58,7 +58,7 @@ background-color: rgb(22, 22, 22);</string>
      <string>Inicio</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="Instrucciones">
     <property name="geometry">
      <rect>
       <x>370</x>
@@ -75,7 +75,7 @@ background-color: rgb(22, 22, 22);</string>
      <string>Instrucciones</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="Volver">
     <property name="geometry">
      <rect>
       <x>380</x>
@@ -89,10 +89,10 @@ background-color: rgb(22, 22, 22);</string>
 background-color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
-     <string>Cancel</string>
+     <string>Volver</string>
     </property>
    </widget>
-   <widget class="QGraphicsView" name="graphicsView_2">
+   <widget class="QGraphicsView" name="Anuncios">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -102,11 +102,11 @@ background-color: rgb(0, 0, 0);</string>
      </rect>
     </property>
    </widget>
-   <zorder>graphicsView</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>pushButton_2</zorder>
-   <zorder>graphicsView_2</zorder>
-   <zorder>pushButton_3</zorder>
+   <zorder>Game</zorder>
+   <zorder>Anuncios</zorder>
+   <zorder>Inicio</zorder>
+   <zorder>Instrucciones</zorder>
+   <zorder>Volver</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -114,7 +114,7 @@ background-color: rgb(0, 0, 0);</string>
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
   </widget>

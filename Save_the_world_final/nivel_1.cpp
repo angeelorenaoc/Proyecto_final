@@ -13,28 +13,29 @@ Nivel_1::Nivel_1(QWidget *parent) :
     v_limit = 642;
 
     scene_1->setSceneRect(0,0,h_limit,v_limit);
-    ui->graphicsView->setScene(scene_1);
+    ui->Game->setScene(scene_1);
     ui->centralwidget->adjustSize();
     scene_1->addRect(scene_1->sceneRect());
-    ui->graphicsView->resize(800,600);
-    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Game->resize(800,600);
+    this->resize(ui->Game->width(),ui->Game->height());
+    ui->Game->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Game->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
     scene_2->setSceneRect(0,0,700,700);
-    ui->graphicsView_2->setScene(scene_2);
+    ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
     scene_2->addRect(scene_2->sceneRect());
-    ui->graphicsView_2->resize(700,700);
-    ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Anuncios->resize(700,700);
+    ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ui->graphicsView->hide();
-    ui->graphicsView_2->hide();
-    ui->pushButton_3->hide();
-    ui->pushButton_4->hide();
-    ui->pushButton_6->hide();
+    ui->Game->hide();
+    ui->Anuncios->hide();
+    ui->Volver->hide();
+    ui->Siguiente_nivel->hide();
+    ui->Anuncios->hide();
+    ui->Reiniciar->hide();
 
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
@@ -83,7 +84,6 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 if(player_collides(player))
                     player->right();
 
-                ui->graphicsView->centerOn(player->x(),player->y());
                 sentido_bala=1;
             }
             if(event->key() == Qt::Key_D){
@@ -91,7 +91,6 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 if(player_collides(player))
                     player->left();
 
-                ui->graphicsView->centerOn(player->x(),player->y());
                 sentido_bala=2;
             }
             if(event->key() == Qt::Key_W){
@@ -99,7 +98,6 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 if(player_collides(player))
                     player->down();
 
-                ui->graphicsView->centerOn(player->x(),player->y());
                 sentido_bala=3;
             }
             if(event->key() == Qt::Key_S){
@@ -107,7 +105,6 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 if(player_collides(player))
                     player->up();
 
-                ui->graphicsView->centerOn(player->x(),player->y());
                 sentido_bala=4;
             }
             if(event->key() == Qt::Key_Space){
@@ -120,6 +117,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 if(Cooldown)
                     spawn_shield(player);
             }
+            ui->Game->centerOn(player->x(),player->y());
             vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
             vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
 //            qDebug()<<vida_J1->x()<<vida_J1->y();
@@ -137,32 +135,24 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     player->left();
                     if(player_collides(player))
                         player->right();
-
-                    ui->graphicsView->centerOn(player->x(),player->y());
                     sentido_bala=1;
                 }
                 if(event->key() == Qt::Key_D){
                     player->right();
                     if(player_collides(player))
                         player->left();
-
-                    ui->graphicsView->centerOn(player->x(),player->y());
                     sentido_bala=2;
                 }
                 if(event->key() == Qt::Key_W){
                     player->up();
                     if(player_collides(player))
                         player->down();
-
-                    ui->graphicsView->centerOn(player->x(),player->y());
                     sentido_bala=3;
                 }
                 if(event->key() == Qt::Key_S){
                     player->down();
                     if(player_collides(player))
                         player->up();
-
-                    ui->graphicsView->centerOn(player->x(),player->y());
                     sentido_bala=4;
                 }
                 if(event->key() == Qt::Key_Space){
@@ -175,6 +165,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     if(Cooldown)
                         spawn_shield(player);
                 }
+                ui->Game->centerOn(player->x(),player->y());
                 vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
                 vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
             }
@@ -186,7 +177,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
             }
             else{
                 player_two = jugadores.at(0);
-                ui->graphicsView->centerOn(player_two->x(),player_two->y());
+                ui->Game->centerOn(player_two->x(),player_two->y());
             }
             if(vida_J2->getAnuncio()>0){
                 if(event->key()== Qt::Key_J){
@@ -233,6 +224,64 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
 
             }
         }
+    }
+    if(enemigos.size()==0 && enemy_timer->isActive()==false){
+        if(vida_J1->getAnuncio()>0){
+           ui->Game->hide();
+
+
+           jugadores.clear();
+           muros.clear();
+           escudos.clear();
+           disparos.clear();
+
+           shield->stop();
+           timer_move->stop();
+           enemy_timer->stop();
+           bullet_timer->stop();
+           Cooldown_timer->stop();
+           tiempo_de_habilidad->stop();
+           scene_2->clear();
+           ui->Anuncios->show();
+           ui->Anuncios->resize(467,700);
+           this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+           ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+           ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+           scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
+           ui->Salir->show();
+           ui->Siguiente_nivel->show();
+
+           scene_1->clear();
+        }
+
+        else if(N_jugadores==2){
+            if(vida_J2->getAnuncio()>0){
+                ui->Game->hide();
+                scene_1->clear();
+
+                muros.clear();
+                escudos.clear();
+                enemigos.clear();
+                disparos.clear();
+
+                shield->stop();
+                timer_move->stop();
+                enemy_timer->stop();
+                bullet_timer->stop();
+                Cooldown_timer->stop();
+                tiempo_de_habilidad->stop();
+
+                scene_2->clear();
+                ui->Anuncios->show();
+                ui->Anuncios->resize(467,700);
+                this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+                ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
+                ui->Salir->show();
+                ui->Siguiente_nivel->show();
+            }
+    }
     }
 }
 
@@ -422,18 +471,8 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         }
     }
     if(jugadores.size()<=0){
-        for(int i=0;i<muros.size();i++){
-            scene_1->removeItem(muros.at(i));
-        }
-        for(int i=0;i<escudos.size();i++){
-            scene_1->removeItem(escudos.at(i));
-        }
-        for(int i=0;i<enemigos.size();i++){
-            scene_1->removeItem(enemigos.at(i));
-        }
-        for(int i=0;i<disparos.size();i++){
-            scene_1->removeItem(disparos.at(i));
-        }
+
+
         muros.clear();
         escudos.clear();
         enemigos.clear();
@@ -446,16 +485,18 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         Cooldown_timer->stop();
         tiempo_de_habilidad->stop();
         qDebug()<<"YOU LOSE";
-        ui->graphicsView->hide();
+        ui->Game->hide();
         scene_2->clear();
-        ui->graphicsView_2->show();
-        ui->graphicsView_2->resize(467,700);
-        this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
-        ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-        ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->Anuncios->show();
+        ui->Anuncios->resize(467,700);
+        this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+        ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel1.jpg")));
-        ui->pushButton_5->show();
-        ui->pushButton_6->show();
+        ui->Salir->show();
+        ui->Anuncios->show();
+
+        scene_1->clear();
     }
 }
 
@@ -558,12 +599,12 @@ void Nivel_1::setDatos_partida_1(const Informacion &value)
     datos_partida_1 = value;
 }
 
-void Nivel_1::on_pushButton_clicked()
+void Nivel_1::on_Inicio_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
-    ui->pushButton_5->hide();
-    ui->graphicsView->show();
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
+    ui->Salir->hide();
+    ui->Game->show();
     scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
 
     /*QString info;*/                       //String para leer los datos del archivo
@@ -613,7 +654,7 @@ void Nivel_1::on_pushButton_clicked()
         jugadores.push_back(new Personaje(0,0,1,490,400));
         scene_1->addItem(jugadores.back());
         N_jugadores++;
-        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+        ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 
         vida_J1 = new Anuncio(0,0,0,10,1);
         vida_J1->setPx(470); vida_J1->setPy(420);
@@ -633,7 +674,7 @@ void Nivel_1::on_pushButton_clicked()
         jugadores.push_back(new Personaje(0,0,1,470,400));
         scene_1->addItem(jugadores.back());
         N_jugadores++;
-        ui->graphicsView->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
+        ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
         vida_J1 = new Anuncio(0,0,0,10);
         vida_J1->setPx(470); vida_J1->setPy(420);
         scene_1->addItem(vida_J1);
@@ -660,38 +701,38 @@ void Nivel_1::on_pushButton_clicked()
     }
 }
 
-void Nivel_1::on_pushButton_2_clicked()
+void Nivel_1::on_Instrucciones_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
-    ui->pushButton_4->hide();
-    ui->graphicsView_2->show();
-    this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
+    ui->Siguiente_nivel->hide();
+    ui->Anuncios->show();
+    this->resize(ui->Anuncios->width(),ui->Anuncios->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
-    ui->pushButton_3->show();
+    ui->Volver->show();
 }
 
-void Nivel_1::on_pushButton_3_clicked()
+void Nivel_1::on_Volver_clicked()
 {
-    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
-    ui->graphicsView_2->hide();
-    ui->pushButton->show();
-    ui->pushButton_2->show();
-    ui->pushButton_3->hide();
+    ui->Anuncios->hide();
+    ui->Inicio->show();
+    ui->Instrucciones->show();
+    ui->Volver->hide();
 }
 
-void Nivel_1::on_pushButton_6_clicked()
+void Nivel_1::on_Reiniciar_clicked()
 {
 
 }
 
-void Nivel_1::on_pushButton_4_clicked()
+void Nivel_1::on_Siguiente_nivel_clicked()
 {
 
 }
 
-void Nivel_1::on_pushButton_5_clicked()
+void Nivel_1::on_Salir_clicked()
 {
 
 }

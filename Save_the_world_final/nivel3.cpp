@@ -14,25 +14,25 @@ Nivel3::Nivel3(QWidget *parent) :
     v_limit = 650;
 
     scene->setSceneRect(0,0,h_limit,v_limit);
-    ui->graphicsView->setScene(scene);
+    ui->Game->setScene(scene);
     ui->centralwidget->adjustSize();
     scene->addRect(scene->sceneRect());
-    ui->graphicsView->resize(1000,650);
-    ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Game->resize(1000,650);
+    ui->Game->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Game->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("Nivel3 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
     scene_2->setSceneRect(0,0,700,700);
-    ui->graphicsView_2->setScene(scene_2);
+    ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
     scene_2->addRect(scene_2->sceneRect());
-    ui->graphicsView_2->resize(700,700);
-    ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Anuncios->resize(700,700);
+    ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
-    ui->pushButton_3->hide();
-    ui->graphicsView->hide();
-    ui->graphicsView_2->hide();
+    ui->Volver->hide();
+    ui->Game->hide();
+    ui->Anuncios->hide();
 
     vidas1 = new Anuncio(0,0,0,15,3);
     vidas2 = new Anuncio(0,1,0,15,3);
@@ -62,17 +62,17 @@ void Nivel3:: keyPressEvent(QKeyEvent *event)
             if(event->key()== Qt::Key_A){
                 player->set_vel(-15,player->getVy(),player->getPx(),player->getPy());
                 bars.at(0)->setFilas(0);
-                ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                ui->Game->centerOn(player->getPx(),player->getPy());
             }
             if(event->key() == Qt::Key_D){
                 player->set_vel(15,player->getVy(),player->getPx(),player->getPy());
                 bars.at(0)->setFilas(76);
-                ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                ui->Game->centerOn(player->getPx(),player->getPy());
 
             }
             if(event->key() == Qt::Key_W){
                 player->set_vel(player->getVx(),40,player->getPx(),player->getPy());
-                ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                ui->Game->centerOn(player->getPx(),player->getPy());
             }
         }
     }
@@ -87,16 +87,16 @@ void Nivel3:: keyPressEvent(QKeyEvent *event)
                 if(event->key()== Qt::Key_A){
                     player->set_vel(-15,player->getVy(),player->getPx(),player->getPy());
                     bars.at(0)->setFilas(0);
-                    ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                    ui->Game->centerOn(player->getPx(),player->getPy());
                 }
                 if(event->key() == Qt::Key_D){
                     player->set_vel(15,player->getVy(),player->getPx(),player->getPy());
                     bars.at(0)->setFilas(76);
-                    ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                    ui->Game->centerOn(player->getPx(),player->getPy());
                 }
                 if(event->key() == Qt::Key_W){
                     player->set_vel(player->getVx(),40,player->getPx(),player->getPy());
-                    ui->graphicsView->centerOn(player->getPx(),player->getPy());
+                    ui->Game->centerOn(player->getPx(),player->getPy());
                 }
             }
 
@@ -114,14 +114,14 @@ void Nivel3:: keyPressEvent(QKeyEvent *event)
                     player_two->set_vel(-15,player_two->getVy(),player_two->getPx(),player_two->getPy());
                     if (vidas1->getAnuncio() > 0){bars.at(1)->setFilas(0);}
                     else {bars.at(0)->setFilas(0);
-                        ui->graphicsView->centerOn(player_two->getPx(),player_two->getPy());}
+                        ui->Game->centerOn(player_two->getPx(),player_two->getPy());}
                 }
                 if(event->key() == Qt::Key_L){
                     player_two->set_vel(15,player_two->getVy(),player_two->getPx(),player_two->getPy());
                     if (vidas1->getAnuncio() > 0){bars.at(1)->setFilas(76);}
 
                     else {bars.at(0)->setFilas(76);
-                        ui->graphicsView->centerOn(player_two->getPx(),player_two->getPy());}
+                        ui->Game->centerOn(player_two->getPx(),player_two->getPy());}
                 }
                 if(event->key() == Qt::Key_I){
                     player_two->set_vel(player_two->getVx(),40,player_two->getPx(),player_two->getPy());
@@ -334,13 +334,13 @@ void Nivel3::setDatos_juego(const Informacion &value)
     datos_juego = value;
 }
 
-void Nivel3::on_pushButton_clicked()
+void Nivel3::on_Inicio_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
-    ui->graphicsView->show();
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
+    ui->Game->show();
 
-    this->resize(ui->graphicsView->width(),ui->graphicsView->height()+25);
+    this->resize(ui->Game->width(),ui->Game->height()+25);
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
 
     QFile file(RUTA_MURO3);           //Objeto para manejar la lectura del archivo
@@ -561,7 +561,7 @@ void Nivel3::on_pushButton_clicked()
         bars.back()->setFocus();
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
+        ui->Game->centerOn(bars.back());
         timer->start(3);
         timere->start(50);
     }
@@ -592,31 +592,32 @@ void Nivel3::on_pushButton_clicked()
         bars.push_back((new Personaje3graf));
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
+        ui->Game->centerOn(bars.back());
         bars.push_back((new Personaje3graf(0,1)));
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
-        ui->graphicsView->centerOn(bars.back());
+        ui->Game->centerOn(bars.back());
     }
 
 }
 
-void Nivel3::on_pushButton_2_clicked()
+void Nivel3::on_Instrucciones_clicked()
 {
-    ui->pushButton->hide();
-    ui->pushButton_2->hide();
-    ui->graphicsView_2->show();
-    this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
-    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones3.jpg")));
-    ui->pushButton_3->show();
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
+    ui->Anuncios->show();
+    this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Anuncios3.jpg")));
+    ui->Volver->show();
 }
 
-void Nivel3::on_pushButton_3_clicked()
+void Nivel3::on_Volver_clicked()
 {
-    ui->pushButton->show();
-    ui->pushButton_2->show();
-    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    ui->Inicio->show();
+    ui->Instrucciones->show();
+    this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
-    ui->graphicsView_2->hide();
-    ui->pushButton_3->hide();
+    ui->Anuncios->hide();
+    ui->Volver->hide();
 }
+

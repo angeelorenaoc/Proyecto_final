@@ -45,11 +45,11 @@ public slots:
     void Movimiento_Enemigo();
 
 private slots:
-    void on_pushButton_clicked();
+    void on_Inicio_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_Instrucciones_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_Volver_clicked();
 
 private:
     Ui::Nivel3 *ui;

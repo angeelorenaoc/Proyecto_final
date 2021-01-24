@@ -49,17 +49,18 @@ public slots:
     void estado_de_habilidad();
 
 private slots:
-    void on_pushButton_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_Inicio_clicked();
 
-    void on_pushButton_3_clicked();
+    void on_Instrucciones_clicked();
 
-    void on_pushButton_6_clicked();
+    void on_Volver_clicked();
 
-    void on_pushButton_4_clicked();
+    void on_Siguiente_nivel_clicked();
 
-    void on_pushButton_5_clicked();
+    void on_Reiniciar_clicked();
+
+    void on_Salir_clicked();
 
 private:
     Ui::Nivel_1 *ui;

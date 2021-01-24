@@ -30,6 +30,9 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->Volver->hide();
     ui->graphicsView->hide();
     ui->graphicsView_2->hide();
+    ui->Salir->hide();
+    ui->Siguiente->hide();
+    ui->Reiniciar->hide();
 
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
@@ -45,6 +48,9 @@ Nivel2::Nivel2(QWidget *parent) :
 
     mover_enemigos_s = new QTimer;
     connect(mover_enemigos_s,SIGNAL(timeout()),this,SLOT(move_enemy_jump()));
+
+    win = new QTimer;
+    connect(win,SIGNAL(timeout()),this,SLOT(victory()));
 }
 
 Nivel2::~Nivel2()
@@ -178,7 +184,7 @@ void Nivel2::move_enemy()
                 }
                 for(int i=0;i<enemigos.size();i++){scene->removeItem(enemigos.at(i));} enemigos.clear();
                 for(int i=0;i<enemigos_s.size();i++){scene->removeItem(enemigos_s.at(i));} enemigos_s.clear();
-                for(int i=0;i<balas.size();i++){scene->removeItem(balas.at(i));} balas.clear();
+                for(int i=0;i<balas.size();i++){scene->removeItem(balas.at(i));} balas.clear();                
                 timer->stop();
                 crear_enemigos->stop();
                 mover_enemigos->stop();
@@ -206,6 +212,33 @@ void Nivel2::move_enemy_jump()
         enemigos_s.at(i)->actualizar(v_limit);
         enemigos_s.at(i)->Actualizacion();
         borderCollision(i);
+    }
+}
+
+void Nivel2::victory()
+{
+    if(enemigos.size()==0 && enemigos_s.size()==0 && crear_enemigos->isActive()==false && crear_enemigos_s->isActive()==false){
+        balas.clear();
+        enemigos_s.clear();
+        enemigos.clear();
+        jugadores.clear();
+
+        timer->stop();
+        crear_enemigos->stop();
+        mover_enemigos->stop();
+        crear_enemigos_s->stop();
+        mover_enemigos_s->stop();
+        win->stop();
+
+        ui->graphicsView->hide();
+        ui->graphicsView_2->show();
+        ui->graphicsView_2->resize(467,700);
+        this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
+        ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel2.jpg")));
+
+        scene->clear();
     }
 }
 
@@ -348,4 +381,19 @@ void Nivel2::on_Volver_clicked()
     ui->Iniciar->show();
     ui->Instrucciones->show();
     ui->Volver->hide();
+}
+
+void Nivel2::on_Salir_clicked()
+{
+
+}
+
+void Nivel2::on_Siguiente_clicked()
+{
+
+}
+
+void Nivel2::on_Reiniciar_clicked()
+{
+
 }
