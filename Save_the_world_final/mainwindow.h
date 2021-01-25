@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QFile>
+#include <QMessageBox>
 #include <QString>
+#include <QFile>
 
 #include "nivel_1.h"
 #include "nivel2.h"
@@ -22,6 +23,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    int Find(string Nombre, string Clave);
+
 private slots:
     void on_Botoncontinuar_clicked();
 
@@ -33,9 +36,15 @@ private slots:
 
     void on_CargaPartida_clicked();
 
+    void on_Botoncontinuar_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 
-    Informacion datos_partida;
+    Informacion datos_partida;       
+
+    QList<QString> datos;
+
+    QMessageBox msgBox;
 };
 #endif // MAINWINDOW_H

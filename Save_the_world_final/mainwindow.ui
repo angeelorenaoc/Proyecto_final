@@ -215,6 +215,23 @@ background-color: rgb(0, 0, 0);</string>
      <string>INGRESA TUS DATOS</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="Botoncontinuar_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>440</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CONTINUAR</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
