@@ -78,8 +78,8 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Volver">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>710</y>
+      <x>310</x>
+      <y>620</y>
       <width>81</width>
       <height>31</height>
      </rect>
@@ -118,11 +118,15 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Salir">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>630</y>
+      <x>400</x>
+      <y>620</y>
       <width>75</width>
-      <height>23</height>
+      <height>31</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>SALIR</string>

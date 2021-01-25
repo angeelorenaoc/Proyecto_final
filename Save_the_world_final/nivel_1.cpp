@@ -724,6 +724,7 @@ void Nivel_1::on_Instrucciones_clicked()
     ui->Inicio->hide();
     ui->Instrucciones->hide();
     ui->Siguiente_nivel->hide();
+    ui->Volver->show();
     ui->Anuncios->show();
     this->resize(ui->Anuncios->width(),ui->Anuncios->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
@@ -785,13 +786,12 @@ void Nivel_1::on_Siguiente_nivel_clicked()
         QString modo = datos.at(2);
         QString semilla = datos.at(3);
         QString puntaje = datos.at(4);
+        QTextStream out(&filer);
         if(Name == Nombre){
-            QTextStream out(&filer);
             out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
         }
-        else{
-            QTextStream out(&filer);
-            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+        else{        
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
         }
         datos.clear();
         n = 0;
@@ -844,7 +844,7 @@ void Nivel_1::on_Salir_clicked()
             }
             else{
                 QTextStream out(&filer);
-                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
             }
             datos.clear();
             n = 0;

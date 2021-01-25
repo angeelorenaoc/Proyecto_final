@@ -37,9 +37,9 @@
    <widget class="QPushButton" name="Solitario">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>310</y>
-      <width>211</width>
+      <x>280</x>
+      <y>240</y>
+      <width>231</width>
       <height>61</height>
      </rect>
     </property>
@@ -60,9 +60,9 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Multijugador">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>380</y>
-      <width>211</width>
+      <x>280</x>
+      <y>310</y>
+      <width>231</width>
       <height>61</height>
      </rect>
     </property>
@@ -83,9 +83,9 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="CargaPartida">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>450</y>
-      <width>211</width>
+      <x>280</x>
+      <y>380</y>
+      <width>231</width>
       <height>61</height>
      </rect>
     </property>
@@ -107,7 +107,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>160</x>
-      <y>220</y>
+      <y>150</y>
       <width>481</width>
       <height>81</height>
      </rect>
@@ -129,7 +129,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>320</y>
+      <y>250</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -147,7 +147,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>380</y>
+      <y>310</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -163,7 +163,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>440</y>
+      <y>370</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -197,7 +197,7 @@ background-color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>210</x>
-      <y>220</y>
+      <y>150</y>
       <width>391</width>
       <height>71</height>
      </rect>
@@ -219,7 +219,7 @@ background-color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>440</y>
+      <y>370</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -230,6 +230,46 @@ background-color: rgb(0, 0, 0);</string>
     </property>
     <property name="text">
      <string>CONTINUAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Eliminar">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>450</y>
+      <width>231</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Kristen ITC</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>ELIMINAR PARTIDA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Confirmar">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>370</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CONFIRMAR</string>
     </property>
    </widget>
   </widget>

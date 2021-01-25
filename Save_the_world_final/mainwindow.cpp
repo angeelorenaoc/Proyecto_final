@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #define RUTA_FICHEROS "Ficheros.txt"
+#define FICHEROS_RESPALDO "Respaldo.txt"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -16,6 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Volver->hide();
     ui->Ingresar->hide();
     ui->Botoncontinuar_2->hide();
+    ui->Confirmar->hide();
 
 }
 
@@ -65,15 +67,13 @@ void MainWindow::on_Botoncontinuar_clicked()
 {
     string Nombre = ui->Nombre->text().toStdString();
     string Clave = ui->Clave->text().toStdString();
-
-
     if(Find(Nombre,Clave)==2){
         datos_partida.setNombre_equipo(datos.at(0).toStdString());
         datos_partida.setClave(datos.at(1).toInt());
         datos_partida.setModo(datos.at(2).toInt());
         datos_partida.setSemilla(datos.at(3).toInt());
         datos_partida.setPuntaje(datos.at(4).toInt());
-//        qDebug()<<datos_partida.getClave() << datos_partida.getModo() << datos_partida.getSemilla() << datos_partida.getPuntaje();
+
         if(datos_partida.getSemilla()==1){
             Nivel_1 *nivel_1 = new Nivel_1;
             nivel_1->setDatos_partida_1(this->datos_partida);
@@ -96,6 +96,8 @@ void MainWindow::on_Botoncontinuar_clicked()
     else{
         msgBox.setText("El usuario no existe. Verifique usuario y contraseña");
         msgBox.exec();
+        ui->Nombre->clear();
+        ui->Clave->clear();
     }
 }
 
@@ -110,6 +112,11 @@ void MainWindow::on_Volver_clicked()
     ui->Multijugador->show();
     ui->CargaPartida->show();
     ui->Seleccionar->show();
+    ui->Botoncontinuar_2->hide();
+    ui->Confirmar->hide();
+    ui->Eliminar->show();
+    ui->Nombre->clear();
+    ui->Clave->clear();
 
 }
 
@@ -121,6 +128,8 @@ void MainWindow::on_Solitario_clicked()
     ui->Nombre->show();
     ui->Clave->show();
     ui->Botoncontinuar_2->show();
+    ui->Eliminar->hide();
+    ui->Volver->show();
 
     datos_partida.setModo(1);
 }
@@ -133,6 +142,8 @@ void MainWindow::on_Multijugador_clicked()
     ui->Nombre->show();
     ui->Clave->show();
     ui->Botoncontinuar_2->show();
+    ui->Eliminar->hide();
+    ui->Volver->show();
 
     datos_partida.setModo(2);
 }
@@ -148,18 +159,20 @@ void MainWindow::on_CargaPartida_clicked()
     ui->Nombre->show();
     ui->Clave->show();
     ui->Botoncontinuar->show();
+    ui->Eliminar->hide();
 }
 
 void MainWindow::on_Botoncontinuar_2_clicked()
 {
     QString Nombre = ui->Nombre->text();
-    QString Clave = ui->Clave->text();
+    QString Clave = ui->Clave->text();    
 
     if(Find(Nombre.toStdString(),Clave.toStdString())==1 || Find(Nombre.toStdString(),Clave.toStdString())==2){
         msgBox.setText("El usuario ya existe, intente con otro nombre");
         msgBox.exec();
     }
-    else{
+
+    else if(Nombre.indexOf(" ")==-1){
         QFile file(RUTA_FICHEROS);
         file.open(QIODevice::WriteOnly | QIODevice::Text |QIODevice::Append);
 
@@ -176,4 +189,86 @@ void MainWindow::on_Botoncontinuar_2_clicked()
         nivel_1->show();
         this->~MainWindow();
     }
+    else{
+        msgBox.setText("Favor no utilizar espacios en el nombre.");
+        msgBox.exec();
+    }
+    ui->Nombre->clear();
+    ui->Clave->clear();
+}
+
+void MainWindow::on_Eliminar_clicked()
+{
+    ui->Seleccionar->hide();
+    ui->Solitario->hide();
+    ui->Multijugador->hide();
+    ui->CargaPartida->hide();
+    ui->Ingresar->show();
+    ui->Volver->show();
+    ui->Nombre->show();
+    ui->Clave->show();
+    ui->Confirmar->show();
+    ui->Eliminar->hide();
+}
+
+void MainWindow::on_Confirmar_clicked()
+{
+    QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
+    file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+    QList <QString> datos;
+
+    QFile filer(FICHEROS_RESPALDO);
+    filer.open(QIODevice::WriteOnly);
+
+    QString Nombre = ui->Nombre->text();
+    QString Clave = ui->Clave->text();
+
+    int n=0;
+    bool Found=false;
+    while (file.atEnd() == false){
+        QString line = file.readLine();
+        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+            n = line.indexOf(" ");
+            if(n!=0){
+                datos.append(line.left(n));
+            }
+            line=line.remove(0,n+1);
+        }
+        QString Name = datos.at(0);
+        QString Password = datos.at(1);
+        QString modo = datos.at(2);
+        QString semilla = datos.at(3);
+        QString puntaje = datos.at(4);
+        QTextStream out(&filer);
+        if(Name != Nombre){
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
+        }
+        else{
+            if(Clave != Password){
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
+                msgBox.setText("Contraseña incorrecta.");
+                msgBox.exec();
+                Found = true;
+            }
+            else{
+                msgBox.setText("Usuario elimindado con exito.");
+                msgBox.exec();
+                Found = true;
+            }
+        }
+        datos.clear();
+        n = 0;
+    }
+    if(!Found){
+        msgBox.setText("Usuario no encontrado. Verificar usuario y contraseña");
+        msgBox.exec();
+    }
+    ui->Nombre->clear();
+    ui->Clave->clear();
+        filer.flush();
+        filer.close();
+        file.close();
+        file.remove();
+        filer.rename(RUTA_FICHEROS);
+
 }

@@ -38,6 +38,10 @@ private slots:
 
     void on_Botoncontinuar_2_clicked();
 
+    void on_Eliminar_clicked();
+
+    void on_Confirmar_clicked();
+
 private:
     Ui::MainWindow *ui;
 

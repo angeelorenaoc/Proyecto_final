@@ -605,7 +605,7 @@ void Nivel3::on_Salir_clicked()
             }
             else{
                 QTextStream out(&filer);
-                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
             }
             datos.clear();
             n = 0;
@@ -635,8 +635,6 @@ void Nivel3::on_Volver_jugar_clicked()
     QString Nombre = QString::fromStdString(datos_juego.getNombre_equipo());
     QString Clave = QString::number(datos_juego.getClave());
     QString Modo= QString::number(datos_juego.getModo());
-    QString Semilla = QString::number(datos_juego.getSemilla());
-    QString Puntaje = QString::number(datos_juego.getPuntaje());
 
     int n=0;
     while (file.atEnd() == false){
@@ -655,11 +653,11 @@ void Nivel3::on_Volver_jugar_clicked()
         QString puntaje = datos.at(4);
         if(Name == Nombre){
             QTextStream out(&filer);
-            out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
+            out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<"1"<<" "<<"0"<<"\n";
         }
         else{
             QTextStream out(&filer);
-            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
         }
         datos.clear();
         n = 0;

@@ -454,7 +454,7 @@ void Nivel2::on_Salir_clicked()
             }
             else{
                 QTextStream out(&filer);
-                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
             }
             datos.clear();
             n = 0;
@@ -507,7 +507,7 @@ void Nivel2::on_Siguiente_clicked()
         }
         else{
             QTextStream out(&filer);
-            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje;
         }
         datos.clear();
         n = 0;
