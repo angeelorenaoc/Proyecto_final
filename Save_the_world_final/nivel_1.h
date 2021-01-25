@@ -49,6 +49,7 @@ public slots:
     void delete_escudos();
     void actualizar_escudos();
     void estado_de_habilidad();
+    void Verificacion_Ganar();
 
 private slots:
 
@@ -76,10 +77,12 @@ private:
     QTimer *Cooldown_timer;
     QTimer *tiempo_de_habilidad;
     QTimer *tiempo_inmunidad;
+    QTimer *Ganar;
 
     float dt;
     int h_limit;
     int v_limit;
+    int puntaje_total = 0;
     int N_enemigos=0;
     int N_jugadores=0;
     int sentido_bala=4;

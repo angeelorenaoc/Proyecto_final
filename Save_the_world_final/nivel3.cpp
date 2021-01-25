@@ -2,6 +2,8 @@
 #include "ui_nivel3.h"
 #define RUTA_MURO3 "Muros_N3.txt"
 #define RUTA_MONEDA "Monedas_N3.txt"
+#define RUTA_FICHEROS "Ficheros.txt"
+#define FICHEROS_RESPALDO "Respaldo.txt"
 
 Nivel3::Nivel3(QWidget *parent) :
     QMainWindow(parent),
@@ -35,6 +37,7 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
     ui->Salir->hide();
+    ui->Volver_jugar->hide();
     ui->Siguiente->hide();
 
     timer = new QTimer;
@@ -542,6 +545,7 @@ void Nivel3::on_Siguiente_clicked()
     scene_2->clear();
     ui->Siguiente->hide();
     ui->Salir->move(226,600);
+    ui->Volver_jugar->show();
     scene_2->setSceneRect(0,0,547,700);
     ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -567,8 +571,107 @@ void Nivel3::on_Reiniciar_clicked()
 
 void Nivel3::on_Salir_clicked()
 {
+    if (datos_juego.getSemilla()==2){
+        QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
+        file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+        QList <QString> datos;
+
+        QFile filer(FICHEROS_RESPALDO);
+        filer.open(QIODevice::WriteOnly);
+        QString Nombre = QString::fromStdString(datos_juego.getNombre_equipo());
+        QString Clave = QString::number(datos_juego.getClave());
+        QString Modo= QString::number(datos_juego.getModo());
+        QString Semilla = QString::number(datos_juego.getSemilla());
+        QString Puntaje = QString::number(datos_juego.getPuntaje());
+
+        int n=0;
+        while (file.atEnd() == false){
+            QString line = file.readLine();
+            while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+                n = line.indexOf(" ");
+                if(n!=0){
+                    datos.append(line.left(n));
+                }
+                line=line.remove(0,n+1);
+            }
+            QString Name = datos.at(0);
+            QString Password = datos.at(1);
+            QString modo = datos.at(2);
+            QString semilla = datos.at(3);
+            QString puntaje = datos.at(4);
+            if(Name == Nombre){
+                QTextStream out(&filer);
+                out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
+            }
+            else{
+                QTextStream out(&filer);
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+            }
+            datos.clear();
+            n = 0;
+        }
+        filer.flush();
+        filer.close();
+        file.close();
+        file.remove();
+        filer.rename(RUTA_FICHEROS);
+    }
     this->hide();
     MainWindow *Menu = new MainWindow;
     Menu->show();
+    this->~Nivel3();
+}
+
+void Nivel3::on_Volver_jugar_clicked()
+{
+    datos_juego.setSemilla(1);
+    datos_juego.setPuntaje(0);
+    QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
+    file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+    QList <QString> datos;
+
+    QFile filer(FICHEROS_RESPALDO);
+    filer.open(QIODevice::WriteOnly);
+    QString Nombre = QString::fromStdString(datos_juego.getNombre_equipo());
+    QString Clave = QString::number(datos_juego.getClave());
+    QString Modo= QString::number(datos_juego.getModo());
+    QString Semilla = QString::number(datos_juego.getSemilla());
+    QString Puntaje = QString::number(datos_juego.getPuntaje());
+
+    int n=0;
+    while (file.atEnd() == false){
+        QString line = file.readLine();
+        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+            n = line.indexOf(" ");
+            if(n!=0){
+                datos.append(line.left(n));
+            }
+            line=line.remove(0,n+1);
+        }
+        QString Name = datos.at(0);
+        QString Password = datos.at(1);
+        QString modo = datos.at(2);
+        QString semilla = datos.at(3);
+        QString puntaje = datos.at(4);
+        if(Name == Nombre){
+            QTextStream out(&filer);
+            out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
+        }
+        else{
+            QTextStream out(&filer);
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+        }
+        datos.clear();
+        n = 0;
+    }
+    filer.flush();
+    filer.close();
+    file.close();
+    file.remove();
+    filer.rename(RUTA_FICHEROS);
+
+    Nivel_1 *nivel1 = new Nivel_1;
+    nivel1->setDatos_partida_1(this->datos_juego);
+    nivel1->show();
     this->~Nivel3();
 }

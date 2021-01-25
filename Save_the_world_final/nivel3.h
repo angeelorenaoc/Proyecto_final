@@ -25,6 +25,7 @@
 #include "personaje3graf.h"
 #include "enemigo_fisica.h"
 #include "mainwindow.h"
+#include "nivel_1.h"
 
 namespace Ui {
 class Nivel3;
@@ -58,6 +59,8 @@ private slots:
     void on_Reiniciar_clicked();
 
     void on_Salir_clicked();
+
+    void on_Volver_jugar_clicked();
 
 private:
     Ui::Nivel3 *ui;

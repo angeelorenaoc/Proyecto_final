@@ -1,6 +1,8 @@
 #include "nivel_1.h"
 #include "ui_nivel_1.h"
 #define RUTA_MURO "Muros_N1.txt"
+#define RUTA_FICHEROS "Ficheros.txt"
+#define FICHEROS_RESPALDO "Respaldo.txt"
 
 Nivel_1::Nivel_1(QWidget *parent) :
     QMainWindow(parent),
@@ -58,6 +60,9 @@ Nivel_1::Nivel_1(QWidget *parent) :
 
     tiempo_inmunidad = new QTimer();
     connect(tiempo_inmunidad,SIGNAL(timeout()),this,SLOT(inmunidad()));
+
+    Ganar = new QTimer();
+    connect(Ganar,SIGNAL(timeout()),this,SLOT(Verificacion_Ganar()));
 
 }
 
@@ -223,65 +228,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                 vida_J2->setPos(vida_J2->getPx(),vida_J2->getPy());
 
             }
-        }
-    }
-    if(enemigos.size()==0 && enemy_timer->isActive()==false){
-        if(vida_J1->getAnuncio()>0){
-           ui->Game->hide();
-
-
-           jugadores.clear();
-           muros.clear();
-           escudos.clear();
-           disparos.clear();
-
-           shield->stop();
-           timer_move->stop();
-           enemy_timer->stop();
-           bullet_timer->stop();
-           Cooldown_timer->stop();
-           tiempo_de_habilidad->stop();
-           scene_2->clear();
-           ui->Anuncios->show();
-           ui->Anuncios->resize(467,700);
-           this->resize(ui->Anuncios->width(),ui->Anuncios->height());
-           ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-           ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-           scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
-           ui->Salir->show();
-           ui->Siguiente_nivel->show();
-
-           scene_1->clear();
-        }
-
-        else if(N_jugadores==2){
-            if(vida_J2->getAnuncio()>0){
-                ui->Game->hide();
-                scene_1->clear();
-
-                muros.clear();
-                escudos.clear();
-                enemigos.clear();
-                disparos.clear();
-
-                shield->stop();
-                timer_move->stop();
-                enemy_timer->stop();
-                bullet_timer->stop();
-                Cooldown_timer->stop();
-                tiempo_de_habilidad->stop();
-
-                scene_2->clear();
-                ui->Anuncios->show();
-                ui->Anuncios->resize(467,700);
-                this->resize(ui->Anuncios->width(),ui->Anuncios->height());
-                ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
-                ui->Salir->show();
-                ui->Siguiente_nivel->show();
-            }
-    }
+        }    
     }
 }
 
@@ -472,7 +419,6 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
     }
     if(jugadores.size()<=0){
 
-
         muros.clear();
         escudos.clear();
         enemigos.clear();
@@ -484,6 +430,8 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         bullet_timer->stop();
         Cooldown_timer->stop();
         tiempo_de_habilidad->stop();
+        Ganar->stop();
+
         qDebug()<<"YOU LOSE";
         ui->Game->hide();
         scene_2->clear();
@@ -582,6 +530,74 @@ void Nivel_1::estado_de_habilidad()
 {
     if(!Cooldown)
         Cooldown=true;
+}
+
+void Nivel_1::Verificacion_Ganar()
+{
+    if(enemigos.size()==0 && enemy_timer->isActive()==false){
+        if(vida_J1->getAnuncio()>0){
+            ui->Game->hide();
+
+            jugadores.clear();
+            muros.clear();
+            escudos.clear();
+            disparos.clear();
+            puntaje_total += puntaje_J1->getAnuncio();
+
+            shield->stop();
+            timer_move->stop();
+            enemy_timer->stop();
+            bullet_timer->stop();
+            Cooldown_timer->stop();
+            tiempo_de_habilidad->stop();
+            Ganar->stop();
+            scene_2->clear();
+            ui->Anuncios->show();
+            ui->Anuncios->resize(467,700);
+            this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+            ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+            scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
+            ui->Salir->show();
+            ui->Siguiente_nivel->show();
+
+            scene_1->clear();
+        }
+
+        if(N_jugadores==2){
+            if(vida_J2->getAnuncio()>0){
+                ui->Game->hide();
+                scene_1->clear();
+
+                muros.clear();
+                escudos.clear();
+                enemigos.clear();
+                disparos.clear();
+
+                shield->stop();
+                timer_move->stop();
+                enemy_timer->stop();
+                bullet_timer->stop();
+                Cooldown_timer->stop();
+                tiempo_de_habilidad->stop();
+                Ganar->stop();
+                puntaje_total += puntaje_J2->getAnuncio();
+
+                scene_2->clear();
+                ui->Anuncios->show();
+                ui->Anuncios->resize(467,700);
+                this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+                ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+                scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
+                ui->Salir->show();
+                ui->Siguiente_nivel->show();
+            }
+        }
+        datos_partida_1.setPuntaje(puntaje_total);
+        datos_partida_1.setSemilla(2);
+        puntaje_total=0;
+    }
 }
 
 void Nivel_1::inmunidad()
@@ -700,6 +716,7 @@ void Nivel_1::on_Inicio_clicked()
         bullet_timer->start(50);
         shield->start(50);
     }
+    Ganar->start(10);
 }
 
 void Nivel_1::on_Instrucciones_clicked()
@@ -741,6 +758,50 @@ void Nivel_1::on_Reiniciar_clicked()
 
 void Nivel_1::on_Siguiente_nivel_clicked()
 {
+    QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
+    file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+    QList <QString> datos;
+
+    QFile filer(FICHEROS_RESPALDO);
+    filer.open(QIODevice::WriteOnly);
+    QString Nombre = QString::fromStdString(datos_partida_1.getNombre_equipo());
+    QString Clave = QString::number(datos_partida_1.getClave());
+    QString Modo= QString::number(datos_partida_1.getModo());
+    QString Semilla = QString::number(datos_partida_1.getSemilla());
+    QString Puntaje = QString::number(datos_partida_1.getPuntaje());
+
+    int n=0;
+    while (file.atEnd() == false){
+        QString line = file.readLine();
+        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+            n = line.indexOf(" ");
+            if(n!=0){
+                datos.append(line.left(n));
+            }
+            line=line.remove(0,n+1);
+        }
+        QString Name = datos.at(0);
+        QString Password = datos.at(1);
+        QString modo = datos.at(2);
+        QString semilla = datos.at(3);
+        QString puntaje = datos.at(4);
+        if(Name == Nombre){
+            QTextStream out(&filer);
+            out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
+        }
+        else{
+            QTextStream out(&filer);
+            out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+        }
+        datos.clear();
+        n = 0;
+    }
+    filer.flush();
+    filer.close();
+    file.close();
+    file.remove();
+    filer.rename(RUTA_FICHEROS);
+
     Nivel2 *nivel_2 = new Nivel2;
     nivel_2->setDatos_partida(this->datos_partida_1);
     nivel_2->show();
@@ -749,6 +810,51 @@ void Nivel_1::on_Siguiente_nivel_clicked()
 
 void Nivel_1::on_Salir_clicked()
 {
+    if (datos_partida_1.getSemilla()==2){
+        QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
+        file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+        QList <QString> datos;
+
+        QFile filer(FICHEROS_RESPALDO);
+        filer.open(QIODevice::WriteOnly);
+        QString Nombre = QString::fromStdString(datos_partida_1.getNombre_equipo());
+        QString Clave = QString::number(datos_partida_1.getClave());
+        QString Modo= QString::number(datos_partida_1.getModo());
+        QString Semilla = QString::number(datos_partida_1.getSemilla());
+        QString Puntaje = QString::number(datos_partida_1.getPuntaje());
+
+        int n=0;
+        while (file.atEnd() == false){
+            QString line = file.readLine();
+            while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+                n = line.indexOf(" ");
+                if(n!=0){
+                    datos.append(line.left(n));
+                }
+                line=line.remove(0,n+1);
+            }
+            QString Name = datos.at(0);
+            QString Password = datos.at(1);
+            QString modo = datos.at(2);
+            QString semilla = datos.at(3);
+            QString puntaje = datos.at(4);
+            if(Name == Nombre){
+                QTextStream out(&filer);
+                out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
+            }
+            else{
+                QTextStream out(&filer);
+                out << Name<<" "<<Password<<" "<<modo<<" "<<semilla<<" "<<puntaje<<"\n";
+            }
+            datos.clear();
+            n = 0;
+        }
+        filer.flush();
+        filer.close();
+        file.close();
+        file.remove();
+        filer.rename(RUTA_FICHEROS);
+    }
     this->hide();
     MainWindow *Menu = new MainWindow;
     Menu->show();
