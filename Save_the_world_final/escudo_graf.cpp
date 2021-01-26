@@ -2,6 +2,7 @@
 
 escudo_graf::escudo_graf(float x, float y, float vx, float vy)
 {
+    //Se crea una instacia de la clase Escudos_fisica
     esc = new Escudos_fisica(x,y,vx,vy);
 }
 
@@ -18,6 +19,7 @@ void escudo_graf::paint(QPainter *painter, const QStyleOptionGraphicsItem *optio
 
 void escudo_graf::actualizar(float dt)
 {
+    // Se actualiza la posicion del escudo en pantalla
     esc->actualizar(dt);
     setPos(esc->getPX(),esc->getPY());
 }

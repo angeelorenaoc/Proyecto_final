@@ -15,8 +15,8 @@ private:
     float masa = 100;
     float AX;
     float AY;
-    float G;
-    float R = 5;
+    float G; //Gravedad
+    float R = 5; //Radio
 
 public:
     Escudos_fisica(float px_, float py_, float vx_, float vy_);
@@ -25,10 +25,12 @@ public:
     float getPY() const;
     float getMasa() const;
     float getR() const;
+    void setMasa(float value);
 
+    //*********************Moviento*********************
     void acelerar(float px2_, float py2_, float masa2);
     void actualizar(float dt);
-    void setMasa(float value);
+    //**************************************************
 };
 
 #endif // ESCUDOS_FISICA_H

@@ -10,8 +10,11 @@
 #include <QTimer>
 #include <QPixmap>
 #include <QDebug>
-
 #include "bala_parabolica.h"
+
+/* Es clase maneja todo lo referente a la imagen de la
+ * bala parabolica.
+ */
 
 class Bala_parabolica_graf: public QObject, public QGraphicsItem
 {
@@ -26,11 +29,15 @@ public:
 
     Bala_parabolica *getBala() const;
 
-private:
+private:    
     Bala_parabolica *bala;
+
     int id;
+
+    //****Sprite****
     QPixmap *pixmap;
     int r_sprite=64;
+    //**************
 
 };
 

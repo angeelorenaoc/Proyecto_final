@@ -6,21 +6,27 @@
 
 using namespace std;
 
+/* Esta clase tiene como objetivo almacenar los datos
+ * del jugador para poder pasarlos entre ventanas mas
+ * facilmente.
+ */
+
 class Informacion
 {
 private:
+
     string Nombre_equipo;
-    int clave;
-    int semilla;
-    int modo;
+    string clave;
+    int modo; //Si es un jugador o multijugador
+    int semilla; //Determina el nivel
     int puntaje;
 
 public:
     Informacion();
     string getNombre_equipo() const;
     void setNombre_equipo(const string &value);
-    int getClave() const;
-    void setClave(int value);
+    string getClave() const;
+    void setClave(string value);
     int getSemilla() const;
     void setSemilla(int value);
     int getModo() const;

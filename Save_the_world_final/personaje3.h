@@ -4,6 +4,9 @@
 #include <math.h>
 #include <cmath>
 
+/* Clase encargada del movimiento fisico de los personajes
+ * del nivel 3. */
+
 class Personaje3
 {
 private:
@@ -20,8 +23,8 @@ private:
     float K; //Resistencia del aire
     float e; //Coeficiente de restitución
     float v; //vector velocidad
-    float dt;
-    float rr;
+    float dt; //Delta de tiempo
+    float rr; //Radio para colisiones
 public:
     Personaje3(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_);
     ~Personaje3();

@@ -10,12 +10,12 @@ void Informacion::setNombre_equipo(const string &value)
     Nombre_equipo = value;
 }
 
-int Informacion::getClave() const
+string Informacion::getClave() const
 {
     return clave;
 }
 
-void Informacion::setClave(int value)
+void Informacion::setClave(string value)
 {
     clave = value;
 }

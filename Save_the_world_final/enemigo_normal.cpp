@@ -1,18 +1,17 @@
 #include "enemigo_normal.h"
 
-void Enemigo_normal::setVelocidad(int value)
-{
-    velocidad = value;
-}
-
 Enemigo_normal::Enemigo_normal(int nivel_)
 {
     nivel = nivel_;
+
+    //Dependiendo del nivel se determina la imagen y posicion de aparicion del enemigo
     if (nivel == 2){
+        //Se crea el enemigo en posiciones Y al azar desde la parte derecha de la pantalla
         int random_number = rand()% 400+10;
         setPos(800,random_number);
         posx=800;posy=random_number;
 
+        //********************Creacion y manejo del sprite**********************
         columnas = 0;
         ancho = 95;
         alto = 50;
@@ -22,8 +21,11 @@ Enemigo_normal::Enemigo_normal(int nivel_)
         timer= new QTimer;
         connect(timer,&QTimer::timeout,this,&Enemigo_normal::Actualizar_sprite);
         timer->start(50);
+        //**********************************************************************
     }
     else{
+        /*Se generan posiciones aleatorias para los enemigos, partiendo de los
+         * bodes de pantalla.*/
         int random_number=rand()%3;
 
         if(random_number==0){
@@ -37,20 +39,22 @@ Enemigo_normal::Enemigo_normal(int nivel_)
             setPosx(random_number);setPosy(600);
         }
         else{
-            random_number = rand()%70+207;
+            random_number = rand()%60+210;
             setPos(920,random_number);
             setPosx(920);setPosy(random_number);
         }
+
+        //***********************Creacion y manejo del sprite***********************
         columnas=0;
         ancho = 100;
         alto = 100;
-
         pixmap = new QPixmap(":/new/Imagenes/Covid.png");
         setScale(0.45);
 
         timer = new QTimer();
         connect(timer, &QTimer::timeout, this, &Enemigo_normal::Actualizar_sprite);
         timer->start(150);
+        //**************************************************************************
     }
 }
 
@@ -66,24 +70,28 @@ void Enemigo_normal::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
 
 void Enemigo_normal::up()
 {
+    //Mueve al enemigo hacia arriba
     posy-= velocidad;
     setPos(posx,posy);
 }
 
 void Enemigo_normal::down()
 {
+    //Mueve al enemigo hacia abajo
     posy+= velocidad;
     setPos(posx,posy);
 }
 
 void Enemigo_normal::left()
 {
+    //Mueve al enemigo hacia la izquierda
     posx-= velocidad;
     setPos(posx,posy);
 }
 
 void Enemigo_normal::right()
 {
+    //Mueve al enemigo hacia la derecha
     posx+= velocidad;
     setPos(posx,posy);
 }
@@ -91,6 +99,11 @@ void Enemigo_normal::right()
 float Enemigo_normal::getPosx() const
 {
     return posx;
+}
+
+void Enemigo_normal::setVelocidad(int value)
+{
+    velocidad = value;
 }
 
 float Enemigo_normal::getPosy() const

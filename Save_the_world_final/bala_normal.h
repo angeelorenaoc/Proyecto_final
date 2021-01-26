@@ -6,15 +6,24 @@
 #include <QPixmap>
 #include <QPainter>
 
+/*
+Esta clase es la encargada de manejar todo lo referente al movimiento
+e imagen de las balas que no poseen movimientos fisicos diferentes del
+M.R.U.
+*/
+
 class Bala_normal: public QObject, public QGraphicsItem
 {
-    int posx, posy;
-    int sentido;
-    bool collides = false;
-    int id;
+    //*********************Atributos****************************************
+    int posx, posy; //Posicion en la pantalla
+    int sentido; //Determina la direccion con la que la bala saldra disparada
+    int id; //Variable que identifica que jugador la disparo
+    //**********************************************************************
 
+    //***Manejo de sprite***
     int ancho, alto;
     QPixmap *pixmap;
+    //**********************
 
     Q_OBJECT
 public:
@@ -28,7 +37,7 @@ public:
     void setId(int value);
 
 public slots:
-    void move();
+    void move(); //Mueve la bala
 };
 
 #endif // BALA_NORMAL_H

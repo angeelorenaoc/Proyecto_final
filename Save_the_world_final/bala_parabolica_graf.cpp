@@ -2,6 +2,7 @@
 
 Bala_parabolica_graf::Bala_parabolica_graf(float px, float py, float ang, float v)
 {
+    //Se definen los datos por defecto al objeto
     float posx,posy,masa,r,K,e;
     posx = px;
     posy = py;
@@ -10,14 +11,18 @@ Bala_parabolica_graf::Bala_parabolica_graf(float px, float py, float ang, float 
     masa = 50;
     K = 0.08;
     e = 0.09;
+
+    //Se crea un instacia de la clase bala_parabolica
     bala = new Bala_parabolica(posx,posy,masa,r,K,e,ang,v);
 
     pixmap = new QPixmap(":/new/Imagenes/bala_canon.png");
     setScale(0.13);
 
 }
+//Se reccibe el v_limit para definir hacia donde debe caer el bala
 void Bala_parabolica_graf::actualizar(float v_limit)
 {
+    //Se actualiza la posicion de la bala en la pantalla
     bala->ActualizarPosicion();
     setPos(bala->getPx(),v_limit-bala->getPy());
 }

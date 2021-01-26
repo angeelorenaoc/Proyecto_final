@@ -1,9 +1,11 @@
 #include "enemigo_graf.h"
 
-Enemigo_graf::Enemigo_graf(QObject *parent, int nivel_) : QObject(parent),escala(1)
+Enemigo_graf::Enemigo_graf(QObject *parent, int nivel_) : QObject(parent)
 {
     float posx,posy,velx,vely,masa,r,K,e,rr;
     nivel = nivel_;
+
+    // Se definen valores por defecto dependiendo del nivel
     if (nivel==3){
         pixmap = new QPixmap(":/new/Imagenes/Enemigo_3.png");
 
@@ -19,7 +21,8 @@ Enemigo_graf::Enemigo_graf(QObject *parent, int nivel_) : QObject(parent),escala
         vely = 0;
         K = 0.08;
         e = 0.09;
-        rr = 1;}
+        rr = 1;
+    }
     else{
         columnas = 1200;
         pixmap = new QPixmap(":/new/Imagenes/Lenador_saltando.png");
@@ -39,12 +42,16 @@ Enemigo_graf::Enemigo_graf(QObject *parent, int nivel_) : QObject(parent),escala
     }
 
     setPos(posx,posy);
+
+    //Se crea una instacia de la clase enemigo_fisica
     enemy = new Enemigo_fisica(posx,posy,velx,vely,masa,r,K,e,rr);
 
-    timerm = new QTimer();
+    //******************Manejo del sprite******************************
     filas = 0;
+    timerm = new QTimer();
     timerm->start(100);
     connect(timerm,&QTimer::timeout,this,&Enemigo_graf::Actualizacion);
+    //*****************************************************************
 }
 
 Enemigo_graf::~Enemigo_graf()
@@ -62,11 +69,6 @@ void Enemigo_graf::paint(QPainter *painter, const QStyleOptionGraphicsItem *opti
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 
-void Enemigo_graf::setescala(float s)
-{
-    escala = s;
-}
-
 void Enemigo_graf::actualizar(float v_limit)
 {
     enemy->Actualizar();
@@ -77,7 +79,6 @@ Enemigo_fisica *Enemigo_graf::getEnemy()
 {
     return enemy;
 }
-
 
 void Enemigo_graf::setFilas(float value)
 {
@@ -95,6 +96,10 @@ float Enemigo_graf::getAncho() const
 }
 
 void Enemigo_graf::up()
+/*Metodo usado para que el enemigo del nivel 2
+ * salte con una velocidad constante, describiendo
+ * un movimiento parabolido
+ */
 {
     enemy->set_vel(-10,100,enemy->getPx(),enemy->getPy());
 }
@@ -102,6 +107,7 @@ void Enemigo_graf::up()
 
 void Enemigo_graf::Actualizacion()
 {
+    //Se varia entre los diferentes sprites, dependiendo el nivel
     if (nivel == 3){
         columnas += 45;
         if(columnas >= 405)

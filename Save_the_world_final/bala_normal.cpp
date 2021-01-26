@@ -4,10 +4,11 @@ Bala_normal::Bala_normal(int sentido_)
 {
     sentido = sentido_;
 
+    //Por medio de un timer se actualiza la posicion de la bala
     QTimer *timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-
     timer->start(50);
+    //**********************************************************
 
     ancho=94;
     alto =49;
@@ -42,6 +43,13 @@ int Bala_normal::getSentido() const
 
 void Bala_normal::move()
 {
+    /* Dependiendo del sentido que lleva la bala
+     * se restan posiciones y se actualiza en la
+     * escena la nueva posicion.
+     * A traves del setRotation se rota la imagen
+     * para que concuerde con el sentido.
+    */
+
     if(sentido == 1){
         setRotation(180);
         setPos(x()-20,y());

@@ -9,8 +9,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    //Coloca el fondo
     setStyleSheet("MainWindow {background-image:url(:/new/Imagenes/Fondo.jpg)}");
 
+    //Se ocultan los elementos que no se necesitan de momento
     ui->Nombre->hide();
     ui->Clave->hide();
     ui->Botoncontinuar->hide();
@@ -28,23 +30,28 @@ MainWindow::~MainWindow()
 
 int MainWindow::Find(string Nombre, string Clave)
 {
+    // Metodo encargado de buscar los datos de un usuario en los registros
+
     /*QString info;*/                       //String para leer los datos del archivo
 
     QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
-    file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
+    file.open(QIODevice::ReadOnly);     //Abre el archivo en modo lectura
 
-    int n=0;
+    int n=0; //Bandera para el manejo de datos
     while (file.atEnd() == false){
         QString line = file.readLine();
-        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+        // Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo datos
+        while(n>=0){
             n = line.indexOf(" ");
             if(n!=0){
                 datos.append(line.left(n));
             }
             line=line.remove(0,n+1);
         }
+        // Conversion de QString a string
         string Name = datos.at(0).toStdString();
         string Password = datos.at(1).toStdString();
+
         if(Name == Nombre){
             if(Password == Clave){
                 file.close();
@@ -67,9 +74,11 @@ void MainWindow::on_Botoncontinuar_clicked()
 {
     string Nombre = ui->Nombre->text().toStdString();
     string Clave = ui->Clave->text().toStdString();
+
+    // Apertura del nivel y actualizacion de datos
     if(Find(Nombre,Clave)==2){
         datos_partida.setNombre_equipo(datos.at(0).toStdString());
-        datos_partida.setClave(datos.at(1).toInt());
+        datos_partida.setClave(datos.at(1).toStdString());
         datos_partida.setModo(datos.at(2).toInt());
         datos_partida.setSemilla(datos.at(3).toInt());
         datos_partida.setPuntaje(datos.at(4).toInt());
@@ -93,6 +102,7 @@ void MainWindow::on_Botoncontinuar_clicked()
             this->~MainWindow();
         }
     }
+
     else{
         msgBox.setText("El usuario no existe. Verifique usuario y contraseña");
         msgBox.exec();
@@ -103,6 +113,7 @@ void MainWindow::on_Botoncontinuar_clicked()
 
 void MainWindow::on_Volver_clicked()
 {
+    //Volver al menu principal
     ui->Ingresar->hide();
     ui->Nombre->hide();
     ui->Clave->hide();
@@ -122,6 +133,8 @@ void MainWindow::on_Volver_clicked()
 
 void MainWindow::on_Solitario_clicked()
 {
+    //Se dirige al menu de registro de un jugador
+
     ui->Solitario->hide();
     ui->Multijugador->hide();
     ui->CargaPartida->hide();
@@ -136,6 +149,7 @@ void MainWindow::on_Solitario_clicked()
 
 void MainWindow::on_Multijugador_clicked()
 {
+    //Se dirige al menu de registro de un equipo de jugadores
     ui->Solitario->hide();
     ui->Multijugador->hide();
     ui->CargaPartida->hide();
@@ -150,6 +164,8 @@ void MainWindow::on_Multijugador_clicked()
 
 void MainWindow::on_CargaPartida_clicked()
 {
+    // Dirige al usuario al menu de cargar partida
+
     ui->Seleccionar->hide();
     ui->Solitario->hide();
     ui->Multijugador->hide();
@@ -164,20 +180,27 @@ void MainWindow::on_CargaPartida_clicked()
 
 void MainWindow::on_Botoncontinuar_2_clicked()
 {
+    /* Se capturan los datos de los line edit y se verifica que no existan mas usuarios con el mismo
+     * nombre o que se utilicen caracteres no admitidos. Si todo esta en orden, se procede al registro
+     */
+
     QString Nombre = ui->Nombre->text();
     QString Clave = ui->Clave->text();    
 
+    ui->Nombre->clear();
+    ui->Clave->clear();
+
     if(Find(Nombre.toStdString(),Clave.toStdString())==1 || Find(Nombre.toStdString(),Clave.toStdString())==2){
-        msgBox.setText("El usuario ya existe, intente con otro nombre");
-        msgBox.exec();
+        msgBox.setText("El usuario ya existe, intente con otro nombre"); //Se da el texto para la qMessegeBox
+        msgBox.exec(); //Se muestra la qMessegeBox
     }
 
-    else if(Nombre.indexOf(" ")==-1){
+    else if(Nombre.indexOf(" ")==-1 || Clave.indexOf(" ")==-1){ //Verificacion
         QFile file(RUTA_FICHEROS);
         file.open(QIODevice::WriteOnly | QIODevice::Text |QIODevice::Append);
 
         QTextStream out(&file);
-        out << Nombre<<" "<<Clave<<" "<<datos_partida.getModo()<<" "<<"1"<<" "<<"0"<<"\n";
+        out << Nombre<<" "<<Clave<<" "<<datos_partida.getModo()<<" "<<"1"<<" "<<"0"<<"\n"; //Registro
         file.flush();
         file.close();
 
@@ -190,15 +213,14 @@ void MainWindow::on_Botoncontinuar_2_clicked()
         this->~MainWindow();
     }
     else{
-        msgBox.setText("Favor no utilizar espacios en el nombre.");
+        msgBox.setText("Favor no utilizar espacios en el nombre o la contraseña.");
         msgBox.exec();
     }
-    ui->Nombre->clear();
-    ui->Clave->clear();
 }
 
 void MainWindow::on_Eliminar_clicked()
 {
+    //Se dirige al menu para eliminar un usuario
     ui->Seleccionar->hide();
     ui->Solitario->hide();
     ui->Multijugador->hide();
@@ -213,13 +235,19 @@ void MainWindow::on_Eliminar_clicked()
 
 void MainWindow::on_Confirmar_clicked()
 {
+    /* Este metodo se utiza para eliminar un usuario
+     * Se crean un nuevo archivo (.txt) con el objetivo de que toda
+     * la informacion (excepto la del jugador eliminado) se guarde
+     */
+
     QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
     file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
     QList <QString> datos;
 
     QFile filer(FICHEROS_RESPALDO);
-    filer.open(QIODevice::WriteOnly);
+    filer.open(QIODevice::WriteOnly);   //Abre el archiv en modo lectura
 
+    //Captura de datos de los line edit
     QString Nombre = ui->Nombre->text();
     QString Clave = ui->Clave->text();
 
@@ -227,7 +255,8 @@ void MainWindow::on_Confirmar_clicked()
     bool Found=false;
     while (file.atEnd() == false){
         QString line = file.readLine();
-        while(n>=0){      //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo vec
+        //Ciclo para guardar cada dato de la linea de texto en su posicion correspondiente en el arreglo
+        while(n>=0){
             n = line.indexOf(" ");
             if(n!=0){
                 datos.append(line.left(n));
@@ -266,9 +295,9 @@ void MainWindow::on_Confirmar_clicked()
     ui->Nombre->clear();
     ui->Clave->clear();
         filer.flush();
-        filer.close();
-        file.close();
-        file.remove();
-        filer.rename(RUTA_FICHEROS);
+        filer.close(); //Se cierra el nuevo archivo
+        file.close(); //Se cierra el archivo viejo
+        file.remove(); //Se elimina el archivo viejo
+        filer.rename(RUTA_FICHEROS); //Se renombra el archivo nuevo
 
 }

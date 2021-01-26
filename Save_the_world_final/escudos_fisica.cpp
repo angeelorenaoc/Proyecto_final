@@ -1,11 +1,8 @@
 #include "escudos_fisica.h"
-void Escudos_fisica::setMasa(float value)
-{
-    masa = value;
-}
 
 Escudos_fisica::Escudos_fisica(float px_, float py_, float vx_, float vy_)
 {
+   // Se definen los valores por defecto
    PX = px_;
    PY = py_;
    VX = vx_;
@@ -13,9 +10,9 @@ Escudos_fisica::Escudos_fisica(float px_, float py_, float vx_, float vy_)
    AX = 0;
    AY = 0;
    G = 6.67384*(pow(10,-11));
-
 }
 
+//*******************Ecuaciones de moviento*************************
 void Escudos_fisica::acelerar(float px2_, float py2_, float masa2)
 {
     Distancia = pow((pow((px2_-PX),2)+pow((py2_-PY),2)),1/2);
@@ -29,6 +26,12 @@ void Escudos_fisica::actualizar(float dt)
     PY = PY + (VY*dt) + ((AX*dt*dt)/2);
     VX = VX + (AX*dt);
     VY = VY + (AY*dt);
+}
+//*****************************************************************
+
+void Escudos_fisica::setMasa(float value)
+{
+    masa = value;
 }
 
 float Escudos_fisica::getPX() const

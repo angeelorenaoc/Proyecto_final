@@ -5,6 +5,12 @@
 #include <QPainter>
 #include <QTimer>
 
+/*
+Esta clase es la encargada de manejar todo lo referente al movimiento
+e imagen de los enemigos que no poseen movimientos fisicos diferentes del
+M.R.U.
+*/
+
 class Enemigo_normal: public QObject, public QGraphicsItem
 {
     float posx ,posy;
@@ -12,10 +18,12 @@ class Enemigo_normal: public QObject, public QGraphicsItem
     int r=20;
     int nivel;
 
+    //****Sprite*****
     int columnas;
     int ancho, alto;
     QTimer *timer;
     QPixmap *pixmap;
+    //***************
 
     Q_OBJECT
 public:
@@ -23,10 +31,12 @@ public:
     QRectF boundingRect() const;
     void paint (QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
 
+    //*****Movimiento****
     void up();
     void down();
     void left();
     void right();
+    //*******************
 
     float getPosx() const;
     void setPosx(float value);

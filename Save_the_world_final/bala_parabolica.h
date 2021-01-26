@@ -5,23 +5,28 @@
 #include <cmath>
 #include <QDebug>
 
+/*
+Esta clase es la encargada de manejar todo lo referente al movimiento
+de las balas que poseen movimientos fisicos diferentes al M.R.U.
+*/
+
 class Bala_parabolica: public QObject
 {
     Q_OBJECT
     float px;
     float py;
     float masa;
-    float r;
+    float r; //Radio
     float vx;
     float vy;
     float angulo;
     float ax;
     float ay;
-    float g;
+    float g; //Gravedad
     float K; //Resistencia del aire
     float e; //Coeficiente de restitución
-    float v; //vector velocidad
-    float dt;
+    float v;
+    float dt; //Delta de tiempo
 public:
     Bala_parabolica(float posx_, float posy_,float masa_, float radio_, float k_, float e_,float a_,float v_);
     ~Bala_parabolica();

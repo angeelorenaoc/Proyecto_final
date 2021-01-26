@@ -1,27 +1,13 @@
 #include "personaje.h"
 
-int Personaje::getAngulo() const
-{
-    return angulo;
-}
-
-int Personaje::getVel_inicial() const
-{
-    return vel_inicial;
-}
-
-void Personaje::setVel_inicial(int value)
-{
-    vel_inicial = value;
-}
-
 Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): QObject(parent)
 {
-    id=id_;
+    id=id_; //Identidicador para determinar la imagen del jugador (multijugador)
     nivel = nivel_;
     columnas=0;
     filas=0;
 
+    // Dependiendo del nivel se carga la imagen del personaje y se definen sus dimendiones
     if (nivel == 1){
         ancho = 60;
         alto = 95;
@@ -52,6 +38,7 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
         setRotation(45);
         timer = new QTimer();//Creacion del timer para el nivel 2
         connect(timer, &QTimer::timeout, this, &Personaje::Actualizar_sprite);
+        //en este caso el timer no se inicia ya que el sprite solo se recorre cuando dispara
     }
     posx = posx_;
     posy = posy_;
@@ -95,6 +82,10 @@ void Personaje::disparo()
     timer->start(100);
 }
 
+//*************************************************
+/* En el caso del nivel 1 se mueve al personaje por
+ * la pantalla, en caso del nivel 2 se modifica el
+ * angulo y la velocidad inicial de disparo. */
 void Personaje::up()
 {
     if (nivel == 1){
@@ -144,6 +135,7 @@ void Personaje::right()
         vel_inicial+=5;
     }
 }
+//************************************************
 
 float Personaje::getPosy() const
 {
@@ -183,4 +175,19 @@ int Personaje::getFilas() const
 void Personaje::setFilas(int value)
 {
     filas = value;
+}
+
+int Personaje::getAngulo() const
+{
+    return angulo;
+}
+
+int Personaje::getVel_inicial() const
+{
+    return vel_inicial;
+}
+
+void Personaje::setVel_inicial(int value)
+{
+    vel_inicial = value;
 }

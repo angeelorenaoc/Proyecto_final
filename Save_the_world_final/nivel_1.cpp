@@ -766,7 +766,7 @@ void Nivel_1::on_Siguiente_nivel_clicked()
     QFile filer(FICHEROS_RESPALDO);
     filer.open(QIODevice::WriteOnly);
     QString Nombre = QString::fromStdString(datos_partida_1.getNombre_equipo());
-    QString Clave = QString::number(datos_partida_1.getClave());
+    QString Clave = QString::fromStdString(datos_partida_1.getClave());
     QString Modo= QString::number(datos_partida_1.getModo());
     QString Semilla = QString::number(datos_partida_1.getSemilla());
     QString Puntaje = QString::number(datos_partida_1.getPuntaje());
@@ -818,7 +818,7 @@ void Nivel_1::on_Salir_clicked()
         QFile filer(FICHEROS_RESPALDO);
         filer.open(QIODevice::WriteOnly);
         QString Nombre = QString::fromStdString(datos_partida_1.getNombre_equipo());
-        QString Clave = QString::number(datos_partida_1.getClave());
+        QString Clave = QString::fromStdString(datos_partida_1.getClave());
         QString Modo= QString::number(datos_partida_1.getModo());
         QString Semilla = QString::number(datos_partida_1.getSemilla());
         QString Puntaje = QString::number(datos_partida_1.getPuntaje());

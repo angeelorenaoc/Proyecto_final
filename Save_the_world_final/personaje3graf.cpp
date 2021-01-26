@@ -1,10 +1,11 @@
 #include "personaje3graf.h"
 
-Personaje3graf::Personaje3graf(QObject *parent, int id) : QObject(parent), escala(1) //Para escalar la imagen
+Personaje3graf::Personaje3graf(QObject *parent, int id) : QObject(parent)
 {
     timermo = new QTimer();
     filas = 0;
     columnas = 0;
+    // Dependiendo del id se le da la imagen al personaje
     if (id == 0){
         pixmap = new QPixmap(":/new/Imagenes/Sprite_personaje.png");}
     else{
@@ -23,6 +24,8 @@ Personaje3graf::Personaje3graf(QObject *parent, int id) : QObject(parent), escal
     K = 0.08;
     e = 0.5;
     rr = 1;
+
+    // Se crea una instancia de la clase Personaje3
     esf = new Personaje3(posx,posy,velx,vely,masa,r,K,e,rr);
 
     timermo->start(100);
@@ -32,6 +35,13 @@ Personaje3graf::Personaje3graf(QObject *parent, int id) : QObject(parent), escal
 Personaje3graf::~Personaje3graf()
 {
     delete esf;
+}
+
+void Personaje3graf::actualizar(float v_limit)
+{
+    //Actualiza la posicion
+    esf->Actualizar();
+    setPos(esf->getPx(),v_limit-esf->getPy());
 }
 
 QRectF Personaje3graf::boundingRect() const
@@ -44,16 +54,6 @@ void Personaje3graf::paint(QPainter *painter, const QStyleOptionGraphicsItem *op
     painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,filas,ancho,alto);
 }
 
-void Personaje3graf::setescala(float s)
-{
-    escala = s;
-}
-
-void Personaje3graf::actualizar(float v_limit)
-{
-    esf->Actualizar();
-    setPos(esf->getPx(),v_limit-esf->getPy());
-}
 
 Personaje3 *Personaje3graf::getEsf()
 {

@@ -1,6 +1,7 @@
 #include "enemigo_fisica.h"
 Enemigo_fisica::Enemigo_fisica(float posx_, float posy_, float velx_, float vely_,float masa_, float radio_, float k_, float e_, float rr_)
 {
+    //Se definen los valores por defecto del objeto
     px =posx_;
     py = posy_;
     masa = masa_;
@@ -22,6 +23,7 @@ Enemigo_fisica::~Enemigo_fisica()
 
 }
 
+//*******************Ecuaciones del movimiento*****************************
 void Enemigo_fisica::Actualizar()
 {
     v = pow(((vx*vx)+(vy*vy)),1/2);
@@ -42,6 +44,7 @@ void Enemigo_fisica::set_vel(float vx_, float vy_, float px_, float py_)
     px = px_;
     py= py_;
 }
+//***********************************************************************
 
 float Enemigo_fisica::getPy() const
 {

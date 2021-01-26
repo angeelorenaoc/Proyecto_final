@@ -7,14 +7,20 @@
 #include <QPixmap>
 #include <QTimer>
 
+/*Esta clase se encarga de todo lo relacionado con los
+ *  bonus que se pueden recoger a lo largo del nivel 3*/
+
 class Monedas: public QObject, public QGraphicsItem
 {
     int r=10;
     int posx, posy;
+
+    //********Sprite***********
     int ancho = 75, alto = 70;
     int columnas;
     QPixmap *pixmap;
     QTimer *timer;
+    //*************************
 
 public:
     Monedas(int x, int y);

@@ -6,6 +6,12 @@
 #include <QPainter>
 #include <QTimer>
 
+/*
+Esta clase es la encargada de manejar todo lo referente al movimiento
+e imagen de los personajes que no poseen movimientos o su movimiento
+es el M.R.U.
+*/
+
 class Personaje: public QObject, public QGraphicsItem
 {
     float posx ,posy;

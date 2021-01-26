@@ -9,8 +9,11 @@
 #include <QObject>
 #include <QTimer>
 #include <QPixmap>
-
 #include "enemigo_fisica.h"
+
+/* Es clase maneja todo lo referente a la imagen de los
+ * enemigos con movientos fisicos.
+ */
 
 class Enemigo_graf: public QObject, public QGraphicsItem
 {
@@ -19,23 +22,26 @@ public:
     ~Enemigo_graf();
     QRectF boundingRect() const;
     void paint(QPainter *painter,const QStyleOptionGraphicsItem *option, QWidget *widget);
-    void setescala (float s);
+
+    //******Metodos encargados del movimiento****
     void actualizar (float v_limit);
+    void up();
+    //*******************************************
+
     Enemigo_fisica *getEnemy();
-    QTimer *timerm;      //Variable para lograr que el pacman se vea comiendo
-    QPixmap *pixmap;
+
     void setFilas(float value);
     void setColumnas(float value);
+    void setescala (float s);
     float getAncho() const;
-    void up();
 
 private:
-    float filas,columnas;
-    float ancho;
-    float alto;
-    Enemigo_fisica *enemy;
-    float escala;
     int nivel;
+    float filas,columnas;
+    float ancho, alto;
+    Enemigo_fisica *enemy;
+    QTimer *timerm;      //Variable para lograr que el pacman se vea comiendo
+    QPixmap *pixmap;
 
 signals:
 

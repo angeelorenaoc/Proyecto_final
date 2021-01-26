@@ -3,6 +3,7 @@
 
 Bala_parabolica::Bala_parabolica(float posx_, float posy_,float masa_, float radio_, float k_, float e_,float a_,float v_)
 {
+    // Asignacion de los valores por defecto.
     px =posx_;
     py = posy_;
     angulo = (a_*pi)/180;
@@ -35,6 +36,7 @@ Bala_parabolica::~Bala_parabolica()
 
 }
 
+//*******Ecuaciones de movimiento parabolico********
 void Bala_parabolica::ActualizarPosicion()
 {
     CalcularVelocidad();
@@ -49,6 +51,15 @@ void Bala_parabolica::CalcularVelocidad()
     angulo=atan2(vy,vx);
     v=sqrt(pow(vy,2)+pow(vx,2));
 }
+
+void Bala_parabolica::set_vel(float vx_, float vy_, float px_, float py_)
+{
+    vx = vx_;
+    vy = vy_;
+    px = px_;
+    py= py_;
+}
+//**************************************************
 
 float Bala_parabolica::getE() const
 {
@@ -83,12 +94,4 @@ float Bala_parabolica::getVx() const
 float Bala_parabolica::getVy() const
 {
     return vy;
-}
-
-void Bala_parabolica::set_vel(float vx_, float vy_, float px_, float py_)
-{
-    vx = vx_;
-    vy = vy_;
-    px = px_;
-    py= py_;
 }

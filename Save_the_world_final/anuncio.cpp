@@ -2,24 +2,29 @@
 
 Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int nivel_)
 {
-    color = colorp;
+    color = colorp; //Variable que asigna un color al texto dependiendo el jugador
+
     id = id_;/* Variable que permite identificar el tipo de anuncio. Si id = 0
                se refiere a la vida; si id = 1, es el puntaje; y si id = 2, es la
                velocidad.*/
+
     nivel = nivel_;// Variable que permite identificar el nivel
 
     if(nivel != 2){
         if (id == 0 ){
             anuncio = 3;
-            setPlainText(QString("Vida: ")+ QString::number(anuncio));}
+            setPlainText(QString("Vida: ")+ QString::number(anuncio));} //Se convierte un int en un QString
         else if ( id == 1){
             anuncio = 0;
             setPlainText(QString("Puntaje: ")+ QString::number(anuncio));}
     }
+
     else {
+        //***** Este solo aplica para el nivel 2 ya que es el unico que necesita sprite y velocidad******
+        //El sprite hace las veces de vida
         anuncio = 10;
-        pixmap = new QPixmap(":/new/Imagenes/sprite_Vida.png");
-        setScale(0.85);
+        pixmap = new QPixmap(":/new/Imagenes/sprite_Vida.png"); //Se carga la imagen
+        setScale(0.85); //Se escala para que ajuste mejor en la pantalla (no se vea muy grande)
         columnas = 0;
         if (id == 1){
             anuncio = 0;
@@ -33,8 +38,8 @@ Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int niv
     else
         setDefaultTextColor(Qt::magenta);
 
-    setFont(QFont("Tekton Pro",tamanio));
-    setPos(Px,Py);
+    setFont(QFont("Tekton Pro",tamanio)); //Se determina la fuente y el tamaño
+    setPos(Px,Py); //Se da la posicion
 }
 
 QRectF Anuncio::boundingRect() const
@@ -68,7 +73,7 @@ void Anuncio::decrease_vida(int i)//Metodo que permite decrementar i veces el nu
     }
 }
 
-void Anuncio::increse_score(int i)//Metodo que permite aumentar i veces el puntaje
+void Anuncio::increse_score(int i) //Metodo que permite aumentar i veces el puntaje
 {
     anuncio+=i;
     if (id == 1) {

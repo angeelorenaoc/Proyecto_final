@@ -4,12 +4,15 @@
 #include <QGraphicsItem>
 #include <QPainter>
 
+/* Esta clase se encarga de crear los muros que aparecen en los
+ * niveles 1 y 3. */
+
 class Muro: public QGraphicsItem, public QObject
 {
 
-    int w,h;
+    int w,h; //Ancho y alto del muro
     int posx, posy;
-    int  id;
+    int  id; //Determina el tipo de muro
 
 public:
     Muro(int w_, int h_, int x, int y, int id_,QObject *parent = nullptr);
