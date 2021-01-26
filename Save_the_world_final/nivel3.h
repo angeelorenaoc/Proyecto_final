@@ -27,6 +27,8 @@
 #include "mainwindow.h"
 #include "nivel_1.h"
 
+// Clase encargada de administrar lo relacionado con el nivel 3
+
 namespace Ui {
 class Nivel3;
 }
@@ -43,24 +45,23 @@ public:
     void setDatos_juego(const Informacion &value);
 
 public slots:
+    //****** Movimiento *******
     void actualizar();
     void Movimiento_Enemigo();
+    //*************************
+
     void Perder();
 
 private slots:
+    //*********** Botones *************
     void on_Inicio_clicked();
-
     void on_Instrucciones_clicked();
-
     void on_Volver_clicked();
-
     void on_Siguiente_clicked();
-
     void on_Reiniciar_clicked();
-
     void on_Salir_clicked();
-
     void on_Volver_jugar_clicked();
+    //*********************************
 
 private:
     Ui::Nivel3 *ui;
@@ -72,9 +73,9 @@ private:
     QTimer *Lose;
 
     float dt;
+    int semilla;
     int h_limit;
     int v_limit;
-    int semilla;
 
     Informacion datos_juego;
 
@@ -84,6 +85,7 @@ private:
     void Colision_paredes_e();
     void keyPressEvent(QKeyEvent *event);
 
+    //****** Elementos de la partida *****
     Muro *Boton;
     Anuncio *vidas1;
     Anuncio *vidas2;
@@ -93,6 +95,7 @@ private:
     QList <Monedas *> Bonus;
     QList<Personaje3graf*>bars;
     QList <Enemigo_graf *> Enemigo;
+    //************************************
 };
 
 #endif // NIVEL3_H

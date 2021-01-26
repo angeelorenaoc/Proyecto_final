@@ -11,16 +11,20 @@ Nivel2::Nivel2(QWidget *parent) :
     h_limit = 800;
     v_limit = 600;
 
-    scene->setSceneRect(0,0,h_limit,v_limit);
+    //************ Definicion de escena en la que se va a jugar *****************
+    scene->setSceneRect(0,0,h_limit,v_limit); // Tamaño de la escena
     ui->graphicsView->setScene(scene);
     ui->centralwidget->adjustSize();
     scene->addRect(scene->sceneRect());
     ui->graphicsView->resize(scene->width(),scene->height());
-    this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    this->resize(ui->graphicsView->width(),ui->graphicsView->height()); //La ventana toma el tamaño de la escena
     ui->graphicsView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("Nivel2 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+    //***************************************************************************
 
+    setStyleSheet("Nivel2 {background-image:url(:/new/Imagenes/Fondo.jpg)}"); //Fondo que tiene la ventana
+
+    //************ Definicion de escena en la que se muestran los anuncios *****************
     scene_2->setSceneRect(0,0,902,700);
     ui->graphicsView_2->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -28,14 +32,18 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->graphicsView_2->resize(902,605);
     ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //**************************************************************************************
 
+    //Se ocultan los botones que no se necesitan en el momento
     ui->Volver->hide();
     ui->graphicsView->hide();
     ui->graphicsView_2->hide();
     ui->Salir->hide();
     ui->Siguiente->hide();
     ui->Reiniciar->hide();
+    //********************************************************
 
+    //***** Se crean los timer y se conectan con sus respectivas funciones *********
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this,SLOT(move()));
 
@@ -53,6 +61,7 @@ Nivel2::Nivel2(QWidget *parent) :
 
     win = new QTimer;
     connect(win,SIGNAL(timeout()),this,SLOT(victory()));
+    //*****************************************************************************
 }
 
 Nivel2::~Nivel2()
@@ -131,6 +140,8 @@ void Nivel2::keyPressEvent(QKeyEvent *event)
 
 void Nivel2::move()
 {
+    /* Recorre la lista de balas y llama al metodo que
+     * cambia su posicion. */
     for(int i=0;i<balas.size();i++){
         balas.at(i)->actualizar(v_limit);
         if (Colisiones_Enemigos(i)){
@@ -143,6 +154,8 @@ void Nivel2::move()
 
 void Nivel2::borderCollisionbala(int i)
 {
+    /* Detecta cuando una bala sale de la pantalla , si este
+     * es el caso, la elimina. */
     Bala_parabolica *b = balas.at(i)->getBala();
     if (b->getPx()<0 || b->getPx()>h_limit-b->getR() || b->getPy()<b->getR() ){
         scene->removeItem(balas.at(i));
@@ -153,76 +166,41 @@ void Nivel2::borderCollisionbala(int i)
 
 void Nivel2::spawn()
 {
+    // Crea a los enemigos normales
     enemigos.push_back(new Enemigo_normal(2));
     scene->addItem(enemigos.back());
     N_enemigos++;
 
     if(N_enemigos>=Total_enemigos){
+        /* Una vez llegado al limite de enemigos
+         * se detiene el timer para que no se creen mas */
         crear_enemigos->stop();
     }
 }
 
 void Nivel2::move_enemy()
 {
+    // Se encarga de mover a los enemigos normales
     for(int i=0;i<enemigos.size();i++){
         enemigos.at(i)->left();
+        // En caso de que lleguen al bosque los pierden vidas
         if(enemigos.at(i)->getPosx()<=0){
             scene->removeItem(enemigos.at(i));
             enemigos.removeAt(i);
             vida->decrease_vida(1);
-            if (vida->getAnuncio() <= 0){
-                scene->removeItem(vida);
-                if (jugadores.size()== 2){
-                    scene->removeItem(jugadores.at(1));
-                    jugadores.removeAt(1);
-                    scene->removeItem(puntaje2);
-                    scene->removeItem(velocidad_2);
-                }
-                if(jugadores.size()==1){
-                    scene->removeItem(jugadores.at(0));
-                    jugadores.removeAt(0);
-                    scene->removeItem(puntaje1);
-                    scene->removeItem(velocidad_1);
-                }
-                ui->graphicsView->hide();
-                balas.clear();
-                enemigos_s.clear();
-                enemigos.clear();
-                jugadores.clear();
-
-                timer->stop();
-                crear_enemigos->stop();
-                mover_enemigos->stop();
-                crear_enemigos_s->stop();
-                mover_enemigos_s->stop();
-                win->stop();
-
-                scene_2->clear();
-                scene_2->setSceneRect(0,0,497,700);
-                ui->graphicsView_2->setScene(scene_2);
-                ui->centralwidget->adjustSize();
-                scene_2->addRect(scene_2->sceneRect());
-                ui->graphicsView_2->show();
-                ui->graphicsView_2->resize(497,700);
-                this->resize(ui->graphicsView_2->width()+105,ui->graphicsView_2->height());
-                ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-                scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel2.jpg")));
-                ui->Salir->show();
-                ui->Reiniciar->show();
-
-                scene->clear();
-            }
         }
     }
 }
 
 void Nivel2::spawn_jump()
 {
+    // Genera a los enemigos saltarines
     enemigos_s.push_back(new Enemigo_graf(0,2));
     scene->addItem(enemigos_s.back());
     N_enemigos++;
 
+    /* Una vez llegado al limite de enemigos
+     * se detiene el timer para que no se creen mas */
     if(N_enemigos>=Total_enemigos){
         crear_enemigos_s->stop();
     }
@@ -230,6 +208,7 @@ void Nivel2::spawn_jump()
 
 void Nivel2::move_enemy_jump()
 {
+    // Se encarga de mover a los enemigos saltarines
     for(int i=0;i<enemigos_s.size();i++){
         enemigos_s.at(i)->actualizar(v_limit);
         enemigos_s.at(i)->Actualizacion();
@@ -239,27 +218,39 @@ void Nivel2::move_enemy_jump()
 
 void Nivel2::victory()
 {
-    int puntaje_total = 0;
+    /* Varible para sumar el puntaje obtenido por los jugadores
+     * y sumarlo al global. */
+    int puntaje_total = datos_partida.getPuntaje();
+
+    //************* Verifica la victoria ****************
     if(enemigos.size()==0 && enemigos_s.size()==0 && crear_enemigos->isActive()==false && crear_enemigos_s->isActive()==false){
+
+        //*** Se limpian las listas ***
         ui->graphicsView->hide();
         balas.clear();
         enemigos_s.clear();
         enemigos.clear();
         jugadores.clear();
+        //*****************************
 
+        //*** Se detienen los timer ***
         timer->stop();
         crear_enemigos->stop();
         mover_enemigos->stop();
         crear_enemigos_s->stop();
         mover_enemigos_s->stop();
         win->stop();
+        //*****************************
 
+        //*********** Se suma el puntaje obtenido y se suma al global *************
         puntaje_total += puntaje1->getAnuncio();
         if(datos_partida.getModo() == 2){puntaje_total += puntaje2->getAnuncio();}
         datos_partida.setPuntaje(puntaje_total);
         puntaje_total = 0;
         datos_partida.setSemilla(3);
+        //*************************************************************************
 
+        //********* Se muestra la escena que contiene las felicitaciones ****************
         ui->Salir->show();
         ui->Siguiente->show();
         scene_2->setSceneRect(0,0,497,700);
@@ -272,6 +263,61 @@ void Nivel2::victory()
         ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel2.jpg")));
+        //*******************************************************************************
+
+        scene->clear(); // Se limpia la escena del juego
+    }
+
+    //************** Verifica la derrota ***************************
+    else if (vida->getAnuncio() <= 0){
+        scene->removeItem(vida);
+        //*** Evalula la cantidad de jugadores para eliminarlos ***
+        if (jugadores.size()== 2){
+            scene->removeItem(jugadores.at(1));
+            jugadores.removeAt(1);
+            scene->removeItem(puntaje2);
+            scene->removeItem(velocidad_2);
+        }
+        if(jugadores.size()==1){
+            scene->removeItem(jugadores.at(0));
+            jugadores.removeAt(0);
+            scene->removeItem(puntaje1);
+            scene->removeItem(velocidad_1);
+        }
+        //**********************************************************
+
+        //*** Se limpian las listas ***
+        ui->graphicsView->hide();
+        balas.clear();
+        enemigos_s.clear();
+        enemigos.clear();
+        jugadores.clear();
+        //*****************************
+
+        //**** Se detienen los timer ****
+        timer->stop();
+        crear_enemigos->stop();
+        mover_enemigos->stop();
+        crear_enemigos_s->stop();
+        mover_enemigos_s->stop();
+        win->stop();
+        //*******************************
+
+        //*********** Se muestra la escena que contiene el mensaje de derrota ****************
+        scene_2->clear();
+        scene_2->setSceneRect(0,0,497,700);
+        ui->graphicsView_2->setScene(scene_2);
+        ui->centralwidget->adjustSize();
+        scene_2->addRect(scene_2->sceneRect());
+        ui->graphicsView_2->show();
+        ui->graphicsView_2->resize(497,700);
+        this->resize(ui->graphicsView_2->width()+105,ui->graphicsView_2->height());
+        ui->graphicsView_2->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel2.jpg")));
+        ui->Salir->show();
+        ui->Reiniciar->show();
+        //*************************************************************************************
 
         scene->clear();
     }
@@ -279,7 +325,10 @@ void Nivel2::victory()
 
 void Nivel2::borderCollision(int i)
 {
+    // Analiza la colision de los enemigos con los bordes de la escena
     Enemigo_fisica *b = enemigos_s.at(i)->getEnemy();
+
+    // Verifica cuando el enemigo llega al bosque y baja la vida del jugador
     if (b->getPx()<0){
         scene->removeItem(enemigos_s.at(i));
         enemigos_s.removeAt(i);
@@ -296,6 +345,7 @@ void Nivel2::borderCollision(int i)
             jugadores.removeAt(0);
         }
     }
+    // Se verifica la posicion del enemigo y le da movimiento
     if (b->getPx()>h_limit-b->getR()){
         b->set_vel(-1*b->getE()*b->getVx(),b->getVy(),h_limit-b->getR(),b->getPy());
     }
@@ -309,6 +359,7 @@ void Nivel2::borderCollision(int i)
 
 bool Nivel2::Colisiones_Enemigos(int i)
 {
+    //Verifica cuando las balas chocan con los enemigos y aumenta el puntaje
     for(int j = 0; j < enemigos.size(); j++){
         if (balas.at(i)->collidesWithItem(enemigos.at(j))){
             if (balas.at(i)->getId() == 1)
@@ -346,12 +397,14 @@ void Nivel2::setDatos_partida(const Informacion &value)
 
 void Nivel2::on_Iniciar_clicked()
 {
+    // Boton que da inicio a la partida
+
     ui->Iniciar->hide();
     ui->Instrucciones->hide();
     ui->graphicsView->show();
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
 
-
+    // Modo solitario
     if(datos_partida.getModo()==1){
         Total_enemigos = 30;
         jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
@@ -370,6 +423,7 @@ void Nivel2::on_Iniciar_clicked()
         crear_enemigos_s->start(5000);
         mover_enemigos_s->start(15);
     }
+    // Modo multijugador
     else{
         Total_enemigos = 60;
         jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
@@ -400,6 +454,7 @@ void Nivel2::on_Iniciar_clicked()
 
 void Nivel2::on_Instrucciones_clicked()
 {
+    // Boton que muestra las instrucciones en pantalla
     ui->Iniciar->hide();
     ui->Instrucciones->hide();
     ui->graphicsView_2->show();
@@ -410,6 +465,7 @@ void Nivel2::on_Instrucciones_clicked()
 
 void Nivel2::on_Volver_clicked()
 {
+    // Boton que permite al jugador regresar al menu de nivel
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
     scene_2->clear();
     ui->graphicsView_2->hide();
@@ -420,6 +476,7 @@ void Nivel2::on_Volver_clicked()
 
 void Nivel2::on_Salir_clicked()
 {
+    // Guarda los datos del usuario cuando el jugador gana y lo lleva al menu principal
     if (datos_partida.getSemilla()==3){
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
@@ -474,6 +531,8 @@ void Nivel2::on_Salir_clicked()
 
 void Nivel2::on_Siguiente_clicked()
 {
+    // Guarda los usuario cuando gana y le permite avanzar al siguiente nivel
+
     QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
     file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
     QList <QString> datos;
@@ -518,6 +577,7 @@ void Nivel2::on_Siguiente_clicked()
     file.remove();
     filer.rename(RUTA_FICHEROS);
 
+    // Se crea el nivel 3
     Nivel3 *nivel_3 = new Nivel3;
     nivel_3->setDatos_juego(this->datos_partida);
     nivel_3->show();
@@ -526,6 +586,8 @@ void Nivel2::on_Siguiente_clicked()
 
 void Nivel2::on_Reiniciar_clicked()
 {
+    // Dado el caso de que el jugador haya perdido, le da la posibilidad de repetir el nivel
+
     N_enemigos=0;
     Total_enemigos=0;
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());

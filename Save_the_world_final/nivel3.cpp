@@ -12,9 +12,11 @@ Nivel3::Nivel3(QWidget *parent) :
     srand(time(NULL));
     ui->setupUi(this);
 
+    // Dimensiones de la escena
     h_limit = 6000;
     v_limit = 650;
 
+    //************ Definicion de escena en la que se va a jugar *****************
     scene->setSceneRect(0,0,h_limit,v_limit);
     ui->Game->setScene(scene);
     ui->centralwidget->adjustSize();
@@ -22,8 +24,11 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Game->resize(1000,650);
     ui->Game->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->Game->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    setStyleSheet("Nivel3 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+    //***************************************************************************
 
+    setStyleSheet("Nivel3 {background-image:url(:/new/Imagenes/Fondo.jpg)}"); //Fondo que tiene la ventana
+
+    //************ Definicion de escena en la que se muestran los anuncios *****************
     scene_2->setSceneRect(0,0,700,700);
     ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -31,7 +36,9 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Anuncios->resize(700,700);
     ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //**************************************************************************************
 
+    //Se ocultan los botones que no se necesitan en el momento
     ui->Volver->hide();
     ui->Game->hide();
     ui->Anuncios->hide();
@@ -39,13 +46,17 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Salir->hide();
     ui->Volver_jugar->hide();
     ui->Siguiente->hide();
+    //********************************************************
 
+    //***** Se crean los timer y se conectan con sus respectivas funciones *********
     timer = new QTimer;
     connect(timer,SIGNAL(timeout()),this, SLOT(actualizar()));
     timere = new QTimer;
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
     Lose = new QTimer;
     connect(timere,SIGNAL(timeout()),this, SLOT(Perder()));
+    //*****************************************************************************
+
 }
 
 Nivel3::~Nivel3()

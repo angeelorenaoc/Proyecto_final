@@ -23,6 +23,8 @@
 #include "mainwindow.h"
 #include "nivel3.h"
 
+// Clase encargada de administrar lo relacionado con el nivel 2
+
 namespace Ui {
 class Nivel2;
 }
@@ -39,37 +41,45 @@ public:
     void setDatos_partida(const Informacion &value);
 
 public slots:
-    void move();
+
+    //***** Generar enemigos ******
     void spawn();
-    void move_enemy();
     void spawn_jump();
+    //*****************************
+
+    //**** Mover elementos ********
+    void move();
+    void move_enemy();
     void move_enemy_jump();
-    void victory();
+    //*****************************
+
+    void victory(); //Verifica cuando los jugadores ganan
 
 private slots:
+
+    //************ Botones **************
     void on_Iniciar_clicked();
-
     void on_Instrucciones_clicked();
-
     void on_Volver_clicked();
-
     void on_Salir_clicked();
-
     void on_Siguiente_clicked();
-
     void on_Reiniciar_clicked();
+    //**********************************
 
 private:
     Ui::Nivel2 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
     QGraphicsScene *scene_2 = new QGraphicsScene;
 
+    // Dimensiones de la pantalla
     int h_limit;
     int v_limit;
+
+    // Determinan el numero de enemigos a crear
     int N_enemigos=0;
     int Total_enemigos;
 
-    Informacion datos_partida;
+    Informacion datos_partida; //Informacion del jugador
 
     QTimer *timer;
     QTimer *crear_enemigos;
@@ -79,20 +89,27 @@ private:
     QTimer *win;
 
     void keyPressEvent(QKeyEvent * event);
+
+    //***Colisiones de los elementos en pantalla***
     void borderCollision(int i);
     void borderCollisionbala(int i);
     bool Colisiones_Enemigos(int i);
+    //*********************************************
 
+    //*** Listas de elementos en pantalla ***
     QList<Personaje *> jugadores;
     QList<Bala_parabolica_graf *> balas;
     QList<Enemigo_normal *> enemigos;
     QList<Enemigo_graf *> enemigos_s;
+    //***************************************
 
+    //**** Anuncuios *****
     Anuncio *vida;
     Anuncio *puntaje1;
     Anuncio *puntaje2;
     Anuncio *velocidad_1;
     Anuncio *velocidad_2;
+    //********************
 };
 
 #endif // NIVEL2_H
