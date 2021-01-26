@@ -14,6 +14,7 @@ Nivel_1::Nivel_1(QWidget *parent) :
     h_limit = 962;
     v_limit = 642;
 
+    //******************* Definicion de escena1 ********************************
     scene_1->setSceneRect(0,0,h_limit,v_limit);
     ui->Game->setScene(scene_1);
     ui->centralwidget->adjustSize();
@@ -23,7 +24,9 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->Game->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->Game->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setStyleSheet("Nivel_1 {background-image:url(:/new/Imagenes/Fondo.jpg)}");
+    //**************************************************************************
 
+    //**************** Definicion de la escena 2 ***********************
     scene_2->setSceneRect(0,0,700,700);
     ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -31,7 +34,9 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->Anuncios->resize(700,700);
     ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    //******************************************************************
 
+    //Se esconden los botones
     ui->Game->hide();
     ui->Anuncios->hide();
     ui->Volver->hide();
@@ -39,6 +44,7 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
 
+    //******************* Se definen los timer ********************************
     enemy_timer = new QTimer(this);
     connect(enemy_timer,SIGNAL(timeout()),this,SLOT(spawn()));
 
@@ -63,6 +69,7 @@ Nivel_1::Nivel_1(QWidget *parent) :
 
     Ganar = new QTimer();
     connect(Ganar,SIGNAL(timeout()),this,SLOT(Verificacion_Ganar()));
+    //***************************************************************************
 
 }
 
@@ -80,55 +87,55 @@ Nivel_1::~Nivel_1()
 
 void Nivel_1::keyPressEvent(QKeyEvent *event)
 {
+    //Se manejan las teclas para el movimiento
     if(N_jugadores==1){
         if(jugadores.size()>0){
             Personaje *player = jugadores.at(0);
 
             if(event->key()== Qt::Key_A){
                 player->left();
-                if(player_collides(player))
+                if(player_collides(player))//Verifica la colision con el muro
                     player->right();
 
-                sentido_bala=1;
+                sentido_bala=1;//Cambia el sentido de la bala
             }
             if(event->key() == Qt::Key_D){
                 player->right();
-                if(player_collides(player))
+                if(player_collides(player))//Verifica la colision con el muro
                     player->left();
 
-                sentido_bala=2;
+                sentido_bala=2;//Cambia el sentido de la bala
             }
             if(event->key() == Qt::Key_W){
                 player->up();
-                if(player_collides(player))
+                if(player_collides(player))//Verifica la colision con el muro
                     player->down();
 
-                sentido_bala=3;
+                sentido_bala=3;//Cambia el sentido de la bala
             }
             if(event->key() == Qt::Key_S){
                 player->down();
-                if(player_collides(player))
+                if(player_collides(player))//Verifica la colision con el muro
                     player->up();
 
-                sentido_bala=4;
+                sentido_bala=4;//Cambia el sentido de la bala
             }
-            if(event->key() == Qt::Key_Space){
+            if(event->key() == Qt::Key_Space){//Se crea la bala
                 disparos.push_back(new Bala_normal(sentido_bala));
                 disparos.back()->setId(1);
                 disparos.back()->setPos(player->getPosx(),player->getPosy());
                 scene_1->addItem(disparos.back());
             }
-            if(event->key() == Qt::Key_E){
+            if(event->key() == Qt::Key_E){//Se activa el escudo
                 if(Cooldown)
                     spawn_shield(player);
             }
             ui->Game->centerOn(player->x(),player->y());
             vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
             vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
-//            qDebug()<<vida_J1->x()<<vida_J1->y();
         }
     }
-
+    //Para el jugador 2
     else if(N_jugadores==2){
         if(jugadores.size()>0){
 
@@ -138,35 +145,35 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
 
                 if(event->key()== Qt::Key_A){
                     player->left();
-                    if(player_collides(player))
+                    if(player_collides(player))//Se verifica la colision con los muros
                         player->right();
-                    sentido_bala=1;
+                    sentido_bala=1;//Cambia el sentido de la bala
                 }
                 if(event->key() == Qt::Key_D){
                     player->right();
-                    if(player_collides(player))
+                    if(player_collides(player))//Se verifica la colision con los muros
                         player->left();
-                    sentido_bala=2;
+                    sentido_bala=2;//Cambia el sentido de la bala
                 }
                 if(event->key() == Qt::Key_W){
                     player->up();
-                    if(player_collides(player))
+                    if(player_collides(player))//Se verifica la colision con los muros
                         player->down();
-                    sentido_bala=3;
+                    sentido_bala=3;//Cambia el sentido de la bala
                 }
                 if(event->key() == Qt::Key_S){
                     player->down();
-                    if(player_collides(player))
+                    if(player_collides(player))//Se verifica la colision con los muros
                         player->up();
-                    sentido_bala=4;
+                    sentido_bala=4;//Cambia el sentido de la bala
                 }
-                if(event->key() == Qt::Key_Space){
+                if(event->key() == Qt::Key_Space){//Se crea la bala
                     disparos.push_back(new Bala_normal(sentido_bala));
                     disparos.back()->setPos(player->getPosx(),player->getPosy());
                     disparos.back()->setId(1);
                     scene_1->addItem(disparos.back());
                 }
-                if(event->key() == Qt::Key_E){
+                if(event->key() == Qt::Key_E){//Se crea el escudo
                     if(Cooldown)
                         spawn_shield(player);
                 }
@@ -234,6 +241,7 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
 
 bool Nivel_1::player_collides(Personaje *P)
 {
+    //Se comprueba si el jugador colisiona con alguno de los muros.
     for(int i=0;i<muros.size();i++){
         if(P->collidesWithItem(muros.at(i))){
             return true;
@@ -244,6 +252,7 @@ bool Nivel_1::player_collides(Personaje *P)
 
 void Nivel_1::bullet_impact()
 {
+    //Cuando las balas colisionan con los enemigos.
     for (int j=0;j<disparos.size();j++) {
         for (int i=0;i<enemigos.size();i++) {
             if(enemigos.at(i)->collidesWithItem(disparos.at(j))){
@@ -262,6 +271,8 @@ void Nivel_1::bullet_impact()
             }
         }
     }
+
+    //Cuando las balas colisionan con los muros.
     for (int i=0;i<muros.size();i++) {
         for (int j=0;j<disparos.size();j++) {
             if(disparos.at(j)->collidesWithItem(muros.at(i))){
@@ -274,6 +285,7 @@ void Nivel_1::bullet_impact()
 
 void Nivel_1::spawn()
 {
+    //********Creacion de los enemigos*********
     enemigos.push_back(new Enemigo_normal(1));
     scene_1->addItem(enemigos.back());
     N_enemigos++;
@@ -281,10 +293,12 @@ void Nivel_1::spawn()
     if(N_enemigos>=30){
         enemy_timer->stop();
     }
+    //*****************************************
 }
 
 void Nivel_1::perseguir()
 {
+    //Busca al jugador mas cercano para perseguirlo
     float dist = 999;
     int player=0, enemigo=0;
     for(int i=0;i<enemigos.size();i++){
@@ -306,6 +320,7 @@ void Nivel_1::perseguir()
 
 void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
 {
+    //***Movimiento del enemigo*********************
     if(e->getPosx() > c->getPosx()){
         e->left();
 
@@ -418,7 +433,7 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         }
     }
     if(jugadores.size()<=0){
-
+        // Comprobacion de la derrota para los jugadores
         muros.clear();
         escudos.clear();
         enemigos.clear();
@@ -447,16 +462,19 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
 
         scene_1->clear();
     }
+    //**********************************************
 }
 
 bool Nivel_1::enemy_collides(Enemigo_normal *E)
 {
+    //***Se comprueba si el enemigo colisiona con un muro***
     for(int i=0;i<muros.size();i++){
         if(E->collidesWithItem(muros.at(i))){
             return true;
         }
     }
     return false;
+    //******************************************************
 }
 
 void Nivel_1::spawn_shield(Personaje *P)
@@ -534,6 +552,7 @@ void Nivel_1::estado_de_habilidad()
 
 void Nivel_1::Verificacion_Ganar()
 {
+    // Chequea si el jugador gano el nivel.
     if(enemigos.size()==0 && enemy_timer->isActive()==false){
         if(vida_J1->getAnuncio()>0){
             ui->Game->hide();
@@ -602,6 +621,7 @@ void Nivel_1::Verificacion_Ganar()
 
 void Nivel_1::inmunidad()
 {
+    //Esta inmunidad se le da al jugador cuando se pone en escena.
     inmune = false;
     tiempo_inmunidad->stop();
 }
@@ -618,6 +638,7 @@ void Nivel_1::setDatos_partida_1(const Informacion &value)
 
 void Nivel_1::on_Inicio_clicked()
 {
+    //Boton que inicia el nivel
     ui->Inicio->hide();
     ui->Instrucciones->hide();
     ui->Salir->hide();
@@ -667,6 +688,7 @@ void Nivel_1::on_Inicio_clicked()
     muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
     muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());*/}
 
+    //Modo solitario.
     if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));
         scene_1->addItem(jugadores.back());
@@ -687,6 +709,7 @@ void Nivel_1::on_Inicio_clicked()
         bullet_timer->start(50);
         shield->start(50);
     }
+    //Modo multijuador
     else{
         jugadores.push_back(new Personaje(0,0,1,470,400));
         scene_1->addItem(jugadores.back());
@@ -733,6 +756,7 @@ void Nivel_1::on_Instrucciones_clicked()
 
 void Nivel_1::on_Volver_clicked()
 {
+    //Vuelve al inicio del nivel.
     this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
     ui->Anuncios->hide();
@@ -743,6 +767,7 @@ void Nivel_1::on_Volver_clicked()
 
 void Nivel_1::on_Reiniciar_clicked()
 {
+    //Si el jugador pierde, se la da la posibilidad de volver a jugar el nivel
     N_enemigos=0;
     N_jugadores=0;
     sentido_bala=4;
@@ -759,6 +784,7 @@ void Nivel_1::on_Reiniciar_clicked()
 
 void Nivel_1::on_Siguiente_nivel_clicked()
 {
+    //Boton que permite pasar al siguiente nivel
     QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
     file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
     QList <QString> datos;
@@ -802,6 +828,7 @@ void Nivel_1::on_Siguiente_nivel_clicked()
     file.remove();
     filer.rename(RUTA_FICHEROS);
 
+    // Creación de la escena para el nivel 2.
     Nivel2 *nivel_2 = new Nivel2;
     nivel_2->setDatos_partida(this->datos_partida_1);
     nivel_2->show();
@@ -810,6 +837,8 @@ void Nivel_1::on_Siguiente_nivel_clicked()
 
 void Nivel_1::on_Salir_clicked()
 {
+    /*En el caso de que haya ganado se guarda la partida y se dirige al menu principal,
+     * sino solo lo dirige al menu principal*/
     if (datos_partida_1.getSemilla()==2){
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
@@ -856,6 +885,7 @@ void Nivel_1::on_Salir_clicked()
         filer.rename(RUTA_FICHEROS);
     }
     this->hide();
+    //Creacion del menu principal
     MainWindow *Menu = new MainWindow;
     Menu->show();
     this->~Nivel_1();

@@ -24,6 +24,8 @@
 #include "mainwindow.h"
 #include "nivel2.h"
 
+// Clase encargada de administrar lo relacionado con el nivel 1
+
 namespace Ui {
 class Nivel_1;
 }
@@ -52,18 +54,14 @@ public slots:
     void Verificacion_Ganar();
 
 private slots:
-
+    //***********Botones**************
     void on_Inicio_clicked();
-
     void on_Instrucciones_clicked();
-
     void on_Volver_clicked();
-
     void on_Siguiente_nivel_clicked();
-
     void on_Reiniciar_clicked();
-
     void on_Salir_clicked();
+    //********************************
 
 private:
     Ui::Nivel_1 *ui;
@@ -96,6 +94,7 @@ private:
     void keyPressEvent(QKeyEvent * evento);
     void move_enemy(Personaje *c, Enemigo_normal *e,int i,int j);
 
+    //Objetos necesarios para el nivel
     Anuncio *vida_J1;
     Anuncio *vida_J2;
     Anuncio *puntaje_J1;

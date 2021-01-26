@@ -67,6 +67,7 @@ Nivel3::~Nivel3()
     delete ui;
 }
 
+//Metodo que maneja las teclas del jugador
 void Nivel3:: keyPressEvent(QKeyEvent *event)
 {
     if(datos_juego.getModo()==1){
@@ -147,11 +148,13 @@ void Nivel3:: keyPressEvent(QKeyEvent *event)
 
 void Nivel3::actualizar()
 {
+    //Ciclo que actualiza las posciones del enemigo y hace algunas verificaciones
     for (int i = 0;i < bars.size() ;i++) {
         bars.at(i)->actualizar(v_limit);
-        Eliminar_vida();
-        Puntos(i);
+        Eliminar_vida();//Metodo que disminuye la vida
+        Puntos(i);//Metodo que aumenta el puntaje
         if (i == 0){
+            //Se verifica si la vida es mayor a 0. Ademas se trasladan los anuncios con el jugador.
             if (vidas1->getAnuncio() > 0){
                 vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);
                 puntaje1->setPos(puntaje1->getPx()+bars.at(i)->getEsf()->getPx(),18);
@@ -165,6 +168,7 @@ void Nivel3::actualizar()
             vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
             puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx(),18);
         }
+        //Se revisa el numero de vidas de cada jugador, en caso que sea 0, este sera eliminado.
         if (vidas1->getAnuncio() == 0){
             scene->removeItem(vidas1);
             vidas1->decrease_vida(1);
@@ -184,11 +188,14 @@ void Nivel3::actualizar()
                 bars.pop_back();}
         }
     }
+    //Metodo para comprobar las colisiones con muros, bordes o el boton final.
     borderCollision();
 }
 
 void Nivel3::Puntos(int i)
 {
+    /* Metodo que se encarga de verificar el jugador al que se le
+     * hara el aumento del puntaje si este colisiona con el bonus.*/
     for (int j=0;j<Bonus.size();j++) {
         if(bars.at(i)->collidesWithItem(Bonus.at(j))){
             if (i == 0){
@@ -210,6 +217,7 @@ void Nivel3::Puntos(int i)
 
 void Nivel3::borderCollision()
 {
+    //***************Cuando colisiona con los bordes de la escena****************************
     for (int i = 0; i < bars.size(); i++){
         Personaje3 *b = bars.at(i)->getEsf();
         if (b->getPx()<b->getRr()){
@@ -225,13 +233,15 @@ void Nivel3::borderCollision()
             b->set_vel(b->getVx(),-1*b->getE()*b->getVy(),b->getPx(),v_limit-b->getR());
         }
     }
+    //***************************************************************************************
 
+    //***************************************Cuando el jugador colisiona con los muros*********************************************************
     for (int i = 0; i<Muros.size();i++){
         for (int j = 0; j < bars.size();j++){
             if (bars.at(j)->collidesWithItem(Muros.at(i))){
                 Personaje3 *c= bars.at(j)->getEsf();
                 Muro *m = Muros.at(i);
-
+                //Las colisiones se hacen con un cambio de velocidad.
                 if(c->getPy()<=v_limit-m->getPosy() && c->getPy()>=v_limit-m->getPosy()-m->getH() && c->getPx()<=m->getPosx()){
                     c->set_vel(-1*c->getE()*c->getVx(),c->getVy(),c->getPx()-c->getRr(),c->getPy());
                 }
@@ -247,6 +257,9 @@ void Nivel3::borderCollision()
             }
         }
     }
+    //*******************************************************************************************************************************************
+
+    //*****************Cuando el jugador colisiona con el boton final**************************
     for (int i = 0; i < bars.size() ; i++ ) {
         if (bars.at(i)->collidesWithItem(Boton)){
             ui->Game->hide();
@@ -275,6 +288,7 @@ void Nivel3::borderCollision()
             scene->clear();
         }
     }
+    //*****************************************************************************************
 }
 
 void Nivel3::Movimiento_Enemigo()
@@ -282,6 +296,7 @@ void Nivel3::Movimiento_Enemigo()
     float dist = 6001;
     int player=0;
 
+    //****************Calcula el jugador mas cercano para seguirlo********************************
     for (int j = 0; j < Enemigo.size() ; j++ ) {
         for(int i =0 ;i<bars.size();i++){
             Enemigo_fisica *e = Enemigo.at(j)->getEnemy();
@@ -294,6 +309,7 @@ void Nivel3::Movimiento_Enemigo()
         }
         dist=6001;
         if(bars.size()>0){
+            // Se actualiza el movimiento del enemigo de acuerdo a el calculo entregado.
             Enemigo_fisica *e = Enemigo.at(j)->getEnemy();
             Personaje3 *c = bars.at(player)->getEsf();
             if (e->getPx() < c->getPx()){
@@ -317,10 +333,12 @@ void Nivel3::Movimiento_Enemigo()
             Colision_paredes_e();
         }
     }
+    //********************************************************************************************
 }
 
 void Nivel3::Perder()
 {
+    //Se comprueba cuando el jugadores o jugadores pierden el nivel.
     if(bars.size() == 0){
         ui->Game->hide();
         Bonus.clear();
@@ -351,6 +369,7 @@ void Nivel3::Perder()
 
 void Nivel3::Colision_paredes_e()
 {
+    //*********************************************Cuando el enemigo colisiona con un muro***************************************************
     for (int i = 0; i<Enemigo.size();i++){
         for (int j = 0; j < Muros.size();j++){
             if (Enemigo.at(i)->collidesWithItem(Muros.at(j))){
@@ -372,6 +391,7 @@ void Nivel3::Colision_paredes_e()
             }
         }
     }
+    //***************************************************************************************************************************************
 
 }
 
@@ -406,6 +426,7 @@ void Nivel3::on_Inicio_clicked()
     ui->Instrucciones->hide();
     ui->Game->show();
 
+    //Boton que inicia el nivel y carga todo lo necesario a escena
     this->resize(ui->Game->width(),ui->Game->height()+25);
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
 
@@ -449,6 +470,7 @@ void Nivel3::on_Inicio_clicked()
     }
     ARCHIVO.close();
 
+    //******Creacion de enemigos*************
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(1000,160);
     scene->addItem(Enemigo.back());
@@ -458,15 +480,21 @@ void Nivel3::on_Inicio_clicked()
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(2760,120);
     scene->addItem(Enemigo.back());
+    //***************************************
 
+    //**********Boton*******************
     Boton = new Muro(150,250,5850,530,2);
     scene->addItem(Boton);
+    //**********************************
 
+    //***********Anuncios**************
     vidas1 = new Anuncio(0,0,0,15,3);
     vidas2 = new Anuncio(0,1,0,15,3);
     puntaje1 = new Anuncio(0,0,1,15,3);
     puntaje2 = new Anuncio(0,1,1,15,3);
+    //*********************************
 
+    //Modo solitario
     if(datos_juego.getModo()==1){
         scene->addItem(vidas1);
         scene->addItem(puntaje1);
@@ -493,6 +521,8 @@ void Nivel3::on_Inicio_clicked()
         timer->start(3);
         timere->start(50);
     }
+
+    //Modo multijugador
     else{
         timer->start(3);
         timere->start(10);
@@ -532,27 +562,31 @@ void Nivel3::on_Inicio_clicked()
 
 void Nivel3::on_Instrucciones_clicked()
 {
+    //**************Muestra las instrucciones en escena*************************
     ui->Inicio->hide();
     ui->Instrucciones->hide();
     ui->Anuncios->show();
     this->resize(ui->Anuncios->width(),ui->Anuncios->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Anuncios3.jpg")));
     ui->Volver->show();
+    //***************************************************************************
 }
 
 void Nivel3::on_Volver_clicked()
 {
+    //*****Boton que lo lleva al inicio del nivel*******
     ui->Inicio->show();
     ui->Instrucciones->show();
     this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Volver->hide();
+    //*************************************************
 }
 
 void Nivel3::on_Siguiente_clicked()
 {
-
+    //Muestra una imagen felicitando al jugador
     scene_2->clear();
     ui->Siguiente->hide();
     ui->Salir->move(226,600);
@@ -571,6 +605,7 @@ void Nivel3::on_Siguiente_clicked()
 
 void Nivel3::on_Reiniciar_clicked()
 {
+    //En el caso de que el jugador pierda el nivel, se le da la posibilidad de repetirlo.
     this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
     ui->Anuncios->hide();
@@ -582,6 +617,8 @@ void Nivel3::on_Reiniciar_clicked()
 
 void Nivel3::on_Salir_clicked()
 {
+    /*Este boton guarda los datos(en el caso de que haya ganado)
+     * y lleva al usuario al menu principal.*/
     if (datos_juego.getSemilla()==2){
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
@@ -627,6 +664,8 @@ void Nivel3::on_Salir_clicked()
         file.remove();
         filer.rename(RUTA_FICHEROS);
     }
+
+    //Se crea el menu
     this->hide();
     MainWindow *Menu = new MainWindow;
     Menu->show();
@@ -635,6 +674,9 @@ void Nivel3::on_Salir_clicked()
 
 void Nivel3::on_Volver_jugar_clicked()
 {
+    /*Cuando finaliza el juego al jugador se le da la opcion de volver a jugarlo sin la necesidad
+     *de reingresar o cambiar los datos, en esta parte del codigo, se cambia la semilla
+     *y se reinicia el puntaje*/
     datos_juego.setSemilla(1);
     datos_juego.setPuntaje(0);
     QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
@@ -679,6 +721,7 @@ void Nivel3::on_Volver_jugar_clicked()
     file.remove();
     filer.rename(RUTA_FICHEROS);
 
+    //Se crea la escena con el primer nivel.
     Nivel_1 *nivel1 = new Nivel_1;
     nivel1->setDatos_partida_1(this->datos_juego);
     nivel1->show();
