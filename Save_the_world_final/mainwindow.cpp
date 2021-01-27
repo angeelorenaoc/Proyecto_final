@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->Ingresar->hide();
     ui->Botoncontinuar_2->hide();
     ui->Confirmar->hide();
+    ui->label_Team->hide();
+    ui->Label_Password->hide();
 
 }
 
@@ -131,6 +133,8 @@ void MainWindow::on_Volver_clicked()
     ui->Eliminar->show();
     ui->Nombre->clear();
     ui->Clave->clear();
+    ui->label_Team->hide();
+    ui->Label_Password->hide();
 
 }
 
@@ -146,6 +150,10 @@ void MainWindow::on_Solitario_clicked()
     ui->Botoncontinuar_2->show();
     ui->Eliminar->hide();
     ui->Volver->show();
+    ui->Seleccionar->hide();
+    ui->Ingresar->show();
+    ui->label_Team->show();
+    ui->Label_Password->show();
 
     datos_partida.setModo(1);
 }
@@ -161,6 +169,10 @@ void MainWindow::on_Multijugador_clicked()
     ui->Botoncontinuar_2->show();
     ui->Eliminar->hide();
     ui->Volver->show();
+    ui->Seleccionar->hide();
+    ui->Ingresar->show();
+    ui->label_Team->show();
+    ui->Label_Password->show();
 
     msgBox.setText("Tener en cuenta\nSe jugará en modo cooperativo por lo que solo se guarda el nombre del equipo y el puntaje es el mismo para ambos.");
     msgBox.exec();
@@ -182,6 +194,8 @@ void MainWindow::on_CargaPartida_clicked()
     ui->Clave->show();
     ui->Botoncontinuar->show();
     ui->Eliminar->hide();
+    ui->label_Team->show();
+    ui->Label_Password->show();
 }
 
 void MainWindow::on_Botoncontinuar_2_clicked()
@@ -210,6 +224,8 @@ void MainWindow::on_Botoncontinuar_2_clicked()
         file.flush();
         file.close();
 
+        datos_partida.setNombre_equipo(Nombre.toStdString());
+        datos_partida.setClave(Clave.toStdString());
         datos_partida.setSemilla(1);
         datos_partida.setPuntaje(0);
 
@@ -237,6 +253,8 @@ void MainWindow::on_Eliminar_clicked()
     ui->Clave->show();
     ui->Confirmar->show();
     ui->Eliminar->hide();
+    ui->label_Team->show();
+    ui->Label_Password->show();
 }
 
 void MainWindow::on_Confirmar_clicked()

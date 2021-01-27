@@ -54,7 +54,9 @@ Nivel3::Nivel3(QWidget *parent) :
     timere = new QTimer;
     connect(timere,SIGNAL(timeout()),this, SLOT(Movimiento_Enemigo()));
     Lose = new QTimer;
-    connect(timere,SIGNAL(timeout()),this, SLOT(Perder()));
+    connect(Lose,SIGNAL(timeout()),this, SLOT(Perder()));
+    Colisiones = new QTimer;
+    connect(Colisiones,SIGNAL(timeout()),this, SLOT(borderCollision()));
     //*****************************************************************************
 
 }
@@ -189,7 +191,7 @@ void Nivel3::actualizar()
         }
     }
     //Metodo para comprobar las colisiones con muros, bordes o el boton final.
-    borderCollision();
+//    borderCollision();
 }
 
 void Nivel3::Puntos(int i)
@@ -533,13 +535,13 @@ void Nivel3::on_Inicio_clicked()
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
         ui->Game->centerOn(bars.back());
-        timer->start(3);
+        timer->start(4);
         timere->start(40);
     }
 
     //Modo multijugador
     else{
-        timer->start(3);
+        timer->start(4);
         timere->start(40);
         for (int i = 0; i < Enemigo.size() ; i++ ) {
             Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
@@ -579,6 +581,7 @@ void Nivel3::on_Inicio_clicked()
         ui->Game->centerOn(bars.back());
     }
     Lose->start(10);
+    Colisiones->start(1);
 
 }
 

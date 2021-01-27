@@ -129,7 +129,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>250</y>
+      <y>290</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -147,7 +147,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>310</y>
+      <y>380</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -163,7 +163,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>370</y>
+      <y>440</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -219,7 +219,7 @@ background-color: rgb(0, 0, 0);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>370</y>
+      <y>440</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -259,7 +259,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>320</x>
-      <y>370</y>
+      <y>440</y>
       <width>161</width>
       <height>31</height>
      </rect>
@@ -272,6 +272,64 @@ background-color: rgb(0, 0, 0);</string>
      <string>CONFIRMAR</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Label_Password">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>340</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>CONTRASEÑA</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Team">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>250</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>NOMBRE DEL EQUIPO</string>
+    </property>
+   </widget>
+   <zorder>CargaPartida</zorder>
+   <zorder>Solitario</zorder>
+   <zorder>Multijugador</zorder>
+   <zorder>Seleccionar</zorder>
+   <zorder>Volver</zorder>
+   <zorder>Botoncontinuar_2</zorder>
+   <zorder>Eliminar</zorder>
+   <zorder>Label_Password</zorder>
+   <zorder>Clave</zorder>
+   <zorder>Botoncontinuar</zorder>
+   <zorder>Confirmar</zorder>
+   <zorder>Nombre</zorder>
+   <zorder>Ingresar</zorder>
+   <zorder>label_Team</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

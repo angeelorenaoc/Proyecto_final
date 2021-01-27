@@ -131,8 +131,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     spawn_shield(player);
             }
             ui->Game->centerOn(player->x(),player->y());
-            vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
-            vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+//            vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
+//            vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
         }
     }
     //Para el jugador 2
@@ -563,6 +563,7 @@ void Nivel_1::estado_de_habilidad()
 void Nivel_1::Verificacion_Ganar()
 {
     // Chequea si el jugador gano el nivel.
+    int puntaje_total = 0;
     if(enemigos.size()==0 && enemy_timer->isActive()==false){
         if(vida_J1->getAnuncio()>0){
             ui->Game->hide();
@@ -629,6 +630,7 @@ void Nivel_1::Verificacion_Ganar()
         }
         datos_partida_1.setPuntaje(puntaje_total);
         datos_partida_1.setSemilla(2);
+        qDebug()<<"Nuevos datos ingresados";
         puntaje_total=0;
     }
 }
@@ -689,11 +691,11 @@ void Nivel_1::on_Inicio_clicked()
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 
         vida_J1 = new Anuncio(0,0,0,10,1);
-        vida_J1->setPx(470); vida_J1->setPy(420);
+        vida_J1->setPx(600); vida_J1->setPy(-300);
         vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
         scene_1->addItem(vida_J1);
         puntaje_J1 = new Anuncio(0,0,1,15,1);
-        puntaje_J1->setPos(420,83);
+        puntaje_J1->setPos(600,300);
         scene_1->addItem(puntaje_J1);
 
 
@@ -834,9 +836,12 @@ void Nivel_1::on_Siguiente_nivel_clicked()
 
 void Nivel_1::on_Salir_clicked()
 {
+    qDebug()<<datos_partida_1.getSemilla();
+    qDebug()<<datos_partida_1.getPuntaje();
     /*En el caso de que haya ganado se guarda la partida y se dirige al menu principal,
      * sino solo lo dirige al menu principal*/
     if (datos_partida_1.getSemilla()==2){
+        qDebug()<<"Se guarda el usuario";
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
         QList <QString> datos;
@@ -864,8 +869,12 @@ void Nivel_1::on_Salir_clicked()
             QString modo = datos.at(2);
             QString semilla = datos.at(3);
             QString puntaje = datos.at(4);
+
+            qDebug()<<Name << Nombre;
             if(Name == Nombre){
                 QTextStream out(&filer);
+                qDebug()<<datos_partida_1.getSemilla();
+                qDebug()<<datos_partida_1.getPuntaje();
                 out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
             }
             else{

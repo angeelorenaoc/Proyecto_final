@@ -79,8 +79,7 @@ private:
 
     float dt;
     int h_limit;
-    int v_limit;
-    int puntaje_total = 0;
+    int v_limit;    
     int N_enemigos=0;
     int Lim_enemigos;
     int N_jugadores=0;

@@ -48,6 +48,7 @@ public slots:
     //****** Movimiento *******
     void actualizar();
     void Movimiento_Enemigo();
+    void borderCollision();
     //*************************
 
     void Perder();
@@ -71,6 +72,7 @@ private:
     QTimer *timer;
     QTimer *timere;
     QTimer *Lose;
+    QTimer *Colisiones;
 
     float dt;
     int semilla;
@@ -81,7 +83,6 @@ private:
 
     void Puntos(int i);
     void Eliminar_vida();
-    void borderCollision();
     void Colision_paredes_e();
     void keyPressEvent(QKeyEvent *event);
 
