@@ -479,9 +479,11 @@ bool Nivel_1::enemy_collides(Enemigo_normal *E)
 
 void Nivel_1::spawn_shield(Personaje *P)
 {
-    Cooldown = false;
-    Cooldown_timer->stop();
+    // Generar los escudos y ponerlos en pantalla
+    Cooldown = false; // Bandandera que impide que se vuelva a activar la habilidad
+    Cooldown_timer->stop(); // Se pausa el tiempo de reactivacion de habilidad
 
+    // Se crea los escudos y los coloca en pantalla
     escudos.push_back(new escudo_graf(P->getPosx(),P->getPosy(),0,0));
     escudos.back()->getEsf()->setMasa(1000);
 
@@ -497,11 +499,13 @@ void Nivel_1::spawn_shield(Personaje *P)
     escudos.push_back(new escudo_graf(P->getPosx(),P->getPosy()-40,-0.009,0));
     scene_1->addItem(escudos.back());
 
+    // Se inicia el tiempo que habilidad dura en pantalla
     tiempo_de_habilidad->start(5000);
 }
 
 void Nivel_1::actualizar_escudos()
 {
+    // Se actualiza la posicion y velocidad de los escudos
     for(int i=0; i<escudos.size();i++){
         for(int j=0; j<escudos.size();j++){
             if(i!=j){
@@ -510,6 +514,8 @@ void Nivel_1::actualizar_escudos()
             }
         }
     }
+
+    // Se verifica la colision con los enemigos
     for (int i=0;i<enemigos.size();i++) {
         for (int j=0;j<escudos.size();j++) {
             if(enemigos.at(i)->collidesWithItem(escudos.at(j))){
@@ -524,6 +530,8 @@ void Nivel_1::actualizar_escudos()
             }
         }
     }
+
+    // Se verifica la colision con los muros
     for (int i=0;i<muros.size();i++) {
         for (int j=0;j<escudos.size();j++) {
             if(escudos.at(j)->collidesWithItem(muros.at(i))){
@@ -536,6 +544,7 @@ void Nivel_1::actualizar_escudos()
 
 void Nivel_1::delete_escudos()
 {
+    // Una vez se cumple su tiempo en pantalla se eliminan los escudos
     for (int i=0;i<escudos.size();i++) {
         scene_1->removeItem(escudos.at(i));
         tiempo_de_habilidad->stop();
@@ -546,6 +555,7 @@ void Nivel_1::delete_escudos()
 
 void Nivel_1::estado_de_habilidad()
 {
+    // Cambia el estado de habilidad
     if(!Cooldown)
         Cooldown=true;
 }
