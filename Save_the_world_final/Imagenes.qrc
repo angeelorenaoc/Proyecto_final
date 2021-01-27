@@ -30,4 +30,9 @@
         <file>Fondo.jpg</file>
         <file>Felicitaciones.jpg</file>
     </qresource>
+    <qresource prefix="/new/Archivos_texto">
+        <file>Monedas_N3.txt</file>
+        <file>Muros_N1.txt</file>
+        <file>Muros_N3.txt</file>
+    </qresource>
 </RCC>

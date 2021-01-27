@@ -205,13 +205,18 @@ void MainWindow::on_Botoncontinuar_2_clicked()
      */
 
     QString Nombre = ui->Nombre->text();
-    QString Clave = ui->Clave->text();    
+    QString Clave = ui->Clave->text();
 
     ui->Nombre->clear();
     ui->Clave->clear();
 
     if(Find(Nombre.toStdString(),Clave.toStdString())==1 || Find(Nombre.toStdString(),Clave.toStdString())==2){
         msgBox.setText("El usuario ya existe, intente con otro nombre"); //Se da el texto para la qMessegeBox
+        msgBox.exec(); //Se muestra la qMessegeBox
+    }
+
+    else if(Nombre=="" || Clave==""){
+        msgBox.setText("Todos los campos deben ser llenados"); //Se da el texto para la qMessegeBox
         msgBox.exec(); //Se muestra la qMessegeBox
     }
 

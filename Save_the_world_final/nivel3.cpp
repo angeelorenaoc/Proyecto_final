@@ -1,7 +1,7 @@
 #include "nivel3.h"
 #include "ui_nivel3.h"
-#define RUTA_MURO3 "Muros_N3.txt"
-#define RUTA_MONEDA "Monedas_N3.txt"
+#define RUTA_MURO3 ":/new/Archivos_texto/Muros_N3.txt"
+#define RUTA_MONEDA ":/new/Archivos_texto/Monedas_N3.txt"
 #define RUTA_FICHEROS "Ficheros.txt"
 #define FICHEROS_RESPALDO "Respaldo.txt"
 
@@ -264,6 +264,7 @@ void Nivel3::borderCollision()
     //*****************Cuando el jugador colisiona con el boton final**************************
     for (int i = 0; i < bars.size() ; i++ ) {
         if (bars.at(i)->collidesWithItem(Boton)){
+            int Puntaje_total=datos_juego.getPuntaje();
             ui->Game->hide();
             Bonus.clear();
             Muros.clear();
@@ -273,6 +274,9 @@ void Nivel3::borderCollision()
             timer->stop();
             timere->stop();
             Lose->stop();
+
+            Puntaje_total += puntaje1->getAnuncio();
+            Puntaje_total += puntaje2->getAnuncio();
 
             ui->Salir->show();
             ui->Salir->move(470,320);
@@ -288,6 +292,8 @@ void Nivel3::borderCollision()
             ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
             scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel3.jpg")));
 
+            datos_juego.setPuntaje(Puntaje_total);
+            Puntaje_total=0;
             scene->clear();
         }
     }
@@ -647,7 +653,7 @@ void Nivel3::on_Salir_clicked()
 {
     /*Este boton guarda los datos(en el caso de que haya ganado)
      * y lleva al usuario al menu principal.*/
-    if (datos_juego.getSemilla()==2){
+    if (datos_juego.getSemilla()==3){
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
         QList <QString> datos;

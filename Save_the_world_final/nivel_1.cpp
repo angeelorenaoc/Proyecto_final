@@ -1,6 +1,6 @@
 #include "nivel_1.h"
 #include "ui_nivel_1.h"
-#define RUTA_MURO "Muros_N1.txt"
+#define RUTA_MURO ":/new/Archivos_texto/Muros_N1.txt"
 #define RUTA_FICHEROS "Ficheros.txt"
 #define FICHEROS_RESPALDO "Respaldo.txt"
 
@@ -630,7 +630,6 @@ void Nivel_1::Verificacion_Ganar()
         }
         datos_partida_1.setPuntaje(puntaje_total);
         datos_partida_1.setSemilla(2);
-        qDebug()<<"Nuevos datos ingresados";
         puntaje_total=0;
     }
 }
@@ -836,12 +835,9 @@ void Nivel_1::on_Siguiente_nivel_clicked()
 
 void Nivel_1::on_Salir_clicked()
 {
-    qDebug()<<datos_partida_1.getSemilla();
-    qDebug()<<datos_partida_1.getPuntaje();
     /*En el caso de que haya ganado se guarda la partida y se dirige al menu principal,
      * sino solo lo dirige al menu principal*/
     if (datos_partida_1.getSemilla()==2){
-        qDebug()<<"Se guarda el usuario";
         QFile file(RUTA_FICHEROS);           //Objeto para manejar la lectura del archivo
         file.open(QIODevice::ReadOnly);     //Abre el archiv en modo lectura
         QList <QString> datos;
@@ -870,11 +866,8 @@ void Nivel_1::on_Salir_clicked()
             QString semilla = datos.at(3);
             QString puntaje = datos.at(4);
 
-            qDebug()<<Name << Nombre;
             if(Name == Nombre){
                 QTextStream out(&filer);
-                qDebug()<<datos_partida_1.getSemilla();
-                qDebug()<<datos_partida_1.getPuntaje();
                 out << Nombre<<" "<<Clave<<" "<<Modo<<" "<<Semilla<<" "<<Puntaje<<"\n";
             }
             else{
