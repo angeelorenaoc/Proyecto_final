@@ -82,6 +82,7 @@ private:
     int v_limit;
     int puntaje_total = 0;
     int N_enemigos=0;
+    int Lim_enemigos;
     int N_jugadores=0;
     int sentido_bala=4;
     bool inmune = false;

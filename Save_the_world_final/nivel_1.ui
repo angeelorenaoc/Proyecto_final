@@ -44,8 +44,8 @@
    <widget class="QPushButton" name="Inicio">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>210</y>
+      <x>370</x>
+      <y>230</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -61,8 +61,8 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Instrucciones">
     <property name="geometry">
      <rect>
-      <x>110</x>
-      <y>290</y>
+      <x>370</x>
+      <y>310</y>
       <width>111</width>
       <height>41</height>
      </rect>
@@ -78,7 +78,7 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Volver">
     <property name="geometry">
      <rect>
-      <x>310</x>
+      <x>270</x>
       <y>620</y>
       <width>81</width>
       <height>31</height>
@@ -111,6 +111,10 @@ background-color: rgb(22, 22, 22);</string>
       <height>23</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
      <string>SIGUIENTE NIVEL</string>
     </property>
@@ -118,7 +122,7 @@ background-color: rgb(22, 22, 22);</string>
    <widget class="QPushButton" name="Salir">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>390</x>
       <y>620</y>
       <width>75</width>
       <height>31</height>
@@ -140,6 +144,10 @@ background-color: rgb(22, 22, 22);</string>
       <width>75</width>
       <height>23</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>REINICIAR</string>

@@ -43,9 +43,9 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Game->hide();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
-    ui->Salir->hide();
     ui->Volver_jugar->hide();
     ui->Siguiente->hide();
+    ui->Salir->move(380,530);
     //********************************************************
 
     //***** Se crean los timer y se conectan con sus respectivas funciones *********
@@ -273,6 +273,7 @@ void Nivel3::borderCollision()
             Lose->stop();
 
             ui->Salir->show();
+            ui->Salir->move(470,320);
             ui->Siguiente->show();
             scene_2->setSceneRect(0,0,466,700);
             ui->Anuncios->setScene(scene_2);
@@ -351,6 +352,7 @@ void Nivel3::Perder()
         Lose->stop();
 
         ui->Salir->show();
+        ui->Salir->move(470,320);
         ui->Reiniciar->show();
         scene_2->setSceneRect(0,0,466,700);
         ui->Anuncios->setScene(scene_2);
@@ -425,6 +427,7 @@ void Nivel3::on_Inicio_clicked()
     ui->Inicio->hide();
     ui->Instrucciones->hide();
     ui->Game->show();
+    ui->Salir->hide();
 
     //Boton que inicia el nivel y carga todo lo necesario a escena
     this->resize(ui->Game->width(),ui->Game->height()+25);
@@ -480,6 +483,12 @@ void Nivel3::on_Inicio_clicked()
     Enemigo.push_back(new Enemigo_graf(0,3));
     Enemigo.back()->setPos(2760,120);
     scene->addItem(Enemigo.back());
+    Enemigo.push_back(new Enemigo_graf(0,3));
+    Enemigo.back()->setPos(4500,120);
+    scene->addItem(Enemigo.back());
+    Enemigo.push_back(new Enemigo_graf(0,3));
+    Enemigo.back()->setPos(5950,120);
+    scene->addItem(Enemigo.back());
     //***************************************
 
     //**********Boton*******************
@@ -511,6 +520,12 @@ void Nivel3::on_Inicio_clicked()
             if (i == 2){
                 e->setPx(2760); e->setPy(120);
             }
+            if (i == 3){
+                e->setPx(4500); e->setPy(120);
+            }
+            if (i == 4){
+                e->setPx(5950); e->setPy(120);
+            }
             Enemigo.at(i)->actualizar((v_limit));
         }
         bars.push_back((new Personaje3graf(0,0)));
@@ -519,13 +534,13 @@ void Nivel3::on_Inicio_clicked()
         scene->addItem(bars.back());
         ui->Game->centerOn(bars.back());
         timer->start(3);
-        timere->start(50);
+        timere->start(40);
     }
 
     //Modo multijugador
     else{
         timer->start(3);
-        timere->start(10);
+        timere->start(40);
         for (int i = 0; i < Enemigo.size() ; i++ ) {
             Enemigo_fisica *e = Enemigo.at(i)->getEnemy();
             if(i == 0){
@@ -537,6 +552,13 @@ void Nivel3::on_Inicio_clicked()
             if (i == 2){
                 e->setPx(2760); e->setPy(120);
             }
+            if (i == 3){
+                e->setPx(4500); e->setPy(120);
+            }
+            if (i == 4){
+                e->setPx(5950); e->setPy(120);
+            }
+
             Enemigo.at(i)->actualizar((v_limit));
         }
         scene->addItem(vidas1);
@@ -567,8 +589,9 @@ void Nivel3::on_Instrucciones_clicked()
     ui->Instrucciones->hide();
     ui->Anuncios->show();
     this->resize(ui->Anuncios->width(),ui->Anuncios->height());
-    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Anuncios3.jpg")));
+    scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones3.jpg")));
     ui->Volver->show();
+    ui->Salir->hide();
     //***************************************************************************
 }
 
@@ -581,6 +604,7 @@ void Nivel3::on_Volver_clicked()
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Volver->hide();
+    ui->Salir->show();
     //*************************************************
 }
 
@@ -591,6 +615,7 @@ void Nivel3::on_Siguiente_clicked()
     ui->Siguiente->hide();
     ui->Salir->move(226,600);
     ui->Volver_jugar->show();
+    ui->Volver_jugar->move(226,550);
     scene_2->setSceneRect(0,0,547,700);
     ui->Anuncios->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -673,7 +698,7 @@ void Nivel3::on_Salir_clicked()
 }
 
 void Nivel3::on_Volver_jugar_clicked()
-{
+{   
     /*Cuando finaliza el juego al jugador se le da la opcion de volver a jugarlo sin la necesidad
      *de reingresar o cambiar los datos, en esta parte del codigo, se cambia la semilla
      *y se reinicia el puntaje*/

@@ -82,6 +82,9 @@ void MainWindow::on_Botoncontinuar_clicked()
         datos_partida.setModo(datos.at(2).toInt());
         datos_partida.setSemilla(datos.at(3).toInt());
         datos_partida.setPuntaje(datos.at(4).toInt());
+        QString Info = "Nombre: "+QString::fromStdString(datos_partida.getNombre_equipo())+"\n"+"Puntaje: "+QString::number(datos_partida.getPuntaje());
+        msgBox.setText(Info);
+        msgBox.exec();
 
         if(datos_partida.getSemilla()==1){
             Nivel_1 *nivel_1 = new Nivel_1;
@@ -158,6 +161,9 @@ void MainWindow::on_Multijugador_clicked()
     ui->Botoncontinuar_2->show();
     ui->Eliminar->hide();
     ui->Volver->show();
+
+    msgBox.setText("Tener en cuenta\nSe jugará en modo cooperativo por lo que solo se guarda el nombre del equipo y el puntaje es el mismo para ambos.");
+    msgBox.exec();
 
     datos_partida.setModo(2);
 }

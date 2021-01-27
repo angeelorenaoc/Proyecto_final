@@ -37,7 +37,7 @@ Nivel_1::Nivel_1(QWidget *parent) :
     //******************************************************************
 
     //Se esconden los botones
-    ui->Game->hide();
+    ui->Game->hide();   
     ui->Anuncios->hide();
     ui->Volver->hide();
     ui->Siguiente_nivel->hide();
@@ -290,7 +290,7 @@ void Nivel_1::spawn()
     scene_1->addItem(enemigos.back());
     N_enemigos++;
 
-    if(N_enemigos>=30){
+    if(N_enemigos>=Lim_enemigos){
         enemy_timer->stop();
     }
     //*****************************************
@@ -583,12 +583,14 @@ void Nivel_1::Verificacion_Ganar()
             scene_2->clear();
             ui->Anuncios->show();
             ui->Anuncios->resize(467,700);
-            this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+            this->resize(ui->Anuncios->width()+130,ui->Anuncios->height());
             ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
             ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
             scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
             ui->Salir->show();
+            ui->Salir->move(470,330);
             ui->Siguiente_nivel->show();
+            ui->Siguiente_nivel->move(470,380);
 
             scene_1->clear();
         }
@@ -615,12 +617,14 @@ void Nivel_1::Verificacion_Ganar()
                 scene_2->clear();
                 ui->Anuncios->show();
                 ui->Anuncios->resize(467,700);
-                this->resize(ui->Anuncios->width(),ui->Anuncios->height());
+                this->resize(ui->Anuncios->width()+130,ui->Anuncios->height());
                 ui->Anuncios->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
                 ui->Anuncios->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
                 scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Ganar_nivel1.jpg")));
                 ui->Salir->show();
+                ui->Salir->move(470,330);
                 ui->Siguiente_nivel->show();
+                ui->Siguiente_nivel->move(470,380);
             }
         }
         datos_partida_1.setPuntaje(puntaje_total);
@@ -677,27 +681,6 @@ void Nivel_1::on_Inicio_clicked()
     }
     file.close();
 
-    for(int i =0; i <1; i++){
-   /* muros.push_back(new Muro(67,31,0,67,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,96,67,289,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,81,0,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(190,194,388,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(320,51,642,142,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,96,802,288,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(32,110,930,309,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(64,33,674,387,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(288,64,674,417,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(256,59,706,470,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(112,97,850,545,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(96,64,194,128,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(34,84,0,341,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(258,64,0,417,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(194,79,0,434,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(112,97,0,544,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(0,642,0,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(0,642,962,0,1));scene_1->addItem(muros.back());
-    muros.push_back(new Muro(962,0,0,642,1));scene_1->addItem(muros.back());*/}
-
     //Modo solitario.
     if(datos_partida_1.getModo()==1){
         jugadores.push_back(new Personaje(0,0,1,490,400));
@@ -714,7 +697,8 @@ void Nivel_1::on_Inicio_clicked()
         scene_1->addItem(puntaje_J1);
 
 
-        timer_move->start(50);
+        Lim_enemigos = 30;
+        timer_move->start(35);
         enemy_timer->start(1000);
         bullet_timer->start(50);
         shield->start(50);
@@ -743,8 +727,9 @@ void Nivel_1::on_Inicio_clicked()
             puntaje_J2->setPos(420,83);
             scene_1->addItem(puntaje_J2);
 
-            timer_move->start(15);
-            enemy_timer->start(800);
+            Lim_enemigos=50;
+            timer_move->start(20);
+            enemy_timer->start(900);
         }
         bullet_timer->start(50);
         shield->start(50);
@@ -755,6 +740,7 @@ void Nivel_1::on_Inicio_clicked()
 void Nivel_1::on_Instrucciones_clicked()
 {
     ui->Inicio->hide();
+    ui->Salir->hide();
     ui->Instrucciones->hide();
     ui->Siguiente_nivel->hide();
     ui->Volver->show();
@@ -773,6 +759,7 @@ void Nivel_1::on_Volver_clicked()
     ui->Inicio->show();
     ui->Instrucciones->show();
     ui->Volver->hide();
+    ui->Salir->show();
 }
 
 void Nivel_1::on_Reiniciar_clicked()

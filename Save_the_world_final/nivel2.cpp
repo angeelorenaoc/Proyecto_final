@@ -38,7 +38,7 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->Volver->hide();
     ui->graphicsView->hide();
     ui->graphicsView_2->hide();
-    ui->Salir->hide();
+    ui->Salir->move(350,530);
     ui->Siguiente->hide();
     ui->Reiniciar->hide();
     //********************************************************
@@ -252,6 +252,7 @@ void Nivel2::victory()
 
         //********* Se muestra la escena que contiene las felicitaciones ****************
         ui->Salir->show();
+        ui->Salir->move(500,340);
         ui->Siguiente->show();
         scene_2->setSceneRect(0,0,497,700);
         ui->graphicsView_2->setScene(scene_2);
@@ -316,6 +317,7 @@ void Nivel2::victory()
         ui->graphicsView_2->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Perder_nivel2.jpg")));
         ui->Salir->show();
+        ui->Salir->move(500,340);
         ui->Reiniciar->show();
         //*************************************************************************************
 
@@ -402,6 +404,7 @@ void Nivel2::on_Iniciar_clicked()
     ui->Iniciar->hide();
     ui->Instrucciones->hide();
     ui->graphicsView->show();
+    ui->Salir->hide();
     scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
 
     // Modo solitario
@@ -461,6 +464,7 @@ void Nivel2::on_Instrucciones_clicked()
     this->resize(ui->graphicsView_2->width(),ui->graphicsView_2->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
     ui->Volver->show();
+    ui->Salir->hide();
 }
 
 void Nivel2::on_Volver_clicked()
@@ -472,6 +476,7 @@ void Nivel2::on_Volver_clicked()
     ui->Iniciar->show();
     ui->Instrucciones->show();
     ui->Volver->hide();
+    ui->Salir->show();
 }
 
 void Nivel2::on_Salir_clicked()
