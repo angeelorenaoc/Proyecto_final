@@ -220,7 +220,7 @@ void MainWindow::on_Botoncontinuar_2_clicked()
         msgBox.exec(); //Se muestra la qMessegeBox
     }
 
-    else if(Nombre.indexOf(" ")==-1 || Clave.indexOf(" ")==-1){ //Verificacion
+    else if(Nombre.indexOf(" ")==-1 && Clave.indexOf(" ")==-1){ //Verificacion
         QFile file(RUTA_FICHEROS);
         file.open(QIODevice::WriteOnly | QIODevice::Text |QIODevice::Append);
 

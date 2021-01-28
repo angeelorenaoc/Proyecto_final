@@ -24,7 +24,7 @@ Nivel2::Nivel2(QWidget *parent) :
 
     setStyleSheet("Nivel2 {background-image:url(:/new/Imagenes/Fondo.jpg)}"); //Fondo que tiene la ventana
 
-    //************ Definicion de escena en la que se muestran los anuncios *****************
+    //************ Definicion de escena en la que se muestran los graphicsView_2 *****************
     scene_2->setSceneRect(0,0,902,700);
     ui->graphicsView_2->setScene(scene_2);
     ui->centralwidget->adjustSize();
@@ -622,16 +622,22 @@ void Nivel2::on_Reiniciar_clicked()
 {
     // Dado el caso de que el jugador haya perdido, le da la posibilidad de repetir el nivel
 
+    scene_2->setSceneRect(0,0,902,605);
+    ui->graphicsView_2->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->graphicsView_2->resize(902,605);
+
     N_enemigos=0;
     Total_enemigos=0;
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
-    ui->graphicsView_2->resize(902,605);
     scene_2->clear();
     ui->graphicsView_2->hide();
     ui->Reiniciar->hide();
     ui->Salir->move(350,530);
     ui->Iniciar->show();
     ui->Instrucciones->show();
+    ui->Configurar->show();
 }
 
 void Nivel2::on_Configurar_clicked()

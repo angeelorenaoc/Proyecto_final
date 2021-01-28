@@ -673,8 +673,13 @@ void Nivel3::on_Siguiente_clicked()
 void Nivel3::on_Reiniciar_clicked()
 {
     //En el caso de que el jugador pierda el nivel, se le da la posibilidad de repetirlo.
-    this->resize(800,700);
+    scene_2->setSceneRect(0,0,700,700);
+    ui->Anuncios->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
     ui->Anuncios->resize(700,700);
+
+    this->resize(800,700);
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();

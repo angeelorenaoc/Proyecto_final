@@ -801,6 +801,13 @@ void Nivel_1::on_Volver_clicked()
 void Nivel_1::on_Reiniciar_clicked()
 {
     //Si el jugador pierde, se la da la posibilidad de volver a jugar el nivel
+
+    scene_2->setSceneRect(0,0,700,700);
+    ui->Anuncios->setScene(scene_2);
+    ui->centralwidget->adjustSize();
+    scene_2->addRect(scene_2->sceneRect());
+    ui->Anuncios->resize(700,700);
+
     N_enemigos=0;
     N_jugadores=0;
     sentido_bala=4;
@@ -808,7 +815,6 @@ void Nivel_1::on_Reiniciar_clicked()
     inmune = false;
     Cooldown = true;
     this->resize(ui->Game->width(),ui->Game->height());
-    ui->Anuncios->resize(700,700);
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();

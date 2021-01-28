@@ -15,7 +15,7 @@ es el M.R.U.
 class Personaje: public QObject, public QGraphicsItem
 {
     float posx ,posy;
-    int velocidad=3;
+    int velocidad=5;
     int angulo;
     int vel_inicial;
 
