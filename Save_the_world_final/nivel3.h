@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QMessageBox>
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <string.h>
@@ -62,6 +63,13 @@ private slots:
     void on_Reiniciar_clicked();
     void on_Salir_clicked();
     void on_Volver_jugar_clicked();
+    void on_Fondo1_clicked();
+    void on_Fondo2_clicked();
+    void on_Hombre_clicked();
+    void on_Mujer_clicked();
+    void on_Hombre1_clicked();
+    void on_Mujer1_clicked();
+    void on_Configurar_clicked();
     //*********************************
 
 private:
@@ -73,6 +81,8 @@ private:
     QTimer *timere;
     QTimer *Lose;
     QTimer *Colisiones;
+
+    QMessageBox msgBox;
 
     float dt;
     int semilla;
@@ -88,7 +98,7 @@ private:
 
     //****** Elementos de la partida *****
     int disenio_jugador1=0;
-    int disenio_jugador2=0;
+    int disenio_jugador2=3;
     int fondo3=0;
     Muro *Boton;
     Anuncio *vidas1;

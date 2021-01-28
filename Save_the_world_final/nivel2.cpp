@@ -415,6 +415,8 @@ void Nivel2::on_Iniciar_clicked()
     ui->Iniciar->hide();
     ui->Instrucciones->hide();
     ui->graphicsView->show();
+    ui->Configurar->hide();
+
     ui->Salir->hide();
     if (fondo2 == 0)
         scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
@@ -479,6 +481,7 @@ void Nivel2::on_Instrucciones_clicked()
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones2.jpg")));
     ui->Volver->show();
     ui->Salir->hide();
+    ui->Configurar->hide();
 }
 
 void Nivel2::on_Volver_clicked()
@@ -622,6 +625,7 @@ void Nivel2::on_Reiniciar_clicked()
     N_enemigos=0;
     Total_enemigos=0;
     this->resize(ui->graphicsView->width(),ui->graphicsView->height());
+    ui->graphicsView_2->resize(902,605);
     scene_2->clear();
     ui->graphicsView_2->hide();
     ui->Reiniciar->hide();
@@ -633,8 +637,11 @@ void Nivel2::on_Reiniciar_clicked()
 void Nivel2::on_Configurar_clicked()
 {
     ui->Configurar->hide();
+    ui->Iniciar->hide();
+    ui->Instrucciones->hide();
     ui->Fondo->show();
     ui->Jugador1->show();
+    ui->Salir->hide();
 
     ui->Fondo1->show();
     ui->Fondo2->show();
@@ -656,39 +663,55 @@ void Nivel2::on_Configurar_clicked()
 void Nivel2::on_Fondo1_clicked()
 {
     fondo2=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Fondo2_clicked()
 {
     fondo2=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Azul_clicked()
 {
-    disenio_jugador1=0;
+    disenio_jugador1=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Rojo_clicked()
 {
-    disenio_jugador1=2;
+    disenio_jugador1=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Verde_clicked()
 {
-    disenio_jugador1=1;
+    disenio_jugador1=2;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Azul1_clicked()
 {
-    disenio_jugador2=0;
+    disenio_jugador2=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Rojo1_clicked()
 {
-    disenio_jugador2=2;
+    disenio_jugador2=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel2::on_Verde1_clicked()
 {
-    disenio_jugador2=1;
+    disenio_jugador2=2;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }

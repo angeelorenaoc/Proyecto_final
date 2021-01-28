@@ -34,6 +34,8 @@
         <file>Laboratorio_Oak_2.jpg</file>
         <file>Sprite_medico3.png</file>
         <file>Sprite_medico4.png</file>
+        <file>Sprite_personaje2.png</file>
+        <file>Personaje_mujer2.png</file>
     </qresource>
     <qresource prefix="/new/Archivos_texto">
         <file>Monedas_N3.txt</file>

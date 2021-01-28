@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QMessageBox>
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QObject>
@@ -64,25 +65,16 @@ private slots:
     void on_Salir_clicked();
     void on_Siguiente_clicked();
     void on_Reiniciar_clicked();
-    //**********************************
-
     void on_Fondo1_clicked();
-
     void on_Fondo2_clicked();
-
     void on_Azul_clicked();
-
     void on_Rojo_clicked();
-
     void on_Verde_clicked();
-
     void on_Azul1_clicked();
-
     void on_Rojo1_clicked();
-
     void on_Verde1_clicked();
-
     void on_Configurar_clicked();
+    //**********************************
 
 private:
     Ui::Nivel2 *ui;
@@ -106,6 +98,8 @@ private:
     QTimer *mover_enemigos_s;
     QTimer *win;
 
+    QMessageBox msgBox;
+
     void keyPressEvent(QKeyEvent * event);
 
     //***Colisiones de los elementos en pantalla***
@@ -123,7 +117,7 @@ private:
 
     //**** Anuncuios *****
     int disenio_jugador1=0;
-    int disenio_jugador2=0;
+    int disenio_jugador2=1;
     int fondo2=0;
     Anuncio *vida;
     Anuncio *puntaje1;

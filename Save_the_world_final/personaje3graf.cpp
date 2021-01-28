@@ -8,8 +8,13 @@ Personaje3graf::Personaje3graf(QObject *parent, int id) : QObject(parent)
     // Dependiendo del id se le da la imagen al personaje
     if (id == 0){
         pixmap = new QPixmap(":/new/Imagenes/Sprite_personaje.png");}
-    else{
+    else if(id == 1){
         pixmap = new QPixmap(":/new/Imagenes/Personaje_mujer.png");}
+    else if(id == 3)
+        pixmap = new QPixmap(":/new/Imagenes/Sprite_personaje2.png");
+    else
+        pixmap = new QPixmap(":/new/Imagenes/Personaje_mujer2.png");
+
 
     ancho = 40;
     alto  = 76;

@@ -170,6 +170,201 @@ background-color: rgb(22, 22, 22);</string>
      <string>VOLVER A JUGAR</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Fondo">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>65</y>
+      <width>141</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Elija un fondo</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Hombre">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>215</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Hombre</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Mujer1">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>245</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Mujer</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Fondo2">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>115</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Fondo 2</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Jugador1">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>165</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Elije jugador 1</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Configurar">
+    <property name="geometry">
+     <rect>
+      <x>370</x>
+      <y>315</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Configurar mapa</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Hombre1">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>215</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Hombre</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Fondo1">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>115</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Fondo 1</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Mujer">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>245</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Mujer</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Jugador2">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>170</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>Elije jugador 2</string>
+    </property>
+   </widget>
    <zorder>Game</zorder>
    <zorder>Anuncios</zorder>
    <zorder>Inicio</zorder>
@@ -179,6 +374,16 @@ background-color: rgb(22, 22, 22);</string>
    <zorder>Siguiente</zorder>
    <zorder>Reiniciar</zorder>
    <zorder>Volver</zorder>
+   <zorder>Fondo</zorder>
+   <zorder>Hombre</zorder>
+   <zorder>Mujer1</zorder>
+   <zorder>Fondo2</zorder>
+   <zorder>Jugador1</zorder>
+   <zorder>Configurar</zorder>
+   <zorder>Hombre1</zorder>
+   <zorder>Fondo1</zorder>
+   <zorder>Mujer</zorder>
+   <zorder>Jugador2</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

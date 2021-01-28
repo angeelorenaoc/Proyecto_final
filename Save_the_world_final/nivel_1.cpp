@@ -461,7 +461,6 @@ void Nivel_1::move_enemy(Personaje *c, Enemigo_normal *e,int i, int j)
         tiempo_de_habilidad->stop();
         Ganar->stop();
 
-        qDebug()<<"YOU LOSE";
         ui->Game->hide();
         scene_2->clear();
         ui->Anuncios->show();
@@ -763,6 +762,7 @@ void Nivel_1::on_Instrucciones_clicked()
     ui->Instrucciones->hide();
     ui->Siguiente_nivel->hide();
     ui->Volver->show();
+    ui->Configurar->hide();
     ui->Anuncios->show();
     this->resize(ui->Anuncios->width(),ui->Anuncios->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones_1.jpg")));
@@ -808,11 +808,13 @@ void Nivel_1::on_Reiniciar_clicked()
     inmune = false;
     Cooldown = true;
     this->resize(ui->Game->width(),ui->Game->height());
+    ui->Anuncios->resize(700,700);
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
     ui->Inicio->show();
     ui->Instrucciones->show();
+    ui->Configurar->show();
 }
 
 void Nivel_1::on_Siguiente_nivel_clicked()
@@ -927,8 +929,12 @@ void Nivel_1::on_Salir_clicked()
 
 void Nivel_1::on_Configurar_clicked()
 {
+    // Se presetan las config
     ui->Configurar->hide();
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
     ui->Fondo->show();
+    ui->Salir->hide();
     ui->Jugador1->show();
 
     ui->Fondo1->show();
@@ -950,53 +956,72 @@ void Nivel_1::on_Configurar_clicked()
 
 }
 
-
 void Nivel_1::on_Fondo1_clicked()
 {
     fondo1=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Fondo2_clicked()
 {
     fondo1=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Azul_clicked()
 {
     disenio_jugador1=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Rosado_clicked()
 {
     disenio_jugador1=2;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Verde_clicked()
 {
     disenio_jugador1=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Morado_clicked()
 {
     disenio_jugador1=3;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Azul1_clicked()
 {
     disenio_jugador2=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Rosado1_clicked()
 {
     disenio_jugador2=2;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Verde1_clicked()
 {
     disenio_jugador2=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
 
 void Nivel_1::on_Morado1_clicked()
 {
     disenio_jugador1=3;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }

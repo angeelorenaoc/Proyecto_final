@@ -3,6 +3,7 @@
 
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QMessageBox>
 #include <QMainWindow>
 #include <QKeyEvent>
 #include <QObject>
@@ -61,29 +62,18 @@ private slots:
     void on_Siguiente_nivel_clicked();
     void on_Reiniciar_clicked();
     void on_Salir_clicked();
-    //********************************
-
     void on_Configurar_clicked();
-
     void on_Fondo1_clicked();
-
     void on_Fondo2_clicked();
-
     void on_Azul_clicked();
-
     void on_Rosado_clicked();
-
     void on_Verde_clicked();
-
     void on_Morado_clicked();
-
     void on_Azul1_clicked();
-
     void on_Rosado1_clicked();
-
     void on_Verde1_clicked();
-
     void on_Morado1_clicked();
+    //********************************
 
 private:
     Ui::Nivel_1 *ui;
@@ -98,6 +88,8 @@ private:
     QTimer *tiempo_de_habilidad;
     QTimer *tiempo_inmunidad;
     QTimer *Ganar;
+
+    QMessageBox msgBox;
 
     float dt;
     int disenio_jugador1=0;

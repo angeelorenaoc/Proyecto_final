@@ -46,6 +46,15 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Volver_jugar->hide();
     ui->Siguiente->hide();
     ui->Salir->move(380,530);
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Hombre->hide();
+    ui->Mujer->hide();
+    ui->Jugador2->hide();
+    ui->Hombre1->hide();
+    ui->Mujer1->hide();
     //********************************************************
 
     //***** Se crean los timer y se conectan con sus respectivas funciones *********
@@ -436,10 +445,15 @@ void Nivel3::on_Inicio_clicked()
     ui->Instrucciones->hide();
     ui->Game->show();
     ui->Salir->hide();
+    ui->Configurar->hide();
 
     //Boton que inicia el nivel y carga todo lo necesario a escena
     this->resize(ui->Game->width(),ui->Game->height()+25);
-    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
+
+    if(fondo3==0)
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
+    else
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/fondo_ladrillo.jpg")));
 
     QFile file(RUTA_MURO3);           //Objeto para manejar la lectura del archivo
     file.open(QIODevice::ReadOnly);     //Abre el archivo en modo lectura
@@ -536,7 +550,7 @@ void Nivel3::on_Inicio_clicked()
             }
             Enemigo.at(i)->actualizar((v_limit));
         }
-        bars.push_back((new Personaje3graf(0,0)));
+        bars.push_back((new Personaje3graf(0,disenio_jugador1)));
         bars.back()->setFocus();
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
@@ -577,11 +591,11 @@ void Nivel3::on_Inicio_clicked()
         scene->addItem(puntaje2);
         vidas2->setPx(0);vidas2->setPy(0);
         puntaje2->setPx(0);vidas1->setPy(18);
-        bars.push_back((new Personaje3graf));
+        bars.push_back((new Personaje3graf(0,disenio_jugador1)));
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
         ui->Game->centerOn(bars.back());
-        bars.push_back((new Personaje3graf(0,1)));
+        bars.push_back((new Personaje3graf(0,disenio_jugador2)));
         bars.back()->actualizar((v_limit));
         scene->addItem(bars.back());
         ui->Game->centerOn(bars.back());
@@ -600,6 +614,7 @@ void Nivel3::on_Instrucciones_clicked()
     this->resize(ui->Anuncios->width(),ui->Anuncios->height());
     scene_2->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Instrucciones3.jpg")));
     ui->Volver->show();
+    ui->Configurar->hide();
     ui->Salir->hide();
     //***************************************************************************
 }
@@ -609,11 +624,21 @@ void Nivel3::on_Volver_clicked()
     //*****Boton que lo lleva al inicio del nivel*******
     ui->Inicio->show();
     ui->Instrucciones->show();
-    this->resize(ui->Game->width(),ui->Game->height());
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Volver->hide();
     ui->Salir->show();
+    ui->Configurar->show();
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Hombre->hide();
+    ui->Mujer->hide();
+    ui->Jugador2->hide();
+    ui->Hombre1->hide();
+    ui->Mujer1->hide();
+    this->resize(800,700);
     //*************************************************
 }
 
@@ -640,13 +665,16 @@ void Nivel3::on_Siguiente_clicked()
 void Nivel3::on_Reiniciar_clicked()
 {
     //En el caso de que el jugador pierda el nivel, se le da la posibilidad de repetirlo.
-    this->resize(ui->Game->width(),ui->Game->height());
+    this->resize(800,700);
+    ui->Anuncios->resize(700,700);
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
     ui->Salir->hide();
     ui->Inicio->show();
     ui->Instrucciones->show();
+    ui->Configurar->show();
+    ui->Salir->move(380,530);
 }
 
 void Nivel3::on_Salir_clicked()
@@ -760,4 +788,70 @@ void Nivel3::on_Volver_jugar_clicked()
     nivel1->setDatos_partida_1(this->datos_juego);
     nivel1->show();
     this->~Nivel3();
+}
+
+void  Nivel3::on_Configurar_clicked()
+{
+    ui->Configurar->hide();
+    ui->Inicio->hide();
+    ui->Instrucciones->hide();
+    ui->Fondo->show();
+    ui->Jugador1->show();
+    ui->Salir->hide();
+
+    ui->Fondo1->show();
+    ui->Fondo2->show();
+    ui->Hombre->show();
+    ui->Mujer->show();
+
+    if (datos_juego.getModo()==2){
+        ui->Jugador2->show();
+        ui->Hombre1->show();
+        ui->Mujer1->show();
+    }
+
+    ui->Volver->show();
+
+}
+
+void  Nivel3::on_Fondo1_clicked()
+{
+    fondo3=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void  Nivel3::on_Fondo2_clicked()
+{
+    fondo3=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void  Nivel3::on_Hombre_clicked()
+{
+    disenio_jugador1=0;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void  Nivel3::on_Mujer_clicked()
+{
+    disenio_jugador1=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void  Nivel3::on_Hombre1_clicked()
+{
+    disenio_jugador2=3;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void  Nivel3::on_Mujer1_clicked()
+{
+    disenio_jugador2=4;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
 }
