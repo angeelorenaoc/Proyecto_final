@@ -70,6 +70,8 @@ private slots:
     void on_Hombre1_clicked();
     void on_Mujer1_clicked();
     void on_Configurar_clicked();
+    void on_Fondo3_clicked();
+    void on_Fondo4_clicked();
     //*********************************
 
 private:

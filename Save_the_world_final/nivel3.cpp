@@ -50,6 +50,8 @@ Nivel3::Nivel3(QWidget *parent) :
     ui->Jugador1->hide();
     ui->Fondo1->hide();
     ui->Fondo2->hide();
+    ui->Fondo3->hide();
+    ui->Fondo4->hide();
     ui->Hombre->hide();
     ui->Mujer->hide();
     ui->Jugador2->hide();
@@ -452,8 +454,12 @@ void Nivel3::on_Inicio_clicked()
 
     if(fondo3==0)
         scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/nochefin.jpg")));
+    else if(fondo3==1)
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Hangar_guerra.jpg")));
+    else if(fondo3==2)
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Explosion_nuclear.jpg")));
     else
-        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/fondo_ladrillo.jpg")));
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Fondo_Random.jpg")));
 
     QFile file(RUTA_MURO3);           //Objeto para manejar la lectura del archivo
     file.open(QIODevice::ReadOnly);     //Abre el archivo en modo lectura
@@ -633,6 +639,8 @@ void Nivel3::on_Volver_clicked()
     ui->Jugador1->hide();
     ui->Fondo1->hide();
     ui->Fondo2->hide();
+    ui->Fondo3->hide();
+    ui->Fondo4->hide();
     ui->Hombre->hide();
     ui->Mujer->hide();
     ui->Jugador2->hide();
@@ -670,7 +678,8 @@ void Nivel3::on_Reiniciar_clicked()
     scene_2->clear();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
-    ui->Salir->hide();
+    ui->Salir->move(380,530);
+    ui->Salir->show();
     ui->Inicio->show();
     ui->Instrucciones->show();
     ui->Configurar->show();
@@ -801,6 +810,8 @@ void  Nivel3::on_Configurar_clicked()
 
     ui->Fondo1->show();
     ui->Fondo2->show();
+    ui->Fondo3->show();
+    ui->Fondo4->show();
     ui->Hombre->show();
     ui->Mujer->show();
 
@@ -824,6 +835,20 @@ void  Nivel3::on_Fondo1_clicked()
 void  Nivel3::on_Fondo2_clicked()
 {
     fondo3=1;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void Nivel3::on_Fondo3_clicked()
+{
+    fondo3=2;
+    msgBox.setText("Configuración guardada");
+    msgBox.exec();
+}
+
+void Nivel3::on_Fondo4_clicked()
+{
+    fondo3=3;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -855,3 +880,4 @@ void  Nivel3::on_Mujer1_clicked()
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
+

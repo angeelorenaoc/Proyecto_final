@@ -629,7 +629,7 @@ void Nivel2::on_Reiniciar_clicked()
     scene_2->clear();
     ui->graphicsView_2->hide();
     ui->Reiniciar->hide();
-    ui->Salir->hide();
+    ui->Salir->move(350,530);
     ui->Iniciar->show();
     ui->Instrucciones->show();
 }

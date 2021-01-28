@@ -196,7 +196,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>215</y>
+      <y>240</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -213,7 +213,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>245</y>
+      <y>270</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -252,7 +252,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>165</y>
+      <y>190</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -291,7 +291,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>215</y>
+      <y>240</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -330,7 +330,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>180</x>
-      <y>245</y>
+      <y>270</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -347,7 +347,7 @@ background-color: rgb(22, 22, 22);</string>
     <property name="geometry">
      <rect>
       <x>390</x>
-      <y>170</y>
+      <y>195</y>
       <width>131</width>
       <height>31</height>
      </rect>
@@ -363,6 +363,50 @@ background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
      <string>Elije jugador 2</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Fondo3">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Fondo 3</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Fondo4">
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>150</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>Fondo 4</string>
     </property>
    </widget>
    <zorder>Game</zorder>
@@ -384,6 +428,8 @@ background-color: rgb(22, 22, 22);</string>
    <zorder>Fondo1</zorder>
    <zorder>Mujer</zorder>
    <zorder>Jugador2</zorder>
+   <zorder>Fondo3</zorder>
+   <zorder>Fondo4</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

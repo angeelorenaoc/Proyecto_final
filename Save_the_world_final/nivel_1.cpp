@@ -723,7 +723,7 @@ void Nivel_1::on_Inicio_clicked()
     }
     //Modo multijuador
     else{
-        jugadores.push_back(new Personaje(0,disenio_jugador2,1,470,400));
+        jugadores.push_back(new Personaje(0,disenio_jugador1,1,470,400));
         scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
@@ -735,7 +735,7 @@ void Nivel_1::on_Inicio_clicked()
         scene_1->addItem(puntaje_J1);
 
         if(N_jugadores<2){
-            jugadores.push_back(new Personaje(0,1,1,510,400));
+            jugadores.push_back(new Personaje(0,disenio_jugador2,1,510,400));
             scene_1->addItem(jugadores.back());
             N_jugadores++;
             vida_J2 = new Anuncio(0,1,0,10);

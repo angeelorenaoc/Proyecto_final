@@ -30,12 +30,14 @@
         <file>Fondo.jpg</file>
         <file>Felicitaciones.jpg</file>
         <file>Bosque_noche.jpg</file>
-        <file>fondo_ladrillo.jpg</file>
         <file>Laboratorio_Oak_2.jpg</file>
         <file>Sprite_medico3.png</file>
         <file>Sprite_medico4.png</file>
         <file>Sprite_personaje2.png</file>
         <file>Personaje_mujer2.png</file>
+        <file>Hangar_guerra.jpg</file>
+        <file>Fondo_Random.jpg</file>
+        <file>Explosion_nuclear.jpg</file>
     </qresource>
     <qresource prefix="/new/Archivos_texto">
         <file>Monedas_N3.txt</file>
