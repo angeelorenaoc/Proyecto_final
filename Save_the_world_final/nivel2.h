@@ -66,6 +66,24 @@ private slots:
     void on_Reiniciar_clicked();
     //**********************************
 
+    void on_Fondo1_clicked();
+
+    void on_Fondo2_clicked();
+
+    void on_Azul_clicked();
+
+    void on_Rojo_clicked();
+
+    void on_Verde_clicked();
+
+    void on_Azul1_clicked();
+
+    void on_Rojo1_clicked();
+
+    void on_Verde1_clicked();
+
+    void on_Configurar_clicked();
+
 private:
     Ui::Nivel2 *ui;
     QGraphicsScene *scene = new QGraphicsScene(this);
@@ -104,6 +122,9 @@ private:
     //***************************************
 
     //**** Anuncuios *****
+    int disenio_jugador1=0;
+    int disenio_jugador2=0;
+    int fondo2=0;
     Anuncio *vida;
     Anuncio *puntaje1;
     Anuncio *puntaje2;

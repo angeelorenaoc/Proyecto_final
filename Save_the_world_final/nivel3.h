@@ -87,6 +87,9 @@ private:
     void keyPressEvent(QKeyEvent *event);
 
     //****** Elementos de la partida *****
+    int disenio_jugador1=0;
+    int disenio_jugador2=0;
+    int fondo3=0;
     Muro *Boton;
     Anuncio *vidas1;
     Anuncio *vidas2;

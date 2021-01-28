@@ -41,6 +41,17 @@ Nivel2::Nivel2(QWidget *parent) :
     ui->Salir->move(350,530);
     ui->Siguiente->hide();
     ui->Reiniciar->hide();
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Jugador2->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Azul->hide();
+    ui->Azul1->hide();
+    ui->Verde->hide();
+    ui->Verde1->hide();
+    ui->Rojo->hide();
+    ui->Rojo1->hide();
     //********************************************************
 
     //***** Se crean los timer y se conectan con sus respectivas funciones *********
@@ -405,12 +416,15 @@ void Nivel2::on_Iniciar_clicked()
     ui->Instrucciones->hide();
     ui->graphicsView->show();
     ui->Salir->hide();
-    scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
+    if (fondo2 == 0)
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque.jpg")));
+    else
+        scene->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Bosque_noche.jpg")));
 
     // Modo solitario
     if(datos_partida.getModo()==1){
         Total_enemigos = 30;
-        jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
+        jugadores.push_back(new Personaje(nullptr,disenio_jugador1,2,40,540));scene->addItem(jugadores.back());
         vida = new Anuncio(0,0,0,15,2);
         vida->setPos(710,40);
         scene->addItem(vida);
@@ -429,7 +443,7 @@ void Nivel2::on_Iniciar_clicked()
     // Modo multijugador
     else{
         Total_enemigos = 60;
-        jugadores.push_back(new Personaje(nullptr,0,2,40,540));scene->addItem(jugadores.back());
+        jugadores.push_back(new Personaje(nullptr,disenio_jugador1,2,40,540));scene->addItem(jugadores.back());
         vida = new Anuncio(0,0,0,15,2);
         vida->setPos(710,40);
         scene->addItem(vida);
@@ -439,7 +453,7 @@ void Nivel2::on_Iniciar_clicked()
         velocidad_1 = new Anuncio(0,0,2,10,2);
         velocidad_1->setPos(0,575);
         scene->addItem(velocidad_1);
-        jugadores.push_back(new Personaje(nullptr,1,2,40,470));scene->addItem(jugadores.back());
+        jugadores.push_back(new Personaje(nullptr,disenio_jugador2,2,40,470));scene->addItem(jugadores.back());
         puntaje2 = new Anuncio(0,1,1,16,2);
         puntaje2->setPos(670,470);
         scene->addItem(puntaje2);
@@ -475,8 +489,20 @@ void Nivel2::on_Volver_clicked()
     ui->graphicsView_2->hide();
     ui->Iniciar->show();
     ui->Instrucciones->show();
+    ui->Configurar->show();
     ui->Volver->hide();
     ui->Salir->show();
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Jugador2->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Azul->hide();
+    ui->Azul1->hide();
+    ui->Verde->hide();
+    ui->Verde1->hide();
+    ui->Rojo->hide();
+    ui->Rojo1->hide();
 }
 
 void Nivel2::on_Salir_clicked()
@@ -602,4 +628,67 @@ void Nivel2::on_Reiniciar_clicked()
     ui->Salir->hide();
     ui->Iniciar->show();
     ui->Instrucciones->show();
+}
+
+void Nivel2::on_Configurar_clicked()
+{
+    ui->Configurar->hide();
+    ui->Fondo->show();
+    ui->Jugador1->show();
+
+    ui->Fondo1->show();
+    ui->Fondo2->show();
+    ui->Azul->show();
+    ui->Verde->show();
+    ui->Rojo->show();
+
+    if (datos_partida.getModo()==2){
+        ui->Jugador2->show();
+        ui->Azul1->show();
+        ui->Verde1->show();
+        ui->Rojo1->show();
+    }
+
+    ui->Volver->show();
+
+}
+
+void Nivel2::on_Fondo1_clicked()
+{
+    fondo2=0;
+}
+
+void Nivel2::on_Fondo2_clicked()
+{
+    fondo2=1;
+}
+
+void Nivel2::on_Azul_clicked()
+{
+    disenio_jugador1=0;
+}
+
+void Nivel2::on_Rojo_clicked()
+{
+    disenio_jugador1=2;
+}
+
+void Nivel2::on_Verde_clicked()
+{
+    disenio_jugador1=1;
+}
+
+void Nivel2::on_Azul1_clicked()
+{
+    disenio_jugador2=0;
+}
+
+void Nivel2::on_Rojo1_clicked()
+{
+    disenio_jugador2=2;
+}
+
+void Nivel2::on_Verde1_clicked()
+{
+    disenio_jugador2=1;
 }

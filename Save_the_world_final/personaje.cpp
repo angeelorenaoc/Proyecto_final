@@ -13,8 +13,12 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
         alto = 95;
         if(id==0)
             pixmap = new QPixmap(":/new/Imagenes/Sprite_medico_1.png");
-        else
+        else if (id == 1)
             pixmap = new QPixmap(":/new/Imagenes/Sprite_medico2.png");
+        else if (id == 2)
+            pixmap = new QPixmap(":/new/Imagenes/Sprite_medico3.png");
+        else
+            pixmap = new QPixmap(":/new/Imagenes/Sprite_medico4.png");
 
         setScale(0.6);
         timer = new QTimer();//Creacion del timer para el nivel 1
@@ -30,8 +34,10 @@ Personaje::Personaje(QObject *parent,int id_, int nivel_,int posx_, int posy_): 
         timer = new QTimer();
         if(id == 0)
             filas = 0;
-        else
+        else if (id == 1)
             filas = 100;
+        else
+            filas = 200;
         columnas = 1200;
         pixmap = new QPixmap(":/new/Imagenes/Sprite_canon.png");
         setScale(0.8);

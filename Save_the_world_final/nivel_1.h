@@ -63,6 +63,28 @@ private slots:
     void on_Salir_clicked();
     //********************************
 
+    void on_Configurar_clicked();
+
+    void on_Fondo1_clicked();
+
+    void on_Fondo2_clicked();
+
+    void on_Azul_clicked();
+
+    void on_Rosado_clicked();
+
+    void on_Verde_clicked();
+
+    void on_Morado_clicked();
+
+    void on_Azul1_clicked();
+
+    void on_Rosado1_clicked();
+
+    void on_Verde1_clicked();
+
+    void on_Morado1_clicked();
+
 private:
     Ui::Nivel_1 *ui;
     QGraphicsScene *scene_1 = new QGraphicsScene;
@@ -78,6 +100,9 @@ private:
     QTimer *Ganar;
 
     float dt;
+    int disenio_jugador1=0;
+    int disenio_jugador2=1;
+    int fondo1=0;
     int h_limit;
     int v_limit;    
     int N_enemigos=0;

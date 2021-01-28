@@ -43,6 +43,20 @@ Nivel_1::Nivel_1(QWidget *parent) :
     ui->Siguiente_nivel->hide();
     ui->Anuncios->hide();
     ui->Reiniciar->hide();
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Jugador2->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Azul->hide();
+    ui->Azul1->hide();
+    ui->Verde->hide();
+    ui->Verde1->hide();
+    ui->Rosado->hide();
+    ui->Rosado1->hide();
+    ui->Morado->hide();
+    ui->Morado1->hide();
+
 
     //******************* Se definen los timer ********************************
     enemy_timer = new QTimer(this);
@@ -658,7 +672,11 @@ void Nivel_1::on_Inicio_clicked()
     ui->Instrucciones->hide();
     ui->Salir->hide();
     ui->Game->show();
-    scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
+    ui->Configurar->hide();
+    if (fondo1 == 0)
+         scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak.jpg")));
+    else
+        scene_1->setBackgroundBrush(QBrush(QImage(":/new/Imagenes/Laboratorio_Oak_2.jpg")));
 
     /*QString info;*/                       //String para leer los datos del archivo
 
@@ -684,7 +702,7 @@ void Nivel_1::on_Inicio_clicked()
 
     //Modo solitario.
     if(datos_partida_1.getModo()==1){
-        jugadores.push_back(new Personaje(0,0,1,490,400));
+        jugadores.push_back(new Personaje(0,disenio_jugador1,1,490,400));
         scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
@@ -706,7 +724,7 @@ void Nivel_1::on_Inicio_clicked()
     }
     //Modo multijuador
     else{
-        jugadores.push_back(new Personaje(0,0,1,470,400));
+        jugadores.push_back(new Personaje(0,disenio_jugador2,1,470,400));
         scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
@@ -761,6 +779,23 @@ void Nivel_1::on_Volver_clicked()
     ui->Instrucciones->show();
     ui->Volver->hide();
     ui->Salir->show();
+    ui->Configurar->show();
+
+    ui->Fondo->hide();
+    ui->Jugador1->hide();
+    ui->Fondo1->hide();
+    ui->Fondo2->hide();
+    ui->Azul->hide();
+    ui->Verde->hide();
+    ui->Rosado->hide();
+    ui->Morado->hide();
+    if (datos_partida_1.getModo()==2){
+        ui->Jugador2->hide();
+        ui->Morado1->hide();
+        ui->Azul1->hide();
+        ui->Verde1->hide();
+        ui->Rosado1->hide();
+    }
 }
 
 void Nivel_1::on_Reiniciar_clicked()
@@ -888,4 +923,80 @@ void Nivel_1::on_Salir_clicked()
     MainWindow *Menu = new MainWindow;
     Menu->show();
     this->~Nivel_1();
+}
+
+void Nivel_1::on_Configurar_clicked()
+{
+    ui->Configurar->hide();
+    ui->Fondo->show();
+    ui->Jugador1->show();
+
+    ui->Fondo1->show();
+    ui->Fondo2->show();
+    ui->Azul->show();
+    ui->Verde->show();
+    ui->Rosado->show();
+    ui->Morado->show();
+
+    if (datos_partida_1.getModo()==2){
+        ui->Jugador2->show();
+        ui->Azul1->show();
+        ui->Morado1->show();
+        ui->Verde1->show();
+        ui->Rosado1->show();
+    }
+
+    ui->Volver->show();
+
+}
+
+
+void Nivel_1::on_Fondo1_clicked()
+{
+    fondo1=0;
+}
+
+void Nivel_1::on_Fondo2_clicked()
+{
+    fondo1=1;
+}
+
+void Nivel_1::on_Azul_clicked()
+{
+    disenio_jugador1=0;
+}
+
+void Nivel_1::on_Rosado_clicked()
+{
+    disenio_jugador1=2;
+}
+
+void Nivel_1::on_Verde_clicked()
+{
+    disenio_jugador1=1;
+}
+
+void Nivel_1::on_Morado_clicked()
+{
+    disenio_jugador1=3;
+}
+
+void Nivel_1::on_Azul1_clicked()
+{
+    disenio_jugador2=0;
+}
+
+void Nivel_1::on_Rosado1_clicked()
+{
+    disenio_jugador2=2;
+}
+
+void Nivel_1::on_Verde1_clicked()
+{
+    disenio_jugador2=1;
+}
+
+void Nivel_1::on_Morado1_clicked()
+{
+    disenio_jugador1=3;
 }

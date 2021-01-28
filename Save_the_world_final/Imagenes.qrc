@@ -29,6 +29,11 @@
         <file>Logo.png</file>
         <file>Fondo.jpg</file>
         <file>Felicitaciones.jpg</file>
+        <file>Bosque_noche.jpg</file>
+        <file>fondo_ladrillo.jpg</file>
+        <file>Laboratorio_Oak_2.jpg</file>
+        <file>Sprite_medico3.png</file>
+        <file>Sprite_medico4.png</file>
     </qresource>
     <qresource prefix="/new/Archivos_texto">
         <file>Monedas_N3.txt</file>
