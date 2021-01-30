@@ -6,99 +6,343 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>930</width>
-    <height>603</height>
+    <width>800</width>
+    <height>600</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>930</width>
-    <height>603</height>
+    <width>800</width>
+    <height>600</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>930</width>
-    <height>603</height>
+    <width>800</width>
+    <height>600</height>
    </size>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Save The World</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>:/new/Imagenes/Logo.png</normalon>
+   </iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QGraphicsView" name="graphicsView">
+   <widget class="QPushButton" name="Solitario">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>800</width>
-      <height>560</height>
+      <x>280</x>
+      <y>240</y>
+      <width>231</width>
+      <height>61</height>
      </rect>
     </property>
-    <property name="minimumSize">
-     <size>
-      <width>800</width>
-      <height>560</height>
-     </size>
+    <property name="font">
+     <font>
+      <family>Kristen ITC</family>
+      <pointsize>14</pointsize>
+     </font>
     </property>
-    <property name="maximumSize">
-     <size>
-      <width>800</width>
-      <height>560</height>
-     </size>
-    </property>
-   </widget>
-   <widget class="QRadioButton" name="radioButton">
-    <property name="geometry">
-     <rect>
-      <x>810</x>
-      <y>50</y>
-      <width>84</width>
-      <height>19</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
     </property>
     <property name="text">
-     <string>Un Jugador</string>
+     <string>SOLITARIO</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="radioButton_2">
+   <widget class="QPushButton" name="Multijugador">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>90</y>
-      <width>101</width>
-      <height>19</height>
+      <x>280</x>
+      <y>310</y>
+      <width>231</width>
+      <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Kristen ITC</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
-     <string>Dos Jugadores</string>
+     <string>MULTIJUGADOR</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="CargaPartida">
     <property name="geometry">
      <rect>
-      <x>810</x>
-      <y>140</y>
-      <width>101</width>
-      <height>51</height>
+      <x>280</x>
+      <y>380</y>
+      <width>231</width>
+      <height>61</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <family>Kristen ITC</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
     <property name="text">
-     <string>Play</string>
+     <string>CARGAR PARTIDA</string>
     </property>
    </widget>
+   <widget class="QLabel" name="Seleccionar">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>150</y>
+      <width>481</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>26</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>SELECCIONE UNA OPCIÓN</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Nombre">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>290</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="Clave">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>380</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Botoncontinuar">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>440</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CONTINUAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Volver">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>520</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>VOLVER</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Ingresar">
+    <property name="geometry">
+     <rect>
+      <x>210</x>
+      <y>150</y>
+      <width>391</width>
+      <height>71</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>26</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>INGRESA TUS DATOS</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Botoncontinuar_2">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>440</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CONTINUAR</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Eliminar">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>450</y>
+      <width>231</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Kristen ITC</family>
+      <pointsize>14</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(22, 22, 22);</string>
+    </property>
+    <property name="text">
+     <string>ELIMINAR PARTIDA</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Confirmar">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>440</y>
+      <width>161</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);</string>
+    </property>
+    <property name="text">
+     <string>CONFIRMAR</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="Label_Password">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>340</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>CONTRASEÑA</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_Team">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>250</y>
+      <width>271</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MV Boli</family>
+      <pointsize>18</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(255, 255, 255);</string>
+    </property>
+    <property name="text">
+     <string>NOMBRE DEL EQUIPO</string>
+    </property>
+   </widget>
+   <zorder>CargaPartida</zorder>
+   <zorder>Solitario</zorder>
+   <zorder>Multijugador</zorder>
+   <zorder>Seleccionar</zorder>
+   <zorder>Volver</zorder>
+   <zorder>Botoncontinuar_2</zorder>
+   <zorder>Eliminar</zorder>
+   <zorder>Label_Password</zorder>
+   <zorder>Clave</zorder>
+   <zorder>Botoncontinuar</zorder>
+   <zorder>Confirmar</zorder>
+   <zorder>Nombre</zorder>
+   <zorder>Ingresar</zorder>
+   <zorder>label_Team</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>930</width>
+     <width>800</width>
      <height>20</height>
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>

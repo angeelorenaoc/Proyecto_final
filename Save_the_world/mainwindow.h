@@ -2,21 +2,16 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QGraphicsScene>
-#include <QGraphicsView>
-#include <QObject>
-#include "personaje.h"
-#include "enemy.h"
-#include "bala_comun.h"
-#include "paredes.h"
-#include "escudo.h"
-#include "escudo_graph.h"
-#include "anuncios.h"
-#include <QKeyEvent>
-#include <QTimer>
-#include <QDebug>
-#include <QList>
-#include <math.h>
+#include <QMessageBox>
+#include <QString>
+#include <QFile>
+
+#include "nivel_1.h"
+#include "nivel2.h"
+#include "nivel3.h"
+#include "informacion.h"
+
+// Este es el menu principal
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,53 +25,32 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-public slots:
-    void spawn();
-    void perseguir();
-    void bullet_impact();
-    void delete_escudos();
-    void actualizar_escudos();
-    void estado_de_habilidad();
-    void inmunidad();
+    int Find(string Nombre, string Clave);
 
 private slots:
-    void on_pushButton_clicked();
+    void on_Botoncontinuar_clicked();
+
+    void on_Volver_clicked();
+
+    void on_Solitario_clicked();
+
+    void on_Multijugador_clicked();
+
+    void on_CargaPartida_clicked();
+
+    void on_Botoncontinuar_2_clicked();
+
+    void on_Eliminar_clicked();
+
+    void on_Confirmar_clicked();
 
 private:
     Ui::MainWindow *ui;
-    QGraphicsScene *scene = new QGraphicsScene;
-    QTimer *shield;
-    QTimer *timer_move;
-    QTimer *enemy_timer;
-    QTimer *bullet_timer;
-    QTimer *Cooldown_timer;
-    QTimer *tiempo_de_habilidad;
-    QTimer *tiempo_inmunidad;
 
-    float dt;
-    int h_limit;
-    int v_limit;
-    int N_enemigos=0;
-    int N_jugadores=0;
-    int sentido_bala=2;
-    bool Cooldown = true;
-    bool inmune = false;
-    int sentido_bala_two=1;
+    Informacion datos_partida;       
 
-    bool enemy_collides(enemy *E);
-    void spawn_shield(personaje *P);
-    bool player_collides(personaje *P);
-    void keyPressEvent(QKeyEvent * evento);
-    void move_enemy(personaje *c, enemy *e,int i,int j);
+    QList<QString> datos;
 
-    anuncios *vida_J1;
-    anuncios *vida_J2;
-    anuncios *puntaje_J1;
-    anuncios *puntaje_J2;
-    QList<paredes *> muros;
-    QList<enemy *> enemigos;
-    QList<personaje *> jugadores;
-    QList<Bala_comun *> disparos;
-    QList<escudo_graph *> escudos;
+    QMessageBox msgBox;
 };
 #endif // MAINWINDOW_H
