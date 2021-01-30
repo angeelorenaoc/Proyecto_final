@@ -281,7 +281,7 @@ void Nivel2::victory()
     }
 
     //************** Verifica la derrota ***************************
-    else if (vida->getAnuncio() <= 0){
+    else if (vida->getVida() <= 0){
         scene->removeItem(vida);
         //*** Evalula la cantidad de jugadores para eliminarlos ***
         if (jugadores.size()== 2){
@@ -346,7 +346,7 @@ void Nivel2::borderCollision(int i)
         scene->removeItem(enemigos_s.at(i));
         enemigos_s.removeAt(i);
         vida->decrease_vida(2);
-        if (vida->getAnuncio() == 0){
+        if (vida->getVida() == 0){
             scene->removeItem(vida);
             scene->removeItem(puntaje1);
             if (jugadores.size()== 2){
@@ -427,13 +427,13 @@ void Nivel2::on_Iniciar_clicked()
     if(datos_partida.getModo()==1){
         Total_enemigos = 30;
         jugadores.push_back(new Personaje(nullptr,disenio_jugador1,2,40,540));scene->addItem(jugadores.back());
-        vida = new Anuncio(0,0,0,15,2);
+        vida = new Vida_II;
         vida->setPos(710,40);
         scene->addItem(vida);
-        puntaje1 = new Anuncio(0,0,1,16,2);
+        puntaje1 = new Anuncio(0,Color,1,16,2);
         puntaje1->setPos(670,540);
         scene->addItem(puntaje1);
-        velocidad_1 = new Anuncio(0,0,2,10,2);
+        velocidad_1 = new Anuncio(0,Color,2,10,2);
         velocidad_1->setPos(0,575);
         scene->addItem(velocidad_1);
         timer->start(20);
@@ -446,20 +446,20 @@ void Nivel2::on_Iniciar_clicked()
     else{
         Total_enemigos = 60;
         jugadores.push_back(new Personaje(nullptr,disenio_jugador1,2,40,540));scene->addItem(jugadores.back());
-        vida = new Anuncio(0,0,0,15,2);
+        vida = new Vida_II;
         vida->setPos(710,40);
         scene->addItem(vida);
-        puntaje1 = new Anuncio(0,0,1,16,2);
+        puntaje1 = new Anuncio(0,Color,1,16,2);
         puntaje1->setPos(670,540);
         scene->addItem(puntaje1);
-        velocidad_1 = new Anuncio(0,0,2,10,2);
+        velocidad_1 = new Anuncio(0,Color,2,10,2);
         velocidad_1->setPos(0,575);
         scene->addItem(velocidad_1);
         jugadores.push_back(new Personaje(nullptr,disenio_jugador2,2,40,470));scene->addItem(jugadores.back());
-        puntaje2 = new Anuncio(0,1,1,16,2);
+        puntaje2 = new Anuncio(0,Color_2,1,16,2);
         puntaje2->setPos(670,470);
         scene->addItem(puntaje2);
-        velocidad_2 = new Anuncio(0,1,2,10,2);
+        velocidad_2 = new Anuncio(0,Color_2,2,10,2);
         velocidad_2->setPos(0,500);
         scene->addItem(velocidad_2);
         timer->start(20);
@@ -683,6 +683,7 @@ void Nivel2::on_Fondo2_clicked()
 void Nivel2::on_Azul_clicked()
 {
     disenio_jugador1=1;
+    Color = 0;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -690,6 +691,7 @@ void Nivel2::on_Azul_clicked()
 void Nivel2::on_Rojo_clicked()
 {
     disenio_jugador1=0;
+    Color = 4;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -697,6 +699,7 @@ void Nivel2::on_Rojo_clicked()
 void Nivel2::on_Verde_clicked()
 {
     disenio_jugador1=2;
+    Color = 3;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -704,6 +707,7 @@ void Nivel2::on_Verde_clicked()
 void Nivel2::on_Azul1_clicked()
 {
     disenio_jugador2=1;
+    Color_2 = 0;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -711,6 +715,7 @@ void Nivel2::on_Azul1_clicked()
 void Nivel2::on_Rojo1_clicked()
 {
     disenio_jugador2=0;
+    Color_2 = 4;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -718,6 +723,7 @@ void Nivel2::on_Rojo1_clicked()
 void Nivel2::on_Verde1_clicked()
 {
     disenio_jugador2=2;
+    Color_2 = 3;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }

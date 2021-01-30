@@ -169,17 +169,17 @@ void Nivel3::actualizar()
         if (i == 0){
             //Se verifica si la vida es mayor a 0. Ademas se trasladan los anuncios con el jugador.
             if (vidas1->getAnuncio() > 0){
-                vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx(),0);
-                puntaje1->setPos(puntaje1->getPx()+bars.at(i)->getEsf()->getPx(),18);
+                vidas1->setPos(vidas1->getPx()+bars.at(i)->getEsf()->getPx()-30,0);
+                puntaje1->setPos(puntaje1->getPx()+bars.at(i)->getEsf()->getPx()-50,18);
             }
             else{
-                vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
-                puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx(),18);
+                vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx()-30,0);
+                puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx()-50,18);
             }
         }
         else if (i == 1){
-            vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx(),0);
-            puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx(),18);
+            vidas2->setPos(vidas2->getPx()+bars.at(i)->getEsf()->getPx()-30,0);
+            puntaje2->setPos(puntaje2->getPx()+bars.at(i)->getEsf()->getPx()-50,18);
         }
         //Se revisa el numero de vidas de cada jugador, en caso que sea 0, este sera eliminado.
         if (vidas1->getAnuncio() == 0){
@@ -525,10 +525,10 @@ void Nivel3::on_Inicio_clicked()
     //**********************************
 
     //***********Anuncios**************
-    vidas1 = new Anuncio(0,0,0,15,3);
-    vidas2 = new Anuncio(0,1,0,15,3);
-    puntaje1 = new Anuncio(0,0,1,15,3);
-    puntaje2 = new Anuncio(0,1,1,15,3);
+    vidas1 = new Anuncio(0,4,0,15,3);
+    vidas2 = new Anuncio(0,0,0,15,3);
+    puntaje1 = new Anuncio(0,4,1,15,3);
+    puntaje2 = new Anuncio(0,0,1,15,3);
     //*********************************
 
     //Modo solitario

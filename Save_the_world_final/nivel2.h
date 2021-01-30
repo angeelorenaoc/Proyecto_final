@@ -23,6 +23,7 @@
 #include "bala_parabolica_graf.h"
 #include "mainwindow.h"
 #include "nivel3.h"
+#include "vida_ii.h"
 
 // Clase encargada de administrar lo relacionado con el nivel 2
 
@@ -119,7 +120,10 @@ private:
     int disenio_jugador1=0;
     int disenio_jugador2=1;
     int fondo2=0;
-    Anuncio *vida;
+    int Color=0;
+    int Color_2=1;
+
+    Vida_II *vida;
     Anuncio *puntaje1;
     Anuncio *puntaje2;
     Anuncio *velocidad_1;

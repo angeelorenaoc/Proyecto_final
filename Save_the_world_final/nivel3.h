@@ -102,6 +102,7 @@ private:
     int disenio_jugador1=0;
     int disenio_jugador2=3;
     int fondo3=0;
+
     Muro *Boton;
     Anuncio *vidas1;
     Anuncio *vidas2;

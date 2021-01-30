@@ -28,7 +28,8 @@ SOURCES += \
     nivel_1.cpp \
     personaje.cpp \
     personaje3.cpp \
-    personaje3graf.cpp
+    personaje3graf.cpp \
+    vida_ii.cpp
 
 HEADERS += \
     anuncio.h \
@@ -49,7 +50,8 @@ HEADERS += \
     nivel_1.h \
     personaje.h \
     personaje3.h \
-    personaje3graf.h
+    personaje3graf.h \
+    vida_ii.h
 
 FORMS += \
     mainwindow.ui \

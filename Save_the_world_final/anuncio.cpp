@@ -20,12 +20,7 @@ Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int niv
     }
 
     else {
-        //***** Este solo aplica para el nivel 2 ya que es el unico que necesita sprite y velocidad******
-        //El sprite hace las veces de vida
-        anuncio = 10;
-        pixmap = new QPixmap(":/new/Imagenes/sprite_Vida.png"); //Se carga la imagen
-        setScale(0.85); //Se escala para que ajuste mejor en la pantalla (no se vea muy grande)
-        columnas = 0;
+        //***** Este solo aplica para el nivel 2 ya que es el unico que necesita velocidad******
         if (id == 1){
             anuncio = 0;
             setPlainText(QString("Puntaje: ")+ QString::number(anuncio));}
@@ -35,42 +30,24 @@ Anuncio::Anuncio(QGraphicsItem *parent, int colorp, int id_,int tamanio, int niv
     }
     if(color == 0)
         setDefaultTextColor(Qt::blue);
-    else
+    else if(color == 1)
         setDefaultTextColor(Qt::magenta);
+    else if(color == 2)
+        setDefaultTextColor(Qt::darkMagenta);
+    else if(color == 3)
+        setDefaultTextColor(Qt::green);
+    else if(color == 4)
+        setDefaultTextColor(Qt::red);
+
 
     setFont(QFont("Tekton Pro",tamanio)); //Se determina la fuente y el tamaño
     setPos(Px,Py); //Se da la posicion
 }
 
-QRectF Anuncio::boundingRect() const
-{
-    return QRectF(-ancho/2,-alto/2,ancho,alto);
-}
-
-void Anuncio::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
-{
-    if (nivel == 2 && id == 0){
-        /*El sprite de la vida solo se invoca en el nivel 2*/
-        painter->drawPixmap(-ancho/2,-alto/2,*pixmap,columnas,0,ancho,alto);}
-}
-
-
 void Anuncio::decrease_vida(int i)//Metodo que permite decrementar i veces el numero de vidas
 {
     anuncio-=i;
-    if (nivel != 2)
-        setPlainText(QString("Vida: ")+QString::number(anuncio));
-    else{
-        /*Permite recorrer el sprite evitando la situacion de cuando columnas toma
-        valores inexistentes en la imagen*/
-        if(columnas<=1431 && i==2){
-            columnas+=159*i;
-        }
-        else if(columnas < 1749){
-            columnas+=159;
-        }
-        this->update(-ancho/2,-alto/2,ancho,alto);
-    }
+    setPlainText(QString("Vida: ")+QString::number(anuncio));
 }
 
 void Anuncio::increse_score(int i) //Metodo que permite aumentar i veces el puntaje

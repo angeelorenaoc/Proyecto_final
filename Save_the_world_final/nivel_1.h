@@ -104,6 +104,8 @@ private:
     bool inmune = false;
     bool Cooldown = true;
     int sentido_bala_two=4;
+    int Color=0;
+    int Color_2=1;
 
     void spawn_shield(Personaje *P);
     bool player_collides(Personaje *P);

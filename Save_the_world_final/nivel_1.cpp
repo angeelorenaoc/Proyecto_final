@@ -145,8 +145,8 @@ void Nivel_1::keyPressEvent(QKeyEvent *event)
                     spawn_shield(player);
             }
             ui->Game->centerOn(player->x(),player->y());
-//            vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
-//            vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+            vida_J1->setPx(player->getPosx()-20); vida_J1->setPy(player->getPosy()+20);
+            vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
         }
     }
     //Para el jugador 2
@@ -706,12 +706,12 @@ void Nivel_1::on_Inicio_clicked()
         N_jugadores++;
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
 
-        vida_J1 = new Anuncio(0,0,0,10,1);
-        vida_J1->setPx(600); vida_J1->setPy(-300);
-        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
+        vida_J1 = new Anuncio(0,Color,0,10,1);
+        vida_J1->setPx(490); vida_J1->setPy(420);
+//        vida_J1->setPos(vida_J1->getPx(),vida_J1->getPy());
         scene_1->addItem(vida_J1);
-        puntaje_J1 = new Anuncio(0,0,1,15,1);
-        puntaje_J1->setPos(600,300);
+        puntaje_J1 = new Anuncio(0,Color,1,15,1);
+        puntaje_J1->setPos(420,83);
         scene_1->addItem(puntaje_J1);
 
 
@@ -727,10 +727,10 @@ void Nivel_1::on_Inicio_clicked()
         scene_1->addItem(jugadores.back());
         N_jugadores++;
         ui->Game->centerOn(jugadores.at(0)->x(),jugadores.at(0)->y());
-        vida_J1 = new Anuncio(0,0,0,10);
+        vida_J1 = new Anuncio(0,Color,0,10);
         vida_J1->setPx(470); vida_J1->setPy(420);
         scene_1->addItem(vida_J1);
-        puntaje_J1 = new Anuncio(0,0,1,15);
+        puntaje_J1 = new Anuncio(0,Color,1,15);
         puntaje_J1->setPos(420,52);
         scene_1->addItem(puntaje_J1);
 
@@ -738,10 +738,10 @@ void Nivel_1::on_Inicio_clicked()
             jugadores.push_back(new Personaje(0,disenio_jugador2,1,510,400));
             scene_1->addItem(jugadores.back());
             N_jugadores++;
-            vida_J2 = new Anuncio(0,1,0,10);
+            vida_J2 = new Anuncio(0,Color_2,0,10);
             vida_J2->setPx(490); vida_J2->setPy(420);
             scene_1->addItem(vida_J2);
-            puntaje_J2 = new Anuncio(0,1,1,15);
+            puntaje_J2 = new Anuncio(0,Color_2,1,15);
             puntaje_J2->setPos(420,83);
             scene_1->addItem(puntaje_J2);
 
@@ -979,6 +979,7 @@ void Nivel_1::on_Fondo2_clicked()
 void Nivel_1::on_Azul_clicked()
 {
     disenio_jugador1=0;
+    Color = 0;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -986,6 +987,7 @@ void Nivel_1::on_Azul_clicked()
 void Nivel_1::on_Rosado_clicked()
 {
     disenio_jugador1=2;
+    Color = 1;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -993,6 +995,7 @@ void Nivel_1::on_Rosado_clicked()
 void Nivel_1::on_Verde_clicked()
 {
     disenio_jugador1=1;
+    Color = 3;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -1000,6 +1003,7 @@ void Nivel_1::on_Verde_clicked()
 void Nivel_1::on_Morado_clicked()
 {
     disenio_jugador1=3;
+    Color = 2;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -1007,6 +1011,7 @@ void Nivel_1::on_Morado_clicked()
 void Nivel_1::on_Azul1_clicked()
 {
     disenio_jugador2=0;
+    Color_2 = 0;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -1014,6 +1019,7 @@ void Nivel_1::on_Azul1_clicked()
 void Nivel_1::on_Rosado1_clicked()
 {
     disenio_jugador2=2;
+    Color_2 = 1;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
@@ -1021,13 +1027,15 @@ void Nivel_1::on_Rosado1_clicked()
 void Nivel_1::on_Verde1_clicked()
 {
     disenio_jugador2=1;
+    Color_2 = 3;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
 
 void Nivel_1::on_Morado1_clicked()
 {
-    disenio_jugador1=3;
+    disenio_jugador2=3;
+    Color_2 = 2;
     msgBox.setText("Configuración guardada");
     msgBox.exec();
 }
